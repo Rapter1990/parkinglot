@@ -12,6 +12,7 @@ public class SuvFeeCalculatorStrategy implements FeeCalculationStrategy {
         BigDecimal fee = price.multiply(BigDecimal.valueOf(SUV_FEE_RATE));
 
         return price.add(fee);
+
     }
 
 

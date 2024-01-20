@@ -34,6 +34,7 @@ public class FeeCalculationUtil {
 
 
         return VEHICLE_TYPE_FEE_CALCULATION.get(park.getVehicle().getType()).calculatePrice(price);
+
     }
 
     private static boolean isWithinTimeInterval(PriceList priceList, long spentTime) {

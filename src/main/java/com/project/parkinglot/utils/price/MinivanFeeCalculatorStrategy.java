@@ -12,5 +12,6 @@ public class MinivanFeeCalculatorStrategy implements FeeCalculationStrategy {
         BigDecimal fee = price.multiply(BigDecimal.valueOf(MINIVAN_FEE_RATE));
 
         return price.add(fee);
+
     }
 }

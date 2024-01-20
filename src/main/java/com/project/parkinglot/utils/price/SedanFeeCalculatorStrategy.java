@@ -12,6 +12,7 @@ public class SedanFeeCalculatorStrategy implements FeeCalculationStrategy {
         BigDecimal fee = price.multiply(BigDecimal.valueOf(SEDAN_FEE_RATE));
 
         return price.add(fee);
+
     }
 
 }
