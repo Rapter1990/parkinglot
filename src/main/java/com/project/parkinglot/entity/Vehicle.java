@@ -34,7 +34,7 @@ public class Vehicle extends BaseEntity {
     @OneToMany(mappedBy = "vehicle")
     private List<Park> parks;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", nullable = false)
     private User user;
 

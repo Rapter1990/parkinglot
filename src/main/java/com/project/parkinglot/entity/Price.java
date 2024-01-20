@@ -7,26 +7,29 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.math.BigDecimal;
+
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "price_list")
-public class PriceList extends BaseEntity {
+@Table(name = "price")
+public class Price extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "ID")
     private String id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "price_id", referencedColumnName = "id")
-    private Price price;
+    @Column(name = "start_hour")
+    private Integer startHour;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "park_area_id", referencedColumnName = "id")
-    private ParkingArea parkingArea;
+    @Column(name = "end_hour")
+    private Integer endHour;
+
+    @Column(name = "price")
+    private BigDecimal price;
 
 }
