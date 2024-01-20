@@ -4,9 +4,8 @@ package com.project.parkinglot.exception;
 import org.springframework.http.HttpStatus;
 
 import java.io.Serial;
-import java.io.Serializable;
 
-public abstract class NotFoundException extends RuntimeException implements Serializable{
+public abstract class NotFoundException extends RuntimeException {
 
     @Serial
     private static final long serialVersionUID = -9077739335957202970L;
