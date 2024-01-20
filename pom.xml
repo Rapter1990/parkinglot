@@ -15,6 +15,7 @@
 	<description>Parking Lot Project</description>
 	<properties>
 		<java.version>17</java.version>
+		<openapi.version>2.1.0</openapi.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -41,6 +42,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${openapi.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
