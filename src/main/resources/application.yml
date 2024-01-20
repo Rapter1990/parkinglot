@@ -1,0 +1,24 @@
+server:
+  port: 1222
+
+# MYSQL
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    url: jdbc:mysql://${PARKING_LOT_DB_IP:localhost}:${PARKING_LOT_DB_PORT:3306}/parkinglot
+    username: ${DATABASE_USERNAME:root}
+    password: ${DATABASE_PASSWORD:password}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+      show-sql: true
+
+# SWAGGER
+springdoc:
+  api-docs:
+    enabled: true
+  show-actuator: true
