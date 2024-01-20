@@ -2,6 +2,7 @@ package com.project.parkinglot.logging.aop;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.project.parkinglot.exception.NotFoundException;
 import com.project.parkinglot.logging.entity.LogEntity;
 import com.project.parkinglot.logging.service.LogService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -117,7 +118,12 @@ public class LoggerAspectJ {
 
     private HttpStatus getHttpStatusFromException(Exception ex) {
 
-        return HttpStatus.CONFLICT;
+        if (ex instanceof NotFoundException) {
+            return NotFoundException.STATUS;
+        }
+
+        return null;
+
     }
 
 }
