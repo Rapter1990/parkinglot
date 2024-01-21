@@ -1,7 +1,9 @@
 package com.project.parkinglot.repository;
 
-import com.project.parkinglot.entity.Vehicle;
+import com.project.parkinglot.model.entity.VehicleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface VehicleRepository extends JpaRepository<Vehicle, String> {
+@Repository
+public interface VehicleRepository extends JpaRepository<VehicleEntity, String> {
 }
