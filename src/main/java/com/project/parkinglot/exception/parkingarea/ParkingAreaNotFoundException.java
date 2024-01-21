@@ -10,10 +10,10 @@ public class ParkingAreaNotFoundException extends NotFoundException {
     private static final long serialVersionUID = -75325461433448105L;
 
     private static final String DEFAULT_MESSAGE =
-            "The specified ParkingArea is not found!";
+            "The specified ParkingAreaEntity is not found!";
 
     private static final String MESSAGE_TEMPLATE =
-            "No ParkingArea found with ID: ";
+            "No ParkingAreaEntity found with ID: ";
 
     public ParkingAreaNotFoundException(String id) {
         super(MESSAGE_TEMPLATE.concat(id));

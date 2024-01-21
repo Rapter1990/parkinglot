@@ -10,10 +10,10 @@ public class ParkNotFoundException extends NotFoundException {
     private static final long serialVersionUID = -2716997535675707393L;
 
     private static final String DEFAULT_MESSAGE =
-            "The specified Park is not found!";
+            "The specified ParkEntity is not found!";
 
     private static final String MESSAGE_TEMPLATE =
-            "No Park found with ID: ";
+            "No ParkEntity found with ID: ";
 
     public ParkNotFoundException(String id) {
         super(MESSAGE_TEMPLATE.concat(id));

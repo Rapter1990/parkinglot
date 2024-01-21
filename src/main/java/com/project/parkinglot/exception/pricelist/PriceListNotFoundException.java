@@ -10,10 +10,10 @@ public class PriceListNotFoundException extends NotFoundException {
     private static final long serialVersionUID = -2516692732933542371L;
 
     private static final String DEFAULT_MESSAGE =
-            "The specified PriceList is not found!";
+            "The specified PriceListEntity is not found!";
 
     private static final String MESSAGE_TEMPLATE =
-            "No PriceList found with ID: ";
+            "No PriceListEntity found with ID: ";
 
     public PriceListNotFoundException(String id) {
         super(MESSAGE_TEMPLATE.concat(id));
