@@ -1,7 +1,9 @@
 package com.project.parkinglot.repository;
 
-import com.project.parkinglot.entity.Park;
+import com.project.parkinglot.model.entity.ParkEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ParkRepository extends JpaRepository<Park, String> {
+@Repository
+public interface ParkRepository extends JpaRepository<ParkEntity, String> {
 }
