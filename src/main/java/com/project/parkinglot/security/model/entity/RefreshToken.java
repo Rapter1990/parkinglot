@@ -1,4 +1,4 @@
-package com.project.parkinglot.entity;
+package com.project.parkinglot.security.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
