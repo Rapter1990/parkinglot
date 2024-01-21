@@ -1,11 +1,14 @@
-package com.project.parkinglot.entity;
+package com.project.parkinglot.security.model.entity;
 
-import com.project.parkinglot.entity.enums.Role;
+import com.project.parkinglot.model.entity.VehicleEntity;
+import com.project.parkinglot.security.model.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -30,5 +33,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "ROLE")
     private Role role;
+
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy = "user"
+    )
+    private List<VehicleEntity> vehicles;
 
 }
