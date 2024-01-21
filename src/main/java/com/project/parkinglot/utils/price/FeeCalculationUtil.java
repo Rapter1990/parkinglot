@@ -1,14 +1,14 @@
 package com.project.parkinglot.utils.price;
 
-import com.project.parkinglot.entity.Park;
-import com.project.parkinglot.entity.PriceList;
-import com.project.parkinglot.entity.enums.VehicleType;
+import com.project.parkinglot.model.entity.ParkEntity;
+import com.project.parkinglot.model.entity.PriceEntity;
+import com.project.parkinglot.model.entity.PriceListEntity;
+import com.project.parkinglot.model.enums.VehicleType;
 import com.project.parkinglot.exception.pricelist.PriceListNotFoundException;
 import lombok.experimental.UtilityClass;
 
 import java.math.BigDecimal;
 import java.time.Duration;
-import java.util.List;
 import java.util.Map;
 
 @UtilityClass
@@ -21,30 +21,38 @@ public class FeeCalculationUtil {
     );
 
 
-    private static BigDecimal findPriceForTimeInterval(List<PriceList> parkingAreaPriceList, Park park) {
+    private static BigDecimal findPriceForTimeInterval(
+            final PriceListEntity parkingAreaPriceListEntity,
+            final ParkEntity parkEntity
+    ) {
 
-        long spentTime = getSpentTime(park);
+        long spentTime = getSpentTime(parkEntity);
 
-        BigDecimal price = parkingAreaPriceList.stream()
-                .filter(priceList -> isWithinTimeInterval(priceList, spentTime))
-                .map(priceList -> priceList.getPrice().getPrice())
+        final BigDecimal price = parkingAreaPriceListEntity.getPriceEntities().stream()
+                .filter(priceEntity -> isWithinTimeInterval(priceEntity, spentTime))
+                .map(PriceEntity::getCost)
                 .findFirst()
                 // TODO : Add validation exception for this process
                 .orElseThrow(() -> new PriceListNotFoundException("Not Found"));
 
 
-        return VEHICLE_TYPE_FEE_CALCULATION.get(park.getVehicle().getType()).calculatePrice(price);
+        return VEHICLE_TYPE_FEE_CALCULATION.get(parkEntity.getVehicleEntity().getVehicleType()).calculatePrice(price);
 
     }
 
-    private static boolean isWithinTimeInterval(PriceList priceList, long spentTime) {
-        int startHour = priceList.getPrice().getStartHour();
-        int endHour = priceList.getPrice().getEndHour();
-        return startHour <= spentTime && spentTime < endHour;
+    private static boolean isWithinTimeInterval(
+            final PriceEntity priceEntity,
+            final long spentTime
+    ) {
+        int startHour = priceEntity.getLowerBound();
+        int endHour = priceEntity.getUpperBound();
+        return spentTime >= startHour && spentTime <= endHour;
     }
 
-    private static long getSpentTime(Park park){
-        return Duration.between(park.getCheckInDate(), park.getCheckInDate()).toHours();
+    private static long getSpentTime(
+            final ParkEntity parkEntity
+    ){
+        return Duration.between(parkEntity.getCheckIn(), parkEntity.getCheckOut()).toHours();
     }
 
 }
