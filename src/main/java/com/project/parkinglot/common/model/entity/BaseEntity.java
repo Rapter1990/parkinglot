@@ -1,4 +1,4 @@
-package com.project.parkinglot.common.model;
+package com.project.parkinglot.common.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
