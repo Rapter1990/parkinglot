@@ -1,10 +1,10 @@
 package com.project.parkinglot.utils.price;
 
+import com.project.parkinglot.exception.pricelist.PriceListNotFoundException;
 import com.project.parkinglot.model.entity.ParkEntity;
 import com.project.parkinglot.model.entity.PriceEntity;
 import com.project.parkinglot.model.entity.PriceListEntity;
 import com.project.parkinglot.model.enums.VehicleType;
-import com.project.parkinglot.exception.pricelist.PriceListNotFoundException;
 import lombok.experimental.UtilityClass;
 
 import java.math.BigDecimal;
