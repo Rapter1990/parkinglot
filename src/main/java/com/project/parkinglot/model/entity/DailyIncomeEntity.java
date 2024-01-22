@@ -38,7 +38,12 @@ public class DailyIncomeEntity extends BaseEntity {
     @Column(name = "DATE")
     private LocalDate date;
 
-    @Column(name = "INCOME")
+    @Column(
+            name = "INCOME",
+            nullable = false,
+            scale = 24,
+            precision = 4
+    )
     private BigDecimal income;
 
     @ManyToOne(
