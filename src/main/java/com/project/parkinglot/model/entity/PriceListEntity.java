@@ -26,7 +26,10 @@ public class PriceListEntity extends BaseEntity {
     @Column(name = "ID")
     private String id;
 
-    @Column(name = "NAME")
+    @Column(
+            name = "NAME",
+            nullable = false
+    )
     private String name;
 
     @OneToMany(
