@@ -9,6 +9,12 @@ spring:
     url: jdbc:mysql://${PARKING_LOT_DB_IP:localhost}:${PARKING_LOT_DB_PORT:3306}/parkinglot
     username: ${DATABASE_USERNAME:root}
     password: ${DATABASE_PASSWORD:password}
+
+  liquibase:
+    enabled: true
+    changeLog: "classpath:db/changelog/db.changelog-master.yaml"
+    drop-first: ${PARKING_LOT_LIQUIBASE_ENABLE_DROP_FIRST:false}
+
   jpa:
     properties:
       hibernate:
