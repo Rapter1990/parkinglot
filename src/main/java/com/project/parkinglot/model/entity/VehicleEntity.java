@@ -1,14 +1,10 @@
 package com.project.parkinglot.model.entity;
 
-import com.project.parkinglot.common.model.BaseEntity;
+import com.project.parkinglot.common.model.entity.BaseEntity;
 import com.project.parkinglot.model.enums.VehicleType;
 import com.project.parkinglot.security.model.entity.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;

@@ -10,13 +10,13 @@ public class UserNotFoundException extends NotFoundException {
     private static final long serialVersionUID = 4895291155273970971L;
 
     private static final String DEFAULT_MESSAGE =
-            "The specified PriceListEntity is not found!";
+            "The specified user is not found";
 
     private static final String MESSAGE_TEMPLATE =
-            "No PriceListEntity found with ID: ";
+            "No user was found with ID: ";
 
-    public UserNotFoundException(String id) {
-        super(MESSAGE_TEMPLATE.concat(id));
+    public UserNotFoundException(Long id) {
+        super(MESSAGE_TEMPLATE.concat(String.valueOf(id)));
     }
 
     public UserNotFoundException() {

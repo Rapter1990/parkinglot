@@ -1,6 +1,6 @@
 package com.project.parkinglot.model.entity;
 
-import com.project.parkinglot.common.model.BaseEntity;
+import com.project.parkinglot.common.model.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
