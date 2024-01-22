@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd">
+
+    <changeSet id="1-parking-log-ddl" author="mseymusyuzen">
+
+
+        <!-- =============== -->
+        <!-- DDL of PRICE_LIST -->
+        <!-- =============== -->
+        <createTable tableName="PRICE_LIST">
+            <column name="ID" type="VARCHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_USER" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_USER" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_AT" type="TIMESTAMP"/>
+            <column name="UPDATED_AT" type="TIMESTAMP"/>
+        </createTable>
+        <!-- =============== -->
+        <!-- DDL of PRICE_LIST -->
+        <!-- =============== -->
+
+
+        <!-- =============== -->
+        <!-- DDL of VEHICLE -->
+        <!-- =============== -->
+        <createTable tableName="VEHICLE">
+            <column name="ID" type="VARCHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LICENCE_PLATE" type="VARCHAR(10)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="USER_ID" type="VARCHAR(36)">
+                <constraints foreignKeyName="FK__VEHICLE__USERS"
+                             referencedTableName="USERS"
+                             referencedColumnNames="ID"
+                />
+            </column>
+            <column name="VEHICLE_TYPE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_USER" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_USER" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_AT" type="TIMESTAMP"/>
+            <column name="UPDATED_AT" type="TIMESTAMP"/>
+        </createTable>
+        <sql>-- TODO : Add check constraint to status column with liquibase syntax
+        ALTER TABLE `VEHICLE`
+            ADD CONSTRAINT `C__VEHICLE_TYPE` CHECK (`VEHICLE_TYPE` IN ('MINIVAN', 'SEDAN', 'SUV'));
+        </sql>
+        <!-- =============== -->
+        <!-- DDL of VEHICLE -->
+        <!-- =============== -->
+
+
+        <!-- =========================================== -->
+        <!-- DDL of PARKING_AREA -->
+        <!-- =========================================== -->
+        <createTable tableName="PARKING_AREA">
+            <column name="ID" type="VARCHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="LOCATION" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="CAPACITY" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CITY" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRICE_LIST_ID" type="VARCHAR(36)">
+                <constraints foreignKeyName="FK__PARKING_AREA__PRICE_LIST"
+                             referencedTableName="PRICE_LIST"
+                             referencedColumnNames="ID"
+                />
+            </column>
+            <column name="CREATED_USER" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_USER" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_AT" type="TIMESTAMP"/>
+            <column name="UPDATED_AT" type="TIMESTAMP"/>
+        </createTable>
+        <!-- =========================================== -->
+        <!-- DDL of PARKING_AREA -->
+        <!-- =========================================== -->
+
+
+        <!-- ======================= -->
+        <!-- DDL of DAILY_INCOME -->
+        <!-- ======================= -->
+        <createTable tableName="DAILY_INCOME">
+            <column name="ID" type="VARCHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="DATE" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INCOME" type="DECIMAL(24,4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PARKING_AREA_ID" type="VARCHAR(36)">
+                <constraints foreignKeyName="FK__PARKING_AREA__DAILY_INCOME"
+                             referencedTableName="PARKING_AREA"
+                             referencedColumnNames="ID"
+                />
+            </column>
+            <column name="CREATED_USER" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_USER" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_AT" type="TIMESTAMP"/>
+            <column name="UPDATED_AT" type="TIMESTAMP"/>
+        </createTable>
+        <!-- ======================= -->
+        <!-- DDL of DAILY_INCOME -->
+        <!-- ======================= -->
+
+
+        <!-- ===================== -->
+        <!-- DDL of PARK -->
+        <!-- ===================== -->
+        <createTable tableName="PARK">
+            <column name="ID" type="VARCHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="CHECK_IN" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CHECK_OUT" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TOTAL_COST" type="DECIMAL(24,4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PARKING_AREA_ID" type="VARCHAR(36)">
+                <constraints foreignKeyName="FK__PARKING_AREA__PARK"
+                             referencedTableName="PARKING_AREA"
+                             referencedColumnNames="ID"
+                />
+            </column>
+            <column name="VEHICLE_ID" type="VARCHAR(36)">
+                <constraints foreignKeyName="FK__PARK__VEHICLE"
+                             referencedTableName="VEHICLE"
+                             referencedColumnNames="ID"
+                />
+            </column>
+            <column name="PARK_STATUS" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_USER" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_USER" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_AT" type="TIMESTAMP"/>
+            <column name="UPDATED_AT" type="TIMESTAMP"/>
+        </createTable>
+        <sql>
+            ALTER TABLE `PARK`
+                ADD CONSTRAINT `C__PARK_STATUS` CHECK (`PARK_STATUS` IN ('EMPTY', 'FULL'));
+        </sql>
+        <!-- ===================== -->
+        <!-- DDL of PARK -->
+        <!-- ===================== -->
+
+
+        <!-- =============== -->
+        <!-- DDL of PRICE    -->
+        <!-- =============== -->
+        <createTable tableName="PRICE">
+            <column name="ID" type="VARCHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LOWER_BOUND" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPPER_BOUND" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COST" type="DECIMAL(24,4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRICE_LIST_ID" type="VARCHAR(36)">
+                <constraints foreignKeyName="FK__PRICE__PRICE_LIST"
+                             referencedTableName="PRICE_LIST"
+                             referencedColumnNames="ID"
+                />
+            </column>
+            <column name="CREATED_USER" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_USER" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_AT" type="TIMESTAMP"/>
+            <column name="UPDATED_AT" type="TIMESTAMP"/>
+        </createTable>
+        <!-- =============== -->
+        <!-- DDL of PRICE    -->
+        <!-- =============== -->
+
+    </changeSet>
+</databaseChangeLog>
