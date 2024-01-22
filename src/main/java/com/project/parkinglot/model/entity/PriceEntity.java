@@ -24,13 +24,24 @@ public class PriceEntity extends BaseEntity {
     @Column(name = "ID")
     private String id;
 
-    @Column(name = "LOWER_BOUND")
+    @Column(
+            name = "LOWER_BOUND",
+            nullable = false
+    )
     private Integer lowerBound;
 
-    @Column(name = "UPPER_BOUND")
+    @Column(
+            name = "UPPER_BOUND",
+            nullable = false
+    )
     private Integer upperBound;
 
-    @Column(name = "COST")
+    @Column(
+            name = "COST",
+            nullable = false,
+            scale = 24,
+            precision = 4
+    )
     private BigDecimal cost;
 
     @ManyToOne(
