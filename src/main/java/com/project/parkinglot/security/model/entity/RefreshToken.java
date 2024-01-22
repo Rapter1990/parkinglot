@@ -13,21 +13,32 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "refresh_token")
+@Table(name = "REFRESH_TOKEN")
 public class RefreshToken {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "ID")
+    private String id;
 
     @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(
+            name = "USER_ID",
+            referencedColumnName = "ID"
+    )
     private User user;
 
-    @Column(nullable = false, unique = true)
+    @Column(
+            name = "TOKEN",
+            nullable = false,
+            unique = true
+    )
     private String token;
 
-    @Column(nullable = false)
+    @Column(
+            name = "EXPIRY_DATE",
+            nullable = false
+    )
     private LocalDate expiryDate;
 
 }
