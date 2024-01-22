@@ -34,7 +34,12 @@ public class ParkEntity extends BaseEntity {
     @Column(name = "CHECK_OUT")
     private LocalDateTime checkOut;
 
-    @Column(name = "TOTAL_COST")
+    @Column(
+            name = "TOTAL_COST",
+            nullable = false,
+            scale = 24,
+            precision = 4
+    )
     private BigDecimal totalCost;
 
     @ManyToOne(
@@ -55,8 +60,8 @@ public class ParkEntity extends BaseEntity {
     )
     private VehicleEntity vehicleEntity;
 
-    @Column(name = "STATUS")
+    @Column(name = "PARK_STATUS")
     @Enumerated(EnumType.STRING)
-    private ParkStatus status;
+    private ParkStatus parkStatus;
 
 }
