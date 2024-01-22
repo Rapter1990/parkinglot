@@ -20,7 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "PRICE_LIST")
+@Table(name = "VEHICLE")
 public class VehicleEntity extends BaseEntity {
 
     @Id
@@ -31,7 +31,8 @@ public class VehicleEntity extends BaseEntity {
     @Column(
             name = "LICENCE_PLATE",
             nullable = false,
-            unique = true
+            unique = true,
+            length = 10
     )
     private String licensePlate;
 
