@@ -15,8 +15,8 @@ public class UserNotFoundException extends NotFoundException {
     private static final String MESSAGE_TEMPLATE =
             "No user was found with ID: ";
 
-    public UserNotFoundException(Long id) {
-        super(MESSAGE_TEMPLATE.concat(String.valueOf(id)));
+    public UserNotFoundException(String id) {
+        super(MESSAGE_TEMPLATE.concat(id));
     }
 
     public UserNotFoundException() {

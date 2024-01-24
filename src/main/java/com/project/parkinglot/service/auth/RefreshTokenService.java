@@ -11,10 +11,10 @@ public interface RefreshTokenService {
 
     boolean isRefreshExpired(RefreshToken token);
 
-    RefreshToken getByUser(Long userId);
+    RefreshToken getByUser(String userId);
 
     Optional<RefreshToken> findByToken(String token);
 
-    int deleteByUserId(Long userId);
+    int deleteByUserId(String userId);
 
 }

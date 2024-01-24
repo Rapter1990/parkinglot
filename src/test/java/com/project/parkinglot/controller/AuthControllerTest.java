@@ -114,7 +114,7 @@ class AuthControllerTest extends BaseControllerTest {
 
         // Given
         User mockUser = User.builder()
-                .id(1L)
+                .id("1L")
                 .username("driver_1")
                 .email("driver_1@parkinglot.com")
                 .role(Role.ROLE_DRIVER)
@@ -161,7 +161,7 @@ class AuthControllerTest extends BaseControllerTest {
 
         // Given
         User mockUser = User.builder()
-                .id(1L)
+                .id("1L")
                 .username("driver_1")
                 .email("driver_1@parkinglot.com")
                 .role(Role.ROLE_DRIVER)
@@ -225,7 +225,7 @@ class AuthControllerTest extends BaseControllerTest {
 
         // Given
         User mockUser = User.builder()
-                .id(2L)
+                .id("2L")
                 .username("admin_1")
                 .email("admin@parkinglot.com")
                 .role(Role.ROLE_ADMIN)
@@ -271,7 +271,7 @@ class AuthControllerTest extends BaseControllerTest {
 
         // Given
         User mockUser = User.builder()
-                .id(2L)
+                .id("2L")
                 .username("admin_1")
                 .email("admin@parkinglot.com")
                 .role(Role.ROLE_ADMIN)

@@ -62,10 +62,9 @@ public class JwtUtils {
                 .getBody();
     }
 
-    public Long getIdFromToken(String token) {
+    public String getIdFromToken(String token) {
         String idValue = extractClaims(token).get(TokenClaims.ID.getValue()).toString();
-        Double doubleValue = Double.parseDouble(idValue);
-        return doubleValue.longValue();
+        return idValue;
     }
 
     public String getEmailFromToken(String token) {

@@ -1,9 +1,9 @@
 package com.project.parkinglot.service.auth.impl;
 
 import com.project.parkinglot.exception.user.UserNotFoundException;
-import com.project.parkinglot.repository.RefreshTokenRepository;
 import com.project.parkinglot.security.model.entity.RefreshToken;
 import com.project.parkinglot.security.model.entity.User;
+import com.project.parkinglot.security.repository.RefreshTokenRepository;
 import com.project.parkinglot.service.auth.RefreshTokenService;
 import com.project.parkinglot.service.auth.UserService;
 import lombok.RequiredArgsConstructor;
@@ -52,7 +52,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     }
 
     @Override
-    public RefreshToken getByUser(Long userId) {
+    public RefreshToken getByUser(String userId) {
         return refreshTokenRepository.findByUserId(userId);
     }
 
@@ -65,7 +65,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
 
     @Override
     @Transactional
-    public int deleteByUserId(Long userId) {
+    public int deleteByUserId(String userId) {
 
         User user = userService.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
         return refreshTokenRepository.deleteByUser(user);

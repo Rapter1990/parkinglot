@@ -6,12 +6,12 @@ import com.project.parkinglot.payload.request.auth.SignupRequest;
 import com.project.parkinglot.payload.request.auth.TokenRefreshRequest;
 import com.project.parkinglot.payload.response.auth.JWTResponse;
 import com.project.parkinglot.payload.response.auth.TokenRefreshResponse;
-import com.project.parkinglot.repository.UserRepository;
 import com.project.parkinglot.security.CustomUserDetails;
 import com.project.parkinglot.security.jwt.JwtUtils;
 import com.project.parkinglot.security.model.entity.RefreshToken;
 import com.project.parkinglot.security.model.entity.User;
 import com.project.parkinglot.security.model.enums.Role;
+import com.project.parkinglot.security.repository.UserRepository;
 import com.project.parkinglot.service.auth.RefreshTokenService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -177,7 +177,7 @@ class AuthServiceImplTest extends BaseServiceTest {
 
         RefreshToken refreshToken = RefreshToken.builder()
                 .token("validRefreshToken")
-                .user(User.builder().id(1L).build())
+                .user(User.builder().id("1L").build())
                 .build();
 
         // When
@@ -230,7 +230,7 @@ class AuthServiceImplTest extends BaseServiceTest {
 
         RefreshToken refreshToken = RefreshToken.builder()
                 .token("validRefreshToken")
-                .user(User.builder().id(1L).build())
+                .user(User.builder().id("1L").build())
                 .build();
 
         // When
@@ -254,7 +254,7 @@ class AuthServiceImplTest extends BaseServiceTest {
 
         // Given
         String token = "validAuthToken";
-        Long userId = 1L;
+        String userId = "1L";
 
         // When
         when(jwtUtils.extractTokenFromHeader(token)).thenReturn(token);
@@ -286,7 +286,7 @@ class AuthServiceImplTest extends BaseServiceTest {
         assertEquals("Failed", result);
 
         // Verify
-        verify(refreshTokenService, never()).deleteByUserId(anyLong());
+        verify(refreshTokenService, never()).deleteByUserId(anyString());
 
     }
 
@@ -306,7 +306,7 @@ class AuthServiceImplTest extends BaseServiceTest {
         assertEquals("Failed", result);
 
         // Verify
-        verify(refreshTokenService, never()).deleteByUserId(anyLong());
+        verify(refreshTokenService, never()).deleteByUserId(anyString());
 
     }
 
@@ -442,7 +442,7 @@ class AuthServiceImplTest extends BaseServiceTest {
 
         RefreshToken refreshToken = RefreshToken.builder()
                 .token("validRefreshToken")
-                .user(User.builder().id(1L).build())
+                .user(User.builder().id("1L").build())
                 .build();
 
         // When
@@ -495,7 +495,7 @@ class AuthServiceImplTest extends BaseServiceTest {
 
         RefreshToken refreshToken = RefreshToken.builder()
                 .token("validRefreshToken")
-                .user(User.builder().id(1L).build())
+                .user(User.builder().id("1L").build())
                 .build();
 
         // When
@@ -519,7 +519,7 @@ class AuthServiceImplTest extends BaseServiceTest {
 
         // Given
         String token = "validAuthToken";
-        Long userId = 1L;
+        String userId = "1L";
 
         // When
         when(jwtUtils.extractTokenFromHeader(token)).thenReturn(token);
@@ -551,7 +551,7 @@ class AuthServiceImplTest extends BaseServiceTest {
         assertEquals("Failed", result);
 
         // Verify
-        verify(refreshTokenService, never()).deleteByUserId(anyLong());
+        verify(refreshTokenService, never()).deleteByUserId(anyString());
 
     }
 
@@ -571,7 +571,7 @@ class AuthServiceImplTest extends BaseServiceTest {
         assertEquals("Failed", result);
 
         // Verify
-        verify(refreshTokenService, never()).deleteByUserId(anyLong());
+        verify(refreshTokenService, never()).deleteByUserId(anyString());
 
     }
 

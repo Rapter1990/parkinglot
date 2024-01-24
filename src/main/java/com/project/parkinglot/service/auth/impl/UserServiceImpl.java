@@ -1,7 +1,7 @@
 package com.project.parkinglot.service.auth.impl;
 
-import com.project.parkinglot.repository.UserRepository;
 import com.project.parkinglot.security.model.entity.User;
+import com.project.parkinglot.security.repository.UserRepository;
 import com.project.parkinglot.service.auth.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findById(Long userId) {
+    public Optional<User> findById(String userId) {
         return userRepository.findById(userId);
     }
 

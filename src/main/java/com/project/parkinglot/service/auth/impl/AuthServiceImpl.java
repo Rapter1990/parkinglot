@@ -8,11 +8,11 @@ import com.project.parkinglot.payload.request.auth.SignupRequest;
 import com.project.parkinglot.payload.request.auth.TokenRefreshRequest;
 import com.project.parkinglot.payload.response.auth.JWTResponse;
 import com.project.parkinglot.payload.response.auth.TokenRefreshResponse;
-import com.project.parkinglot.repository.UserRepository;
 import com.project.parkinglot.security.CustomUserDetails;
 import com.project.parkinglot.security.jwt.JwtUtils;
 import com.project.parkinglot.security.model.entity.RefreshToken;
 import com.project.parkinglot.security.model.entity.User;
+import com.project.parkinglot.security.repository.UserRepository;
 import com.project.parkinglot.service.auth.AuthService;
 import com.project.parkinglot.service.auth.RefreshTokenService;
 import lombok.RequiredArgsConstructor;
@@ -105,7 +105,7 @@ public class AuthServiceImpl implements AuthService {
         String authToken = jwtUtils.extractTokenFromHeader(token);
 
         if (jwtUtils.validateJwtToken(authToken)) {
-            Long id = jwtUtils.getIdFromToken(authToken);
+            String id = jwtUtils.getIdFromToken(authToken);
 
             refreshTokenService.deleteByUserId(id);
 
