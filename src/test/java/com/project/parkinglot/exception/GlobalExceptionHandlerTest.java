@@ -1,6 +1,12 @@
 package com.project.parkinglot.exception;
 
 import com.project.parkinglot.base.BaseControllerTest;
+import com.project.parkinglot.exception.park.ParkNotFoundException;
+import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException;
+import com.project.parkinglot.exception.pricelist.PriceListNotFoundException;
+import com.project.parkinglot.exception.user.EmailAlreadyExistsException;
+import com.project.parkinglot.exception.user.RefreshTokenNotFoundException;
+import com.project.parkinglot.exception.user.UserNotFoundException;
 import com.project.parkinglot.payload.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
@@ -151,5 +157,168 @@ class GlobalExceptionHandlerTest extends BaseControllerTest {
                 ((ErrorResponse) responseEntity.getBody()).getTimestamp().toLocalDate());
 
     }
+
+    @Test
+    void givenParkingAreaNotFoundException_whenThrowParkingAreaNotFoundException_thenReturnErrorResponse() {
+
+        // Given
+        ParkingAreaNotFoundException mockException = new ParkingAreaNotFoundException("Parking area not found");
+
+        // When
+        List<String> details = new ArrayList<>();
+        details.add(mockException.getMessage());
+
+        ErrorResponse expectedErrorResponse = ErrorResponse.builder()
+                .errorDetails(details)
+                .message("Parking Area Not Found")
+                .statusCode(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND)
+                .timestamp(LocalDateTime.now())
+                .build();
+
+        // Then
+        ResponseEntity<ErrorResponse> responseEntity = globalExceptionHandler.handleParkingAreaNotFoundException(mockException);
+
+        Assertions.assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
+        Assertions.assertEquals(expectedErrorResponse.getTimestamp().toLocalDate(),
+                responseEntity.getBody().getTimestamp().toLocalDate());
+
+    }
+
+    @Test
+    void givenParkNotFoundException_whenThrowParkNotFoundException_thenReturnErrorResponse() {
+
+        // Given
+        ParkNotFoundException mockException = new ParkNotFoundException("Park not found");
+
+        // When
+        List<String> details = new ArrayList<>();
+        details.add(mockException.getMessage());
+
+        ErrorResponse expectedErrorResponse = ErrorResponse.builder()
+                .errorDetails(details)
+                .message("Park Not Found")
+                .statusCode(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND)
+                .timestamp(LocalDateTime.now())
+                .build();
+
+        // Then
+        ResponseEntity<ErrorResponse> responseEntity = globalExceptionHandler.handleParkNotFoundException(mockException);
+
+        Assertions.assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
+        Assertions.assertEquals(expectedErrorResponse.getTimestamp().toLocalDate(),
+                responseEntity.getBody().getTimestamp().toLocalDate());
+
+    }
+
+    @Test
+    void givenPriceListNotFoundException_whenThrowPriceListNotFoundException_thenReturnErrorResponse() {
+
+        // Given
+        PriceListNotFoundException mockException = new PriceListNotFoundException("Price list not found");
+
+        // When
+        List<String> details = new ArrayList<>();
+        details.add(mockException.getMessage());
+
+        ErrorResponse expectedErrorResponse = ErrorResponse.builder()
+                .errorDetails(details)
+                .message("Price List Not Found")
+                .statusCode(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND)
+                .timestamp(LocalDateTime.now())
+                .build();
+
+        // Then
+        ResponseEntity<ErrorResponse> responseEntity = globalExceptionHandler.handlePriceListNotFoundException(mockException);
+
+        Assertions.assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
+        Assertions.assertEquals(expectedErrorResponse.getTimestamp().toLocalDate(),
+                responseEntity.getBody().getTimestamp().toLocalDate());
+
+    }
+
+    @Test
+    void givenRefreshTokenNotFoundException_whenThrowRefreshTokenNotFoundException_thenReturnErrorResponse() {
+
+        // Given
+        RefreshTokenNotFoundException mockException = new RefreshTokenNotFoundException("Refresh token not found");
+
+        // When
+        List<String> details = new ArrayList<>();
+        details.add(mockException.getMessage());
+
+        ErrorResponse expectedErrorResponse = ErrorResponse.builder()
+                .errorDetails(details)
+                .message("Refresh Token Not Found")
+                .statusCode(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND)
+                .timestamp(LocalDateTime.now())
+                .build();
+
+        // Then
+        ResponseEntity<ErrorResponse> responseEntity = globalExceptionHandler.handleRefreshTokenNotFoundException(mockException);
+
+        Assertions.assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
+        Assertions.assertEquals(expectedErrorResponse.getTimestamp().toLocalDate(),
+                responseEntity.getBody().getTimestamp().toLocalDate());
+
+    }
+
+    @Test
+    void givenUserNotFoundException_whenThrowUserNotFoundException_thenReturnErrorResponse() {
+
+        // Given
+        UserNotFoundException mockException = new UserNotFoundException("User not found");
+
+        // When
+        List<String> details = new ArrayList<>();
+        details.add(mockException.getMessage());
+
+        ErrorResponse expectedErrorResponse = ErrorResponse.builder()
+                .errorDetails(details)
+                .message("User Not Found")
+                .statusCode(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND)
+                .timestamp(LocalDateTime.now())
+                .build();
+
+        // Then
+        ResponseEntity<ErrorResponse> responseEntity = globalExceptionHandler.handleUserNotFoundException(mockException);
+
+        Assertions.assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
+        Assertions.assertEquals(expectedErrorResponse.getTimestamp().toLocalDate(),
+                responseEntity.getBody().getTimestamp().toLocalDate());
+
+    }
+
+    @Test
+    void givenEmailAlreadyExistsException_whenThrowEmailAlreadyExistsException_thenReturnErrorResponse() {
+
+        // Given
+        EmailAlreadyExistsException mockException = new EmailAlreadyExistsException("Email already exists");
+
+        // When
+        List<String> details = new ArrayList<>();
+        details.add(mockException.getMessage());
+
+        ErrorResponse expectedErrorResponse = ErrorResponse.builder()
+                .errorDetails(details)
+                .message("Email Already Exists")
+                .statusCode(HttpStatus.CONFLICT.value())
+                .status(HttpStatus.CONFLICT)
+                .timestamp(LocalDateTime.now())
+                .build();
+
+        // Then
+        ResponseEntity<ErrorResponse> responseEntity = globalExceptionHandler.handleEmailAlreadyExistsException(mockException);
+
+        Assertions.assertEquals(HttpStatus.CONFLICT, responseEntity.getStatusCode());
+        Assertions.assertEquals(expectedErrorResponse.getTimestamp().toLocalDate(),
+                responseEntity.getBody().getTimestamp().toLocalDate());
+
+    }
+
 
 }
