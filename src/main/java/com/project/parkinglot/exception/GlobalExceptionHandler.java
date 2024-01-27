@@ -1,5 +1,11 @@
 package com.project.parkinglot.exception;
 
+import com.project.parkinglot.exception.park.ParkNotFoundException;
+import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException;
+import com.project.parkinglot.exception.pricelist.PriceListNotFoundException;
+import com.project.parkinglot.exception.user.EmailAlreadyExistsException;
+import com.project.parkinglot.exception.user.RefreshTokenNotFoundException;
+import com.project.parkinglot.exception.user.UserNotFoundException;
 import com.project.parkinglot.payload.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -11,6 +17,7 @@ import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -114,5 +121,119 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
+    @ExceptionHandler(value = {ParkingAreaNotFoundException.class})
+    protected ResponseEntity<ErrorResponse> handleParkingAreaNotFoundException(ParkingAreaNotFoundException ex) {
+
+        log.error(ex.getMessage(), ex);
+
+        List<String> details = new ArrayList<>();
+        details.add(ex.getMessage());
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .errorDetails(details)
+                .message("Parking Area Not Found")
+                .statusCode(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+
+    }
+
+    @ExceptionHandler(value = {ParkNotFoundException.class})
+    protected ResponseEntity<ErrorResponse> handleParkNotFoundException(ParkNotFoundException ex) {
+
+        log.error(ex.getMessage(), ex);
+
+        List<String> details = new ArrayList<>();
+        details.add(ex.getMessage());
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .errorDetails(details)
+                .message("Park Not Found")
+                .statusCode(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+
+    }
+
+    @ExceptionHandler(value = {PriceListNotFoundException.class})
+    protected ResponseEntity<ErrorResponse> handlePriceListNotFoundException(PriceListNotFoundException ex) {
+
+        log.error(ex.getMessage(), ex);
+
+        List<String> details = new ArrayList<>();
+        details.add(ex.getMessage());
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .errorDetails(details)
+                .message("Price List Not Found")
+                .statusCode(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+
+    }
+
+    @ExceptionHandler(value = {EmailAlreadyExistsException.class})
+    protected ResponseEntity<ErrorResponse> handleEmailAlreadyExistsException(EmailAlreadyExistsException ex) {
+
+        log.error(ex.getMessage(), ex);
+
+        List<String> details = new ArrayList<>();
+        details.add(ex.getMessage());
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .errorDetails(details)
+                .message("Email Already Exists")
+                .statusCode(HttpStatus.CONFLICT.value())
+                .status(HttpStatus.CONFLICT)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+
+    }
+
+    @ExceptionHandler(value = {RefreshTokenNotFoundException.class})
+    protected ResponseEntity<ErrorResponse> handleRefreshTokenNotFoundException(RefreshTokenNotFoundException ex) {
+
+        log.error(ex.getMessage(), ex);
+
+        List<String> details = new ArrayList<>();
+        details.add(ex.getMessage());
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .errorDetails(details)
+                .message("Refresh Token Not Found")
+                .statusCode(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+
+
+    }
+
+    @ExceptionHandler(value = {UserNotFoundException.class})
+    protected ResponseEntity<ErrorResponse> handleUserNotFoundException(UserNotFoundException ex) {
+
+        log.error(ex.getMessage(), ex);
+
+        List<String> details = new ArrayList<>();
+        details.add(ex.getMessage());
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .errorDetails(details)
+                .message("User Not Found")
+                .statusCode(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+
+    }
 
 }
