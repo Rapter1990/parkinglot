@@ -81,7 +81,8 @@ public class SecurityConfig {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/v2/api-docs/**",
-                                "/v3/api-docs/**" // TODO : Add Actuator endpoint
+                                "/v3/api-docs/**",
+                                "/actuator/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
