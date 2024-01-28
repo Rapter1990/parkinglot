@@ -2,6 +2,7 @@ package com.project.parkinglot.logging.aop;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.project.parkinglot.exception.AlreadyException;
 import com.project.parkinglot.exception.NotFoundException;
 import com.project.parkinglot.logging.entity.LogEntity;
 import com.project.parkinglot.logging.service.LogService;
@@ -120,9 +121,11 @@ public class LoggerAspectJ {
 
         if (ex instanceof NotFoundException) {
             return NotFoundException.STATUS;
+        } else if (ex instanceof AlreadyException) {
+            return AlreadyException.STATUS;
         }
 
-        return null;
+        return null; // Handle other exceptions as needed
 
     }
 
