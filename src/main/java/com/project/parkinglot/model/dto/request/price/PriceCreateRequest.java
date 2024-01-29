@@ -15,16 +15,18 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PriceCreateRequest {
-    @NotNull(message = "lowerBound boş olamaz")
-    @Min(value = 0, message = "lowerBound en az 0 olmalıdır")
-    @Max(value = 24, message = "lowerBound en fazla 24 olmalıdır")
+
+    @NotNull(message = "lowerBound cannot be null")
+    @Min(value = 0, message = "lowerBound must be at least 0")
+    @Max(value = 24, message = "lowerBound must be at most 24")
     private Integer lowerBound;
 
-    @NotNull(message = "upperBound boş olamaz")
-    @Min(value = 0, message = "upperBound en az 0 olmalıdır")
-    @Max(value = 24, message = "upperBound en fazla 24 olmalıdır")
+    @NotNull(message = "upperBound cannot be null")
+    @Min(value = 0, message = "upperBound must be at least 0")
+    @Max(value = 24, message = "upperBound must be at most 24")
     private Integer upperBound;
 
-    @NotNull
+    @NotNull(message = "cost cannot be null")
     private BigDecimal cost;
+
 }
