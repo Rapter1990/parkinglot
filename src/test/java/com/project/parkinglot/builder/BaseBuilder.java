@@ -9,7 +9,7 @@ public abstract class BaseBuilder<T> {
         this.data = clazz.getDeclaredConstructor().newInstance();
     }
 
-    T data;
+    public T data;
 
     public T build() {
         return data;
