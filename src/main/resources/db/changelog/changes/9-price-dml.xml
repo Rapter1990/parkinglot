@@ -1,0 +1,48 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <!-- ================================== -->
+    <!-- DML of example PRICE data      -->
+    <!-- ================================== -->
+
+    <changeSet id="insertPriceExampleData1" author="seymusyuzen">
+        <insert tableName="PRICE">
+            <column name="ID" value="a1b2c3d4-e5f6-a7b8-c9d0-0123456789ab"/>
+            <column name="LOWER_BOUND" value="0"/>
+            <column name="UPPER_BOUND" value="100"/>
+            <column name="COST" value="5.0000"/>
+            <column name="PRICE_LIST_ID" value="a1b2c3d4-e5f6-a7b8-c9d0-0123456789ab"/>
+            <column name="CREATED_USER" value="john_doe"/>
+            <column name="CREATED_AT" value="2024-03-15 11:30:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertPriceExampleData2" author="seymusyuzen">
+        <insert tableName="PRICE">
+            <column name="ID" value="b1c2d3e4-f5g6-h7i8-j9k0-123456789abc"/>
+            <column name="LOWER_BOUND" value="101"/>
+            <column name="UPPER_BOUND" value="200"/>
+            <column name="COST" value="7.5000"/>
+            <column name="PRICE_LIST_ID" value="b1c2d3e4-f5g6-h7i8-j9k0-123456789abc"/>
+            <column name="CREATED_USER" value="bob_smith"/>
+            <column name="CREATED_AT" value="2024-03-20 14:45:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertPriceExampleData3" author="seymusyuzen">
+        <insert tableName="PRICE">
+            <column name="ID" value="c1d2e3f4-g5h6-i7j8-k9l0-23456789abcd"/>
+            <column name="LOWER_BOUND" value="201"/>
+            <column name="UPPER_BOUND" value="300"/>
+            <column name="COST" value="10.0000"/>
+            <column name="PRICE_LIST_ID" value="c1d2e3f4-g5h6-i7j8-k9l0-23456789abcd"/>
+            <column name="CREATED_USER" value="alice_j"/>
+            <column name="CREATED_AT" value="2024-03-25 09:15:00"/>
+        </insert>
+    </changeSet>
+
+    <!-- ================================== -->
+    <!-- DML of example PRICE data      -->
+    <!-- ================================== -->
+</databaseChangeLog>
