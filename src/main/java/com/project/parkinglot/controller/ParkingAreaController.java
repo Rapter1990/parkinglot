@@ -22,7 +22,7 @@ public class ParkingAreaController {
     private final ParkingAreaCreateService parkingAreaCreateService;
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<String> createParkingArea(
             @RequestBody final ParkingAreaCreateRequest parkingAreaCreateRequest
     ) {
