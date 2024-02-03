@@ -4,8 +4,8 @@ import com.project.parkinglot.exception.parkingarea.ParkingAreAlreadyExistExcept
 import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
-import com.project.parkinglot.model.mapper.parking_area.ParkingAreaDTOMapper;
-import com.project.parkinglot.model.mapper.parking_area.ParkingAreaMapper;
+import com.project.parkinglot.model.mapper.parking_area.ParkingAreaCreateRequestToParkingAreaEntityMapper;
+import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingAreaDomainModelMapper;
 import com.project.parkinglot.repository.ParkingAreaRepository;
 import com.project.parkinglot.service.parking_area.ParkingAreaCreateService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +17,12 @@ public class ParkingAreaCreateServiceImpl implements ParkingAreaCreateService {
 
     private final ParkingAreaRepository parkingAreaRepository;
 
+    private final ParkingAreaCreateRequestToParkingAreaEntityMapper parkingAreaCreateRequestToParkingAreaEntityMapper =
+            ParkingAreaCreateRequestToParkingAreaEntityMapper.initialize();
+
+    private final ParkingAreaEntityToParkingAreaDomainModelMapper parkingAreaEntityToParkingAreaDomainModelMapper =
+            ParkingAreaEntityToParkingAreaDomainModelMapper.initialize();
+
     @Override
     public ParkingArea createParkingArea(
             final ParkingAreaCreateRequest parkingAreaCreateRequest
@@ -26,13 +32,13 @@ public class ParkingAreaCreateServiceImpl implements ParkingAreaCreateService {
                 parkingAreaCreateRequest.getLocation()
         );
 
-        ParkingAreaEntity parkingAreaToBeCreate = ParkingAreaDTOMapper
-                .mapForSaving(parkingAreaCreateRequest);
+        ParkingAreaEntity parkingAreaToBeCreate = parkingAreaCreateRequestToParkingAreaEntityMapper
+                .map(parkingAreaCreateRequest);
 
         parkingAreaRepository.save(parkingAreaToBeCreate);
 
-        return ParkingAreaMapper
-                .toDomainModel(parkingAreaToBeCreate);
+        return parkingAreaEntityToParkingAreaDomainModelMapper
+                .map(parkingAreaToBeCreate);
     }
 
     private void checkParkingAreaNameAndLocationUniqueness(
