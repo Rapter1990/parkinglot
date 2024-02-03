@@ -6,6 +6,8 @@ import com.project.parkinglot.exception.parkingarea.ParkingAreAlreadyExistExcept
 import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
+import com.project.parkinglot.model.mapper.parking_area.ParkingAreaCreateRequestToParkingAreaEntityMapper;
+import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingAreaDomainModelMapper;
 import com.project.parkinglot.repository.ParkingAreaRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -22,12 +24,24 @@ public class ParkingAreaCreateServiceImplTest extends BaseServiceTest {
     @Mock
     private ParkingAreaRepository parkingAreaRepository;
 
+    private final ParkingAreaCreateRequestToParkingAreaEntityMapper parkingAreaCreateRequestToParkingAreaEntityMapper =
+            ParkingAreaCreateRequestToParkingAreaEntityMapper.initialize();
+
+    private final ParkingAreaEntityToParkingAreaDomainModelMapper parkingAreaEntityToParkingAreaDomainModelMapper =
+            ParkingAreaEntityToParkingAreaDomainModelMapper.initialize();
+
     @Test
     public void givenValidParkingAreaCreateRequest_whenCreateParkingArea_thenReturnParkingAreaDomainModel() {
         // Given
         final ParkingAreaCreateRequest mockValidParkingAreaCreateRequest = new ParkingAreaCreateRequestBuilder()
                 .withValidFields()
                 .build();
+
+        final ParkingAreaEntity mockParkingAreaEntity = parkingAreaCreateRequestToParkingAreaEntityMapper
+                .map(mockValidParkingAreaCreateRequest);
+
+        final ParkingArea mockParkingAreaDomainModel = parkingAreaEntityToParkingAreaDomainModelMapper
+                .map(mockParkingAreaEntity);
 
         // When
         Mockito.when(parkingAreaRepository.existsParkingAreaEntitiesByNameAndLocation(
@@ -40,7 +54,7 @@ public class ParkingAreaCreateServiceImplTest extends BaseServiceTest {
                 .createParkingArea(mockValidParkingAreaCreateRequest);
 
         Assertions.assertEquals(
-                mockValidParkingAreaCreateRequest.getName(),
+                mockParkingAreaDomainModel.getName(),
                 response.getName()
         );
 
