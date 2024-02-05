@@ -48,7 +48,8 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
                 .thenReturn(parkingArea);
 
         mockMvc.perform(
-                        MockMvcRequestBuilders.post("/api/v1/parking-area")
+                        MockMvcRequestBuilders
+                                .post("/api/v1/parking-area")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(parkingAreaCreateRequest))
                                 .header(HttpHeaders.AUTHORIZATION, mockAdminToken)
@@ -71,7 +72,8 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
         ParkingAreaCreateRequest parkingAreaCreateRequest = parkingAreaCreateRequestBuilder.withValidFields().build();
 
         mockMvc.perform(
-                        MockMvcRequestBuilders.post("/api/v1/parking-area")
+                        MockMvcRequestBuilders
+                                .post("/api/v1/parking-area")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(parkingAreaCreateRequest))
                                 .header(HttpHeaders.AUTHORIZATION, mockUserToken)
@@ -102,7 +104,8 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
                 .thenReturn(parkingArea);
 
         mockMvc.perform(
-                        MockMvcRequestBuilders.post("/api/v1/parking-area")
+                        MockMvcRequestBuilders
+                                .post("/api/v1/parking-area")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(parkingAreaCreateRequest))
                                 .header(HttpHeaders.AUTHORIZATION, mockAdminToken)
@@ -131,7 +134,8 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
                 .thenReturn(parkingArea);
 
         mockMvc.perform(
-                        MockMvcRequestBuilders.post("/api/v1/parking-area")
+                        MockMvcRequestBuilders
+                                .post("/api/v1/parking-area")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(parkingAreaCreateRequest))
                                 .header(HttpHeaders.AUTHORIZATION, mockAdminToken)
@@ -160,7 +164,8 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
                 .thenReturn(parkingArea);
 
         mockMvc.perform(
-                        MockMvcRequestBuilders.post("/api/v1/parking-area")
+                        MockMvcRequestBuilders
+                                .post("/api/v1/parking-area")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(parkingAreaCreateRequest))
                                 .header(HttpHeaders.AUTHORIZATION, mockAdminToken)
