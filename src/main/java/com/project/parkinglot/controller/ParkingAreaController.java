@@ -3,6 +3,7 @@ package com.project.parkinglot.controller;
 import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
 import com.project.parkinglot.service.parking_area.ParkingAreaCreateService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,7 +25,7 @@ public class ParkingAreaController {
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<String> createParkingArea(
-            @RequestBody final ParkingAreaCreateRequest parkingAreaCreateRequest
+            @RequestBody @Valid final ParkingAreaCreateRequest parkingAreaCreateRequest
     ) {
         final ParkingArea parkingArea = parkingAreaCreateService
                 .createParkingArea(parkingAreaCreateRequest);
