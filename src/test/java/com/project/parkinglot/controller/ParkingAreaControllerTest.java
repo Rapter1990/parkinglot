@@ -33,7 +33,7 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
             ParkingAreaEntityToParkingAreaDomainModelMapper.initialize();
 
     @Test
-    public void givenValidParkingAreaCreateRequest_whenParkingAreaCreated_thenReturnParkingId() throws Exception {
+    public void givenValidParkingAreaCreateRequest_whenParkingAreaCreated_thenReturnCustomResponse() throws Exception {
 
         String parkingAreaId = UUID.randomUUID().toString();
         ParkingAreaCreateRequestBuilder parkingAreaCreateRequestBuilder = new ParkingAreaCreateRequestBuilder();
@@ -56,9 +56,9 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
                 )
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(
-                        MockMvcResultMatchers.content().string(parkingAreaId)
-                );
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response").value(parkingArea.getId()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.isSuccess").value(true))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.httpStatus").value("OK"));
 
         // Verify
         Mockito.verify(parkingAreaCreateService, Mockito.times(1))
@@ -80,7 +80,6 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
                 )
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isForbidden());
-
 
         // Verify
         Mockito.verify(parkingAreaCreateService, Mockito.never())
