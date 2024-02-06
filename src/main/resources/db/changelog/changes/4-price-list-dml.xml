@@ -1,0 +1,39 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <!-- ================================== -->
+    <!-- DML of example PRICE_LIST data      -->
+    <!-- ================================== -->
+
+    <changeSet id="insertPriceListExampleData1" author="seymusyuzen">
+        <insert tableName="PRICE_LIST">
+            <column name="ID" value="a1b2c3d4-e5f6-a7b8-c9d0-0123456789ab"/>
+            <column name="NAME" value="Standard Price List"/>
+            <column name="CREATED_USER" value="john_doe"/>
+            <column name="CREATED_AT" value="2024-02-01 10:30:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertPriceListExampleData2" author="seymusyuzen">
+        <insert tableName="PRICE_LIST">
+            <column name="ID" value="b1c2d3e4-f5g6-h7i8-j9k0-123456789abc"/>
+            <column name="NAME" value="Promotional Price List"/>
+            <column name="CREATED_USER" value="bob_smith"/>
+            <column name="CREATED_AT" value="2024-02-05 15:45:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertPriceListExampleData3" author="seymusyuzen">
+        <insert tableName="PRICE_LIST">
+            <column name="ID" value="c1d2e3f4-g5h6-i7j8-k9l0-23456789abcd"/>
+            <column name="NAME" value="Bulk Purchase Price List"/>
+            <column name="CREATED_USER" value="alice_j"/>
+            <column name="CREATED_AT" value="2024-02-10 08:00:00"/>
+        </insert>
+    </changeSet>
+
+    <!-- ================================== -->
+    <!-- DML of example PRICE_LIST data      -->
+    <!-- ================================== -->
+</databaseChangeLog>

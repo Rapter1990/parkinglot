@@ -1,0 +1,45 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <!-- ================================== -->
+    <!-- DML of example VEHICLE data      -->
+    <!-- ================================== -->
+
+    <changeSet id="insertVehicleExampleData1" author="seymusyuzen">
+        <insert tableName="VEHICLE">
+            <column name="ID" value="a1b2c3d4-e5f6-a7b8-c9d0-0123456789ab"/>
+            <column name="LICENCE_PLATE" value="ABC123"/>
+            <column name="USER_ID" value="a1b2c3d4-e5f6-a7b8-c9d0-0123456789ab"/>
+            <column name="VEHICLE_TYPE" value="SEDAN"/>
+            <column name="CREATED_USER" value="john_doe"/>
+            <column name="CREATED_AT" value="2024-02-15 09:30:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertVehicleExampleData2" author="seymusyuzen">
+        <insert tableName="VEHICLE">
+            <column name="ID" value="b1c2d3e4-f5g6-h7i8-j9k0-123456789abc"/>
+            <column name="LICENCE_PLATE" value="XYZ789"/>
+            <column name="USER_ID" value="c1d2e3f4-g5h6-i7j8-k9l0-23456789abcd"/>
+            <column name="VEHICLE_TYPE" value="SUV"/>
+            <column name="CREATED_USER" value="bob_smith"/>
+            <column name="CREATED_AT" value="2024-02-20 14:15:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertVehicleExampleData3" author="seymusyuzen">
+        <insert tableName="VEHICLE">
+            <column name="ID" value="c1d2e3f4-g5h6-i7j8-k9l0-23456789abcd"/>
+            <column name="LICENCE_PLATE" value="PQR456"/>
+            <column name="USER_ID" value="d1e2f3g4-h5i6-j7k8-l9m0-3456789abcde"/>
+            <column name="VEHICLE_TYPE" value="MINIVAN"/>
+            <column name="CREATED_USER" value="alice_j"/>
+            <column name="CREATED_AT" value="2024-02-25 17:45:00"/>
+        </insert>
+    </changeSet>
+
+    <!-- ================================== -->
+    <!-- DML of example VEHICLE data      -->
+    <!-- ================================== -->
+</databaseChangeLog>
