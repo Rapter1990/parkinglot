@@ -2,10 +2,10 @@ package com.project.parkinglot.controller;
 
 import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
+import com.project.parkinglot.payload.response.CustomResponse;
 import com.project.parkinglot.service.parking_area.ParkingAreaCreateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,13 +24,13 @@ public class ParkingAreaController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public ResponseEntity<String> createParkingArea(
+    public CustomResponse<String> createParkingArea(
             @RequestBody @Valid final ParkingAreaCreateRequest parkingAreaCreateRequest
     ) {
         final ParkingArea parkingArea = parkingAreaCreateService
                 .createParkingArea(parkingAreaCreateRequest);
 
-        return ResponseEntity.ok(parkingArea.getId());
+        return CustomResponse.ok(parkingArea.getId());
     }
 
 }
