@@ -4,6 +4,8 @@ import com.github.javafaker.Faker;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
 import com.project.parkinglot.model.dto.request.priceList.PriceListCreateRequest;
 
+import java.util.List;
+
 
 public class ParkingAreaCreateRequestBuilder extends BaseBuilder<ParkingAreaCreateRequest> {
 
@@ -18,7 +20,11 @@ public class ParkingAreaCreateRequestBuilder extends BaseBuilder<ParkingAreaCrea
                 .withLocation(faker.address().fullAddress())
                 .withCapacity(faker.number().numberBetween(1, 100))
                 .withCity(faker.address().city())
-                .withPriceList(new PriceListCreateRequest());
+                .withPriceList(
+                        new PriceListCreateRequestBuilder()
+                                .withValidFields()
+                                .build()
+                );
     }
 
     public ParkingAreaCreateRequestBuilder withName(
@@ -62,4 +68,3 @@ public class ParkingAreaCreateRequestBuilder extends BaseBuilder<ParkingAreaCrea
     }
 
 }
-

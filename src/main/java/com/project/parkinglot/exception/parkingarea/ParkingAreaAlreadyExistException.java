@@ -2,7 +2,7 @@ package com.project.parkinglot.exception.parkingarea;
 
 import java.io.Serial;
 
-public class ParkingAreAlreadyExistException extends RuntimeException {
+public class ParkingAreaAlreadyExistException extends RuntimeException {
 
     @Serial
     private static final long serialVersionUID = -4515385870402222793L;
@@ -10,11 +10,13 @@ public class ParkingAreAlreadyExistException extends RuntimeException {
     private static final String DEFAULT_MESSAGE =
             "The Parking Area Name and Location already exist!";
 
-    public ParkingAreAlreadyExistException() {
+    public ParkingAreaAlreadyExistException() {
         super(DEFAULT_MESSAGE);
     }
 
-    public ParkingAreAlreadyExistException(final String message) {
+    public ParkingAreaAlreadyExistException(
+            final String message
+    ) {
         super(DEFAULT_MESSAGE + " " + message);
     }
 

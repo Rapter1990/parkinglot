@@ -1,6 +1,6 @@
 package com.project.parkinglot.service.parking_area.impl;
 
-import com.project.parkinglot.exception.parkingarea.ParkingAreAlreadyExistException;
+import com.project.parkinglot.exception.parkingarea.ParkingAreaAlreadyExistException;
 import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
@@ -47,7 +47,7 @@ public class ParkingAreaCreateServiceImpl implements ParkingAreaCreateService {
     ) {
         if (Boolean.TRUE.equals(parkingAreaRepository
                 .existsParkingAreaEntitiesByNameAndLocation(name, location))) {
-            throw new ParkingAreAlreadyExistException();
+            throw new ParkingAreaAlreadyExistException();
         }
     }
 }

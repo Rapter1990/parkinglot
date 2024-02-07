@@ -35,47 +35,58 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
     @Test
     public void givenValidParkingAreaCreateRequest_whenParkingAreaCreated_thenReturnCustomResponse() throws Exception {
 
-        String parkingAreaId = UUID.randomUUID().toString();
-        ParkingAreaCreateRequestBuilder parkingAreaCreateRequestBuilder = new ParkingAreaCreateRequestBuilder();
+        // Given
+        String mockParkingAreaId = UUID.randomUUID().toString();
 
-        ParkingAreaCreateRequest parkingAreaCreateRequest = parkingAreaCreateRequestBuilder.withValidFields().build();
+        final ParkingAreaCreateRequest mockParkingAreaCreateRequest = new ParkingAreaCreateRequestBuilder()
+                .withValidFields()
+                .build();
 
-        ParkingAreaEntity parkingAreaEntity = parkingAreaCreateRequestToParkingAreaEntityMapper.map(parkingAreaCreateRequest);
-        parkingAreaEntity.setId(parkingAreaId);
-        ParkingArea parkingArea = parkingAreaEntityToParkingAreaDomainModelMapper.map(parkingAreaEntity);
+        final ParkingAreaEntity mockParkingAreaEntity = parkingAreaCreateRequestToParkingAreaEntityMapper
+                .map(mockParkingAreaCreateRequest);
 
+        mockParkingAreaEntity.setId(mockParkingAreaId);
+
+        final ParkingArea mockParkingArea = parkingAreaEntityToParkingAreaDomainModelMapper
+                .map(mockParkingAreaEntity);
+
+        // When
         Mockito.when(parkingAreaCreateService.createParkingArea(Mockito.any(ParkingAreaCreateRequest.class)))
-                .thenReturn(parkingArea);
+                .thenReturn(mockParkingArea);
 
+        // Then
         mockMvc.perform(
                         MockMvcRequestBuilders
                                 .post("/api/v1/parking-area")
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(parkingAreaCreateRequest))
+                                .content(objectMapper.writeValueAsString(mockParkingAreaCreateRequest))
                                 .header(HttpHeaders.AUTHORIZATION, mockAdminToken)
                 )
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.response").value(parkingArea.getId()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response").value(mockParkingArea.getId()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.isSuccess").value(true))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.httpStatus").value("OK"));
 
         // Verify
         Mockito.verify(parkingAreaCreateService, Mockito.times(1))
                 .createParkingArea(Mockito.any(ParkingAreaCreateRequest.class));
+
     }
 
     @Test
     public void givenValidParkingAreaCreateRequest_whenUserUnauthorized_thenReturnForbidden() throws Exception {
 
-        ParkingAreaCreateRequestBuilder parkingAreaCreateRequestBuilder = new ParkingAreaCreateRequestBuilder();
-        ParkingAreaCreateRequest parkingAreaCreateRequest = parkingAreaCreateRequestBuilder.withValidFields().build();
+        // Given
+        final ParkingAreaCreateRequest mockParkingAreaCreateRequest = new ParkingAreaCreateRequestBuilder()
+                .withValidFields().build();
 
+        // Then
         mockMvc.perform(
                         MockMvcRequestBuilders
                                 .post("/api/v1/parking-area")
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(parkingAreaCreateRequest))
+                                .content(objectMapper.writeValueAsString(mockParkingAreaCreateRequest))
                                 .header(HttpHeaders.AUTHORIZATION, mockUserToken)
                 )
                 .andDo(MockMvcResultHandlers.print())
@@ -84,29 +95,35 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
         // Verify
         Mockito.verify(parkingAreaCreateService, Mockito.never())
                 .createParkingArea(Mockito.any(ParkingAreaCreateRequest.class));
+
     }
 
 
     @Test
     public void givenInvalidParkingAreaCreateRequest_whenParkingAreaCapacityLessThanZero_thenReturnBadRequest() throws Exception {
 
-        ParkingAreaCreateRequestBuilder parkingAreaCreateRequestBuilder = new ParkingAreaCreateRequestBuilder();
-
-        ParkingAreaCreateRequest parkingAreaCreateRequest = parkingAreaCreateRequestBuilder.withValidFields()
+        // Given
+        final ParkingAreaCreateRequest mockParkingAreaCreateRequest = new ParkingAreaCreateRequestBuilder()
+                .withValidFields()
                 .withCapacity(-1)
                 .build();
 
-        ParkingAreaEntity parkingAreaEntity = parkingAreaCreateRequestToParkingAreaEntityMapper.map(parkingAreaCreateRequest);
-        ParkingArea parkingArea = parkingAreaEntityToParkingAreaDomainModelMapper.map(parkingAreaEntity);
+        final ParkingAreaEntity mockParkingAreaEntity = parkingAreaCreateRequestToParkingAreaEntityMapper
+                .map(mockParkingAreaCreateRequest);
 
+        final ParkingArea mockParkingArea = parkingAreaEntityToParkingAreaDomainModelMapper
+                .map(mockParkingAreaEntity);
+
+        // When
         Mockito.when(parkingAreaCreateService.createParkingArea(Mockito.any(ParkingAreaCreateRequest.class)))
-                .thenReturn(parkingArea);
+                .thenReturn(mockParkingArea);
 
+        // Then
         mockMvc.perform(
                         MockMvcRequestBuilders
                                 .post("/api/v1/parking-area")
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(parkingAreaCreateRequest))
+                                .content(objectMapper.writeValueAsString(mockParkingAreaCreateRequest))
                                 .header(HttpHeaders.AUTHORIZATION, mockAdminToken)
                 )
                 .andDo(MockMvcResultHandlers.print())
@@ -115,28 +132,34 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
         // Verify
         Mockito.verify(parkingAreaCreateService, Mockito.never())
                 .createParkingArea(Mockito.any(ParkingAreaCreateRequest.class));
+
     }
 
     @Test
     public void givenInvalidParkingAreaCreateRequest_whenParkingAreaCapacityIsNull_thenReturnBadRequest() throws Exception {
 
-        ParkingAreaCreateRequestBuilder parkingAreaCreateRequestBuilder = new ParkingAreaCreateRequestBuilder();
-
-        ParkingAreaCreateRequest parkingAreaCreateRequest = parkingAreaCreateRequestBuilder.withValidFields()
+        // Given
+        final ParkingAreaCreateRequest mockParkingAreaCreateRequest = new ParkingAreaCreateRequestBuilder()
+                .withValidFields()
                 .withCapacity(null)
                 .build();
 
-        ParkingAreaEntity parkingAreaEntity = parkingAreaCreateRequestToParkingAreaEntityMapper.map(parkingAreaCreateRequest);
-        ParkingArea parkingArea = parkingAreaEntityToParkingAreaDomainModelMapper.map(parkingAreaEntity);
+        final ParkingAreaEntity mockParkingAreaEntity = parkingAreaCreateRequestToParkingAreaEntityMapper
+                .map(mockParkingAreaCreateRequest);
 
+        final ParkingArea mockParkingArea = parkingAreaEntityToParkingAreaDomainModelMapper
+                .map(mockParkingAreaEntity);
+
+        // When
         Mockito.when(parkingAreaCreateService.createParkingArea(Mockito.any(ParkingAreaCreateRequest.class)))
-                .thenReturn(parkingArea);
+                .thenReturn(mockParkingArea);
 
+        // Then
         mockMvc.perform(
                         MockMvcRequestBuilders
                                 .post("/api/v1/parking-area")
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(parkingAreaCreateRequest))
+                                .content(objectMapper.writeValueAsString(mockParkingAreaCreateRequest))
                                 .header(HttpHeaders.AUTHORIZATION, mockAdminToken)
                 )
                 .andDo(MockMvcResultHandlers.print())
@@ -145,28 +168,34 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
         // Verify
         Mockito.verify(parkingAreaCreateService, Mockito.never())
                 .createParkingArea(Mockito.any(ParkingAreaCreateRequest.class));
+
     }
 
     @Test
     public void givenInvalidParkingAreaCreateRequest_whenParkingAreaNameIsNull_thenReturnBadRequest() throws Exception {
 
-        ParkingAreaCreateRequestBuilder parkingAreaCreateRequestBuilder = new ParkingAreaCreateRequestBuilder();
-
-        ParkingAreaCreateRequest parkingAreaCreateRequest = parkingAreaCreateRequestBuilder.withValidFields()
+        // Given
+        final ParkingAreaCreateRequest mockParkingAreaCreateRequest = new ParkingAreaCreateRequestBuilder()
+                .withValidFields()
                 .withName(null)
                 .build();
 
-        ParkingAreaEntity parkingAreaEntity = parkingAreaCreateRequestToParkingAreaEntityMapper.map(parkingAreaCreateRequest);
-        ParkingArea parkingArea = parkingAreaEntityToParkingAreaDomainModelMapper.map(parkingAreaEntity);
+        final ParkingAreaEntity mockParkingAreaEntity = parkingAreaCreateRequestToParkingAreaEntityMapper
+                .map(mockParkingAreaCreateRequest);
 
+        final ParkingArea mockParkingArea = parkingAreaEntityToParkingAreaDomainModelMapper
+                .map(mockParkingAreaEntity);
+
+        // When
         Mockito.when(parkingAreaCreateService.createParkingArea(Mockito.any(ParkingAreaCreateRequest.class)))
-                .thenReturn(parkingArea);
+                .thenReturn(mockParkingArea);
 
+        // Then
         mockMvc.perform(
                         MockMvcRequestBuilders
                                 .post("/api/v1/parking-area")
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(parkingAreaCreateRequest))
+                                .content(objectMapper.writeValueAsString(mockParkingAreaCreateRequest))
                                 .header(HttpHeaders.AUTHORIZATION, mockAdminToken)
                 )
                 .andDo(MockMvcResultHandlers.print())
@@ -175,6 +204,7 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
         // Verify
         Mockito.verify(parkingAreaCreateService, Mockito.never())
                 .createParkingArea(Mockito.any(ParkingAreaCreateRequest.class));
+
     }
 
 }
