@@ -248,11 +248,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .errorDetails(details)
                 .message("Parking area already exists")
-                .statusCode(HttpStatus.BAD_REQUEST.value())
-                .status(HttpStatus.BAD_REQUEST)
+                .statusCode(HttpStatus.CONFLICT.value())
+                .status(HttpStatus.CONFLICT)
                 .build();
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
 
 }
