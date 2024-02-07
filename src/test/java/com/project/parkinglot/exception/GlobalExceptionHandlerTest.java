@@ -2,6 +2,7 @@ package com.project.parkinglot.exception;
 
 import com.project.parkinglot.base.BaseControllerTest;
 import com.project.parkinglot.exception.park.ParkNotFoundException;
+import com.project.parkinglot.exception.parkingarea.ParkingAreaAlreadyExistException;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException;
 import com.project.parkinglot.exception.pricelist.PriceListNotFoundException;
 import com.project.parkinglot.exception.user.EmailAlreadyExistsException;
@@ -320,5 +321,31 @@ class GlobalExceptionHandlerTest extends BaseControllerTest {
 
     }
 
+    @Test
+    void givenParkingAreAlreadyExistException_whenThrowParkingAreAlreadyExistException_thenReturnErrorResponse() {
+
+        // Given
+        ParkingAreaAlreadyExistException mockException = new ParkingAreaAlreadyExistException("The Parking Area Name and Location already exist!");
+
+        // When
+        List<String> details = new ArrayList<>();
+        details.add(mockException.getMessage());
+
+        ErrorResponse expectedErrorResponse = ErrorResponse.builder()
+                .errorDetails(details)
+                .message("The Parking Area Name and Location already exist!")
+                .statusCode(HttpStatus.CONFLICT.value())
+                .status(HttpStatus.CONFLICT)
+                .timestamp(LocalDateTime.now())
+                .build();
+
+        // Then
+        ResponseEntity<ErrorResponse> responseEntity = globalExceptionHandler.handleParkingAreAlreadyExistException(mockException);
+
+        Assertions.assertEquals(HttpStatus.CONFLICT, responseEntity.getStatusCode());
+        Assertions.assertEquals(expectedErrorResponse.getTimestamp().toLocalDate(),
+                responseEntity.getBody().getTimestamp().toLocalDate());
+
+    }
 
 }

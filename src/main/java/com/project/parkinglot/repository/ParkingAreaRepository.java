@@ -10,6 +10,11 @@ public interface ParkingAreaRepository extends JpaRepository<ParkingAreaEntity, 
 
     boolean existsByName(String name);
 
+    boolean existsParkingAreaEntitiesByNameAndLocation(
+            final String name,
+            final String location
+    );
+
     Optional<ParkingAreaEntity> findByName(String name);
 
 }

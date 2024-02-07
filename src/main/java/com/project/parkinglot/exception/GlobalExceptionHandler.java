@@ -1,6 +1,7 @@
 package com.project.parkinglot.exception;
 
 import com.project.parkinglot.exception.park.ParkNotFoundException;
+import com.project.parkinglot.exception.parkingarea.ParkingAreaAlreadyExistException;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException;
 import com.project.parkinglot.exception.pricelist.PriceListNotFoundException;
 import com.project.parkinglot.exception.user.EmailAlreadyExistsException;
@@ -234,6 +235,24 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 
+    }
+
+    @ExceptionHandler(ParkingAreaAlreadyExistException.class)
+    public ResponseEntity<ErrorResponse> handleParkingAreAlreadyExistException(ParkingAreaAlreadyExistException ex) {
+
+        log.error(ex.getMessage(), ex);
+
+        List<String> details = new ArrayList<>();
+        details.add(ex.getMessage());
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .errorDetails(details)
+                .message("Parking area already exists")
+                .statusCode(HttpStatus.CONFLICT.value())
+                .status(HttpStatus.CONFLICT)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
 
 }
