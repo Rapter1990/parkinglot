@@ -2,7 +2,7 @@ package com.project.parkinglot.exception;
 
 import com.project.parkinglot.base.BaseControllerTest;
 import com.project.parkinglot.exception.park.ParkNotFoundException;
-import com.project.parkinglot.exception.parkingarea.ParkingAreAlreadyExistException;
+import com.project.parkinglot.exception.parkingarea.ParkingAreaAlreadyExistException;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException;
 import com.project.parkinglot.exception.pricelist.PriceListNotFoundException;
 import com.project.parkinglot.exception.user.EmailAlreadyExistsException;
@@ -325,7 +325,7 @@ class GlobalExceptionHandlerTest extends BaseControllerTest {
     void givenParkingAreAlreadyExistException_whenThrowParkingAreAlreadyExistException_thenReturnErrorResponse() {
 
         // Given
-        ParkingAreAlreadyExistException mockException = new ParkingAreAlreadyExistException("The Parking Area Name and Location already exist!");
+        ParkingAreaAlreadyExistException mockException = new ParkingAreaAlreadyExistException("The Parking Area Name and Location already exist!");
 
         // When
         List<String> details = new ArrayList<>();
