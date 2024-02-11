@@ -10,11 +10,13 @@ public class PriceListEntityBuilder extends BaseBuilder<PriceListEntity> {
     }
 
     public PriceListEntityBuilder withValidFields() {
-        Faker faker = new Faker();
+        final Faker faker = new Faker();
         return this.withName(faker.name().name());
     }
 
-    public PriceListEntityBuilder withName(String name) {
+    public PriceListEntityBuilder withName(
+            final String name
+    ) {
         data.setName(name);
         return this;
     }

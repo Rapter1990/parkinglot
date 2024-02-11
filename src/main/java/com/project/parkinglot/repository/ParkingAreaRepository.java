@@ -7,13 +7,17 @@ import java.util.Optional;
 
 public interface ParkingAreaRepository extends JpaRepository<ParkingAreaEntity, String> {
 
-    boolean existsByName(String name);
+    boolean existsByName(
+            final String name
+    );
 
     boolean existsParkingAreaEntitiesByNameAndLocation(
             final String name,
             final String location
     );
 
-    Optional<ParkingAreaEntity> findByName(String name);
+    Optional<ParkingAreaEntity> findByName(
+            final String name
+    );
 
 }

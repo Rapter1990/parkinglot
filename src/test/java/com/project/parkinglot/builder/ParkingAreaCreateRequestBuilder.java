@@ -12,7 +12,7 @@ public class ParkingAreaCreateRequestBuilder extends BaseBuilder<ParkingAreaCrea
     }
 
     public ParkingAreaCreateRequestBuilder withValidFields() {
-        Faker faker = new Faker();
+        final Faker faker = new Faker();
         return this
                 .withName(faker.name().name())
                 .withLocation(faker.address().fullAddress())

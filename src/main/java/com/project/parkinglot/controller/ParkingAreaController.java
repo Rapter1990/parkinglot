@@ -33,11 +33,14 @@ public class ParkingAreaController {
         return CustomResponse.ok(parkingArea.getId());
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{parkingAreaId}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public CustomResponse<String> deleteParkingAreaById(@PathVariable @UUID String id) {
-        parkingAreaDeleteService.deleteParkingAreaById(id);
-        return CustomResponse.ok("Parking area with id " + id + " is deleted");
+    public CustomResponse<String> deleteParkingAreaById(
+            @PathVariable("parkingAreaId") @UUID final String parkingAreaId
+    ) {
+        parkingAreaDeleteService.deleteParkingAreaById(parkingAreaId);
+
+        return CustomResponse.ok("Parking area with id " + parkingAreaId + " is deleted");
     }
 
 }

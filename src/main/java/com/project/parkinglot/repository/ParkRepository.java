@@ -10,8 +10,14 @@ import java.util.Optional;
 
 public interface ParkRepository extends JpaRepository<ParkEntity, String> {
 
-    Integer countByParkingAreaEntityAndParkStatus(ParkingAreaEntity parkingArea, ParkStatus parkStatus);
+    Integer countByParkingAreaEntityAndParkStatus(
+            final ParkingAreaEntity parkingArea,
+            final ParkStatus parkStatus
+    );
 
-    Optional<ParkEntity> findByVehicleEntityAndParkStatus(VehicleEntity vehicle, ParkStatus parkStatus);
+    Optional<ParkEntity> findByVehicleEntityAndParkStatus(
+            final VehicleEntity vehicle,
+            final ParkStatus parkStatus
+    );
 
 }

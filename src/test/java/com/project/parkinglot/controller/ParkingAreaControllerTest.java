@@ -42,7 +42,7 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
     public void givenValidParkingAreaCreateRequest_whenParkingAreaCreated_thenReturnCustomResponse() throws Exception {
 
         // Given
-        String mockParkingAreaId = UUID.randomUUID().toString();
+        final String mockParkingAreaId = UUID.randomUUID().toString();
 
         final ParkingAreaCreateRequest mockParkingAreaCreateRequest = new ParkingAreaCreateRequestBuilder()
                 .withValidFields()
@@ -85,7 +85,8 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
 
         // Given
         final ParkingAreaCreateRequest mockParkingAreaCreateRequest = new ParkingAreaCreateRequestBuilder()
-                .withValidFields().build();
+                .withValidFields()
+                .build();
 
         // Then
         mockMvc.perform(
@@ -217,10 +218,10 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
     public void givenValidParkingAreaId_whenParkingAreaDeleted_thenReturnCustomResponse() throws Exception {
 
         // Given
-        String mockParkingAreaId = UUID.randomUUID().toString();
+        final String mockParkingAreaId = UUID.randomUUID().toString();
 
         // When
-        doNothing().when(parkingAreaDeleteService).deleteParkingAreaById(mockParkingAreaId);
+        Mockito.doNothing().when(parkingAreaDeleteService).deleteParkingAreaById(mockParkingAreaId);
 
         // Then
         mockMvc.perform(
@@ -236,7 +237,8 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.httpStatus").value("OK"));
 
         // Verify
-        Mockito.verify(parkingAreaDeleteService, times(1)).deleteParkingAreaById(mockParkingAreaId);
+        Mockito.verify(parkingAreaDeleteService, times(1))
+                .deleteParkingAreaById(mockParkingAreaId);
 
     }
 
@@ -261,7 +263,8 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
 
         // Verify
-        Mockito.verify(parkingAreaDeleteService, times(1)).deleteParkingAreaById(invalidParkingAreaId);
+        Mockito.verify(parkingAreaDeleteService, times(1))
+                .deleteParkingAreaById(invalidParkingAreaId);
 
     }
 
@@ -269,10 +272,11 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
     public void givenValidParkingAreaId_whenUserUnauthorized_thenReturnForbidden() throws Exception {
 
         // Given
-        String mockParkingAreaId = UUID.randomUUID().toString();
+        final String mockParkingAreaId = UUID.randomUUID().toString();
 
         // When
-        doNothing().when(parkingAreaDeleteService).deleteParkingAreaById(mockParkingAreaId);
+        Mockito.doNothing().when(parkingAreaDeleteService)
+                .deleteParkingAreaById(mockParkingAreaId);
 
         // Then
         mockMvc.perform(
@@ -285,7 +289,8 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isForbidden());
 
         // Verify
-        Mockito.verify(parkingAreaDeleteService, never()).deleteParkingAreaById(mockParkingAreaId);
+        Mockito.verify(parkingAreaDeleteService, never())
+                .deleteParkingAreaById(mockParkingAreaId);
 
     }
 

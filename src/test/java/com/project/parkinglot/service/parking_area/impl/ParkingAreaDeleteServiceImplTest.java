@@ -25,18 +25,20 @@ class ParkingAreaDeleteServiceImplTest extends BaseServiceTest {
     private ParkingAreaRepository parkingAreaRepository;
 
     @Test
-    void givenMockParkingAreaIdAndParkingAreaEntity_whenParkingAreaFoundAndDelete_thenDeletedParkingAreaEntity() {
+    void givenValidParkingAreaId_whenDeleteParkingAreaById_thenDeleteParkingAreaEntity() {
 
         // Given
-        String mockParkingAreaId = UUID.randomUUID().toString();
-        ParkingAreaEntity mockParkingArea = new ParkingAreaEntityBuilder()
+        final String mockParkingAreaId = UUID.randomUUID().toString();
+
+        final ParkingAreaEntity mockParkingAreaEntityToBeDelete = new ParkingAreaEntityBuilder()
                 .withValidFields()
                 .build();
 
         // When
         Mockito.when(parkingAreaRepository.findById(mockParkingAreaId))
-                .thenReturn(Optional.of(mockParkingArea));
-        doNothing().when(parkingAreaRepository).delete(mockParkingArea);
+                .thenReturn(Optional.of(mockParkingAreaEntityToBeDelete));
+
+        Mockito.doNothing().when(parkingAreaRepository).delete(mockParkingAreaEntityToBeDelete);
 
         // Then
         parkingAreaDeleteService.deleteParkingAreaById(mockParkingAreaId);
@@ -45,30 +47,37 @@ class ParkingAreaDeleteServiceImplTest extends BaseServiceTest {
         Mockito.verify(parkingAreaRepository, times(1))
                 .findById(mockParkingAreaId);
         Mockito.verify(parkingAreaRepository, times(1))
-                .delete(mockParkingArea);
+                .delete(mockParkingAreaEntityToBeDelete);
 
     }
 
     @Test
-    void givenNonExistentParkingAreaId_whenNotFoundParkingAreaById_throwsParkingAreaNotFoundException() {
+    void givenNotExistParkingAreaId_whenDeleteParkingAreaById_throwsParkingAreaNotFoundException() {
 
         // Given
-        String nonExistentParkingAreaId = UUID.randomUUID().toString();
+        final String mockNonExistParkingAreaId = UUID.randomUUID().toString();
 
-        // When and Then
-        ParkingAreaNotFoundException exception = Assertions.assertThrows(
+        // When
+        Mockito.when(parkingAreaRepository.findById(mockNonExistParkingAreaId))
+                .thenReturn(Optional.empty());
+
+        // Then
+        Assertions.assertThrowsExactly(
                 ParkingAreaNotFoundException.class,
-                () -> parkingAreaDeleteService.deleteParkingAreaById(nonExistentParkingAreaId)
+                () -> parkingAreaDeleteService.deleteParkingAreaById(mockNonExistParkingAreaId),
+                "No ParkingAreaEntity found with ID: With given parkingAreaId: " + mockNonExistParkingAreaId
         );
 
-        Assertions.assertEquals("No ParkingAreaEntity found with ID: Parking area not found with id: " +
-                nonExistentParkingAreaId, exception.getMessage());
-
         // Verify
-        verify(parkingAreaRepository, times(1))
-                .findById(nonExistentParkingAreaId);
-        verify(parkingAreaRepository, never())
-                .delete(any());
+        Mockito.verify(
+                parkingAreaRepository,
+                times(1)
+        ).findById(mockNonExistParkingAreaId);
+
+        Mockito.verify(
+                parkingAreaRepository,
+                never()
+        ).delete(Mockito.any(ParkingAreaEntity.class));
 
     }
 

@@ -11,7 +11,7 @@ public class ParkingAreaEntityBuilder extends BaseBuilder<ParkingAreaEntity> {
     }
 
     public ParkingAreaEntityBuilder withValidFields() {
-        Faker faker = new Faker();
+        final Faker faker = new Faker();
         return this
                 .withName(faker.name().name())
                 .withLocation(faker.address().fullAddress())
@@ -20,27 +20,37 @@ public class ParkingAreaEntityBuilder extends BaseBuilder<ParkingAreaEntity> {
                 .withPriceListEntity(new PriceListEntityBuilder().withValidFields().build());
     }
 
-    public ParkingAreaEntityBuilder withName(String name) {
+    public ParkingAreaEntityBuilder withName(
+            final String name
+    ) {
         data.setName(name);
         return this;
     }
 
-    public ParkingAreaEntityBuilder withLocation(String location) {
+    public ParkingAreaEntityBuilder withLocation(
+            final String location
+    ) {
         data.setLocation(location);
         return this;
     }
 
-    public ParkingAreaEntityBuilder withCapacity(Integer capacity) {
+    public ParkingAreaEntityBuilder withCapacity(
+            final Integer capacity
+    ) {
         data.setCapacity(capacity);
         return this;
     }
 
-    public ParkingAreaEntityBuilder withCity(String city) {
+    public ParkingAreaEntityBuilder withCity(
+            final String city
+    ) {
         data.setCity(city);
         return this;
     }
 
-    public ParkingAreaEntityBuilder withPriceListEntity(PriceListEntity priceListEntity) {
+    public ParkingAreaEntityBuilder withPriceListEntity(
+            final PriceListEntity priceListEntity
+    ) {
         data.setPriceListEntity(priceListEntity);
         return this;
     }

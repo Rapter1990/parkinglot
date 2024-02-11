@@ -15,12 +15,14 @@ public class ParkingAreaDeleteServiceImpl implements ParkingAreaDeleteService {
     private final ParkingAreaRepository parkingAreaRepository;
 
     @Override
-    public void deleteParkingAreaById(String id) {
+    public void deleteParkingAreaById(
+            final String parkingAreaId
+    ) {
 
-        ParkingAreaEntity existParkingArea = parkingAreaRepository.findById(id)
-                .orElseThrow(() -> new ParkingAreaNotFoundException("Parking area not found with id: " + id));
+        final ParkingAreaEntity parkingAreaEntityToBeDelete = parkingAreaRepository.findById(parkingAreaId)
+                .orElseThrow(() -> new ParkingAreaNotFoundException("With given parkingAreaId: " + parkingAreaId));
 
-        parkingAreaRepository.delete(existParkingArea);
+        parkingAreaRepository.delete(parkingAreaEntityToBeDelete);
 
     }
 
