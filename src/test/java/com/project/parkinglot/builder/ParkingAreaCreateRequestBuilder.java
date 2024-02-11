@@ -4,8 +4,6 @@ import com.github.javafaker.Faker;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
 import com.project.parkinglot.model.dto.request.priceList.PriceListCreateRequest;
 
-import java.util.List;
-
 
 public class ParkingAreaCreateRequestBuilder extends BaseBuilder<ParkingAreaCreateRequest> {
 
