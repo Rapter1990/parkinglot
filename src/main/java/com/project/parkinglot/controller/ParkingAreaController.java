@@ -4,14 +4,13 @@ import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
 import com.project.parkinglot.payload.response.CustomResponse;
 import com.project.parkinglot.service.parking_area.ParkingAreaCreateService;
+import com.project.parkinglot.service.parking_area.ParkingAreaDeleteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.constraints.UUID;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ParkingAreaController {
 
     private final ParkingAreaCreateService parkingAreaCreateService;
+    private final ParkingAreaDeleteService parkingAreaDeleteService;
 
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
@@ -31,6 +31,16 @@ public class ParkingAreaController {
                 .createParkingArea(parkingAreaCreateRequest);
 
         return CustomResponse.ok(parkingArea.getId());
+    }
+
+    @DeleteMapping("/{parkingAreaId}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public CustomResponse<String> deleteParkingAreaById(
+            @PathVariable("parkingAreaId") @UUID final String parkingAreaId
+    ) {
+        parkingAreaDeleteService.deleteParkingAreaById(parkingAreaId);
+
+        return CustomResponse.ok("Parking area with id " + parkingAreaId + " is deleted");
     }
 
 }
