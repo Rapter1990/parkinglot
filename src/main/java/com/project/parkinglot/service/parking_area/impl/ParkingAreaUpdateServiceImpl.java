@@ -16,9 +16,6 @@ import org.springframework.stereotype.Service;
 public class ParkingAreaUpdateServiceImpl implements ParkingAreaUpdateService {
     private final ParkingAreaRepository parkingAreaRepository;
 
-    private final ParkingAreaDomainModelToParkingAreaEntityMapper parkingAreaDomainModelToParkingAreaEntityMapper =
-            ParkingAreaDomainModelToParkingAreaEntityMapper.initialize();
-
     private final ParkingAreaEntityToParkingAreaDomainModel parkingAreaEntityToParkingAreaDomainModel =
             ParkingAreaEntityToParkingAreaDomainModel.initialize();
 
