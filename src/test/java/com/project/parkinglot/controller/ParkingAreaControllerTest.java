@@ -5,9 +5,6 @@ import com.project.parkinglot.builder.ParkingAreaCreateRequestBuilder;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException;
 import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
-import com.project.parkinglot.model.entity.ParkingAreaEntity;
-import com.project.parkinglot.model.mapper.parking_area.ParkingAreaCreateRequestToParkingAreaEntityMapper;
-import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingAreaDomainModelMapper;
 import com.project.parkinglot.service.parking_area.impl.ParkingAreaCreateServiceImpl;
 import com.project.parkinglot.service.parking_area.impl.ParkingAreaDeleteServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -32,12 +29,6 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
     @MockBean
     private ParkingAreaDeleteServiceImpl parkingAreaDeleteService;
 
-    private final ParkingAreaCreateRequestToParkingAreaEntityMapper parkingAreaCreateRequestToParkingAreaEntityMapper =
-            ParkingAreaCreateRequestToParkingAreaEntityMapper.initialize();
-
-    private final ParkingAreaEntityToParkingAreaDomainModelMapper parkingAreaEntityToParkingAreaDomainModelMapper =
-            ParkingAreaEntityToParkingAreaDomainModelMapper.initialize();
-
     @Test
     public void givenValidParkingAreaCreateRequest_whenParkingAreaCreated_thenReturnCustomResponse() throws Exception {
 
@@ -48,13 +39,13 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
                 .withValidFields()
                 .build();
 
-        final ParkingAreaEntity mockParkingAreaEntity = parkingAreaCreateRequestToParkingAreaEntityMapper
-                .map(mockParkingAreaCreateRequest);
-
-        mockParkingAreaEntity.setId(mockParkingAreaId);
-
-        final ParkingArea mockParkingArea = parkingAreaEntityToParkingAreaDomainModelMapper
-                .map(mockParkingAreaEntity);
+        final ParkingArea mockParkingArea = ParkingArea.builder()
+                .id(mockParkingAreaId)
+                .name(mockParkingAreaCreateRequest.getName())
+                .capacity(mockParkingAreaCreateRequest.getCapacity())
+                .city(mockParkingAreaCreateRequest.getCity())
+                .location(mockParkingAreaCreateRequest.getLocation())
+                .build();
 
         // When
         Mockito.when(parkingAreaCreateService.createParkingArea(Mockito.any(ParkingAreaCreateRequest.class)))
@@ -115,11 +106,9 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
                 .withCapacity(-1)
                 .build();
 
-        final ParkingAreaEntity mockParkingAreaEntity = parkingAreaCreateRequestToParkingAreaEntityMapper
-                .map(mockParkingAreaCreateRequest);
-
-        final ParkingArea mockParkingArea = parkingAreaEntityToParkingAreaDomainModelMapper
-                .map(mockParkingAreaEntity);
+        final ParkingArea mockParkingArea = ParkingArea.builder()
+                .capacity(mockParkingAreaCreateRequest.getCapacity())
+                .build();
 
         // When
         Mockito.when(parkingAreaCreateService.createParkingArea(Mockito.any(ParkingAreaCreateRequest.class)))
@@ -151,11 +140,9 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
                 .withCapacity(null)
                 .build();
 
-        final ParkingAreaEntity mockParkingAreaEntity = parkingAreaCreateRequestToParkingAreaEntityMapper
-                .map(mockParkingAreaCreateRequest);
-
-        final ParkingArea mockParkingArea = parkingAreaEntityToParkingAreaDomainModelMapper
-                .map(mockParkingAreaEntity);
+        final ParkingArea mockParkingArea = ParkingArea.builder()
+                .capacity(mockParkingAreaCreateRequest.getCapacity())
+                .build();
 
         // When
         Mockito.when(parkingAreaCreateService.createParkingArea(Mockito.any(ParkingAreaCreateRequest.class)))
@@ -187,11 +174,9 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
                 .withName(null)
                 .build();
 
-        final ParkingAreaEntity mockParkingAreaEntity = parkingAreaCreateRequestToParkingAreaEntityMapper
-                .map(mockParkingAreaCreateRequest);
-
-        final ParkingArea mockParkingArea = parkingAreaEntityToParkingAreaDomainModelMapper
-                .map(mockParkingAreaEntity);
+        final ParkingArea mockParkingArea = ParkingArea.builder()
+                .name(mockParkingAreaCreateRequest.getName())
+                .build();
 
         // When
         Mockito.when(parkingAreaCreateService.createParkingArea(Mockito.any(ParkingAreaCreateRequest.class)))
