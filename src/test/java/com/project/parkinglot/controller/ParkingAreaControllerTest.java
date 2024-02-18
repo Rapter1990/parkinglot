@@ -18,14 +18,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 
 
-public class ParkingAreaControllerTest extends BaseControllerTest {
+  class ParkingAreaControllerTest extends BaseControllerTest {
 
     @MockBean
     private ParkingAreaCreateServiceImpl parkingAreaCreateService;
@@ -107,9 +105,8 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
 
     }
 
-
     @Test
-    public void givenInvalidParkingAreaCreateRequest_whenParkingAreaCapacityLessThanZero_thenReturnBadRequest() throws Exception {
+     void givenInvalidParkingAreaCreateRequest_whenParkingAreaCapacityLessThanZero_thenReturnBadRequest() throws Exception {
 
         // Given
         final ParkingAreaCreateRequest mockParkingAreaCreateRequest = new ParkingAreaCreateRequestBuilder()
@@ -143,7 +140,7 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
     }
 
     @Test
-    public void givenInvalidParkingAreaCreateRequest_whenParkingAreaCapacityIsNull_thenReturnBadRequest() throws Exception {
+     void givenInvalidParkingAreaCreateRequest_whenParkingAreaCapacityIsNull_thenReturnBadRequest() throws Exception {
 
         // Given
         final ParkingAreaCreateRequest mockParkingAreaCreateRequest = new ParkingAreaCreateRequestBuilder()
@@ -177,7 +174,7 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
     }
 
     @Test
-    public void givenInvalidParkingAreaCreateRequest_whenParkingAreaNameIsNull_thenReturnBadRequest() throws Exception {
+     void givenInvalidParkingAreaCreateRequest_whenParkingAreaNameIsNull_thenReturnBadRequest() throws Exception {
 
         // Given
         final ParkingAreaCreateRequest mockParkingAreaCreateRequest = new ParkingAreaCreateRequestBuilder()
@@ -291,7 +288,7 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
     }
 
     @Test
-    public void givenValidParkingAreaUpdateRequest_whenParkingAreaUpdated_thenReturnCustomResponse() throws Exception{
+     void givenValidParkingAreaUpdateRequest_whenParkingAreaUpdated_thenReturnCustomResponse() throws Exception{
 
         //Given
         final String mockParkingAreaId = UUID.randomUUID().toString();
@@ -310,7 +307,7 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
                 .build();
 
 
-        //when
+        //When
        Mockito.when(
                 parkingAreaUpdateService.parkingAreaUpdateByCapacity(
                         Mockito.anyString(),
@@ -318,7 +315,7 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
                         )
         ).thenReturn(mockParkingAreaDomainModel);
 
-        //then
+        //Then
         mockMvc.perform(
                 MockMvcRequestBuilders
                         .put("/api/v1/parking-area/{id}", mockParkingAreaId)
@@ -332,7 +329,7 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
         .andExpect(MockMvcResultMatchers.jsonPath("$.isSuccess").value(true))
         .andExpect(MockMvcResultMatchers.jsonPath("$.httpStatus").value("OK"));
 
-        //verify
+        //Verify
         Mockito.verify(parkingAreaUpdateService,Mockito.times(1))
                 .parkingAreaUpdateByCapacity(Mockito.anyString(),Mockito.any(ParkingAreaUpdateRequest.class));
     }
@@ -353,7 +350,7 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
                 .capacity(mockParkingAreaUpdateRequest.getCapacity())
                 .build();
 
-        //when
+        //When
         Mockito.when(
                 parkingAreaUpdateService.parkingAreaUpdateByCapacity(
                         mockParkingAreaId,
@@ -361,8 +358,7 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
                 )
         ).thenThrow(new RuntimeException());
 
-
-        //then
+        //Then
         mockMvc.perform(
                         MockMvcRequestBuilders
                                 .put("/api/v1/parking-area/{id}",mockParkingAreaId)
@@ -373,9 +369,7 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
-
-
-        //verify
+        //Verify
         Mockito.verify(parkingAreaUpdateService,Mockito.times(0))
                 .parkingAreaUpdateByCapacity(mockParkingAreaId,mockParkingAreaUpdateRequest);
 
@@ -391,9 +385,7 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
 
         final String mockParkingAreaId = UUID.randomUUID().toString();
 
-
-
-        //then
+        //Then
         mockMvc.perform(
                 MockMvcRequestBuilders
                         .put("/api/v1/parking-area/{id}",mockParkingAreaId)
