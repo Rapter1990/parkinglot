@@ -357,7 +357,7 @@ import static org.mockito.Mockito.*;
                         mockParkingAreaId,
                         mockParkingAreaUpdateRequest
                 )
-        ).thenThrow(new ParkingAreaCapacityCanNotBeNull());
+        ).thenThrow( new ParkingAreaCapacityCanNotBeNull() );
 
         //Then
         mockMvc.perform(
