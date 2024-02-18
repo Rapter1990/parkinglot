@@ -76,6 +76,4 @@ class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
         Mockito.verify(parkingAreaRepository,Mockito.times(1)).findById(mockParkingAreaUpdateRequestId);
         Mockito.verify(parkingAreaRepository,Mockito.times(0)).save(Mockito.any(ParkingAreaEntity.class));
     }
-
-
 }
