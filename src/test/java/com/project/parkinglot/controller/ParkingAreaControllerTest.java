@@ -3,6 +3,7 @@ package com.project.parkinglot.controller;
 import com.project.parkinglot.base.BaseControllerTest;
 import com.project.parkinglot.builder.ParkingAreaCreateRequestBuilder;
 import com.project.parkinglot.builder.ParkingAreaUpdateRequestBuilder;
+import com.project.parkinglot.exception.parkingarea.ParkingAreaCapacityCanNotBeNull;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException;
 import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parkingArea.ParkingAreaUpdateRequest;
@@ -356,7 +357,7 @@ import static org.mockito.Mockito.*;
                         mockParkingAreaId,
                         mockParkingAreaUpdateRequest
                 )
-        ).thenThrow(new RuntimeException());
+        ).thenThrow(new ParkingAreaCapacityCanNotBeNull());
 
         //Then
         mockMvc.perform(
