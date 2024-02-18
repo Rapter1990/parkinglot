@@ -7,6 +7,7 @@ import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
 import com.project.parkinglot.service.parking_area.impl.ParkingAreaCreateServiceImpl;
 import com.project.parkinglot.service.parking_area.impl.ParkingAreaDeleteServiceImpl;
+import com.project.parkinglot.service.parking_area.impl.ParkingAreaGetServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -25,6 +26,9 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
 
     @MockBean
     private ParkingAreaCreateServiceImpl parkingAreaCreateService;
+
+    @MockBean
+    private ParkingAreaGetServiceImpl parkingAreaGetService;
 
     @MockBean
     private ParkingAreaDeleteServiceImpl parkingAreaDeleteService;
@@ -254,7 +258,7 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
     }
 
     @Test
-    public void givenValidParkingAreaId_whenUserUnauthorized_thenReturnForbidden() throws Exception {
+    public void givenValidDeleteParkingAreaById_whenUserUnauthorized_thenReturnForbidden() throws Exception {
 
         // Given
         final String mockParkingAreaId = UUID.randomUUID().toString();
@@ -279,5 +283,94 @@ public class ParkingAreaControllerTest extends BaseControllerTest {
 
     }
 
-}
+    @Test
+    public void givenValidParkingAreaId_whenGetParkingAreaById_thenReturnParkingArea() throws Exception {
 
+        // Given
+        final String mockParkingAreaId = UUID.randomUUID().toString();
+
+        final ParkingArea mockParkingArea = ParkingArea.builder()
+                .id(mockParkingAreaId)
+                .name("Mock Parking Area")
+                .capacity(100)
+                .city("Mock City")
+                .location("Mock Location")
+                .build();
+
+        // When
+        Mockito.when(parkingAreaGetService.getParkingAreaById(Mockito.anyString()))
+                .thenReturn(mockParkingArea);
+
+        // Then
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/api/v1/parking-area/{parkingAreaId}", mockParkingAreaId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header(HttpHeaders.AUTHORIZATION, mockAdminToken))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.id").value(mockParkingAreaId))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.name").value("Mock Parking Area"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.capacity").value(100))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.city").value("Mock City"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.location").value("Mock Location"));
+
+        // Verify
+        Mockito.verify(parkingAreaGetService, times(1)).getParkingAreaById(mockParkingAreaId);
+
+    }
+
+    @Test
+    public void givenInvalidParkingAreaId_whenGetParkingAreaById_thenReturnNotFound() throws Exception {
+
+        // Given
+        final String invalidParkingAreaId = UUID.randomUUID().toString();
+
+        // When
+        Mockito.when(parkingAreaGetService.getParkingAreaById(Mockito.anyString()))
+                .thenThrow(new ParkingAreaNotFoundException("Parking area not found with id: " + invalidParkingAreaId));
+
+        // Then
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/api/v1/parking-area/{parkingAreaId}", invalidParkingAreaId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header(HttpHeaders.AUTHORIZATION, mockAdminToken))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+
+        // Verify
+        Mockito.verify(parkingAreaGetService, times(1)).getParkingAreaById(invalidParkingAreaId);
+
+    }
+
+    @Test
+    public void givenValidGetParkingAreaById_whenUserUnauthorized_thenReturnForbidden() throws Exception {
+
+        // Given
+        final String mockParkingAreaId = UUID.randomUUID().toString();
+
+        final ParkingArea mockParkingArea = ParkingArea.builder()
+                .id(mockParkingAreaId)
+                .name("Mock Parking Area")
+                .capacity(100)
+                .city("Mock City")
+                .location("Mock Location")
+                .build();
+
+        // When
+        Mockito.when(parkingAreaGetService.getParkingAreaById(Mockito.anyString()))
+                .thenReturn(mockParkingArea);
+
+        // Then
+        mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .delete("/api/v1/parking-area/{parkingAreaId}", mockParkingAreaId)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .header(HttpHeaders.AUTHORIZATION, mockUserToken)
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isForbidden());
+
+        // Verify
+        Mockito.verify(parkingAreaGetService, never()).getParkingAreaById(mockParkingAreaId);
+
+    }
+
+}
