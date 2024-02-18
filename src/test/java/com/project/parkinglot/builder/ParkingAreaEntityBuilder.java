@@ -1,8 +1,11 @@
 package com.project.parkinglot.builder;
 
 import com.github.javafaker.Faker;
+import com.project.parkinglot.model.entity.DailyIncomeEntity;
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
 import com.project.parkinglot.model.entity.PriceListEntity;
+
+import java.util.List;
 
 public class ParkingAreaEntityBuilder extends BaseBuilder<ParkingAreaEntity> {
 
@@ -17,7 +20,15 @@ public class ParkingAreaEntityBuilder extends BaseBuilder<ParkingAreaEntity> {
                 .withLocation(faker.address().fullAddress())
                 .withCapacity(faker.number().numberBetween(1, 100))
                 .withCity(faker.address().city())
-                .withPriceListEntity(new PriceListEntityBuilder().withValidFields().build());
+                .withPriceListEntity(new PriceListEntityBuilder().withValidFields().build())
+                .withDailyIncomeEntities(List.of(new DailyIncomeEntityBuilder().withValidFields().build()));
+    }
+
+    public ParkingAreaEntityBuilder withId(
+            final String parkingAreaId
+    ) {
+        data.setId(parkingAreaId);
+        return this;
     }
 
     public ParkingAreaEntityBuilder withName(
@@ -52,6 +63,13 @@ public class ParkingAreaEntityBuilder extends BaseBuilder<ParkingAreaEntity> {
             final PriceListEntity priceListEntity
     ) {
         data.setPriceListEntity(priceListEntity);
+        return this;
+    }
+
+    public ParkingAreaEntityBuilder withDailyIncomeEntities(
+            final List<DailyIncomeEntity> dailyIncomeEntities
+    ) {
+        data.setDailyIncomeEntities(dailyIncomeEntities);
         return this;
     }
 
