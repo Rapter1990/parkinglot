@@ -32,6 +32,7 @@ public class ParkingAreaCreateServiceImplTest extends BaseServiceTest {
 
     @Test
     public void givenValidParkingAreaCreateRequest_whenCreateParkingArea_thenReturnParkingAreaDomainModel() {
+
         // Given
         final ParkingAreaCreateRequest mockValidParkingAreaCreateRequest = new ParkingAreaCreateRequestBuilder()
                 .withValidFields()
@@ -78,6 +79,7 @@ public class ParkingAreaCreateServiceImplTest extends BaseServiceTest {
 
     @Test
     public void givenNotValidParkingAreaCreateRequest_whenCreateParkingArea_thenThrowsException() {
+
         // Given
         final ParkingAreaCreateRequest mockNotValidParkingAreaCreateRequest = new ParkingAreaCreateRequestBuilder()
                 .withValidFields()
