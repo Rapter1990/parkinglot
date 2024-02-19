@@ -37,7 +37,6 @@ import static org.mockito.Mockito.*;
       @MockBean
       private ParkingAreaUpdateServiceImpl parkingAreaUpdateService;
 
-
       @Test
       void givenValidParkingAreaCreateRequest_whenParkingAreaCreated_thenReturnCustomResponse() throws Exception {
 
@@ -325,13 +324,15 @@ import static org.mockito.Mockito.*;
                   )
                   .andDo(MockMvcResultHandlers.print())
                   .andExpect(MockMvcResultMatchers.status().isOk())
-                  .andExpect(MockMvcResultMatchers.jsonPath("$.response").value("Parking area with id " + mockParkingAreaDomainModel.getId() + " is updated"))
+                  .andExpect(MockMvcResultMatchers.jsonPath("$.response")
+                          .value("Parking area with id " + mockParkingAreaDomainModel.getId() + " is updated"))
                   .andExpect(MockMvcResultMatchers.jsonPath("$.isSuccess").value(true))
                   .andExpect(MockMvcResultMatchers.jsonPath("$.httpStatus").value("OK"));
 
           //Verify
           Mockito.verify(parkingAreaUpdateService, Mockito.times(1))
                   .parkingAreaUpdateByCapacity(Mockito.anyString(), Mockito.any(ParkingAreaUpdateRequest.class));
+
       }
 
       @Test
@@ -372,6 +373,7 @@ import static org.mockito.Mockito.*;
           //Verify
           Mockito.verify(parkingAreaUpdateService, Mockito.times(0))
                   .parkingAreaUpdateByCapacity(mockParkingAreaId, mockParkingAreaUpdateRequest);
+
       }
 
   }

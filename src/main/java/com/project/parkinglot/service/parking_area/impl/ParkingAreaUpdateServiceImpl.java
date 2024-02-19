@@ -5,7 +5,7 @@ import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException
 import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parkingArea.ParkingAreaUpdateRequest;
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
-import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingArea;
+import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingAreaMapper;
 import com.project.parkinglot.repository.ParkingAreaRepository;
 import com.project.parkinglot.service.parking_area.ParkingAreaUpdateService;
 import lombok.RequiredArgsConstructor;
@@ -16,16 +16,18 @@ import java.util.Objects;
 @Service
 @RequiredArgsConstructor
 public class ParkingAreaUpdateServiceImpl implements ParkingAreaUpdateService {
+
     private final ParkingAreaRepository parkingAreaRepository;
 
-    private final ParkingAreaEntityToParkingArea parkingAreaEntityToParkingAreaDomainModel =
-            ParkingAreaEntityToParkingArea.initialize();
+    private final ParkingAreaEntityToParkingAreaMapper parkingAreaEntityToParkingArea =
+            ParkingAreaEntityToParkingAreaMapper.initialize();
 
     @Override
     public ParkingArea parkingAreaUpdateByCapacity(
             String parkingAreaId,
             ParkingAreaUpdateRequest parkingAreaUpdateRequest
     ) {
+
         this.checkParkingAreaRequestCapacity(parkingAreaUpdateRequest);
         final ParkingAreaEntity existingParkingArea = parkingAreaRepository
                 .findById(parkingAreaId)
@@ -35,7 +37,7 @@ public class ParkingAreaUpdateServiceImpl implements ParkingAreaUpdateService {
 
         parkingAreaRepository.save(existingParkingArea);
 
-        return parkingAreaEntityToParkingAreaDomainModel.map(existingParkingArea);
+        return parkingAreaEntityToParkingArea.map(existingParkingArea);
     }
 
     private void checkParkingAreaRequestCapacity(

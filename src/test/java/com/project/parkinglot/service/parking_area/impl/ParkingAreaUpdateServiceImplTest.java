@@ -8,6 +8,7 @@ import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException
 import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parkingArea.ParkingAreaUpdateRequest;
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
+import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingAreaMapper;
 import com.project.parkinglot.repository.ParkingAreaRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ import org.mockito.Mockito;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.mockito.Mockito.doThrow;
+
 
 class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
 
@@ -28,8 +29,13 @@ class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
     @Mock
     private ParkingAreaRepository parkingAreaRepository;
 
+    private final ParkingAreaEntityToParkingAreaMapper parkingAreaEntityToParkingAreaMapper =
+            ParkingAreaEntityToParkingAreaMapper.initialize();
+
+
+
     @Test
-    void givenValidParkingAreaUpdateRequest_whenUpdateParkingArea_thenReturnParkingAreaDomainModel(){
+    void givenValidParkingAreaUpdateRequest_whenUpdateParkingArea_thenReturnParkingArea(){
 
         //Given
         final String mockParkingAreaId = UUID.randomUUID().toString();
@@ -43,6 +49,8 @@ class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
                 .witId(mockParkingAreaId)
                 .build();
 
+        final ParkingArea mockBeforeUpdatedParkingArea = parkingAreaEntityToParkingAreaMapper.map(mockParkingAreaEntity);
+
         //When
         Mockito.when(parkingAreaRepository.findById(mockParkingAreaId))
                 .thenReturn(Optional.of(mockParkingAreaEntity));
@@ -50,12 +58,39 @@ class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
         //Then
         final ParkingArea mockParkingArea =
                 parkingAreaUpdateService.parkingAreaUpdateByCapacity(mockParkingAreaId,mockParkingAreaUpdateRequest);
+
         Assertions.assertNotNull(mockParkingArea);
-        Assertions.assertEquals(mockParkingAreaUpdateRequest.getCapacity(), mockParkingArea.getCapacity());
+
+        Assertions.assertEquals(
+                mockParkingAreaUpdateRequest.getCapacity(),
+                mockParkingArea.getCapacity()
+        );
+
+        Assertions.assertEquals(
+                mockBeforeUpdatedParkingArea.getId(),
+                mockParkingArea.getId()
+        );
+
+        Assertions.assertEquals(
+                mockBeforeUpdatedParkingArea.getId(),
+                mockParkingArea.getId()
+        );
+
+        Assertions.assertEquals(
+                mockBeforeUpdatedParkingArea.getLocation(),
+                mockParkingArea.getLocation()
+        );
+
+        Assertions.assertEquals(
+                mockBeforeUpdatedParkingArea.getCity(),
+                mockParkingArea.getCity()
+        );
 
         //Verify
         Mockito.verify(parkingAreaRepository,Mockito.times(1)).findById(mockParkingAreaId);
+
         Mockito.verify(parkingAreaRepository,Mockito.times(1)).save(mockParkingAreaEntity);
+
     }
 
     @Test
@@ -92,13 +127,7 @@ class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
 
         final String mockParkingAreaId = UUID.randomUUID().toString();
 
-        final ParkingAreaEntity mockParkingAreaEntityToBeUpdated = new ParkingAreaEntityBuilder()
-                .withValidFields()
-                .withId(mockParkingAreaId)
-                .withCapacity(null)
-                .build();
-
-       //Then
+        //Then
         Assertions.assertThrowsExactly(
                 ParkingAreaCapacityCanNotBeNullException.class,
                 () -> parkingAreaUpdateService.parkingAreaUpdateByCapacity(mockParkingAreaId,mockParkingAreaUpdateRequest)

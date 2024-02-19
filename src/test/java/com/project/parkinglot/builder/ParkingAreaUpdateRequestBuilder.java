@@ -2,9 +2,9 @@ package com.project.parkinglot.builder;
 
 import com.github.javafaker.Faker;
 import com.project.parkinglot.model.dto.request.parkingArea.ParkingAreaUpdateRequest;
-import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
 
 public class ParkingAreaUpdateRequestBuilder extends BaseBuilder<ParkingAreaUpdateRequest>{
+
     public ParkingAreaUpdateRequestBuilder() {super(ParkingAreaUpdateRequest.class);}
 
     public ParkingAreaUpdateRequestBuilder withValidField(){
@@ -23,4 +23,5 @@ public class ParkingAreaUpdateRequestBuilder extends BaseBuilder<ParkingAreaUpda
 
     @Override
     public ParkingAreaUpdateRequest build(){return super.build();}
+
 }
