@@ -51,11 +51,11 @@ class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
 
         final ParkingArea mockBeforeUpdatedParkingArea = parkingAreaEntityToParkingAreaMapper.map(mockParkingAreaEntity);
 
-        //When
+        // When
         Mockito.when(parkingAreaRepository.findById(mockParkingAreaId))
                 .thenReturn(Optional.of(mockParkingAreaEntity));
 
-        //Then
+        // Then
         final ParkingArea mockParkingArea =
                 parkingAreaUpdateService.parkingAreaUpdateByCapacity(mockParkingAreaId,mockParkingAreaUpdateRequest);
 
@@ -89,35 +89,37 @@ class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
         //Verify
         Mockito.verify(parkingAreaRepository,Mockito.times(1)).findById(mockParkingAreaId);
         Mockito.verify(parkingAreaRepository,Mockito.times(1)).save(mockParkingAreaEntity);
+
     }
 
     @Test
     void givenEmptyParkingAreaUpdate_whenUpdateParkingArea_thenThrowParkingAreaNotFoundException(){
 
-        //Given
+        // Given
         final ParkingAreaUpdateRequest mockParkingAreaUpdateRequest = new ParkingAreaUpdateRequestBuilder()
                 .withValidField()
                 .build();
 
         final String mockParkingAreaUpdateRequestId = UUID.randomUUID().toString();
 
-        //When
+        // When
         Mockito.when(parkingAreaRepository.findById(mockParkingAreaUpdateRequestId)).thenReturn(Optional.empty());
 
-        //Then
+        // Then
         Assertions.assertThrows(ParkingAreaNotFoundException.class,
                 () -> parkingAreaUpdateService.parkingAreaUpdateByCapacity(mockParkingAreaUpdateRequestId,mockParkingAreaUpdateRequest));
 
-        //Verify
+        // Verify
         Mockito.verify(parkingAreaRepository,Mockito.times(1)).findById(mockParkingAreaUpdateRequestId);
         Mockito.verify(parkingAreaRepository,Mockito.times(0)).save(Mockito.any(ParkingAreaEntity.class));
+
     }
 
 
     @Test
     void givenNullParkingAreaUpdate_whenUpdateParkingArea_thenThrowParkingAreaCanNotBeNull(){
 
-        //Given
+        // Given
         final ParkingAreaUpdateRequest mockParkingAreaUpdateRequest = new ParkingAreaUpdateRequestBuilder()
                 .withValidField()
                 .withCapacity(null)
@@ -125,7 +127,7 @@ class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
 
         final String mockParkingAreaId = UUID.randomUUID().toString();
 
-        //Then
+        // Then
         Assertions.assertThrowsExactly(
                 ParkingAreaCapacityCanNotBeNullException.class,
                 () -> parkingAreaUpdateService.parkingAreaUpdateByCapacity(mockParkingAreaId,mockParkingAreaUpdateRequest)
