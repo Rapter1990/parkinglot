@@ -1,29 +1,32 @@
 package com.project.parkinglot.service.parking_area.impl;
 
+import com.project.parkinglot.exception.parkingarea.ParkingAreaCapacityCanNotBeNullException;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException;
 import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parkingArea.ParkingAreaUpdateRequest;
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
-import com.project.parkinglot.model.mapper.parking_area.ParkingAreaDomainModelToParkingAreaEntityMapper;
-import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingAreaDomainModel;
+import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingArea;
 import com.project.parkinglot.repository.ParkingAreaRepository;
 import com.project.parkinglot.service.parking_area.ParkingAreaUpdateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 public class ParkingAreaUpdateServiceImpl implements ParkingAreaUpdateService {
     private final ParkingAreaRepository parkingAreaRepository;
 
-    private final ParkingAreaEntityToParkingAreaDomainModel parkingAreaEntityToParkingAreaDomainModel =
-            ParkingAreaEntityToParkingAreaDomainModel.initialize();
+    private final ParkingAreaEntityToParkingArea parkingAreaEntityToParkingAreaDomainModel =
+            ParkingAreaEntityToParkingArea.initialize();
 
     @Override
     public ParkingArea parkingAreaUpdateByCapacity(
             String parkingAreaId,
             ParkingAreaUpdateRequest parkingAreaUpdateRequest
     ) {
+        this.checkParkingAreaRequestCapacity(parkingAreaUpdateRequest);
         final ParkingAreaEntity existingParkingArea = parkingAreaRepository
                 .findById(parkingAreaId)
                 .orElseThrow( ()-> new ParkingAreaNotFoundException("ParkingArea not found given id" + parkingAreaId));
@@ -33,5 +36,13 @@ public class ParkingAreaUpdateServiceImpl implements ParkingAreaUpdateService {
         parkingAreaRepository.save(existingParkingArea);
 
         return parkingAreaEntityToParkingAreaDomainModel.map(existingParkingArea);
+    }
+
+    private void checkParkingAreaRequestCapacity(
+          ParkingAreaUpdateRequest parkingAreaUpdateRequest
+    ) {
+        if (Objects.isNull(parkingAreaUpdateRequest.getCapacity())) {
+            throw new ParkingAreaCapacityCanNotBeNullException();
+        }
     }
 }

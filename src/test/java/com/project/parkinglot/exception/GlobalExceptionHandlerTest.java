@@ -3,7 +3,7 @@ package com.project.parkinglot.exception;
 import com.project.parkinglot.base.BaseControllerTest;
 import com.project.parkinglot.exception.park.ParkNotFoundException;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaAlreadyExistException;
-import com.project.parkinglot.exception.parkingarea.ParkingAreaCapacityCanNotBeNull;
+import com.project.parkinglot.exception.parkingarea.ParkingAreaCapacityCanNotBeNullException;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException;
 import com.project.parkinglot.exception.pricelist.PriceListNotFoundException;
 import com.project.parkinglot.exception.user.EmailAlreadyExistsException;
@@ -353,7 +353,7 @@ class GlobalExceptionHandlerTest extends BaseControllerTest {
     void givenParkingAreaCapacityCanNotBeNullException_whenThrowParkingAreaCapacityCanNotBeNullException_thenReturnErrorResponse() {
 
         //Given
-        ParkingAreaCapacityCanNotBeNull mockException = new ParkingAreaCapacityCanNotBeNull("ParkingArea Capacity Field can not be null");
+        ParkingAreaCapacityCanNotBeNullException mockException = new ParkingAreaCapacityCanNotBeNullException("ParkingArea Capacity Field can not be null");
 
         //When
         List<String> details = new ArrayList<>();

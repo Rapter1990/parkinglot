@@ -2,7 +2,7 @@ package com.project.parkinglot.exception.parkingarea;
 
 import java.io.Serial;
 
-public class ParkingAreaCapacityCanNotBeNull extends RuntimeException {
+public class ParkingAreaCapacityCanNotBeNullException extends RuntimeException {
 
     @Serial
     private  static final long serialVerisonUID = -4523385870567922894L;
@@ -10,9 +10,9 @@ public class ParkingAreaCapacityCanNotBeNull extends RuntimeException {
     private static final String DEFAULT_MESSAGE =
             "The Parking Area Capacity can not be null!";
 
-    public ParkingAreaCapacityCanNotBeNull(){ super(DEFAULT_MESSAGE);}
+    public ParkingAreaCapacityCanNotBeNullException(){ super(DEFAULT_MESSAGE);}
 
-    public ParkingAreaCapacityCanNotBeNull(
+    public ParkingAreaCapacityCanNotBeNullException(
             final String message
     ){
         super(DEFAULT_MESSAGE + " " + message );

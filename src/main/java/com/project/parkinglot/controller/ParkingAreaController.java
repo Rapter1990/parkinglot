@@ -6,10 +6,11 @@ import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRe
 import com.project.parkinglot.payload.response.CustomResponse;
 import com.project.parkinglot.service.parking_area.ParkingAreaCreateService;
 import com.project.parkinglot.service.parking_area.ParkingAreaDeleteService;
+import com.project.parkinglot.service.parking_area.ParkingAreaGetService;
+import com.project.parkinglot.service.parking_area.ParkingAreaUpdateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.UUID;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

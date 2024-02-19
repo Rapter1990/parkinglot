@@ -5,7 +5,7 @@ import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
 import com.project.parkinglot.model.mapper.parking_area.ParkingAreaCreateRequestToParkingAreaEntityMapper;
-import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingAreaDomainModelMapper;
+import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingAreaMapper;
 import com.project.parkinglot.repository.ParkingAreaRepository;
 import com.project.parkinglot.service.parking_area.ParkingAreaCreateService;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +20,8 @@ public class ParkingAreaCreateServiceImpl implements ParkingAreaCreateService {
     private final ParkingAreaCreateRequestToParkingAreaEntityMapper parkingAreaCreateRequestToParkingAreaEntityMapper =
             ParkingAreaCreateRequestToParkingAreaEntityMapper.initialize();
 
-    private final ParkingAreaEntityToParkingAreaDomainModelMapper parkingAreaEntityToParkingAreaDomainModelMapper =
-            ParkingAreaEntityToParkingAreaDomainModelMapper.initialize();
+    private final ParkingAreaEntityToParkingAreaMapper parkingAreaEntityToParkingAreaMapper =
+            ParkingAreaEntityToParkingAreaMapper.initialize();
 
     @Override
     public ParkingArea createParkingArea(
@@ -37,7 +37,7 @@ public class ParkingAreaCreateServiceImpl implements ParkingAreaCreateService {
 
         parkingAreaRepository.save(parkingAreaToBeCreate);
 
-        return parkingAreaEntityToParkingAreaDomainModelMapper
+        return parkingAreaEntityToParkingAreaMapper
                 .map(parkingAreaToBeCreate);
     }
 

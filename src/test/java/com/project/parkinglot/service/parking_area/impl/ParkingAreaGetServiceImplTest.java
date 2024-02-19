@@ -5,7 +5,7 @@ import com.project.parkinglot.builder.ParkingAreaEntityBuilder;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException;
 import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
-import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingAreaDomainModelMapper;
+import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingAreaMapper;
 import com.project.parkinglot.repository.ParkingAreaRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,8 +16,6 @@ import org.mockito.Mockito;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ParkingAreaGetServiceImplTest extends BaseServiceTest {
 
     @InjectMocks
@@ -26,8 +24,8 @@ class ParkingAreaGetServiceImplTest extends BaseServiceTest {
     @Mock
     private ParkingAreaRepository parkingAreaRepository;
 
-    private final ParkingAreaEntityToParkingAreaDomainModelMapper parkingAreaEntityToParkingAreaDomainModelMapper =
-            ParkingAreaEntityToParkingAreaDomainModelMapper.initialize();
+    private final ParkingAreaEntityToParkingAreaMapper parkingAreaEntityToParkingAreaMapper =
+            ParkingAreaEntityToParkingAreaMapper.initialize();
 
     @Test
     void givenValidParkingArea_whenGetParkingAreaById_thenReturnExistingParkingArea() {
@@ -40,7 +38,7 @@ class ParkingAreaGetServiceImplTest extends BaseServiceTest {
                 .withId(mockParkingAreaId)
                 .build();
 
-        final ParkingArea mockParkingArea = parkingAreaEntityToParkingAreaDomainModelMapper.map(mockParkingAreaEntity);
+        final ParkingArea mockParkingArea = parkingAreaEntityToParkingAreaMapper.map(mockParkingAreaEntity);
 
         // When
         Mockito.when(parkingAreaRepository.findById(mockParkingAreaId)).thenReturn(Optional.of(mockParkingAreaEntity));

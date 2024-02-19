@@ -5,15 +5,14 @@ import com.project.parkinglot.model.entity.ParkingAreaEntity;
 import com.project.parkinglot.model.mapper.BaseMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
-
 @Mapper
-public interface ParkingAreaEntityToParkingAreaDomainModel extends BaseMapper<ParkingAreaEntity,ParkingArea> {
+public interface ParkingAreaToParkingAreaEntityMapper extends BaseMapper<ParkingArea, ParkingAreaEntity> {
 
     @Override
-    ParkingArea map(ParkingAreaEntity source);
+    ParkingAreaEntity map(ParkingArea source);
 
-    static ParkingAreaEntityToParkingAreaDomainModel initialize(){
-        return Mappers.getMapper(ParkingAreaEntityToParkingAreaDomainModel.class);
+    static ParkingAreaToParkingAreaEntityMapper initialize(){
+        return Mappers.getMapper(ParkingAreaToParkingAreaEntityMapper.class);
     }
 
 }

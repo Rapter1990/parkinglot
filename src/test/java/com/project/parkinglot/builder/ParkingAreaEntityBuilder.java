@@ -6,6 +6,7 @@ import com.project.parkinglot.model.entity.ParkingAreaEntity;
 import com.project.parkinglot.model.entity.PriceListEntity;
 
 import java.util.List;
+import java.util.UUID;
 
 public class ParkingAreaEntityBuilder extends BaseBuilder<ParkingAreaEntity> {
 
