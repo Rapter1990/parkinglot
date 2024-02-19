@@ -10,7 +10,7 @@ public class ParkingAreaUpdateRequestBuilder extends BaseBuilder<ParkingAreaUpda
     public ParkingAreaUpdateRequestBuilder withValidField(){
         final Faker faker = new Faker();
         return this
-                .withCapacity(faker.number().numberBetween(1,100));
+                .withCapacity(faker.number().numberBetween(1,23));
 
     }
 
