@@ -2,6 +2,7 @@ package com.project.parkinglot.exception;
 
 import com.project.parkinglot.exception.park.ParkNotFoundException;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaAlreadyExistException;
+import com.project.parkinglot.exception.parkingarea.ParkingAreaCapacityCanNotBeNull;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException;
 import com.project.parkinglot.exception.pricelist.PriceListNotFoundException;
 import com.project.parkinglot.exception.user.EmailAlreadyExistsException;
@@ -255,4 +256,21 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
 
+    @ExceptionHandler(ParkingAreaCapacityCanNotBeNull.class)
+    public ResponseEntity<ErrorResponse> handleParkingAreaNotFoundException(ParkingAreaCapacityCanNotBeNull ex) {
+
+        log.error(ex.getMessage(), ex);
+
+        List<String> details = new ArrayList<>();
+        details.add(ex.getMessage());
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .errorDetails(details)
+                .message("ParkingArea capacity cannot be null")
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.BAD_REQUEST)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
 }

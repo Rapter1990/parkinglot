@@ -1,11 +1,11 @@
 package com.project.parkinglot.controller;
 
 import com.project.parkinglot.model.ParkingArea;
+import com.project.parkinglot.model.dto.request.parkingArea.ParkingAreaUpdateRequest;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
 import com.project.parkinglot.payload.response.CustomResponse;
 import com.project.parkinglot.service.parking_area.ParkingAreaCreateService;
 import com.project.parkinglot.service.parking_area.ParkingAreaDeleteService;
-import com.project.parkinglot.service.parking_area.ParkingAreaGetService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.UUID;
@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class ParkingAreaController {
 
+    private final ParkingAreaUpdateService parkingAreaUpdateService;
     private final ParkingAreaCreateService parkingAreaCreateService;
     private final ParkingAreaDeleteService parkingAreaDeleteService;
     private final ParkingAreaGetService parkingAreaGetService;
@@ -56,4 +57,15 @@ public class ParkingAreaController {
 
     }
 
+    @PutMapping("/{parkingAreaId}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public CustomResponse<String> updateParkingArea(
+            @PathVariable("parkingAreaId") @UUID final String parkingAreaId,
+            @RequestBody @Valid final ParkingAreaUpdateRequest parkingAreaUpdateRequest
+            ){
+        final ParkingArea parkingArea = parkingAreaUpdateService
+                .parkingAreaUpdateByCapacity(parkingAreaId,parkingAreaUpdateRequest);
+
+        return CustomResponse.ok("Parking area with id " + parkingArea.getId() + " is updated");
+    }
 }
