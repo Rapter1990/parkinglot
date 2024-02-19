@@ -86,7 +86,7 @@ class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
                 mockParkingArea.getCity()
         );
 
-        //Verify
+        // Verify
         Mockito.verify(parkingAreaRepository,Mockito.times(1)).findById(mockParkingAreaId);
         Mockito.verify(parkingAreaRepository,Mockito.times(1)).save(mockParkingAreaEntity);
 
