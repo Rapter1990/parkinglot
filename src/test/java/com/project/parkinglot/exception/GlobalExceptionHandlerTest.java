@@ -352,10 +352,10 @@ class GlobalExceptionHandlerTest extends BaseControllerTest {
     @Test
     void givenParkingAreaCapacityCanNotBeNullException_whenThrowParkingAreaCapacityCanNotBeNullException_thenReturnErrorResponse() {
 
-        //Given
+        // Given
         ParkingAreaCapacityCanNotBeNullException mockException = new ParkingAreaCapacityCanNotBeNullException("ParkingArea Capacity Field can not be null");
 
-        //When
+        // When
         List<String> details = new ArrayList<>();
         details.add(mockException.getMessage());
 
@@ -367,7 +367,7 @@ class GlobalExceptionHandlerTest extends BaseControllerTest {
                 .timestamp(LocalDateTime.now())
                 .build();
 
-        //Then
+        // Then
         ResponseEntity<ErrorResponse> responseEntity = globalExceptionHandler.handleParkingAreaNotFoundException(mockException);
 
         Assertions.assertEquals(HttpStatus.BAD_REQUEST,responseEntity.getStatusCode());
