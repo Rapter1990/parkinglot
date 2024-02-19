@@ -6,7 +6,7 @@ import com.project.parkinglot.builder.ParkingAreaUpdateRequestBuilder;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaCapacityCanNotBeNullException;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException;
 import com.project.parkinglot.model.ParkingArea;
-import com.project.parkinglot.model.dto.request.parkingArea.ParkingAreaUpdateRequest;
+import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaUpdateRequest;
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
 import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingAreaMapper;
 import com.project.parkinglot.repository.ParkingAreaRepository;
@@ -88,9 +88,7 @@ class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
 
         //Verify
         Mockito.verify(parkingAreaRepository,Mockito.times(1)).findById(mockParkingAreaId);
-
         Mockito.verify(parkingAreaRepository,Mockito.times(1)).save(mockParkingAreaEntity);
-
     }
 
     @Test
@@ -132,5 +130,7 @@ class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
                 ParkingAreaCapacityCanNotBeNullException.class,
                 () -> parkingAreaUpdateService.parkingAreaUpdateByCapacity(mockParkingAreaId,mockParkingAreaUpdateRequest)
         );
+
     }
+
 }

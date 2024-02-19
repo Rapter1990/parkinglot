@@ -254,6 +254,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .build();
 
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+
     }
 
     @ExceptionHandler(ParkingAreaCapacityCanNotBeNullException.class)

@@ -1,7 +1,7 @@
 package com.project.parkinglot.builder;
 
 import com.github.javafaker.Faker;
-import com.project.parkinglot.model.dto.request.parkingArea.ParkingAreaUpdateRequest;
+import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaUpdateRequest;
 
 public class ParkingAreaUpdateRequestBuilder extends BaseBuilder<ParkingAreaUpdateRequest>{
 
@@ -10,7 +10,7 @@ public class ParkingAreaUpdateRequestBuilder extends BaseBuilder<ParkingAreaUpda
     public ParkingAreaUpdateRequestBuilder withValidField(){
         final Faker faker = new Faker();
         return this
-                .withCapacity(faker.number().numberBetween(1,23));
+                .withCapacity(faker.number().numberBetween(1,100));
 
     }
 

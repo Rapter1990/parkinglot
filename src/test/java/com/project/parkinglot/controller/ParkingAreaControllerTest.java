@@ -6,7 +6,7 @@ import com.project.parkinglot.builder.ParkingAreaUpdateRequestBuilder;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaCapacityCanNotBeNullException;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException;
 import com.project.parkinglot.model.ParkingArea;
-import com.project.parkinglot.model.dto.request.parkingArea.ParkingAreaUpdateRequest;
+import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaUpdateRequest;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
 import com.project.parkinglot.service.parking_area.impl.ParkingAreaCreateServiceImpl;
 import com.project.parkinglot.service.parking_area.impl.ParkingAreaDeleteServiceImpl;
@@ -32,7 +32,6 @@ import static org.mockito.Mockito.*;
 
       @MockBean
       private ParkingAreaDeleteServiceImpl parkingAreaDeleteService;
-
 
       @MockBean
       private ParkingAreaUpdateServiceImpl parkingAreaUpdateService;

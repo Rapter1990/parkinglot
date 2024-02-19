@@ -1,4 +1,4 @@
-package com.project.parkinglot.model.dto.request.parkingArea;
+package com.project.parkinglot.model.dto.request.parking_area;
 
 
 import jakarta.validation.constraints.Max;
