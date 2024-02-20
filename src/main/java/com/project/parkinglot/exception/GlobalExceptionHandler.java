@@ -258,14 +258,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(ParkingAreaCapacityCanNotBeNullException.class)
-    public ResponseEntity<ErrorResponse> handleParkingAreaNotFoundException(ParkingAreaCapacityCanNotBeNullException ex) {
+    public ResponseEntity<ErrorResponse> handleParkingAreaNotFoundException(final ParkingAreaCapacityCanNotBeNullException ex) {
 
         log.error(ex.getMessage(), ex);
 
-        List<String> details = new ArrayList<>();
+        final List<String> details = new ArrayList<>();
         details.add(ex.getMessage());
 
-        ErrorResponse errorResponse = ErrorResponse.builder()
+        final ErrorResponse errorResponse = ErrorResponse.builder()
                 .errorDetails(details)
                 .message("ParkingArea capacity cannot be null")
                 .statusCode(HttpStatus.BAD_REQUEST.value())

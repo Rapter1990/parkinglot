@@ -5,7 +5,7 @@ import java.io.Serial;
 public class ParkingAreaCapacityCanNotBeNullException extends RuntimeException {
 
     @Serial
-    private  static final long serialVersionUID = -4523385870567922894L;
+    private static final long serialVersionUID = -4523385870567922894L;
 
     private static final String DEFAULT_MESSAGE =
             "The Parking Area Capacity can not be null!";

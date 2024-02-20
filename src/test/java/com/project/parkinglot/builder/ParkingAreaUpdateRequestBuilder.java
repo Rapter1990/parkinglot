@@ -11,7 +11,6 @@ public class ParkingAreaUpdateRequestBuilder extends BaseBuilder<ParkingAreaUpda
         final Faker faker = new Faker();
         return this
                 .withCapacity(faker.number().numberBetween(1,23));
-
     }
 
     public ParkingAreaUpdateRequestBuilder withCapacity(

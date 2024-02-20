@@ -38,7 +38,6 @@ public class ParkingAreaEntityBuilder extends BaseBuilder<ParkingAreaEntity> {
     ){
         data.setId(id);
         return this;
-
     }
 
     public ParkingAreaEntityBuilder withName(

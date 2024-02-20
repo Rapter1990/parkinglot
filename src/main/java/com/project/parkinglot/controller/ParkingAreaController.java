@@ -63,7 +63,7 @@ public class ParkingAreaController {
     public CustomResponse<String> updateParkingArea(
             @PathVariable("parkingAreaId") @UUID final String parkingAreaId,
             @RequestBody @Valid final ParkingAreaUpdateRequest parkingAreaUpdateRequest
-            ){
+    ){
         final ParkingArea parkingArea = parkingAreaUpdateService
                 .parkingAreaUpdateByCapacity(parkingAreaId,parkingAreaUpdateRequest);
 
