@@ -237,7 +237,7 @@ import static org.mockito.Mockito.*;
       void givenInvalidParkingAreaId_whenParkingAreaDeleted_thenReturnNotFound() throws Exception {
 
           // Given
-          String invalidParkingAreaId = UUID.randomUUID().toString();
+          final String invalidParkingAreaId = UUID.randomUUID().toString();
 
           // When
           Mockito.doThrow(new ParkingAreaNotFoundException("Parking area not found with id: " + invalidParkingAreaId))

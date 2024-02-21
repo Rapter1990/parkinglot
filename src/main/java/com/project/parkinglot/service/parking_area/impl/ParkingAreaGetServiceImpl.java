@@ -19,7 +19,7 @@ class ParkingAreaGetServiceImpl implements ParkingAreaGetService {
             ParkingAreaEntityToParkingAreaMapper.initialize();
 
     @Override
-    public ParkingArea getParkingAreaById(String parkingAreaId) {
+    public ParkingArea getParkingAreaById(final String parkingAreaId) {
 
         final ParkingAreaEntity existingParkingArea = parkingAreaRepository.findById(parkingAreaId)
                 .orElseThrow(() -> new ParkingAreaNotFoundException("With given parkingAreaId: " + parkingAreaId));
