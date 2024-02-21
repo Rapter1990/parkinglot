@@ -239,7 +239,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(ParkingAreaAlreadyExistException.class)
-    public ResponseEntity<ErrorResponse> handleParkingAreAlreadyExistException(final ParkingAreaAlreadyExistException ex) {
+    protected ResponseEntity<ErrorResponse> handleParkingAreAlreadyExistException(final ParkingAreaAlreadyExistException ex) {
 
         log.error(ex.getMessage(), ex);
 
@@ -258,7 +258,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(ParkingAreaCapacityCanNotBeNullException.class)
-    public ResponseEntity<ErrorResponse> handleParkingAreaNotFoundException(final ParkingAreaCapacityCanNotBeNullException ex) {
+    protected ResponseEntity<ErrorResponse> handleParkingAreaNotFoundException(final ParkingAreaCapacityCanNotBeNullException ex) {
 
         log.error(ex.getMessage(), ex);
 
