@@ -288,7 +288,7 @@ import static org.mockito.Mockito.*;
       @Test
       void givenValidParkingAreaUpdateRequest_whenParkingAreaUpdated_thenReturnCustomResponse() throws Exception {
 
-          //Given
+          // Given
           final String mockParkingAreaId = UUID.randomUUID().toString();
 
           final ParkingAreaUpdateRequest mockParkingAreaUpdateRequest = new ParkingAreaUpdateRequestBuilder()
@@ -305,7 +305,7 @@ import static org.mockito.Mockito.*;
                   .build();
 
 
-          //When
+          // When
           Mockito.when(
                   parkingAreaUpdateService.parkingAreaUpdateByCapacity(
                           Mockito.anyString(),
@@ -313,7 +313,7 @@ import static org.mockito.Mockito.*;
                   )
           ).thenReturn(mockParkingAreaDomainModel);
 
-          //Then
+          // Then
           mockMvc.perform(
                           MockMvcRequestBuilders
                                   .put("/api/v1/parking-area/{id}", mockParkingAreaId)
@@ -328,7 +328,7 @@ import static org.mockito.Mockito.*;
                   .andExpect(MockMvcResultMatchers.jsonPath("$.isSuccess").value(true))
                   .andExpect(MockMvcResultMatchers.jsonPath("$.httpStatus").value("OK"));
 
-          //Verify
+          // Verify
           Mockito.verify(parkingAreaUpdateService, Mockito.times(1))
                   .parkingAreaUpdateByCapacity(Mockito.anyString(), Mockito.any(ParkingAreaUpdateRequest.class));
 
@@ -337,7 +337,7 @@ import static org.mockito.Mockito.*;
       @Test
       void givenInvalidParkingAreaUpdateRequest_whenParkingAreaCapacityIsNull_thenReturnBadRequest() throws Exception {
 
-          //Given
+          // Given
           final String mockParkingAreaId = UUID.randomUUID().toString();
 
           final ParkingAreaUpdateRequest mockParkingAreaUpdateRequest = new ParkingAreaUpdateRequestBuilder()
@@ -350,7 +350,7 @@ import static org.mockito.Mockito.*;
                   .capacity(mockParkingAreaUpdateRequest.getCapacity())
                   .build();
 
-          //When
+          // When
           Mockito.when(
                   parkingAreaUpdateService.parkingAreaUpdateByCapacity(
                           mockParkingAreaId,
@@ -358,7 +358,7 @@ import static org.mockito.Mockito.*;
                   )
           ).thenThrow(new ParkingAreaCapacityCanNotBeNullException());
 
-          //Then
+          // Then
           mockMvc.perform(
                           MockMvcRequestBuilders
                                   .put("/api/v1/parking-area/{id}", mockParkingAreaId)
@@ -369,7 +369,7 @@ import static org.mockito.Mockito.*;
                   .andDo(MockMvcResultHandlers.print())
                   .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
-          //Verify
+          // Verify
           Mockito.verify(parkingAreaUpdateService, Mockito.times(0))
                   .parkingAreaUpdateByCapacity(mockParkingAreaId, mockParkingAreaUpdateRequest);
 
