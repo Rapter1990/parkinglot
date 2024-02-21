@@ -124,7 +124,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = {ParkingAreaNotFoundException.class})
-    protected ResponseEntity<ErrorResponse> handleParkingAreaNotFoundException(ParkingAreaNotFoundException ex) {
+    protected ResponseEntity<ErrorResponse> handleParkingAreaNotFoundException(final ParkingAreaNotFoundException ex) {
 
         log.error(ex.getMessage(), ex);
 
@@ -143,7 +143,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = {ParkNotFoundException.class})
-    protected ResponseEntity<ErrorResponse> handleParkNotFoundException(ParkNotFoundException ex) {
+    protected ResponseEntity<ErrorResponse> handleParkNotFoundException(final ParkNotFoundException ex) {
 
         log.error(ex.getMessage(), ex);
 
@@ -162,7 +162,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = {PriceListNotFoundException.class})
-    protected ResponseEntity<ErrorResponse> handlePriceListNotFoundException(PriceListNotFoundException ex) {
+    protected ResponseEntity<ErrorResponse> handlePriceListNotFoundException(final PriceListNotFoundException ex) {
 
         log.error(ex.getMessage(), ex);
 
@@ -181,7 +181,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = {EmailAlreadyExistsException.class})
-    protected ResponseEntity<ErrorResponse> handleEmailAlreadyExistsException(EmailAlreadyExistsException ex) {
+    protected ResponseEntity<ErrorResponse> handleEmailAlreadyExistsException(final EmailAlreadyExistsException ex) {
 
         log.error(ex.getMessage(), ex);
 
@@ -200,7 +200,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = {RefreshTokenNotFoundException.class})
-    protected ResponseEntity<ErrorResponse> handleRefreshTokenNotFoundException(RefreshTokenNotFoundException ex) {
+    protected ResponseEntity<ErrorResponse> handleRefreshTokenNotFoundException(final RefreshTokenNotFoundException ex) {
 
         log.error(ex.getMessage(), ex);
 
@@ -220,7 +220,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = {UserNotFoundException.class})
-    protected ResponseEntity<ErrorResponse> handleUserNotFoundException(UserNotFoundException ex) {
+    protected ResponseEntity<ErrorResponse> handleUserNotFoundException(final UserNotFoundException ex) {
 
         log.error(ex.getMessage(), ex);
 
@@ -239,7 +239,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(ParkingAreaAlreadyExistException.class)
-    public ResponseEntity<ErrorResponse> handleParkingAreAlreadyExistException(ParkingAreaAlreadyExistException ex) {
+    public ResponseEntity<ErrorResponse> handleParkingAreAlreadyExistException(final ParkingAreaAlreadyExistException ex) {
 
         log.error(ex.getMessage(), ex);
 
