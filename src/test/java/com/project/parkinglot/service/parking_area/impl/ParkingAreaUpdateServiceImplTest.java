@@ -3,7 +3,6 @@ package com.project.parkinglot.service.parking_area.impl;
 import com.project.parkinglot.base.BaseServiceTest;
 import com.project.parkinglot.builder.ParkingAreaEntityBuilder;
 import com.project.parkinglot.builder.ParkingAreaUpdateRequestBuilder;
-import com.project.parkinglot.exception.parkingarea.ParkingAreaCapacityCanNotBeNullException;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException;
 import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaUpdateRequest;
@@ -41,7 +40,7 @@ class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
         final String mockParkingAreaId = UUID.randomUUID().toString();
 
         final ParkingAreaUpdateRequest mockParkingAreaUpdateRequest = new ParkingAreaUpdateRequestBuilder()
-                .withValidField()
+                .withValidFields()
                 .build();
 
         final ParkingAreaEntity mockParkingAreaEntity = new ParkingAreaEntityBuilder()
@@ -97,7 +96,7 @@ class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
 
         // Given
         final ParkingAreaUpdateRequest mockParkingAreaUpdateRequest = new ParkingAreaUpdateRequestBuilder()
-                .withValidField()
+                .withValidFields()
                 .build();
 
         final String mockParkingAreaUpdateRequestId = UUID.randomUUID().toString();

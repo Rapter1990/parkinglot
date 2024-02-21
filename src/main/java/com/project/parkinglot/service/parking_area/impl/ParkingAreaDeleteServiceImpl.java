@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ParkingAreaDeleteServiceImpl implements ParkingAreaDeleteService {
+class ParkingAreaDeleteServiceImpl implements ParkingAreaDeleteService {
 
 
     private final ParkingAreaRepository parkingAreaRepository;

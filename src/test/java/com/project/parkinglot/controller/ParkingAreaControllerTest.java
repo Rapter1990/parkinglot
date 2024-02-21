@@ -8,9 +8,10 @@ import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException
 import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaUpdateRequest;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
-import com.project.parkinglot.service.parking_area.impl.ParkingAreaCreateServiceImpl;
-import com.project.parkinglot.service.parking_area.impl.ParkingAreaDeleteServiceImpl;
-import com.project.parkinglot.service.parking_area.impl.ParkingAreaUpdateServiceImpl;
+
+import com.project.parkinglot.service.parking_area.ParkingAreaCreateService;
+import com.project.parkinglot.service.parking_area.ParkingAreaDeleteService;
+import com.project.parkinglot.service.parking_area.ParkingAreaUpdateService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -28,13 +29,13 @@ import static org.mockito.Mockito.*;
   class ParkingAreaControllerTest extends BaseControllerTest {
 
       @MockBean
-      private ParkingAreaCreateServiceImpl parkingAreaCreateService;
+      private ParkingAreaCreateService parkingAreaCreateService;
 
       @MockBean
-      private ParkingAreaDeleteServiceImpl parkingAreaDeleteService;
+      private ParkingAreaDeleteService parkingAreaDeleteService;
 
       @MockBean
-      private ParkingAreaUpdateServiceImpl parkingAreaUpdateService;
+      private ParkingAreaUpdateService parkingAreaUpdateService;
 
       @Test
       void givenValidParkingAreaCreateRequest_whenParkingAreaCreated_thenReturnCustomResponse() throws Exception {
@@ -292,7 +293,7 @@ import static org.mockito.Mockito.*;
           final String mockParkingAreaId = UUID.randomUUID().toString();
 
           final ParkingAreaUpdateRequest mockParkingAreaUpdateRequest = new ParkingAreaUpdateRequestBuilder()
-                  .withValidField()
+                  .withValidFields()
                   .build();
 
           final ParkingArea mockParkingAreaDomainModel = ParkingArea
@@ -341,7 +342,7 @@ import static org.mockito.Mockito.*;
           final String mockParkingAreaId = UUID.randomUUID().toString();
 
           final ParkingAreaUpdateRequest mockParkingAreaUpdateRequest = new ParkingAreaUpdateRequestBuilder()
-                  .withValidField()
+                  .withValidFields()
                   .withCapacity(null)
                   .build();
 

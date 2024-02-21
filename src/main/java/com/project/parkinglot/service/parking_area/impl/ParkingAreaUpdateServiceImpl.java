@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ParkingAreaUpdateServiceImpl implements ParkingAreaUpdateService {
+class ParkingAreaUpdateServiceImpl implements ParkingAreaUpdateService {
 
     private final ParkingAreaRepository parkingAreaRepository;
 

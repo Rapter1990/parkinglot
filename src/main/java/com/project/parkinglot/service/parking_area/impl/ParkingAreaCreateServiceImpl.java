@@ -7,13 +7,12 @@ import com.project.parkinglot.model.entity.ParkingAreaEntity;
 import com.project.parkinglot.model.mapper.parking_area.ParkingAreaCreateRequestToParkingAreaEntityMapper;
 import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingAreaMapper;
 import com.project.parkinglot.repository.ParkingAreaRepository;
-import com.project.parkinglot.service.parking_area.ParkingAreaCreateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ParkingAreaCreateServiceImpl implements ParkingAreaCreateService {
+class ParkingAreaCreateServiceImpl implements com.project.parkinglot.service.parking_area.ParkingAreaCreateService {
 
     private final ParkingAreaRepository parkingAreaRepository;
 
