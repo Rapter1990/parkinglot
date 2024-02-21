@@ -8,7 +8,6 @@ import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException
 import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaUpdateRequest;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
-
 import com.project.parkinglot.service.parking_area.ParkingAreaCreateService;
 import com.project.parkinglot.service.parking_area.ParkingAreaDeleteService;
 import com.project.parkinglot.service.parking_area.ParkingAreaUpdateService;
@@ -261,7 +260,7 @@ import static org.mockito.Mockito.*;
       }
 
       @Test
-      public void givenValidDeleteParkingAreaById_whenUserUnauthorized_thenReturnForbidden() throws Exception {
+       void givenValidDeleteParkingAreaById_whenUserUnauthorized_thenReturnForbidden() throws Exception {
 
           // Given
           final String mockParkingAreaId = UUID.randomUUID().toString();

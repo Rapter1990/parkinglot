@@ -4,6 +4,7 @@ import com.project.parkinglot.exception.parkingarea.ParkingAreaAlreadyExistExcep
 import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
+import com.project.parkinglot.service.parking_area.ParkingAreaCreateService;
 import com.project.parkinglot.model.mapper.parking_area.ParkingAreaCreateRequestToParkingAreaEntityMapper;
 import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingAreaMapper;
 import com.project.parkinglot.repository.ParkingAreaRepository;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-class ParkingAreaCreateServiceImpl implements com.project.parkinglot.service.parking_area.ParkingAreaCreateService {
+class ParkingAreaCreateServiceImpl implements ParkingAreaCreateService {
 
     private final ParkingAreaRepository parkingAreaRepository;
 
