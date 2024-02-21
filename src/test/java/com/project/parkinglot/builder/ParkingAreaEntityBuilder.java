@@ -17,7 +17,7 @@ public class ParkingAreaEntityBuilder extends BaseBuilder<ParkingAreaEntity> {
     public ParkingAreaEntityBuilder withValidFields() {
         final Faker faker = new Faker();
         return this
-                .witId(UUID.randomUUID().toString())
+                .withId(UUID.randomUUID().toString())
                 .withName(faker.name().name())
                 .withLocation(faker.address().fullAddress())
                 .withCapacity(faker.number().numberBetween(1, 100))

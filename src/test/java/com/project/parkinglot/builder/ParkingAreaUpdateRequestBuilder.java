@@ -7,7 +7,7 @@ public class ParkingAreaUpdateRequestBuilder extends BaseBuilder<ParkingAreaUpda
 
     public ParkingAreaUpdateRequestBuilder() {super(ParkingAreaUpdateRequest.class);}
 
-    public ParkingAreaUpdateRequestBuilder withValidField(){
+    public ParkingAreaUpdateRequestBuilder withValidFields(){
         final Faker faker = new Faker();
         return this
                 .withCapacity(faker.number().numberBetween(1,23));

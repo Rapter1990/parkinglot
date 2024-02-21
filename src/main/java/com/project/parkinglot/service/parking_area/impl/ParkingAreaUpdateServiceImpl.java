@@ -27,15 +27,15 @@ public class ParkingAreaUpdateServiceImpl implements ParkingAreaUpdateService {
             final ParkingAreaUpdateRequest parkingAreaUpdateRequest
     ) {
 
-        final ParkingAreaEntity existingParkingArea = parkingAreaRepository
+        final ParkingAreaEntity parkingAreaEntityToBeUpdate  = parkingAreaRepository
                 .findById(parkingAreaId)
                 .orElseThrow(()-> new ParkingAreaNotFoundException("ParkingArea not found given id" + parkingAreaId));
 
-        existingParkingArea.setCapacity(parkingAreaUpdateRequest.getCapacity());
+        parkingAreaEntityToBeUpdate .setCapacity(parkingAreaUpdateRequest.getCapacity());
 
-        parkingAreaRepository.save(existingParkingArea);
+        parkingAreaRepository.save(parkingAreaEntityToBeUpdate );
 
-        return parkingAreaEntityToParkingArea.map(existingParkingArea);
+        return parkingAreaEntityToParkingArea.map(parkingAreaEntityToBeUpdate );
     }
 
 }
