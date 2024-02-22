@@ -6,8 +6,8 @@ import com.project.parkinglot.builder.ParkingAreaUpdateRequestBuilder;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaCapacityCanNotBeNullException;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException;
 import com.project.parkinglot.model.ParkingArea;
-import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaUpdateRequest;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
+import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaUpdateRequest;
 import com.project.parkinglot.service.parking_area.ParkingAreaCreateService;
 import com.project.parkinglot.service.parking_area.ParkingAreaDeleteService;
 import com.project.parkinglot.service.parking_area.ParkingAreaGetService;
@@ -23,7 +23,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.UUID;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 
 
 class ParkingAreaControllerTest extends BaseControllerTest {

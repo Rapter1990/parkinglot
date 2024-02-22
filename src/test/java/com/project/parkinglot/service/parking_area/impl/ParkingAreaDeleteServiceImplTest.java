@@ -14,7 +14,8 @@ import org.mockito.Mockito;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 
 class ParkingAreaDeleteServiceImplTest extends BaseServiceTest {
 

@@ -1,6 +1,5 @@
 package com.project.parkinglot.builder;
 
-import com.github.javafaker.Faker;
 import com.project.parkinglot.model.entity.PriceEntity;
 
 import java.math.BigDecimal;

@@ -1,13 +1,13 @@
 package com.project.parkinglot.controller;
 
 import com.project.parkinglot.model.ParkingArea;
-import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaUpdateRequest;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
+import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaUpdateRequest;
 import com.project.parkinglot.payload.response.CustomResponse;
-import com.project.parkinglot.service.parking_area.ParkingAreaUpdateService;
 import com.project.parkinglot.service.parking_area.ParkingAreaCreateService;
 import com.project.parkinglot.service.parking_area.ParkingAreaDeleteService;
 import com.project.parkinglot.service.parking_area.ParkingAreaGetService;
+import com.project.parkinglot.service.parking_area.ParkingAreaUpdateService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;

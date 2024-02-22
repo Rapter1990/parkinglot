@@ -1,7 +1,6 @@
 package com.project.parkinglot.builder;
 
 import com.github.javafaker.Faker;
-import com.project.parkinglot.model.entity.ParkingAreaEntity;
 import com.project.parkinglot.model.entity.PriceEntity;
 import com.project.parkinglot.model.entity.PriceListEntity;
 
