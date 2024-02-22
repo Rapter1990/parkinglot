@@ -8,14 +8,14 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface ParkingAreaEntityToParkingAreaDomainModelMapper extends BaseMapper<ParkingAreaEntity, ParkingArea> {
+public interface ParkingAreaEntityToParkingAreaMapper extends BaseMapper<ParkingAreaEntity, ParkingArea> {
 
     @Override
     @Mapping(source = "priceListEntity", target = "priceList")
     ParkingArea map(ParkingAreaEntity source);
 
-    static ParkingAreaEntityToParkingAreaDomainModelMapper initialize() {
-        return Mappers.getMapper(ParkingAreaEntityToParkingAreaDomainModelMapper.class);
+    static ParkingAreaEntityToParkingAreaMapper initialize() {
+        return Mappers.getMapper(ParkingAreaEntityToParkingAreaMapper.class);
     }
 
 }

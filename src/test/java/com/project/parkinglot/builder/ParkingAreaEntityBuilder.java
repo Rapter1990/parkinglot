@@ -6,6 +6,7 @@ import com.project.parkinglot.model.entity.ParkingAreaEntity;
 import com.project.parkinglot.model.entity.PriceListEntity;
 
 import java.util.List;
+import java.util.UUID;
 
 public class ParkingAreaEntityBuilder extends BaseBuilder<ParkingAreaEntity> {
 
@@ -16,6 +17,7 @@ public class ParkingAreaEntityBuilder extends BaseBuilder<ParkingAreaEntity> {
     public ParkingAreaEntityBuilder withValidFields() {
         final Faker faker = new Faker();
         return this
+                .withId(UUID.randomUUID().toString())
                 .withName(faker.name().name())
                 .withLocation(faker.address().fullAddress())
                 .withCapacity(faker.number().numberBetween(1, 100))
@@ -28,6 +30,13 @@ public class ParkingAreaEntityBuilder extends BaseBuilder<ParkingAreaEntity> {
             final String parkingAreaId
     ) {
         data.setId(parkingAreaId);
+        return this;
+    }
+
+    public ParkingAreaEntityBuilder witId(
+            final String id
+    ){
+        data.setId(id);
         return this;
     }
 

@@ -3,6 +3,7 @@ package com.project.parkinglot.exception;
 import com.project.parkinglot.base.BaseControllerTest;
 import com.project.parkinglot.exception.park.ParkNotFoundException;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaAlreadyExistException;
+import com.project.parkinglot.exception.parkingarea.ParkingAreaCapacityCanNotBeNullException;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException;
 import com.project.parkinglot.exception.pricelist.PriceListNotFoundException;
 import com.project.parkinglot.exception.user.EmailAlreadyExistsException;
@@ -343,6 +344,33 @@ class GlobalExceptionHandlerTest extends BaseControllerTest {
         ResponseEntity<ErrorResponse> responseEntity = globalExceptionHandler.handleParkingAreAlreadyExistException(mockException);
 
         Assertions.assertEquals(HttpStatus.CONFLICT, responseEntity.getStatusCode());
+        Assertions.assertEquals(expectedErrorResponse.getTimestamp().toLocalDate(),
+                responseEntity.getBody().getTimestamp().toLocalDate());
+
+    }
+
+    @Test
+    void givenParkingAreaCapacityCanNotBeNullException_whenThrowParkingAreaCapacityCanNotBeNullException_thenReturnErrorResponse() {
+
+        // Given
+        ParkingAreaCapacityCanNotBeNullException mockException = new ParkingAreaCapacityCanNotBeNullException("ParkingArea Capacity Field can not be null");
+
+        // When
+        List<String> details = new ArrayList<>();
+        details.add(mockException.getMessage());
+
+        ErrorResponse expectedErrorResponse = ErrorResponse.builder()
+                .errorDetails(details)
+                .message("ParkingArea Capacity Field can not be null")
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.BAD_REQUEST)
+                .timestamp(LocalDateTime.now())
+                .build();
+
+        // Then
+        ResponseEntity<ErrorResponse> responseEntity = globalExceptionHandler.handleParkingAreaNotFoundException(mockException);
+
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST,responseEntity.getStatusCode());
         Assertions.assertEquals(expectedErrorResponse.getTimestamp().toLocalDate(),
                 responseEntity.getBody().getTimestamp().toLocalDate());
 

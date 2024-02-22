@@ -2,6 +2,7 @@ package com.project.parkinglot.exception;
 
 import com.project.parkinglot.exception.park.ParkNotFoundException;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaAlreadyExistException;
+import com.project.parkinglot.exception.parkingarea.ParkingAreaCapacityCanNotBeNullException;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException;
 import com.project.parkinglot.exception.pricelist.PriceListNotFoundException;
 import com.project.parkinglot.exception.user.EmailAlreadyExistsException;
@@ -123,7 +124,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = {ParkingAreaNotFoundException.class})
-    protected ResponseEntity<ErrorResponse> handleParkingAreaNotFoundException(ParkingAreaNotFoundException ex) {
+    protected ResponseEntity<ErrorResponse> handleParkingAreaNotFoundException(final ParkingAreaNotFoundException ex) {
 
         log.error(ex.getMessage(), ex);
 
@@ -142,7 +143,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = {ParkNotFoundException.class})
-    protected ResponseEntity<ErrorResponse> handleParkNotFoundException(ParkNotFoundException ex) {
+    protected ResponseEntity<ErrorResponse> handleParkNotFoundException(final ParkNotFoundException ex) {
 
         log.error(ex.getMessage(), ex);
 
@@ -161,7 +162,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = {PriceListNotFoundException.class})
-    protected ResponseEntity<ErrorResponse> handlePriceListNotFoundException(PriceListNotFoundException ex) {
+    protected ResponseEntity<ErrorResponse> handlePriceListNotFoundException(final PriceListNotFoundException ex) {
 
         log.error(ex.getMessage(), ex);
 
@@ -180,7 +181,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = {EmailAlreadyExistsException.class})
-    protected ResponseEntity<ErrorResponse> handleEmailAlreadyExistsException(EmailAlreadyExistsException ex) {
+    protected ResponseEntity<ErrorResponse> handleEmailAlreadyExistsException(final EmailAlreadyExistsException ex) {
 
         log.error(ex.getMessage(), ex);
 
@@ -199,7 +200,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = {RefreshTokenNotFoundException.class})
-    protected ResponseEntity<ErrorResponse> handleRefreshTokenNotFoundException(RefreshTokenNotFoundException ex) {
+    protected ResponseEntity<ErrorResponse> handleRefreshTokenNotFoundException(final RefreshTokenNotFoundException ex) {
 
         log.error(ex.getMessage(), ex);
 
@@ -219,7 +220,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = {UserNotFoundException.class})
-    protected ResponseEntity<ErrorResponse> handleUserNotFoundException(UserNotFoundException ex) {
+    protected ResponseEntity<ErrorResponse> handleUserNotFoundException(final UserNotFoundException ex) {
 
         log.error(ex.getMessage(), ex);
 
@@ -238,7 +239,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(ParkingAreaAlreadyExistException.class)
-    public ResponseEntity<ErrorResponse> handleParkingAreAlreadyExistException(ParkingAreaAlreadyExistException ex) {
+    protected ResponseEntity<ErrorResponse> handleParkingAreAlreadyExistException(final ParkingAreaAlreadyExistException ex) {
 
         log.error(ex.getMessage(), ex);
 
@@ -253,6 +254,26 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .build();
 
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+
+    }
+
+    @ExceptionHandler(ParkingAreaCapacityCanNotBeNullException.class)
+    protected ResponseEntity<ErrorResponse> handleParkingAreaNotFoundException(final ParkingAreaCapacityCanNotBeNullException ex) {
+
+        log.error(ex.getMessage(), ex);
+
+        final List<String> details = new ArrayList<>();
+        details.add(ex.getMessage());
+
+        final ErrorResponse errorResponse = ErrorResponse.builder()
+                .errorDetails(details)
+                .message("ParkingArea capacity cannot be null")
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.BAD_REQUEST)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+
     }
 
 }

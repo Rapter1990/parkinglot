@@ -7,7 +7,7 @@ import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
 import com.project.parkinglot.model.mapper.parking_area.ParkingAreaCreateRequestToParkingAreaEntityMapper;
-import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingAreaDomainModelMapper;
+import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingAreaMapper;
 import com.project.parkinglot.repository.ParkingAreaRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-public class ParkingAreaCreateServiceImplTest extends BaseServiceTest {
+class ParkingAreaCreateServiceImplTest extends BaseServiceTest {
 
 
     @InjectMocks
@@ -27,8 +27,8 @@ public class ParkingAreaCreateServiceImplTest extends BaseServiceTest {
     private final ParkingAreaCreateRequestToParkingAreaEntityMapper parkingAreaCreateRequestToParkingAreaEntityMapper =
             ParkingAreaCreateRequestToParkingAreaEntityMapper.initialize();
 
-    private final ParkingAreaEntityToParkingAreaDomainModelMapper parkingAreaEntityToParkingAreaDomainModelMapper =
-            ParkingAreaEntityToParkingAreaDomainModelMapper.initialize();
+    private final ParkingAreaEntityToParkingAreaMapper parkingAreaEntityToParkingAreaMapper =
+            ParkingAreaEntityToParkingAreaMapper.initialize();
 
     @Test
     public void givenValidParkingAreaCreateRequest_whenCreateParkingArea_thenReturnParkingAreaDomainModel() {
@@ -41,7 +41,7 @@ public class ParkingAreaCreateServiceImplTest extends BaseServiceTest {
         final ParkingAreaEntity mockParkingAreaEntity = parkingAreaCreateRequestToParkingAreaEntityMapper
                 .map(mockValidParkingAreaCreateRequest);
 
-        final ParkingArea mockParkingAreaDomainModel = parkingAreaEntityToParkingAreaDomainModelMapper
+        final ParkingArea mockParkingAreaDomainModel = parkingAreaEntityToParkingAreaMapper
                 .map(mockParkingAreaEntity);
 
         // When
