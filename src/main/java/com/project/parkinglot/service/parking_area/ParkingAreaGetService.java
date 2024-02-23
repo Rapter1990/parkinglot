@@ -6,4 +6,6 @@ public interface ParkingAreaGetService {
 
     ParkingArea getParkingAreaById(final String parkingAreaId);
 
+    ParkingArea getParkingAreaByName(final String name);
+
 }

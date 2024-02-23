@@ -76,4 +76,52 @@ class ParkingAreaGetServiceImplTest extends BaseServiceTest {
 
     }
 
+    @Test
+    void givenValidParkingArea_whenGetParkingAreaByName_thenReturnExistingParkingArea() {
+
+        // Given
+        final ParkingAreaEntity mockParkingAreaEntity = new ParkingAreaEntityBuilder()
+                .withValidFields()
+                .build();
+
+        final String mockParkingAreaName = mockParkingAreaEntity.getName();
+
+        final ParkingArea mockParkingArea = parkingAreaEntityToParkingAreaMapper.map(mockParkingAreaEntity);
+
+        // When
+        Mockito.when(parkingAreaRepository.findByName(mockParkingAreaName)).thenReturn(Optional.of(mockParkingAreaEntity));
+
+        // Then
+        final ParkingArea result = parkingAreaService.getParkingAreaByName(mockParkingAreaName);
+
+        Assertions.assertEquals(mockParkingArea.getId(), result.getId());
+        Assertions.assertEquals(mockParkingArea.getParkList(), result.getParkList());
+        Assertions.assertEquals(mockParkingArea.getName(), result.getName());
+        Assertions.assertEquals(mockParkingArea.getCapacity(), result.getCapacity());
+        Assertions.assertEquals(mockParkingArea.getDailyIncomeList(), result.getDailyIncomeList());
+        Assertions.assertEquals(mockParkingArea.getLocation(), result.getLocation());
+
+        // Verify
+        Mockito.verify(parkingAreaRepository, Mockito.times(1)).findByName(mockParkingAreaName);
+
+    }
+
+    @Test
+    void givenNonExistParkingArea_whenGetParkingAreaByName_thenThrowsParkingAreaNotFoundException(){
+
+        // When
+        Mockito.when(parkingAreaRepository.findByName(Mockito.anyString()))
+                .thenReturn(Optional.empty());
+
+        // Then
+        Assertions.assertThrowsExactly(
+                ParkingAreaNotFoundException.class,
+                () -> parkingAreaService.getParkingAreaByName(Mockito.anyString())
+        );
+
+        // Verify
+        Mockito.verify(parkingAreaRepository, Mockito.times(1)).findByName(Mockito.anyString());
+
+    }
+
 }
