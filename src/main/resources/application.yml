@@ -8,7 +8,7 @@ spring:
   datasource:
     url: jdbc:mysql://${PARKING_LOT_DB_IP:localhost}:${PARKING_LOT_DB_PORT:3306}/parkinglot
     username: ${DATABASE_USERNAME:root}
-    password: ${DATABASE_PASSWORD:password}
+    password: ${DATABASE_PASSWORD:${password}}
 
   liquibase:
     enabled: true
