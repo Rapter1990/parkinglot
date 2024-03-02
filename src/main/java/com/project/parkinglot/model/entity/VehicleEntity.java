@@ -40,7 +40,7 @@ public class VehicleEntity extends BaseEntity {
             fetch = FetchType.LAZY,
             mappedBy = "vehicleEntity"
     )
-    private List<ParkEntity> parkEntities;
+    private List<ParkEntity> parkEntities;//mapperda buraya bak
 
     @ManyToOne(
             fetch = FetchType.LAZY
