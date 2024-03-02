@@ -42,7 +42,7 @@ import java.util.UUID;
      @Test
      void givenValidVehicleRequest_whenAssignUserToVehicle_ThenReturnCustomResponse() {
 
-         //Given
+         // Given
          final String mockUserId = UUID.randomUUID().toString();
 
          final VehicleRequest mockVehicleAssignRequest = new VehicleRequestBuilder()
@@ -55,7 +55,7 @@ import java.util.UUID;
                  .vehicleType(mockVehicleAssignRequest.getVehicleType())
                  .build();
 
-         //When
+         // When
          Mockito.when(
                  vehicleService.assignVehicleToUser(
                          Mockito.anyString(),
@@ -63,7 +63,7 @@ import java.util.UUID;
                  )
          ).thenReturn(mockVehicleToCreated);
 
-         //Then
+         // Then
          mockMvc.perform(
                          MockMvcRequestBuilders
                                  .post("/api/v1/vehicles/assign/{user-id}", mockUserId)
@@ -78,7 +78,7 @@ import java.util.UUID;
                  .andExpect(MockMvcResultMatchers.jsonPath("$.isSuccess").value(true))
                  .andExpect(MockMvcResultMatchers.jsonPath("$.httpStatus").value("OK"));
 
-         //Verify
+         // Verify
          Mockito.verify(vehicleService, Mockito.times(1))
                  .assignVehicleToUser(Mockito.anyString(), Mockito.any(VehicleRequest.class));
      }
@@ -87,7 +87,7 @@ import java.util.UUID;
      @SneakyThrows
      void givenAssignVehicleToUserRequest_whenLicenseTypeIsNotValid_thenThrowBadRequest() {
 
-         //Given
+         // Given
          final String mockUserId = UUID.randomUUID().toString();
 
          final VehicleRequest mockVehicleAssignRequest = new VehicleRequestBuilder()
@@ -102,7 +102,7 @@ import java.util.UUID;
                  .build();
 
 
-         //Then
+         // Then
          mockMvc.perform(
                          MockMvcRequestBuilders
                                  .post("/api/v1/vehicles/assign/{user-id}", mockUserId)
@@ -113,7 +113,7 @@ import java.util.UUID;
                  .andDo(MockMvcResultHandlers.print())
                  .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
-         //Verify
+         // Verify
          Mockito.verify(vehicleService, Mockito.never())
                  .assignVehicleToUser(Mockito.anyString(), Mockito.any(VehicleRequest.class));
      }
@@ -122,7 +122,7 @@ import java.util.UUID;
      @SneakyThrows
      void givenAssignVehicleToUserRequest_whenUserIsUnAuthorized_thenReturnForbidden() {
 
-         //Given
+         // Given
          final String mockUserId = UUID.randomUUID().toString();
 
          final VehicleRequest mockVehicleAssignRequest = new VehicleRequestBuilder()
@@ -136,13 +136,13 @@ import java.util.UUID;
                  .vehicleType(mockVehicleAssignRequest.getVehicleType())
                  .build();
 
-         //When
+         // When
          Mockito.when(vehicleService.assignVehicleToUser(
                  mockUserId,
                  mockVehicleAssignRequest
          )).thenReturn(mockVehicleToBeCreated);
 
-         //Then
+         // Then
          mockMvc.perform(
                          MockMvcRequestBuilders
                                  .post("/api/v1/vehicles/assign/{user-id}", mockUserId)
@@ -152,7 +152,7 @@ import java.util.UUID;
                  .andDo(MockMvcResultHandlers.print())
                  .andExpect(MockMvcResultMatchers.status().isUnauthorized());
 
-         //Verify
+         // Verify
          Mockito.verify(vehicleService,Mockito.never())
                  .assignVehicleToUser(Mockito.anyString(),Mockito.any(VehicleRequest.class));
      }
@@ -161,7 +161,7 @@ import java.util.UUID;
      @SneakyThrows
      void givenInvalidVehicleType_whenAssignUserToVehicle_ThenReturnBadRequest(){
 
-         //Given
+         // Given
          final String mockUserId = UUID.randomUUID().toString();
 
          final VehicleRequest mockVehicleAssignRequest = new VehicleRequestBuilder()
@@ -175,13 +175,13 @@ import java.util.UUID;
                  .vehicleType(mockVehicleAssignRequest.getVehicleType())
                  .build();
 
-         //when
+         // When
          Mockito.when(vehicleService.assignVehicleToUser(
                  mockUserId,
                  mockVehicleAssignRequest
          )).thenReturn(mockVehicleToBeCreated);
 
-         //Then
+         // Then
          mockMvc.perform(
                          MockMvcRequestBuilders
                                  .post("/api/v1/vehicles/assign/{user-id}", mockUserId)
@@ -192,7 +192,7 @@ import java.util.UUID;
                  .andDo(MockMvcResultHandlers.print())
                  .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
-         //Verify
+         // Verify
          Mockito.verify(vehicleService,Mockito.never())
                  .assignVehicleToUser(Mockito.anyString(),Mockito.any(VehicleRequest.class));
          }

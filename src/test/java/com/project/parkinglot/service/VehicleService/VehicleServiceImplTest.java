@@ -10,6 +10,8 @@ import com.project.parkinglot.model.Vehicle;
 import com.project.parkinglot.model.dto.request.Vehicle.VehicleRequest;
 import com.project.parkinglot.model.entity.VehicleEntity;
 import com.project.parkinglot.model.mapper.vehicle.VehicleEntityToVehicleMapper;
+import com.project.parkinglot.model.mapper.vehicle.VehicleRequestToVehicleMapper;
+import com.project.parkinglot.model.mapper.vehicle.VehicleToVehicleEntityMapper;
 import com.project.parkinglot.repository.VehicleRepository;
 import com.project.parkinglot.security.model.entity.User;
 import com.project.parkinglot.service.auth.UserService;
@@ -38,11 +40,17 @@ import java.util.UUID;
     final VehicleEntityToVehicleMapper vehicleEntityToVehicleMapper =
             VehicleEntityToVehicleMapper.initialize();
 
+     private final VehicleToVehicleEntityMapper vehicleToVehicleEntityMapper =
+             VehicleToVehicleEntityMapper.initialize();
+
+     private final VehicleRequestToVehicleMapper vehicleRequestToVehicleMapper=
+             VehicleRequestToVehicleMapper.initialize();
+
 
     @Test
     void givenValidVehicleRequest_whenAssignVehicleToUser_thenReturnVehicle(){
 
-        //Given
+        // Given
         final String mockVehicleId = UUID.randomUUID().toString();
 
         final String mockUserId = UUID.randomUUID().toString();
@@ -56,29 +64,38 @@ import java.util.UUID;
                 .withValidFields()
                 .build();
 
-        final VehicleEntity mockVehicleEntity = new VehicleEntityBuilder()
-                .withValidFields()
-                .withId(mockVehicleId)
-                .withUser(mockUser)
-                .withLicensePlate(mockVehicleRequest.getLicensePlate())
-                .withVehicleType(mockVehicleRequest.getVehicleType())
-                .build();
+        final Vehicle mockVehicle = vehicleRequestToVehicleMapper.map(mockVehicleRequest);
 
-        final Vehicle mockVehicle = vehicleEntityToVehicleMapper.map(mockVehicleEntity);
+        final VehicleEntity mockVehicleEntity = vehicleToVehicleEntityMapper.map(mockVehicle);
 
-        //When
+        final Vehicle mockVehicleToCreated = vehicleEntityToVehicleMapper.map(mockVehicleEntity);
+        // When
         Mockito.when(userService.findById(mockUserId))
                 .thenReturn(Optional.of(mockUser));
 
         Mockito.when(vehicleRepository.existsByLicensePlate(mockVehicleRequest.getLicensePlate()))
                 .thenReturn(Boolean.FALSE);
 
-        //Then
+        // Then
         final Vehicle vehicleToBeAssigned = vehicleService.assignVehicleToUser(mockUserId,mockVehicleRequest);
 
         Assertions.assertEquals(mockVehicleRequest.getLicensePlate(),vehicleToBeAssigned.getLicensePlate());
 
         Assertions.assertEquals(mockVehicleRequest.getVehicleType(),vehicleToBeAssigned.getVehicleType());
+
+        Assertions.assertEquals(mockVehicleRequest.getLicensePlate(),mockVehicleEntity.getLicensePlate());
+
+        Assertions.assertEquals(mockVehicleRequest.getVehicleType(),mockVehicleEntity.getVehicleType());
+
+        Assertions.assertEquals(mockVehicleEntity.getId() , mockVehicleToCreated.getId());
+
+        Assertions.assertEquals(mockVehicleEntity.getLicensePlate() , mockVehicleToCreated.getLicensePlate());
+
+        Assertions.assertEquals(mockVehicleEntity.getVehicleType() , mockVehicleToCreated.getVehicleType());
+
+        Assertions.assertEquals(mockVehicleEntity.getParkEntities() , mockVehicleToCreated.getParkList());
+
+        Assertions.assertEquals(mockVehicleEntity.getUser() , mockVehicleToCreated.getUser());
 
         //Verify
         Mockito.verify(userService,Mockito.times(1)).findById(Mockito.anyString());
@@ -96,17 +113,17 @@ import java.util.UUID;
                 .withValidFields()
                 .build();
 
-        //When
+        // When
         Mockito.when(userService.findById(mockGivenId))
                 .thenReturn(Optional.empty());
 
-        //Then
+        // Then
         Assertions.assertThrowsExactly(
                 UserNotFoundException.class,
                 () -> vehicleService.assignVehicleToUser(mockGivenId,mockVehicleRequest)
         );
 
-        //Verify
+        // Verify
         Mockito.verify(userService,Mockito.times(1)).findById(Mockito.anyString());
 
     }
@@ -114,7 +131,7 @@ import java.util.UUID;
     @Test
     void givenValidVehicleRequest_whenAssignVehicleToUser_ThenThrowVehicleAlreadyExistException(){
 
-        //Given
+        // Given
         final String mockUserId = UUID.randomUUID().toString();
 
         final User mockUser = new UserBuilder()
@@ -126,20 +143,20 @@ import java.util.UUID;
                 .withValidFields()
                 .build();
 
-        //When
+        // When
         Mockito.when(userService.findById(mockUserId))
                  .thenReturn(Optional.of(mockUser));
 
         Mockito.when(vehicleRepository.existsByLicensePlate(mockVehicleRequest.getLicensePlate()))
                 .thenReturn(Boolean.TRUE);
 
-        //Then
+        // Then
         Assertions.assertThrowsExactly(
                 VehicleAlreadyExist.class,
                 ()->vehicleService.assignVehicleToUser(mockUserId,mockVehicleRequest)
         );
 
-        //Verify
+        // Verify
         Mockito.verify(userService,Mockito.times(1)).findById(Mockito.anyString());
 
         Mockito.verify(vehicleRepository,Mockito.never()).save(Mockito.any(VehicleEntity.class));

@@ -46,6 +46,7 @@ public class VehicleRequestBuilder extends BaseBuilder<VehicleRequest>{
         int generatedRandomLetter = faker.number().numberBetween(10000,999999);
         return  memoryTag + ageIdentifier+ generatedRandomLetter;
     }
+
     private VehicleType generateRandomVehicleType(){
         Random rnd = new Random();
         int randomValue = rnd.nextInt(VehicleType.values().length);

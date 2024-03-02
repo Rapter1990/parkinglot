@@ -63,6 +63,7 @@ public class VehicleEntityBuilder extends BaseBuilder<VehicleEntity>{
         int generatedRandomLetters = faker.number().numberBetween(1000,99999);
         return  memoryTag + ageIdentifier+ generatedRandomLetters;
     }
+
     private VehicleType generateRandomVehicleType(){
         Random rnd = new Random();
         int randomValue = rnd.nextInt(VehicleType.values().length);
