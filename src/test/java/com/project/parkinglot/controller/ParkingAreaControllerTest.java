@@ -233,6 +233,7 @@ class ParkingAreaControllerTest extends BaseControllerTest {
                           .get("/api/v1/parking-area/id/{parkingAreaId}", mockParkingAreaId)
                           .contentType(MediaType.APPLICATION_JSON)
                           .header(HttpHeaders.AUTHORIZATION, mockAdminToken))
+                  .andDo(MockMvcResultHandlers.print())
                   .andExpect(MockMvcResultMatchers.status().isOk())
                   .andExpect(MockMvcResultMatchers.jsonPath("$.response.id").value(mockParkingAreaId))
                   .andExpect(MockMvcResultMatchers.jsonPath("$.response.name").value("Mock Parking Area"))
