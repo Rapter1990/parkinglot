@@ -69,6 +69,7 @@ import java.util.UUID;
         final VehicleEntity mockVehicleEntity = vehicleToVehicleEntityMapper.map(mockVehicle);
 
         final Vehicle mockVehicleToCreated = vehicleEntityToVehicleMapper.map(mockVehicleEntity);
+
         // When
         Mockito.when(userService.findById(mockUserId))
                 .thenReturn(Optional.of(mockUser));
@@ -89,9 +90,8 @@ import java.util.UUID;
         Assertions.assertEquals(mockVehicleEntity.getParkEntities() , mockVehicleToCreated.getParkList());
         Assertions.assertEquals(mockVehicleEntity.getUser() , mockVehicleToCreated.getUser());
 
-        //Verify
+        // Verify
         Mockito.verify(userService,Mockito.times(1)).findById(Mockito.anyString());
-
         Mockito.verify(vehicleRepository,Mockito.times(1)).save(Mockito.any(VehicleEntity.class));
     }
 

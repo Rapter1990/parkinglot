@@ -9,6 +9,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface VehicleToVehicleEntityMapper extends BaseMapper<Vehicle,VehicleEntity> {
+
     @Override
     VehicleEntity map(Vehicle source);
 
