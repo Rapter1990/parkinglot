@@ -80,21 +80,13 @@ import java.util.UUID;
         final Vehicle vehicleToBeAssigned = vehicleService.assignVehicleToUser(mockUserId,mockVehicleRequest);
 
         Assertions.assertEquals(mockVehicleRequest.getLicensePlate(),vehicleToBeAssigned.getLicensePlate());
-
         Assertions.assertEquals(mockVehicleRequest.getVehicleType(),vehicleToBeAssigned.getVehicleType());
-
         Assertions.assertEquals(mockVehicleRequest.getLicensePlate(),mockVehicleEntity.getLicensePlate());
-
         Assertions.assertEquals(mockVehicleRequest.getVehicleType(),mockVehicleEntity.getVehicleType());
-
         Assertions.assertEquals(mockVehicleEntity.getId() , mockVehicleToCreated.getId());
-
         Assertions.assertEquals(mockVehicleEntity.getLicensePlate() , mockVehicleToCreated.getLicensePlate());
-
         Assertions.assertEquals(mockVehicleEntity.getVehicleType() , mockVehicleToCreated.getVehicleType());
-
         Assertions.assertEquals(mockVehicleEntity.getParkEntities() , mockVehicleToCreated.getParkList());
-
         Assertions.assertEquals(mockVehicleEntity.getUser() , mockVehicleToCreated.getUser());
 
         //Verify
@@ -106,7 +98,7 @@ import java.util.UUID;
     @Test
     void givenNonExitUser_whenAssignVehicleToUser_thenThrowsUserNotFoundException(){
 
-        //Given
+        // Given
         final String mockGivenId = UUID.randomUUID().toString();
 
         final VehicleRequest mockVehicleRequest = new VehicleRequestBuilder()
@@ -158,7 +150,6 @@ import java.util.UUID;
 
         // Verify
         Mockito.verify(userService,Mockito.times(1)).findById(Mockito.anyString());
-
         Mockito.verify(vehicleRepository,Mockito.never()).save(Mockito.any(VehicleEntity.class));
     }
 

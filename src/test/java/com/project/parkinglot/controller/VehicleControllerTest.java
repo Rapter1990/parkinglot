@@ -29,15 +29,6 @@ import java.util.UUID;
      @MockBean
      private VehicleServiceImpl vehicleService;
 
-     private final VehicleToVehicleEntityMapper vehicleToVehicleEntityMapper =
-             VehicleToVehicleEntityMapper.initialize();
-
-     private final VehicleRequestToVehicleMapper vehicleRequestToVehicleMapper =
-             VehicleRequestToVehicleMapper.initialize();
-
-     private final VehicleEntityToVehicleMapper vehicleEntityToVehicleMapper =
-             VehicleEntityToVehicleMapper.initialize();
-
      @SneakyThrows
      @Test
      void givenValidVehicleRequest_whenAssignUserToVehicle_ThenReturnCustomResponse() {

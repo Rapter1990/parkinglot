@@ -70,6 +70,7 @@ public class VehicleServiceImpl implements VehicleService {
         vehicleRepository.save(vehicleEntityToBePersist);
 
         return vehicleEntityToBePersist;
+
     }
 
 }

@@ -17,4 +17,5 @@ public interface VehicleEntityToVehicleMapper extends BaseMapper<VehicleEntity, 
     static VehicleEntityToVehicleMapper initialize(){
         return Mappers.getMapper(VehicleEntityToVehicleMapper.class);
     }
+
 }

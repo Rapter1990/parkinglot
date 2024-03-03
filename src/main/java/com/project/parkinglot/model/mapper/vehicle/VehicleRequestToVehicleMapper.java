@@ -16,4 +16,5 @@ public interface VehicleRequestToVehicleMapper extends BaseMapper<VehicleRequest
     static VehicleRequestToVehicleMapper initialize(){
         return Mappers.getMapper(VehicleRequestToVehicleMapper.class);
     }
+
 }

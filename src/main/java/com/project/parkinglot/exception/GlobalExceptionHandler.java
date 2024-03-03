@@ -276,6 +276,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 
     }
+
     @ExceptionHandler(VehicleAlreadyExist.class)
     protected  ResponseEntity<ErrorResponse> handleUserAlreadyHasThisVehicleException(final VehicleAlreadyExist ex){
 
