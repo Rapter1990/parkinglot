@@ -72,7 +72,6 @@ import java.util.UUID;
          // Verify
          Mockito.verify(vehicleService, Mockito.times(1))
                  .assignVehicleToUser(Mockito.anyString(), Mockito.any(VehicleRequest.class));
-
      }
 
      @Test
@@ -189,6 +188,7 @@ import java.util.UUID;
          // Verify
          Mockito.verify(vehicleService,Mockito.never())
                  .assignVehicleToUser(Mockito.anyString(),Mockito.any(VehicleRequest.class));
+
          }
 
  }
