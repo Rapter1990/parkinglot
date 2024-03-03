@@ -52,4 +52,5 @@ public class VehicleRequestBuilder extends BaseBuilder<VehicleRequest>{
         int randomValue = rnd.nextInt(VehicleType.values().length);
         return VehicleType.values()[randomValue];
     }
+
 }

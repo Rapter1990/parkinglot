@@ -68,6 +68,6 @@ public class VehicleEntityBuilder extends BaseBuilder<VehicleEntity>{
         Random rnd = new Random();
         int randomValue = rnd.nextInt(VehicleType.values().length);
         return VehicleType.values()[randomValue];
-
     }
+
 }

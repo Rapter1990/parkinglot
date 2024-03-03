@@ -93,6 +93,7 @@ import java.util.UUID;
         // Verify
         Mockito.verify(userService,Mockito.times(1)).findById(Mockito.anyString());
         Mockito.verify(vehicleRepository,Mockito.times(1)).save(Mockito.any(VehicleEntity.class));
+
     }
 
     @Test
