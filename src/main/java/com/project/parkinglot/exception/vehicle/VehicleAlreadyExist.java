@@ -14,4 +14,10 @@ public class VehicleAlreadyExist extends RuntimeException{
         super(DEFAULT_MESSAGE);
     }
 
+    public VehicleAlreadyExist(
+            final String message
+    ) {
+        super(DEFAULT_MESSAGE + " " + message);
+    }
+
 }
