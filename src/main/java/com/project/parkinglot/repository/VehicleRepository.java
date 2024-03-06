@@ -11,4 +11,12 @@ public interface VehicleRepository extends JpaRepository<VehicleEntity, String> 
             final String licensePlate
     );
 
+    Optional<VehicleEntity> findByUserId(
+            final String userId
+    );
+
+    Boolean existsByLicensePlate(
+            final String licensePlate
+    );
+
 }

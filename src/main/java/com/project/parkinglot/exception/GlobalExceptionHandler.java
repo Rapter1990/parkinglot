@@ -8,6 +8,7 @@ import com.project.parkinglot.exception.pricelist.PriceListNotFoundException;
 import com.project.parkinglot.exception.user.EmailAlreadyExistsException;
 import com.project.parkinglot.exception.user.RefreshTokenNotFoundException;
 import com.project.parkinglot.exception.user.UserNotFoundException;
+import com.project.parkinglot.exception.vehicle.VehicleAlreadyExist;
 import com.project.parkinglot.payload.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -274,6 +275,23 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 
+    }
+
+    @ExceptionHandler(VehicleAlreadyExist.class)
+    protected  ResponseEntity<ErrorResponse> handleUserAlreadyHasThisVehicleException(final VehicleAlreadyExist ex){
+
+        log.error(ex.getMessage(), ex);
+
+        final List<String> details =new ArrayList<>();
+        details.add(ex.getMessage());
+
+        final ErrorResponse errorResponse = ErrorResponse.builder()
+                .errorDetails(details)
+                .message("Vehicle already exist")
+                .statusCode(HttpStatus.CONFLICT.value())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
 
 }
