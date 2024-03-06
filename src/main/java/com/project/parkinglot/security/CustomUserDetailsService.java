@@ -1,6 +1,6 @@
 package com.project.parkinglot.security;
 
-import com.project.parkinglot.security.model.entity.User;
+import com.project.parkinglot.security.model.entity.UserEntity;
 import com.project.parkinglot.service.auth.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,15 +17,15 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = null;
+        UserEntity userEntity = null;
         try {
-            user = userService.findByEmail(username)
+            userEntity = userService.findByEmail(username)
                     .orElseThrow(() -> new Exception("User Name " + username + " not found"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        return new CustomUserDetails(user);
+        return new CustomUserDetails(userEntity);
 
     }
 

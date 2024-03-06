@@ -1,13 +1,19 @@
 package com.project.parkinglot.builder;
 
-import com.project.parkinglot.security.model.entity.User;
+import com.project.parkinglot.model.User;
+import com.project.parkinglot.model.Vehicle;
+import com.project.parkinglot.model.entity.VehicleEntity;
 import com.project.parkinglot.security.model.enums.Role;
 import com.project.parkinglot.utils.RandomUtil;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class UserBuilder extends BaseBuilder<User> {
 
     public UserBuilder() {
         super(User.class);
+        data.setVehicleList(new ArrayList<>());
     }
 
     public UserBuilder customer() {
@@ -16,7 +22,8 @@ public class UserBuilder extends BaseBuilder<User> {
                 .withFullName(RandomUtil.generateRandomString())
                 .withUsername(RandomUtil.generateRandomString())
                 .withEmail(RandomUtil.generateRandomString().concat("@parkingalot.com"))
-                .withRole(Role.ROLE_DRIVER);
+                .withRole(Role.ROLE_DRIVER)
+                .withVehicle(new VehicleBuilder().withValidFields().build());
     }
 
     public UserBuilder admin() {
@@ -49,4 +56,8 @@ public class UserBuilder extends BaseBuilder<User> {
         return this;
     }
 
+    public UserBuilder withVehicle(Vehicle vehicle) {
+        data.getVehicleList().add(vehicle);
+        return this;
+    }
 }

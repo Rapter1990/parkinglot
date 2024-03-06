@@ -2,7 +2,7 @@ package com.project.parkinglot.service.auth.impl;
 
 import com.project.parkinglot.exception.user.UserNotFoundException;
 import com.project.parkinglot.security.model.entity.RefreshToken;
-import com.project.parkinglot.security.model.entity.User;
+import com.project.parkinglot.security.model.entity.UserEntity;
 import com.project.parkinglot.security.repository.RefreshTokenRepository;
 import com.project.parkinglot.service.auth.RefreshTokenService;
 import com.project.parkinglot.service.auth.UserService;
@@ -30,13 +30,13 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
 
 
     @Override
-    public String createRefreshToken(User user) {
+    public String createRefreshToken(UserEntity userEntity) {
 
-        RefreshToken token = getByUser(user.getId());
+        RefreshToken token = getByUser(userEntity.getId());
 
         if (token == null) {
             token = new RefreshToken();
-            token.setUser(user);
+            token.setUserEntity(userEntity);
         }
 
         token.setToken(UUID.randomUUID().toString());
@@ -53,7 +53,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
 
     @Override
     public RefreshToken getByUser(String userId) {
-        return refreshTokenRepository.findByUserId(userId);
+        return refreshTokenRepository.findByUserEntityId(userId);
     }
 
 
@@ -67,8 +67,8 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     @Transactional
     public int deleteByUserId(String userId) {
 
-        User user = userService.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
-        return refreshTokenRepository.deleteByUser(user);
+        UserEntity userEntity = userService.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+        return refreshTokenRepository.deleteByUserEntity(userEntity);
     }
 
 }

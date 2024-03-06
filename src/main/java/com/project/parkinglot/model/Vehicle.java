@@ -2,7 +2,6 @@ package com.project.parkinglot.model;
 
 import com.project.parkinglot.common.model.BaseDomainModel;
 import com.project.parkinglot.model.enums.VehicleType;
-import com.project.parkinglot.security.model.entity.User;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 

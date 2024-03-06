@@ -2,7 +2,7 @@ package com.project.parkinglot.model.entity;
 
 import com.project.parkinglot.common.model.entity.BaseEntity;
 import com.project.parkinglot.model.enums.VehicleType;
-import com.project.parkinglot.security.model.entity.User;
+import com.project.parkinglot.security.model.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -49,6 +49,6 @@ public class VehicleEntity extends BaseEntity {
             name = "USER_ID",
             referencedColumnName = "ID"
     )
-    private User user;
+    private UserEntity userEntity;
 
 }

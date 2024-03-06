@@ -1,15 +1,9 @@
 package com.project.parkinglot.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.parkinglot.base.BaseControllerTest;
 import com.project.parkinglot.builder.VehicleRequestBuilder;
 import com.project.parkinglot.model.Vehicle;
 import com.project.parkinglot.model.dto.request.Vehicle.VehicleRequest;
-import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaUpdateRequest;
-import com.project.parkinglot.model.mapper.vehicle.VehicleEntityToVehicleMapper;
-import com.project.parkinglot.model.mapper.vehicle.VehicleRequestToVehicleMapper;
-import com.project.parkinglot.model.mapper.vehicle.VehicleToVehicleEntityMapper;
 import com.project.parkinglot.service.vehicle.impl.VehicleServiceImpl;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
@@ -20,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.testcontainers.shaded.com.google.common.base.Verify;
 
 import java.util.UUID;
 
@@ -72,6 +65,7 @@ import java.util.UUID;
          // Verify
          Mockito.verify(vehicleService, Mockito.times(1))
                  .assignVehicleToUser(Mockito.anyString(), Mockito.any(VehicleRequest.class));
+
      }
 
      @Test
@@ -112,7 +106,7 @@ import java.util.UUID;
 
      @Test
      @SneakyThrows
-     void givenAssignVehicleToUserRequest_whenUserIsUnAuthorized_thenReturnForbidden() {
+     void givenAssignVehicleToUserRequest_whenUserIsUnAuthorized_thenReturnUnauthorized() {
 
          // Given
          final String mockUserId = UUID.randomUUID().toString();
@@ -189,6 +183,6 @@ import java.util.UUID;
          Mockito.verify(vehicleService,Mockito.never())
                  .assignVehicleToUser(Mockito.anyString(),Mockito.any(VehicleRequest.class));
 
-         }
+     }
 
  }

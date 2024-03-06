@@ -1,6 +1,6 @@
 package com.project.parkinglot.service.auth.impl;
 
-import com.project.parkinglot.security.model.entity.User;
+import com.project.parkinglot.security.model.entity.UserEntity;
 import com.project.parkinglot.security.repository.UserRepository;
 import com.project.parkinglot.service.auth.UserService;
 import lombok.RequiredArgsConstructor;
@@ -15,17 +15,17 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public Optional<User> findByUsername(String username) {
+    public Optional<UserEntity> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
     @Override
-    public Optional<User> findById(String userId) {
+    public Optional<UserEntity> findById(String userId) {
         return userRepository.findById(userId);
     }
 
     @Override
-    public Optional<User> findByEmail(String email) {
+    public Optional<UserEntity> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 

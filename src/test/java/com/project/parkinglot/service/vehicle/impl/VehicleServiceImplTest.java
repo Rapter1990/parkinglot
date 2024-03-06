@@ -1,8 +1,7 @@
-package com.project.parkinglot.service.VehicleService;
+package com.project.parkinglot.service.vehicle.impl;
 
 import com.project.parkinglot.base.BaseServiceTest;
-import com.project.parkinglot.builder.UserBuilder;
-import com.project.parkinglot.builder.VehicleEntityBuilder;
+import com.project.parkinglot.builder.UserEntityBuilder;
 import com.project.parkinglot.builder.VehicleRequestBuilder;
 import com.project.parkinglot.exception.user.UserNotFoundException;
 import com.project.parkinglot.exception.vehicle.VehicleAlreadyExist;
@@ -13,16 +12,14 @@ import com.project.parkinglot.model.mapper.vehicle.VehicleEntityToVehicleMapper;
 import com.project.parkinglot.model.mapper.vehicle.VehicleRequestToVehicleMapper;
 import com.project.parkinglot.model.mapper.vehicle.VehicleToVehicleEntityMapper;
 import com.project.parkinglot.repository.VehicleRepository;
-import com.project.parkinglot.security.model.entity.User;
+import com.project.parkinglot.security.model.entity.UserEntity;
 import com.project.parkinglot.service.auth.UserService;
-import com.project.parkinglot.service.vehicle.impl.VehicleServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import java.net.FileNameMap;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -51,11 +48,9 @@ import java.util.UUID;
     void givenValidVehicleRequest_whenAssignVehicleToUser_thenReturnVehicle(){
 
         // Given
-        final String mockVehicleId = UUID.randomUUID().toString();
-
         final String mockUserId = UUID.randomUUID().toString();
 
-        final User mockUser = new UserBuilder()
+        final UserEntity mockUserEntity = new UserEntityBuilder()
                 .withId(mockUserId)
                 .customer()
                 .build();
@@ -72,7 +67,7 @@ import java.util.UUID;
 
         // When
         Mockito.when(userService.findById(mockUserId))
-                .thenReturn(Optional.of(mockUser));
+                .thenReturn(Optional.of(mockUserEntity));
 
         Mockito.when(vehicleRepository.existsByLicensePlate(mockVehicleRequest.getLicensePlate()))
                 .thenReturn(Boolean.FALSE);
@@ -88,7 +83,7 @@ import java.util.UUID;
         Assertions.assertEquals(mockVehicleEntity.getLicensePlate() , mockVehicleToCreated.getLicensePlate());
         Assertions.assertEquals(mockVehicleEntity.getVehicleType() , mockVehicleToCreated.getVehicleType());
         Assertions.assertEquals(mockVehicleEntity.getParkEntities() , mockVehicleToCreated.getParkList());
-        Assertions.assertEquals(mockVehicleEntity.getUser() , mockVehicleToCreated.getUser());
+        Assertions.assertEquals(mockVehicleEntity.getUserEntity() , mockVehicleToCreated.getUser());
 
         // Verify
         Mockito.verify(userService,Mockito.times(1)).findById(Mockito.anyString());
@@ -127,7 +122,7 @@ import java.util.UUID;
         // Given
         final String mockUserId = UUID.randomUUID().toString();
 
-        final User mockUser = new UserBuilder()
+        final UserEntity mockUserEntity = new UserEntityBuilder()
                 .withId(mockUserId)
                 .customer()
                 .build();
@@ -138,7 +133,7 @@ import java.util.UUID;
 
         // When
         Mockito.when(userService.findById(mockUserId))
-                 .thenReturn(Optional.of(mockUser));
+                 .thenReturn(Optional.of(mockUserEntity));
 
         Mockito.when(vehicleRepository.existsByLicensePlate(mockVehicleRequest.getLicensePlate()))
                 .thenReturn(Boolean.TRUE);

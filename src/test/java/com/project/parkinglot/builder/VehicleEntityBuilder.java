@@ -3,7 +3,7 @@ package com.project.parkinglot.builder;
 import com.github.javafaker.Faker;
 import com.project.parkinglot.model.entity.VehicleEntity;
 import com.project.parkinglot.model.enums.VehicleType;
-import com.project.parkinglot.security.model.entity.User;
+import com.project.parkinglot.security.model.entity.UserEntity;
 
 import java.util.Random;
 import java.util.UUID;
@@ -13,16 +13,11 @@ public class VehicleEntityBuilder extends BaseBuilder<VehicleEntity>{
     public VehicleEntityBuilder(){super(VehicleEntity.class);}
 
     public VehicleEntityBuilder withValidFields(){
-        Faker faker = new Faker();
 
         return this
                 .withId(UUID.randomUUID().toString())
                 .withVehicleType(this.generateRandomVehicleType())
-                .withLicensePlate(this.generateRandomLicensePlate())
-                .withUser(new UserBuilder()
-                        .customer()
-                        .build()
-                );
+                .withLicensePlate(this.generateRandomLicensePlate());
     }
 
     public VehicleEntityBuilder withId(
@@ -47,9 +42,9 @@ public class VehicleEntityBuilder extends BaseBuilder<VehicleEntity>{
     }
 
     public VehicleEntityBuilder withUser(
-            final User user
+            final UserEntity userEntity
     ){
-        data.setUser(user);
+        data.setUserEntity(userEntity);
         return this;
     }
 
