@@ -11,7 +11,7 @@ import com.project.parkinglot.payload.response.auth.TokenRefreshResponse;
 import com.project.parkinglot.security.CustomUserDetails;
 import com.project.parkinglot.security.jwt.JwtUtils;
 import com.project.parkinglot.security.model.entity.RefreshToken;
-import com.project.parkinglot.security.model.entity.User;
+import com.project.parkinglot.security.model.entity.UserEntity;
 import com.project.parkinglot.security.repository.UserRepository;
 import com.project.parkinglot.service.auth.AuthService;
 import com.project.parkinglot.service.auth.RefreshTokenService;
@@ -45,7 +45,7 @@ public class AuthServiceImpl implements AuthService {
             throw new EmailAlreadyExistsException(request.getEmail());
         }
 
-        User user = User.builder()
+        UserEntity userEntity = UserEntity.builder()
                 .email(request.getEmail())
                 .fullName(request.getFullName())
                 .username(request.getUsername())
@@ -53,7 +53,7 @@ public class AuthServiceImpl implements AuthService {
                 .role(request.getRole())
                 .build();
 
-        userRepository.save(user);
+        userRepository.save(userEntity);
 
         return "Success";
     }
@@ -69,12 +69,12 @@ public class AuthServiceImpl implements AuthService {
         SecurityContextHolder.getContext().setAuthentication(auth);
         String jwtToken = jwtUtils.generateJwtToken(auth);
 
-        User user = userRepository.findByEmail(request.getEmail()).orElseThrow(UserNotFoundException::new);
+        UserEntity userEntity = userRepository.findByEmail(request.getEmail()).orElseThrow(UserNotFoundException::new);
 
         return JWTResponse.builder()
                 .email(request.getEmail())
                 .token(jwtToken)
-                .refreshToken(refreshTokenService.createRefreshToken(user))
+                .refreshToken(refreshTokenService.createRefreshToken(userEntity))
                 .build();
     }
 
@@ -87,7 +87,7 @@ public class AuthServiceImpl implements AuthService {
 
 
         if (!refreshTokenService.isRefreshExpired(refreshToken)) {
-            CustomUserDetails customUserDetails = new CustomUserDetails(refreshToken.getUser());
+            CustomUserDetails customUserDetails = new CustomUserDetails(refreshToken.getUserEntity());
             String newToken = jwtUtils.generateJwtToken(customUserDetails);
 
             return TokenRefreshResponse.builder()

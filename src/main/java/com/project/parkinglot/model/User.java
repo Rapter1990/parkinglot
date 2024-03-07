@@ -1,7 +1,7 @@
 package com.project.parkinglot.model;
 
 import com.project.parkinglot.common.model.BaseDomainModel;
-import com.project.parkinglot.model.enums.VehicleType;
+import com.project.parkinglot.security.model.enums.Role;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -13,12 +13,13 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Vehicle extends BaseDomainModel {
+public class User extends BaseDomainModel {
 
     private String id;
-    private String licensePlate;
-    private VehicleType vehicleType;
-    private List<Park> parkList;
-    private User user;
+    private String fullName;
+    private String username;
+    private String email;
+    private Role role;
+    private List<Vehicle> vehicleList;
 
 }

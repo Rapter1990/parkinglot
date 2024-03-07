@@ -11,6 +11,7 @@ import org.mapstruct.factory.Mappers;
 public interface VehicleToVehicleEntityMapper extends BaseMapper<Vehicle,VehicleEntity> {
 
     @Override
+    @Mapping(source = "user", target = "userEntity")
     VehicleEntity map(Vehicle source);
 
     static VehicleToVehicleEntityMapper initialize(){

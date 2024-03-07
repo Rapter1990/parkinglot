@@ -1,15 +1,15 @@
 package com.project.parkinglot.service.auth;
 
-import com.project.parkinglot.security.model.entity.User;
+import com.project.parkinglot.security.model.entity.UserEntity;
 
 import java.util.Optional;
 
 public interface UserService {
 
-    Optional<User> findByUsername(String username);
+    Optional<UserEntity> findByUsername(String username);
 
-    Optional<User> findById(String userId);
+    Optional<UserEntity> findById(String userId);
 
-    Optional<User> findByEmail(String email);
+    Optional<UserEntity> findByEmail(String email);
 
 }

@@ -9,7 +9,7 @@ import com.project.parkinglot.payload.response.auth.TokenRefreshResponse;
 import com.project.parkinglot.security.CustomUserDetails;
 import com.project.parkinglot.security.jwt.JwtUtils;
 import com.project.parkinglot.security.model.entity.RefreshToken;
-import com.project.parkinglot.security.model.entity.User;
+import com.project.parkinglot.security.model.entity.UserEntity;
 import com.project.parkinglot.security.model.enums.Role;
 import com.project.parkinglot.security.repository.UserRepository;
 import com.project.parkinglot.service.auth.RefreshTokenService;
@@ -58,7 +58,7 @@ class AuthServiceImplTest extends BaseServiceTest {
                 .role(Role.ROLE_DRIVER)
                 .build();
 
-        User user = User.builder()
+        UserEntity userEntity = UserEntity.builder()
                 .email(request.getEmail())
                 .fullName(request.getFullName())
                 .username(request.getUsername())
@@ -68,7 +68,7 @@ class AuthServiceImplTest extends BaseServiceTest {
 
         // When
         when(userRepository.existsByEmail(request.getEmail())).thenReturn(false);
-        when(userRepository.save(any(User.class))).thenReturn(user);
+        when(userRepository.save(any(UserEntity.class))).thenReturn(userEntity);
 
         // Then
         String result = authService.register(request);
@@ -76,7 +76,7 @@ class AuthServiceImplTest extends BaseServiceTest {
         assertEquals("Success", result);
 
         // Verify
-        verify(userRepository).save(any(User.class));
+        verify(userRepository).save(any(UserEntity.class));
     }
 
     @Test
@@ -98,7 +98,7 @@ class AuthServiceImplTest extends BaseServiceTest {
         assertThrows(Exception.class, () -> authService.register(request));
 
         // Verify
-        verify(userRepository, never()).save(any(User.class));
+        verify(userRepository, never()).save(any(UserEntity.class));
 
     }
 
@@ -111,7 +111,7 @@ class AuthServiceImplTest extends BaseServiceTest {
                 .password("driver_password")
                 .build();
 
-        User mockUser = User.builder()
+        UserEntity mockUserEntity = UserEntity.builder()
                 .email(request.getEmail())
                 .fullName("Test User")
                 .username("testuser")
@@ -126,8 +126,8 @@ class AuthServiceImplTest extends BaseServiceTest {
         when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
                 .thenReturn(mockAuthentication);
         when(jwtUtils.generateJwtToken(mockAuthentication)).thenReturn("mockedToken");
-        when(userRepository.findByEmail(request.getEmail())).thenReturn(Optional.of(mockUser));
-        when(refreshTokenService.createRefreshToken(any(User.class)))
+        when(userRepository.findByEmail(request.getEmail())).thenReturn(Optional.of(mockUserEntity));
+        when(refreshTokenService.createRefreshToken(any(UserEntity.class)))
                 .thenReturn("actualRefreshToken");
 
         // Then
@@ -142,7 +142,7 @@ class AuthServiceImplTest extends BaseServiceTest {
         verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
         verify(jwtUtils).generateJwtToken(mockAuthentication);
         verify(userRepository).findByEmail(request.getEmail());
-        verify(refreshTokenService).createRefreshToken(any(User.class));
+        verify(refreshTokenService).createRefreshToken(any(UserEntity.class));
 
     }
 
@@ -177,7 +177,7 @@ class AuthServiceImplTest extends BaseServiceTest {
 
         RefreshToken refreshToken = RefreshToken.builder()
                 .token("validRefreshToken")
-                .user(User.builder().id("1L").build())
+                .userEntity(UserEntity.builder().id("1L").build())
                 .build();
 
         // When
@@ -230,7 +230,7 @@ class AuthServiceImplTest extends BaseServiceTest {
 
         RefreshToken refreshToken = RefreshToken.builder()
                 .token("validRefreshToken")
-                .user(User.builder().id("1L").build())
+                .userEntity(UserEntity.builder().id("1L").build())
                 .build();
 
         // When
@@ -322,7 +322,7 @@ class AuthServiceImplTest extends BaseServiceTest {
                 .role(Role.ROLE_ADMIN)
                 .build();
 
-        User user = User.builder()
+        UserEntity userEntity = UserEntity.builder()
                 .email(request.getEmail())
                 .fullName(request.getFullName())
                 .username(request.getUsername())
@@ -332,7 +332,7 @@ class AuthServiceImplTest extends BaseServiceTest {
 
         // When
         when(userRepository.existsByEmail(request.getEmail())).thenReturn(false);
-        when(userRepository.save(any(User.class))).thenReturn(user);
+        when(userRepository.save(any(UserEntity.class))).thenReturn(userEntity);
 
         // Then
         String result = authService.register(request);
@@ -340,7 +340,7 @@ class AuthServiceImplTest extends BaseServiceTest {
         assertEquals("Success", result);
 
         // Verify
-        verify(userRepository).save(any(User.class));
+        verify(userRepository).save(any(UserEntity.class));
 
     }
 
@@ -363,7 +363,7 @@ class AuthServiceImplTest extends BaseServiceTest {
         assertThrows(Exception.class, () -> authService.register(request));
 
         // Verify
-        verify(userRepository, never()).save(any(User.class));
+        verify(userRepository, never()).save(any(UserEntity.class));
 
     }
 
@@ -376,7 +376,7 @@ class AuthServiceImplTest extends BaseServiceTest {
                 .password("admin_password")
                 .build();
 
-        User mockUser = User.builder()
+        UserEntity mockUserEntity = UserEntity.builder()
                 .email(request.getEmail())
                 .fullName("Test User")
                 .username("testuser")
@@ -391,8 +391,8 @@ class AuthServiceImplTest extends BaseServiceTest {
         when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
                 .thenReturn(mockAuthentication);
         when(jwtUtils.generateJwtToken(mockAuthentication)).thenReturn("mockedToken");
-        when(userRepository.findByEmail(request.getEmail())).thenReturn(Optional.of(mockUser));
-        when(refreshTokenService.createRefreshToken(any(User.class)))
+        when(userRepository.findByEmail(request.getEmail())).thenReturn(Optional.of(mockUserEntity));
+        when(refreshTokenService.createRefreshToken(any(UserEntity.class)))
                 .thenReturn("actualRefreshToken");
 
         // Then
@@ -407,7 +407,7 @@ class AuthServiceImplTest extends BaseServiceTest {
         verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
         verify(jwtUtils).generateJwtToken(mockAuthentication);
         verify(userRepository).findByEmail(request.getEmail());
-        verify(refreshTokenService).createRefreshToken(any(User.class));
+        verify(refreshTokenService).createRefreshToken(any(UserEntity.class));
 
     }
 
@@ -442,7 +442,7 @@ class AuthServiceImplTest extends BaseServiceTest {
 
         RefreshToken refreshToken = RefreshToken.builder()
                 .token("validRefreshToken")
-                .user(User.builder().id("1L").build())
+                .userEntity(UserEntity.builder().id("1L").build())
                 .build();
 
         // When
@@ -495,7 +495,7 @@ class AuthServiceImplTest extends BaseServiceTest {
 
         RefreshToken refreshToken = RefreshToken.builder()
                 .token("validRefreshToken")
-                .user(User.builder().id("1L").build())
+                .userEntity(UserEntity.builder().id("1L").build())
                 .build();
 
         // When

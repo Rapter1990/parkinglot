@@ -19,7 +19,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "USERS")
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -44,7 +44,7 @@ public class User {
 
     @OneToMany(
             fetch = FetchType.LAZY,
-            mappedBy = "user"
+            mappedBy = "userEntity"
     )
     private List<VehicleEntity> vehicles;
 

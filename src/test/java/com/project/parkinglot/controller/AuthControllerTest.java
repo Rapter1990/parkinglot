@@ -7,7 +7,7 @@ import com.project.parkinglot.payload.request.auth.TokenRefreshRequest;
 import com.project.parkinglot.payload.response.auth.JWTResponse;
 import com.project.parkinglot.payload.response.auth.TokenRefreshResponse;
 import com.project.parkinglot.security.CustomUserDetails;
-import com.project.parkinglot.security.model.entity.User;
+import com.project.parkinglot.security.model.entity.UserEntity;
 import com.project.parkinglot.security.model.enums.Role;
 import com.project.parkinglot.service.auth.impl.AuthServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -113,7 +113,7 @@ class AuthControllerTest extends BaseControllerTest {
     void givenRefreshTokenRequestAndAccessToken_WhenCustomerRole_Token_ReturnRefreshTokenSuccess() throws Exception {
 
         // Given
-        User mockUser = User.builder()
+        UserEntity mockUserEntity = UserEntity.builder()
                 .id("1L")
                 .username("driver_1")
                 .email("driver_1@parkinglot.com")
@@ -121,7 +121,7 @@ class AuthControllerTest extends BaseControllerTest {
                 .fullName("driver_fullname")
                 .build();
 
-        CustomUserDetails userDetails = new CustomUserDetails(mockUser);
+        CustomUserDetails userDetails = new CustomUserDetails(mockUserEntity);
 
 
         String accessToken = jwtUtils.generateJwtToken(userDetails);
@@ -160,7 +160,7 @@ class AuthControllerTest extends BaseControllerTest {
     void givenAccessToken_WhenCustomerRole_ReturnLogoutSuccess() throws Exception {
 
         // Given
-        User mockUser = User.builder()
+        UserEntity mockUserEntity = UserEntity.builder()
                 .id("1L")
                 .username("driver_1")
                 .email("driver_1@parkinglot.com")
@@ -168,7 +168,7 @@ class AuthControllerTest extends BaseControllerTest {
                 .fullName("driver_fullname")
                 .build();
 
-        CustomUserDetails userDetails = new CustomUserDetails(mockUser);
+        CustomUserDetails userDetails = new CustomUserDetails(mockUserEntity);
 
 
         String accessToken = jwtUtils.generateJwtToken(userDetails);
@@ -224,7 +224,7 @@ class AuthControllerTest extends BaseControllerTest {
     void givenRefreshTokenRequestandAccessToken_WhenAdminRole_Token_ReturnRefreshTokenSuccess() throws Exception {
 
         // Given
-        User mockUser = User.builder()
+        UserEntity mockUserEntity = UserEntity.builder()
                 .id("2L")
                 .username("admin_1")
                 .email("admin@parkinglot.com")
@@ -232,7 +232,7 @@ class AuthControllerTest extends BaseControllerTest {
                 .fullName("admin_fullname")
                 .build();
 
-        CustomUserDetails userDetails = new CustomUserDetails(mockUser);
+        CustomUserDetails userDetails = new CustomUserDetails(mockUserEntity);
 
 
         String accessToken = jwtUtils.generateJwtToken(userDetails);
@@ -270,7 +270,7 @@ class AuthControllerTest extends BaseControllerTest {
     void givenAccessToken_WhenAdminRole_ReturnLogoutSuccess() throws Exception {
 
         // Given
-        User mockUser = User.builder()
+        UserEntity mockUserEntity = UserEntity.builder()
                 .id("2L")
                 .username("admin_1")
                 .email("admin@parkinglot.com")
@@ -278,7 +278,7 @@ class AuthControllerTest extends BaseControllerTest {
                 .fullName("admin_fullname")
                 .build();
 
-        CustomUserDetails userDetails = new CustomUserDetails(mockUser);
+        CustomUserDetails userDetails = new CustomUserDetails(mockUserEntity);
 
 
         String accessToken = jwtUtils.generateJwtToken(userDetails);

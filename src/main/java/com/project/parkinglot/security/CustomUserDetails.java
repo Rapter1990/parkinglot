@@ -1,6 +1,6 @@
 package com.project.parkinglot.security;
 
-import com.project.parkinglot.security.model.entity.User;
+import com.project.parkinglot.security.model.entity.UserEntity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,21 +19,21 @@ public class CustomUserDetails implements UserDetails {
     @Serial
     private static final long serialVersionUID = 1673829563303819734L;
 
-    private final User user;
+    private final UserEntity userEntity;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(user.getRole().name()));
+        return Collections.singleton(new SimpleGrantedAuthority(userEntity.getRole().name()));
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return userEntity.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return userEntity.getUsername();
     }
 
     @Override
@@ -57,15 +57,15 @@ public class CustomUserDetails implements UserDetails {
     }
 
     public String getEmail() {
-        return user.getEmail();
+        return userEntity.getEmail();
     }
 
     public String getId() {
-        return user.getId();
+        return userEntity.getId();
     }
 
     public Map<String, Object> getClaims() {
-        return user.getClaims();
+        return userEntity.getClaims();
     }
 
 }

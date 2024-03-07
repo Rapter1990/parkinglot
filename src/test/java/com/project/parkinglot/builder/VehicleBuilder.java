@@ -1,52 +1,39 @@
 package com.project.parkinglot.builder;
 
 import com.github.javafaker.Faker;
-import com.project.parkinglot.model.entity.VehicleEntity;
+import com.project.parkinglot.model.Vehicle;
 import com.project.parkinglot.model.enums.VehicleType;
 import com.project.parkinglot.security.model.entity.UserEntity;
 
 import java.util.Random;
 import java.util.UUID;
 
-public class VehicleEntityBuilder extends BaseBuilder<VehicleEntity>{
+public class VehicleBuilder extends BaseBuilder<Vehicle>{
 
-    public VehicleEntityBuilder(){super(VehicleEntity.class);}
+    public VehicleBuilder(){super(Vehicle.class);}
 
-    public VehicleEntityBuilder withValidFields(){
-
+    public VehicleBuilder withValidFields(){
         return this
                 .withId(UUID.randomUUID().toString())
                 .withVehicleType(this.generateRandomVehicleType())
                 .withLicensePlate(this.generateRandomLicensePlate());
     }
 
-    public VehicleEntityBuilder withId(
-            final String Id
-    ){
+    public VehicleBuilder withId(final String Id){
         data.setId(Id);
         return this;
     }
 
-    public VehicleEntityBuilder withLicensePlate(
-            final String licensePlate
-    ){
+    public VehicleBuilder withLicensePlate(final String licensePlate){
         data.setLicensePlate(licensePlate);
         return this;
     }
 
-    public VehicleEntityBuilder withVehicleType(
-            final VehicleType vehicleType
-    ){
+    public VehicleBuilder withVehicleType(final VehicleType vehicleType){
         data.setVehicleType(vehicleType);
         return this;
     }
 
-    public VehicleEntityBuilder withUser(
-            final UserEntity userEntity
-    ){
-        data.setUserEntity(userEntity);
-        return this;
-    }
 
     private String generateRandomLicensePlate(){
         Faker faker = new Faker();
@@ -66,3 +53,4 @@ public class VehicleEntityBuilder extends BaseBuilder<VehicleEntity>{
     }
 
 }
+

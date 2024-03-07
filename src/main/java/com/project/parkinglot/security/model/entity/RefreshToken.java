@@ -26,7 +26,7 @@ public class RefreshToken {
             name = "USER_ID",
             referencedColumnName = "ID"
     )
-    private User user;
+    private UserEntity userEntity;
 
     @Column(
             name = "TOKEN",

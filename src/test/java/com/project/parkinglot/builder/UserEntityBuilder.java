@@ -1,63 +1,61 @@
 package com.project.parkinglot.builder;
 
-import com.project.parkinglot.model.User;
-import com.project.parkinglot.model.Vehicle;
 import com.project.parkinglot.model.entity.VehicleEntity;
+import com.project.parkinglot.security.model.entity.UserEntity;
 import com.project.parkinglot.security.model.enums.Role;
 import com.project.parkinglot.utils.RandomUtil;
 
-import java.util.ArrayList;
 import java.util.Collections;
 
-public class UserBuilder extends BaseBuilder<User> {
+public class UserEntityBuilder extends BaseBuilder<UserEntity> {
 
-    public UserBuilder() {
-        super(User.class);
-        data.setVehicleList(new ArrayList<>());
+    public UserEntityBuilder() {
+        super(UserEntity.class);
     }
 
-    public UserBuilder customer() {
+    public UserEntityBuilder customer() {
         return this
                 .withId("1L")
                 .withFullName(RandomUtil.generateRandomString())
                 .withUsername(RandomUtil.generateRandomString())
                 .withEmail(RandomUtil.generateRandomString().concat("@parkingalot.com"))
                 .withRole(Role.ROLE_DRIVER)
-                .withVehicle(new VehicleBuilder().withValidFields().build());
+                .withVehicle(new VehicleEntityBuilder().withValidFields().build());
     }
 
-    public UserBuilder admin() {
+    public UserEntityBuilder admin() {
         return this.customer()
                 .withRole(Role.ROLE_ADMIN);
     }
 
-    public UserBuilder withId(String id) {
+    public UserEntityBuilder withId(String id) {
         data.setId(id);
         return this;
     }
 
-    public UserBuilder withFullName(String fullName) {
+    public UserEntityBuilder withFullName(String fullName) {
         data.setFullName(fullName);
         return this;
     }
 
-    public UserBuilder withUsername(String username) {
+    public UserEntityBuilder withUsername(String username) {
         data.setUsername(username);
         return this;
     }
 
-    public UserBuilder withEmail(String email) {
+    public UserEntityBuilder withEmail(String email) {
         data.setEmail(email);
         return this;
     }
 
-    public UserBuilder withRole(Role role) {
+    public UserEntityBuilder withRole(Role role) {
         data.setRole(role);
         return this;
     }
 
-    public UserBuilder withVehicle(Vehicle vehicle) {
-        data.getVehicleList().add(vehicle);
+    public UserEntityBuilder withVehicle(VehicleEntity vehicle) {
+        data.setVehicles(Collections.singletonList(vehicle));
         return this;
     }
+
 }

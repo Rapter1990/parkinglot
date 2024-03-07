@@ -9,7 +9,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.UUID;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +28,7 @@ public class VehicleController {
     ){
         final Vehicle vehicle = vehicleService.assignVehicleToUser(userId, vehicleRequest);
 
-        return  CustomResponse.ok(vehicle.getLicensePlate());
+        return CustomResponse.ok(vehicle.getLicensePlate());
     }
 
 }

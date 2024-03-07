@@ -1,13 +1,13 @@
 package com.project.parkinglot.base;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.parkinglot.builder.UserBuilder;
+import com.project.parkinglot.builder.UserEntityBuilder;
 import com.project.parkinglot.logging.entity.LogEntity;
 import com.project.parkinglot.logging.service.impl.LogServiceImpl;
 import com.project.parkinglot.security.CustomUserDetails;
 import com.project.parkinglot.security.CustomUserDetailsService;
 import com.project.parkinglot.security.jwt.JwtUtils;
-import com.project.parkinglot.security.model.entity.User;
+import com.project.parkinglot.security.model.entity.UserEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -38,11 +38,11 @@ public abstract class BaseControllerTest extends AbstractTestContainerConfigurat
     @Autowired
     protected JwtUtils jwtUtils;
 
-    protected User mockUser;
+    protected UserEntity mockUserEntity;
 
     protected String mockUserToken;
 
-    protected User mockAdmin;
+    protected UserEntity mockAdmin;
 
     protected String mockAdminToken;
 
@@ -50,16 +50,16 @@ public abstract class BaseControllerTest extends AbstractTestContainerConfigurat
     @BeforeEach
     protected void initializeAuth() {
 
-        this.mockUser = new UserBuilder().customer().build();
-        this.mockAdmin = new UserBuilder().admin().build();
+        this.mockUserEntity = new UserEntityBuilder().customer().build();
+        this.mockAdmin = new UserEntityBuilder().admin().build();
 
-        final CustomUserDetails mockUserDetails = new CustomUserDetails(mockUser);
+        final CustomUserDetails mockUserDetails = new CustomUserDetails(mockUserEntity);
         final CustomUserDetails mockAdminDetails = new CustomUserDetails(mockAdmin);
 
         this.mockUserToken = generateMockToken(mockUserDetails);
         this.mockAdminToken = generateMockToken(mockAdminDetails);
 
-        when(customUserDetailsService.loadUserByUsername(mockUser.getEmail())).thenReturn(mockUserDetails);
+        when(customUserDetailsService.loadUserByUsername(mockUserEntity.getEmail())).thenReturn(mockUserDetails);
         when(customUserDetailsService.loadUserByUsername(mockAdmin.getEmail())).thenReturn(mockAdminDetails);
         doNothing().when(logService).saveLogToDatabase(any(LogEntity.class));
 
