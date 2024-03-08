@@ -3,7 +3,6 @@ package com.project.parkinglot.service.user.impl;
 import com.project.parkinglot.exception.user.UserNotFoundException;
 import com.project.parkinglot.model.User;
 import com.project.parkinglot.model.mapper.user.UserEntityToUserMapper;
-import com.project.parkinglot.model.mapper.user.UserToUserEntityMapper;
 import com.project.parkinglot.security.model.entity.UserEntity;
 import com.project.parkinglot.service.auth.UserService;
 import com.project.parkinglot.service.user.UserGetService;
@@ -25,6 +24,15 @@ public class UserGetServiceImpl implements UserGetService {
                 .orElseThrow(() -> new UserNotFoundException(userId));
 
         return userEntityToUserMapper.map(userEntity);
+    }
+
+    @Override
+    public User getAdminById(final String adminId) {
+
+        final UserEntity adminEntity = userService.findById(adminId)
+                .orElseThrow(() -> new UserNotFoundException(adminId));
+
+        return userEntityToUserMapper.map(adminEntity);
     }
 
 }
