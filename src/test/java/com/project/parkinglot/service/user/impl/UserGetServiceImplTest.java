@@ -51,22 +51,22 @@ class UserGetServiceImplTest extends BaseServiceTest {
         // Then
         final User expected = userGetService.getUserById(mockUserId);
 
-        Assertions.assertEquals(mockUser.getId(),expected.getId());
-        Assertions.assertEquals(mockUser.getUsername(),expected.getUsername());
-        Assertions.assertEquals(mockUser.getEmail(),expected.getEmail());
-        Assertions.assertEquals(mockUser.getRole(),expected.getRole());
-        Assertions.assertEquals(mockUser.getFullName(),expected.getFullName());
-        Assertions.assertEquals(mockUser.getVehicleList().size(),expected.getVehicleList().size());
-        Assertions.assertEquals(mockUser.getVehicleList().get(0).getVehicleType(),expected.getVehicleList().get(0).getVehicleType());
-        Assertions.assertEquals(mockUser.getVehicleList().get(0).getLicensePlate(),expected.getVehicleList().get(0).getLicensePlate());
+        Assertions.assertEquals(mockUser.getId(), expected.getId());
+        Assertions.assertEquals(mockUser.getUsername(), expected.getUsername());
+        Assertions.assertEquals(mockUser.getEmail(), expected.getEmail());
+        Assertions.assertEquals(mockUser.getRole(), expected.getRole());
+        Assertions.assertEquals(mockUser.getFullName(), expected.getFullName());
+        Assertions.assertEquals(mockUser.getVehicleList().size(), expected.getVehicleList().size());
+        Assertions.assertEquals(mockUser.getVehicleList().get(0).getVehicleType(), expected.getVehicleList().get(0).getVehicleType());
+        Assertions.assertEquals(mockUser.getVehicleList().get(0).getLicensePlate(), expected.getVehicleList().get(0).getLicensePlate());
 
         // Verify
-        Mockito.verify(userService,Mockito.times(1)).findById(Mockito.anyString());
+        Mockito.verify(userService, Mockito.times(1)).findById(Mockito.anyString());
 
     }
 
     @Test
-    void givenNonExistsUser_whenGetUserById_thenThrowsUserNotFoundException(){
+    void givenNonExistsUser_whenGetUserById_thenThrowsUserNotFoundException() {
 
         // Given
         final String mockGivenId = UUID.randomUUID().toString();
@@ -82,7 +82,61 @@ class UserGetServiceImplTest extends BaseServiceTest {
         );
 
         // Verify
-        Mockito.verify(userService,Mockito.times(1)).findById(Mockito.anyString());
+        Mockito.verify(userService, Mockito.times(1)).findById(Mockito.anyString());
+
+    }
+
+    @Test
+    void givenAdmin_whenGetAdminById_thenReturnAdmin() {
+
+        // Given
+        final String mockAdminId = UUID.randomUUID().toString();
+
+        final UserEntity mockAdminEntity = new UserEntityBuilder()
+                .withId(mockAdminId)
+                .admin()
+                .build();
+
+        final User mockAdmin = userEntityToUserMapper.map(mockAdminEntity);
+
+        // When
+        Mockito.when(
+                        userService.findById(mockAdminId))
+                .thenReturn(Optional.of(mockAdminEntity));
+
+        // Then
+        final User expected = userGetService.getAdminById(mockAdminId);
+
+        Assertions.assertEquals(mockAdmin.getId(), expected.getId());
+        Assertions.assertEquals(mockAdmin.getUsername(), expected.getUsername());
+        Assertions.assertEquals(mockAdmin.getEmail(), expected.getEmail());
+        Assertions.assertEquals(mockAdmin.getRole(), expected.getRole());
+
+        // Verify
+        Mockito.verify(
+                userService, Mockito.times(1)
+        ).findById(Mockito.anyString());
+
+    }
+
+    @Test
+    void givenNonExistsAdmin_whenGetAdminById_thenThrowsUserNotFoundException() {
+
+        // Given
+        final String mockGivenId = UUID.randomUUID().toString();
+
+        // When
+        Mockito.when(userService.findById(mockGivenId))
+                .thenReturn(Optional.empty());
+
+        // Then
+        Assertions.assertThrowsExactly(
+                UserNotFoundException.class,
+                () -> userGetService.getAdminById(mockGivenId)
+        );
+
+        // Verify
+        Mockito.verify(userService, Mockito.times(1)).findById(Mockito.anyString());
 
     }
 
