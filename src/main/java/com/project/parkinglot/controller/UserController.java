@@ -10,19 +10,26 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 @Validated
 public class UserController {
 
     private final UserGetService userGetService;
 
-    @GetMapping("/{user-id}")
+    @GetMapping("/user/{user-id}")
     @PreAuthorize("hasAuthority('ROLE_DRIVER')")
-    public CustomResponse<User> getUserInformationById(@PathVariable("user-id") @UUID final String userId){
+    public CustomResponse<User> getUserInformationById(@PathVariable("user-id") @UUID final String userId) {
 
         final User user = userGetService.getUserById(userId);
         return CustomResponse.ok(user);
+    }
+
+    @GetMapping("/admin/{admin-id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public CustomResponse<User> getAdminInformationById(@PathVariable("admin-id") @UUID final String adminId) {
+        final User admin = userGetService.getAdminById(adminId);
+        return CustomResponse.ok(admin);
     }
 
 }
