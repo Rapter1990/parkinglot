@@ -1,18 +1,16 @@
-package com.project.parkinglot.model.dto.request.Vehicle;
+package com.project.parkinglot.model.dto.request.vehicle;
 
 import com.project.parkinglot.model.enums.VehicleType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class VehicleRequest {
 
     @NotBlank

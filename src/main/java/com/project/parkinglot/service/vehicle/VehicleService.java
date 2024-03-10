@@ -1,7 +1,7 @@
 package com.project.parkinglot.service.vehicle;
 
 import com.project.parkinglot.model.Vehicle;
-import com.project.parkinglot.model.dto.request.Vehicle.VehicleRequest;
+import com.project.parkinglot.model.dto.request.vehicle.VehicleRequest;
 
 public interface VehicleService {
 
@@ -9,5 +9,7 @@ public interface VehicleService {
             String id,
             VehicleRequest vehicleRequest
     );
+
+    Vehicle assignOrGet(final String userId, final VehicleRequest vehicleRequest);
 
 }

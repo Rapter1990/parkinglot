@@ -2,12 +2,10 @@ package com.project.parkinglot.builder;
 
 import com.project.parkinglot.model.User;
 import com.project.parkinglot.model.Vehicle;
-import com.project.parkinglot.model.entity.VehicleEntity;
 import com.project.parkinglot.security.model.enums.Role;
 import com.project.parkinglot.utils.RandomUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class UserBuilder extends BaseBuilder<User> {
 

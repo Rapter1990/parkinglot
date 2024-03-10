@@ -5,6 +5,7 @@ import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
 import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingAreaMapper;
 import com.project.parkinglot.repository.ParkingAreaRepository;
+import com.project.parkinglot.service.park.ParkService;
 import com.project.parkinglot.service.parking_area.ParkingAreaGetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 class ParkingAreaGetServiceImpl implements ParkingAreaGetService {
 
     private final ParkingAreaRepository parkingAreaRepository;
+
+    private final ParkService parkService;
 
     private final ParkingAreaEntityToParkingAreaMapper parkingAreaEntityToParkingAreaMapper =
             ParkingAreaEntityToParkingAreaMapper.initialize();

@@ -3,7 +3,6 @@ package com.project.parkinglot.builder;
 import com.github.javafaker.Faker;
 import com.project.parkinglot.model.Vehicle;
 import com.project.parkinglot.model.enums.VehicleType;
-import com.project.parkinglot.security.model.entity.UserEntity;
 
 import java.util.Random;
 import java.util.UUID;

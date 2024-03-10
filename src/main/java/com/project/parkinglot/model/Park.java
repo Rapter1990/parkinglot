@@ -1,6 +1,7 @@
 package com.project.parkinglot.model;
 
 import com.project.parkinglot.common.model.BaseDomainModel;
+import com.project.parkinglot.model.enums.ParkStatus;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -21,4 +22,6 @@ public class Park extends BaseDomainModel {
     private BigDecimal totalCost;
     private ParkingArea parkingArea;
     private Vehicle vehicle;
+    private ParkStatus parkStatus;
+
 }
