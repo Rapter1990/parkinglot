@@ -2,15 +2,7 @@ package com.project.parkinglot.controller;
 
 import com.project.parkinglot.base.BaseControllerTest;
 import com.project.parkinglot.builder.UserBuilder;
-import com.project.parkinglot.builder.UserEntityBuilder;
-import com.project.parkinglot.builder.VehicleEntityBuilder;
-import com.project.parkinglot.builder.VehicleRequestBuilder;
 import com.project.parkinglot.model.User;
-import com.project.parkinglot.model.Vehicle;
-import com.project.parkinglot.model.dto.request.Vehicle.VehicleRequest;
-import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
-import com.project.parkinglot.model.entity.VehicleEntity;
-import com.project.parkinglot.security.model.entity.UserEntity;
 import com.project.parkinglot.service.user.UserGetService;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
@@ -25,6 +17,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.UUID;
 
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 
 class UserControllerTest extends BaseControllerTest {
 
@@ -46,7 +39,7 @@ class UserControllerTest extends BaseControllerTest {
         // Then
         mockMvc.perform(
                         MockMvcRequestBuilders
-                                .get("/api/v1/user/{user-id}", mockUserId)
+                                .get("/api/v1/users/user/{user-id}", mockUserId)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .header(HttpHeaders.AUTHORIZATION, mockUserToken)
                 )
@@ -83,7 +76,7 @@ class UserControllerTest extends BaseControllerTest {
         // Then
         mockMvc.perform(
                         MockMvcRequestBuilders
-                                .get("/api/v1/user/{user-id}", mockUserId)
+                                .get("/api/v1/users/user/{user-id}", mockUserId)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .header(HttpHeaders.AUTHORIZATION, mockAdminToken)
                 )
@@ -110,7 +103,7 @@ class UserControllerTest extends BaseControllerTest {
         // Then
         mockMvc.perform(
                         MockMvcRequestBuilders
-                                .get("/api/v1/user/{user-id}", mockUserId)
+                                .get("/api/v1/users/user/{user-id}", mockUserId)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andDo(MockMvcResultHandlers.print())
@@ -119,6 +112,94 @@ class UserControllerTest extends BaseControllerTest {
         // Verify
         Mockito.verify(userGetService, never()).getUserById(mockUserId);
 
+    }
+
+    @Test
+    @SneakyThrows
+    void givenAdmin_whenAdminGetById_thenReturnCustomResponseUser() {
+
+        // Given
+        final String mockAdminId = UUID.randomUUID().toString();
+
+        final User mockAdmin = new UserBuilder()
+                .admin()
+                .build();
+
+        // When
+        Mockito.when(userGetService.getAdminById(mockAdminId)).thenReturn(mockAdmin);
+
+        // Then
+        mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .get("/api/v1/users/admin/{admin-id}", mockAdminId)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .header(HttpHeaders.AUTHORIZATION, mockAdminToken)
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andDo(MockMvcResultHandlers.log())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.id").value(mockAdmin.getId()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.fullName").value(mockAdmin.getFullName()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.username").value(mockAdmin.getUsername()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.email").value(mockAdmin.getEmail()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.role").value(mockAdmin.getRole().toString()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.isSuccess").value(true))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.httpStatus").value("OK"));
+
+        // Verify
+        Mockito.verify(userGetService, times(1)).getAdminById(mockAdminId);
+    }
+
+    @Test
+    @SneakyThrows
+    void givenAdmin_whenAdminRoleIsUser_thenReturnForbidden() {
+        // Given
+        final String mockAdminId = UUID.randomUUID().toString();
+
+        final User mockAdmin = new UserBuilder()
+                .admin()
+                .build();
+
+        // When
+        Mockito.when(userGetService.getAdminById(mockAdminId)).thenReturn(mockAdmin);
+
+        // Then
+        mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .get("/api/v1/users/admin/{admin-id}", mockAdminId)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .header(HttpHeaders.AUTHORIZATION, mockUserToken)
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isForbidden());
+
+        // Verify
+        Mockito.verify(userGetService, never()).getAdminById(mockAdminId);
+    }
+
+    @Test
+    @SneakyThrows
+    void givenAdmin_whenAdminIsUnauthorized_thenReturnUnauthorized() {
+        // Given
+        final String mockAdminId = UUID.randomUUID().toString();
+
+        final User mockAdmin = new UserBuilder()
+                .admin()
+                .build();
+
+        // When
+        Mockito.when(userGetService.getAdminById(mockAdminId)).thenReturn(mockAdmin);
+
+        // Then
+        mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .get("/api/v1/users/admin/{admin-id}", mockAdminId)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized());
+
+        // Verify
+        Mockito.verify(userGetService, never()).getAdminById(mockAdminId);
     }
 
 }

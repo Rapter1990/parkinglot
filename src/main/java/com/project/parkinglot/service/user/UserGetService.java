@@ -5,4 +5,7 @@ import com.project.parkinglot.model.User;
 public interface UserGetService {
 
     User getUserById(String userId);
+
+    User getAdminById(final String adminId);
+
 }
