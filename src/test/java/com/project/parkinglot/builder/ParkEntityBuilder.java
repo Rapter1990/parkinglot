@@ -5,6 +5,7 @@ import com.project.parkinglot.model.entity.ParkingAreaEntity;
 import com.project.parkinglot.model.entity.VehicleEntity;
 import com.project.parkinglot.model.enums.ParkStatus;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class ParkEntityBuilder extends BaseBuilder<ParkEntity> {
@@ -37,6 +38,16 @@ public class ParkEntityBuilder extends BaseBuilder<ParkEntity> {
 
     public ParkEntityBuilder withParkStatus(final ParkStatus parkStatus) {
         data.setParkStatus(parkStatus);
+        return this;
+    }
+
+    public ParkEntityBuilder withCheckIn() {
+        data.setCheckIn(LocalDateTime.now());
+        return this;
+    }
+
+    public ParkEntityBuilder withCheckOut() {
+        data.setCheckOut(LocalDateTime.now());
         return this;
     }
 

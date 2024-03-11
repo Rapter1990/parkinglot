@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.mockito.Mockito.verify;
@@ -50,6 +51,7 @@ class ParkControllerTest extends BaseControllerTest {
         final ParkCheckInResponse parkCheckInResponse = ParkCheckInResponse.builder()
                 .parkStatus(ParkStatus.FULL)
                 .parkingAreaId(mockParkingAreaId)
+                .checkIn(LocalDateTime.now())
                 .vehicleCheckInResponse(VehicleCheckInResponse.builder()
                         .vehicleType(vehicleRequest.getVehicleType())
                         .licensePlate(vehicleRequest.getLicensePlate())

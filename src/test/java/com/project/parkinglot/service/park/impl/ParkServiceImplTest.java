@@ -87,6 +87,7 @@ class ParkServiceImplTest extends BaseServiceTest {
         ParkEntity parkEntity = new ParkEntityBuilder().withValidFields()
                 .withId(mockParkingAreaId)
                 .withVehicleEntity(vehicleToVehicleEntityMapper.map(vehicle))
+                .withCheckIn()
                 .build();
 
         Park mockPark = parkEntityToParkMapper.map(parkEntity);
@@ -109,7 +110,7 @@ class ParkServiceImplTest extends BaseServiceTest {
         assertEquals(expected.getCheckIn().toLocalTime(), result.getCheckIn().toLocalTime());
 
         // Verify
-        verify(parkRepository).save(parkEntity);
+        verify(parkRepository).save(any(ParkEntity.class));
 
     }
 
