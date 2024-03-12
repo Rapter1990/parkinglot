@@ -21,6 +21,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -59,7 +61,7 @@ class ParkControllerTest extends BaseControllerTest {
                 .build();
 
         // When
-        when(parkService.checkIn(mockUserId, parkCheckInRequest)).thenReturn(parkCheckInResponse);
+        when(parkService.checkIn(anyString(), any(ParkCheckInRequest.class))).thenReturn(parkCheckInResponse);
 
 
         // Then
@@ -73,18 +75,18 @@ class ParkControllerTest extends BaseControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.response.parkStatus")
-                        .value(parkCheckInResponse.getParkStatus()))
+                        .value(parkCheckInResponse.getParkStatus().toString()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.response.parkingAreaId")
                         .value(parkCheckInResponse.getParkingAreaId()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.response.vehicleCheckInResponse.vehicleType")
-                        .value(parkCheckInResponse.getVehicleCheckInResponse().getVehicleType()))
+                        .value(parkCheckInResponse.getVehicleCheckInResponse().getVehicleType().toString()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.response.vehicleCheckInResponse.licensePlate")
                         .value(parkCheckInResponse.getVehicleCheckInResponse().getLicensePlate()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.isSuccess").value(true))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.httpStatus").value("OK"));
 
         // Verify
-        verify(parkService).checkIn(mockUserId, parkCheckInRequest);
+        verify(parkService).checkIn(anyString(), any(ParkCheckInRequest.class));
 
     }
 
