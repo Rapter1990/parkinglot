@@ -10,6 +10,4 @@ public interface ParkService {
 
     Integer countCurrentParks(ParkingAreaEntity parkingAreaEntity);
 
-
-
 }
