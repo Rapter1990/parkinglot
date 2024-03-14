@@ -151,10 +151,10 @@
                 <constraints nullable="false"/>
             </column>
             <column name="CHECK_OUT" type="TIMESTAMP">
-                <constraints nullable="false"/>
+                <constraints/>
             </column>
             <column name="TOTAL_COST" type="DECIMAL(24,4)">
-                <constraints nullable="false"/>
+                <constraints />
             </column>
             <column name="PARKING_AREA_ID" type="VARCHAR(36)">
                 <constraints foreignKeyName="FK__PARKING_AREA__PARK"
