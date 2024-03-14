@@ -2,7 +2,7 @@ package com.project.parkinglot.controller;
 
 
 import com.project.parkinglot.model.Vehicle;
-import com.project.parkinglot.model.dto.request.Vehicle.VehicleRequest;
+import com.project.parkinglot.model.dto.request.vehicle.VehicleRequest;
 import com.project.parkinglot.payload.response.CustomResponse;
 import com.project.parkinglot.service.vehicle.VehicleService;
 import jakarta.validation.Valid;

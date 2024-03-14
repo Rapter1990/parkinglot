@@ -6,7 +6,7 @@ import com.project.parkinglot.builder.VehicleRequestBuilder;
 import com.project.parkinglot.exception.user.UserNotFoundException;
 import com.project.parkinglot.exception.vehicle.VehicleAlreadyExist;
 import com.project.parkinglot.model.Vehicle;
-import com.project.parkinglot.model.dto.request.Vehicle.VehicleRequest;
+import com.project.parkinglot.model.dto.request.vehicle.VehicleRequest;
 import com.project.parkinglot.model.entity.VehicleEntity;
 import com.project.parkinglot.model.mapper.vehicle.VehicleEntityToVehicleMapper;
 import com.project.parkinglot.model.mapper.vehicle.VehicleRequestToVehicleMapper;

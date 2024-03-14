@@ -3,7 +3,7 @@ package com.project.parkinglot.controller;
 import com.project.parkinglot.base.BaseControllerTest;
 import com.project.parkinglot.builder.VehicleRequestBuilder;
 import com.project.parkinglot.model.Vehicle;
-import com.project.parkinglot.model.dto.request.Vehicle.VehicleRequest;
+import com.project.parkinglot.model.dto.request.vehicle.VehicleRequest;
 import com.project.parkinglot.service.vehicle.impl.VehicleServiceImpl;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;

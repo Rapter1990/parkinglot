@@ -3,7 +3,7 @@ package com.project.parkinglot.service.vehicle.impl;
 import com.project.parkinglot.exception.user.UserNotFoundException;
 import com.project.parkinglot.exception.vehicle.VehicleAlreadyExist;
 import com.project.parkinglot.model.Vehicle;
-import com.project.parkinglot.model.dto.request.Vehicle.VehicleRequest;
+import com.project.parkinglot.model.dto.request.vehicle.VehicleRequest;
 import com.project.parkinglot.model.entity.VehicleEntity;
 import com.project.parkinglot.model.mapper.vehicle.VehicleEntityToVehicleMapper;
 import com.project.parkinglot.model.mapper.vehicle.VehicleRequestToVehicleMapper;
@@ -15,6 +15,8 @@ import com.project.parkinglot.service.vehicle.VehicleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -71,6 +73,17 @@ public class VehicleServiceImpl implements VehicleService {
 
         return vehicleEntityToBePersist;
 
+    }
+
+    @Override
+    @Transactional
+    public Vehicle assignOrGet(final String userId, final VehicleRequest vehicleRequest) {
+        final Optional<VehicleEntity> existingVehicle = vehicleRepository.findByLicensePlate(vehicleRequest.getLicensePlate());
+        final VehicleEntity vehicleEntity = existingVehicle.orElseGet(() -> {
+            Vehicle assignedVehicleEntity = assignVehicleToUser(userId, vehicleRequest);
+            return vehicleToVehicleEntityMapper.map(assignedVehicleEntity);
+        });
+        return vehicleEntityToVehicleMapper.map(vehicleEntity);
     }
 
 }

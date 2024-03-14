@@ -1,7 +1,7 @@
 package com.project.parkinglot.builder;
 
 import com.github.javafaker.Faker;
-import com.project.parkinglot.model.dto.request.Vehicle.VehicleRequest;
+import com.project.parkinglot.model.dto.request.vehicle.VehicleRequest;
 import com.project.parkinglot.model.enums.VehicleType;
 
 import java.util.Random;

@@ -1,7 +1,7 @@
 package com.project.parkinglot.model.mapper.vehicle;
 
 import com.project.parkinglot.model.Vehicle;
-import com.project.parkinglot.model.dto.request.Vehicle.VehicleRequest;
+import com.project.parkinglot.model.dto.request.vehicle.VehicleRequest;
 import com.project.parkinglot.model.mapper.BaseMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

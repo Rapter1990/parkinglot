@@ -1,11 +1,10 @@
-package com.project.parkinglot.model;
+package com.project.parkinglot.model.dto.response;
 
 import com.project.parkinglot.common.model.BaseDomainModel;
 import com.project.parkinglot.model.enums.ParkStatus;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -14,14 +13,10 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Park extends BaseDomainModel {
+public class ParkCheckInResponse extends BaseDomainModel {
 
-    private String id;
-    private LocalDateTime checkIn;
-    private LocalDateTime checkOut;
-    private BigDecimal totalCost;
-    private ParkingArea parkingArea;
-    private Vehicle vehicle;
+    private String parkingAreaId;
+    private VehicleCheckInResponse vehicleCheckInResponse;
     private ParkStatus parkStatus;
-
+    private LocalDateTime checkIn;
 }
