@@ -3,6 +3,7 @@ package com.project.parkinglot.controller;
 
 import com.project.parkinglot.model.Vehicle;
 import com.project.parkinglot.model.dto.request.vehicle.VehicleRequest;
+import com.project.parkinglot.model.dto.response.VehicleParkingDetailResponse;
 import com.project.parkinglot.payload.response.CustomResponse;
 import com.project.parkinglot.service.vehicle.VehicleService;
 import jakarta.validation.Valid;
@@ -29,6 +30,12 @@ public class VehicleController {
         final Vehicle vehicle = vehicleService.assignVehicleToUser(userId, vehicleRequest);
 
         return CustomResponse.ok(vehicle.getLicensePlate());
+    }
+
+    @GetMapping("/get-parking-detail/{licensePlate}")
+    @PreAuthorize("hasAuthority('ROLE_DRIVER')")
+    public VehicleParkingDetailResponse getParkingDetails(@PathVariable String licensePlate) {
+        return vehicleService.getParkingDetails(licensePlate);
     }
 
 }
