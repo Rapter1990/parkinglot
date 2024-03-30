@@ -34,8 +34,8 @@ public class VehicleController {
 
     @GetMapping("/get-parking-detail/{licensePlate}")
     @PreAuthorize("hasAuthority('ROLE_DRIVER')")
-    public VehicleParkingDetailResponse getParkingDetails(@PathVariable String licensePlate) {
-        return vehicleService.getParkingDetails(licensePlate);
+    public CustomResponse<VehicleParkingDetailResponse> getParkingDetails(@PathVariable String licensePlate) {
+        return CustomResponse.ok(vehicleService.getParkingDetails(licensePlate));
     }
 
 }

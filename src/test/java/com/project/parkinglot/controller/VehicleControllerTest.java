@@ -226,16 +226,18 @@ class VehicleControllerTest extends BaseControllerTest {
                                     .header(HttpHeaders.AUTHORIZATION, mockUserToken))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.licensePlate").value(mockLicensePlate))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.parkDetails").isArray())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.parkDetails[0].parkingAreaName").value(mockParkDetailResponse1.getParkingAreaName()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.parkDetails[0].checkInDate").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.parkDetails[0].checkOutDate").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.parkDetails[0].totalCost").value(mockParkDetailResponse1.getTotalCost()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.parkDetails[1].parkingAreaName").value(mockParkDetailResponse2.getParkingAreaName()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.parkDetails[1].checkInDate").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.parkDetails[1].checkOutDate").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.parkDetails[1].totalCost").value(mockParkDetailResponse2.getTotalCost()));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.licensePlate").value(mockLicensePlate))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.parkDetails").isArray())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.parkDetails[0].parkingAreaName").value(mockParkDetailResponse1.getParkingAreaName()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.parkDetails[0].checkInDate").exists())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.parkDetails[0].checkOutDate").exists())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.parkDetails[0].totalCost").value(mockParkDetailResponse1.getTotalCost()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.parkDetails[1].parkingAreaName").value(mockParkDetailResponse2.getParkingAreaName()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.parkDetails[1].checkInDate").exists())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.parkDetails[1].checkOutDate").exists())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.parkDetails[1].totalCost").value(mockParkDetailResponse2.getTotalCost()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.isSuccess").value(true))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.httpStatus").value("OK"));
 
         // Verify
         Mockito.verify(vehicleService, Mockito.times(1)).getParkingDetails(mockLicensePlate);
