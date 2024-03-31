@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
- class VehicleServiceImplTest extends BaseServiceTest {
+class VehicleServiceImplTest extends BaseServiceTest {
 
     @InjectMocks
     private VehicleServiceImpl vehicleService;
@@ -165,47 +165,47 @@ import java.util.UUID;
      void givenValidLicensePlate_whenGetParkingDetails_thenReturnParkingDetails() {
 
         // Given
-         final String mockLicensePlate = UUID.randomUUID().toString();
+        final String mockLicensePlate = UUID.randomUUID().toString();
 
-         final ParkEntity mockParkEntity1 = new ParkEntityBuilder()
+        final ParkEntity mockParkEntity1 = new ParkEntityBuilder()
                  .withValidFields().build();
-         final ParkEntity mockParkEntity2 = new ParkEntityBuilder()
+        final ParkEntity mockParkEntity2 = new ParkEntityBuilder()
                  .withValidFields().build();
 
-         final List<ParkEntity> mockParkEntities = Arrays.asList(mockParkEntity1, mockParkEntity2);
+        final List<ParkEntity> mockParkEntities = Arrays.asList(mockParkEntity1, mockParkEntity2);
 
-         final VehicleEntity mockVehicleEntity = new VehicleEntityBuilder()
+        final VehicleEntity mockVehicleEntity = new VehicleEntityBuilder()
                  .withValidFields()
                  .withLicensePlate(mockLicensePlate)
                  .build();
 
-         mockVehicleEntity.setParkEntities(mockParkEntities);
+        mockVehicleEntity.setParkEntities(mockParkEntities);
 
-         List<ParkDetailResponse> expectedParkDetails = Arrays.asList(
+        List<ParkDetailResponse> expectedParkDetails = Arrays.asList(
                  parkEntityToParkDetailResponse.map(mockParkEntity1),
                  parkEntityToParkDetailResponse.map(mockParkEntity2)
-         );
+        );
 
-         // When
-         Mockito.when(vehicleRepository.findByLicensePlate(mockLicensePlate))
-                 .thenReturn(Optional.of(mockVehicleEntity));
+        // When
+        Mockito.when(vehicleRepository.findByLicensePlate(mockLicensePlate))
+                .thenReturn(Optional.of(mockVehicleEntity));
 
-         // Then
-         final VehicleParkingDetailResponse parkingDetails = vehicleService.getParkingDetails(mockLicensePlate);
-
-
-         Assertions.assertNotNull(parkingDetails);
-         Assertions.assertEquals(mockLicensePlate, parkingDetails.getLicensePlate());
-         for(int i = 0; i < expectedParkDetails.size(); i++){
-             Assertions.assertEquals(expectedParkDetails.get(i).getCheckInDate(), parkingDetails.getParkDetails().get(i).getCheckInDate());
-             Assertions.assertEquals(expectedParkDetails.get(i).getCheckOutDate(), parkingDetails.getParkDetails().get(i).getCheckOutDate());
-             Assertions.assertEquals(expectedParkDetails.get(i).getParkingAreaName(), parkingDetails.getParkDetails().get(i).getParkingAreaName());
-             Assertions.assertEquals(expectedParkDetails.get(i).getTotalCost(), parkingDetails.getParkDetails().get(i).getTotalCost());
-         }
+        // Then
+        final VehicleParkingDetailResponse parkingDetails = vehicleService.getParkingDetails(mockLicensePlate);
 
 
-         // Verify
-         Mockito.verify(vehicleRepository, Mockito.times(1)).findByLicensePlate(mockLicensePlate);
+        Assertions.assertNotNull(parkingDetails);
+        Assertions.assertEquals(mockLicensePlate, parkingDetails.getLicensePlate());
+        for(int i = 0; i < expectedParkDetails.size(); i++){
+            Assertions.assertEquals(expectedParkDetails.get(i).getCheckInDate(), parkingDetails.getParkDetails().get(i).getCheckInDate());
+            Assertions.assertEquals(expectedParkDetails.get(i).getCheckOutDate(), parkingDetails.getParkDetails().get(i).getCheckOutDate());
+            Assertions.assertEquals(expectedParkDetails.get(i).getParkingAreaName(), parkingDetails.getParkDetails().get(i).getParkingAreaName());
+            Assertions.assertEquals(expectedParkDetails.get(i).getTotalCost(), parkingDetails.getParkDetails().get(i).getTotalCost());
+        }
+
+
+        // Verify
+        Mockito.verify(vehicleRepository, Mockito.times(1)).findByLicensePlate(mockLicensePlate);
 
      }
 

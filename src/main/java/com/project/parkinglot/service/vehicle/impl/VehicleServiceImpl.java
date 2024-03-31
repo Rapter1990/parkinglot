@@ -96,11 +96,11 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public VehicleParkingDetailResponse getParkingDetails(String licensePlate) {
+    public VehicleParkingDetailResponse getParkingDetails(final String licensePlate) {
 
-        VehicleEntity vehicleEntity = vehicleRepository.findByLicensePlate(licensePlate).orElseThrow(() -> new VehicleNotFoundException(licensePlate));
+        final VehicleEntity vehicleEntity = vehicleRepository.findByLicensePlate(licensePlate).orElseThrow(() -> new VehicleNotFoundException(licensePlate));
 
-        List<ParkDetailResponse> parkDetails = vehicleEntity.getParkEntities().stream()
+        final List<ParkDetailResponse> parkDetails = vehicleEntity.getParkEntities().stream()
                 .map(parkEntityToParkDetailResponse::map)
                 .collect(Collectors.toList());
 

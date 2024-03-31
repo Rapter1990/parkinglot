@@ -13,6 +13,6 @@ public interface VehicleService {
 
     Vehicle assignOrGet(final String userId, final VehicleRequest vehicleRequest);
 
-    VehicleParkingDetailResponse getParkingDetails(String licensePlate);
+    VehicleParkingDetailResponse getParkingDetails(final String licensePlate);
 
 }
