@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
 public interface ParkingAreaEntityToParkingAreaMapper extends BaseMapper<ParkingAreaEntity, ParkingArea> {
 
     @Override
-    @Mapping(source = "priceListEntity", target = "priceList")
+    @Mapping(target = "priceList", ignore = true)
     ParkingArea map(ParkingAreaEntity source);
 
     static ParkingAreaEntityToParkingAreaMapper initialize() {

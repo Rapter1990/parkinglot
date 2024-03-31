@@ -49,8 +49,7 @@ public class ParkingAreaEntity extends BaseEntity {
     private String city;
 
     @ManyToOne(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
+            fetch = FetchType.LAZY
     )
     @JoinColumn(
             name = "PRICE_LIST_ID",
