@@ -2,9 +2,13 @@ package com.project.parkinglot.service.vehicle.impl;
 
 import com.project.parkinglot.exception.user.UserNotFoundException;
 import com.project.parkinglot.exception.vehicle.VehicleAlreadyExist;
+import com.project.parkinglot.exception.vehicle.VehicleNotFoundException;
 import com.project.parkinglot.model.Vehicle;
 import com.project.parkinglot.model.dto.request.vehicle.VehicleRequest;
+import com.project.parkinglot.model.dto.response.ParkDetailResponse;
+import com.project.parkinglot.model.dto.response.VehicleParkingDetailResponse;
 import com.project.parkinglot.model.entity.VehicleEntity;
+import com.project.parkinglot.model.mapper.park.ParkEntityToParkDetailResponse;
 import com.project.parkinglot.model.mapper.vehicle.VehicleEntityToVehicleMapper;
 import com.project.parkinglot.model.mapper.vehicle.VehicleRequestToVehicleMapper;
 import com.project.parkinglot.model.mapper.vehicle.VehicleToVehicleEntityMapper;
@@ -16,7 +20,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +40,9 @@ public class VehicleServiceImpl implements VehicleService {
 
     private final VehicleEntityToVehicleMapper vehicleEntityToVehicleMapper =
             VehicleEntityToVehicleMapper.initialize();
+
+    private final ParkEntityToParkDetailResponse parkEntityToParkDetailResponse =
+            ParkEntityToParkDetailResponse.initialize();
 
     @Override
     @Transactional
@@ -84,6 +93,22 @@ public class VehicleServiceImpl implements VehicleService {
             return vehicleToVehicleEntityMapper.map(assignedVehicleEntity);
         });
         return vehicleEntityToVehicleMapper.map(vehicleEntity);
+    }
+
+    @Override
+    public VehicleParkingDetailResponse getParkingDetails(final String licensePlate) {
+
+        final VehicleEntity vehicleEntity = vehicleRepository.findByLicensePlate(licensePlate).orElseThrow(() -> new VehicleNotFoundException(licensePlate));
+
+        final List<ParkDetailResponse> parkDetails = vehicleEntity.getParkEntities().stream()
+                .map(parkEntityToParkDetailResponse::map)
+                .collect(Collectors.toList());
+
+        return VehicleParkingDetailResponse.builder()
+                .licensePlate(vehicleEntity.getLicensePlate())
+                .parkDetails(parkDetails)
+                .build();
+
     }
 
 }
