@@ -2,6 +2,7 @@ package com.project.parkinglot.service.vehicle.impl;
 
 import com.project.parkinglot.exception.user.UserNotFoundException;
 import com.project.parkinglot.exception.vehicle.VehicleAlreadyExist;
+import com.project.parkinglot.exception.vehicle.VehicleNotFoundException;
 import com.project.parkinglot.model.Vehicle;
 import com.project.parkinglot.model.dto.request.vehicle.VehicleRequest;
 import com.project.parkinglot.model.entity.VehicleEntity;
@@ -84,6 +85,13 @@ public class VehicleServiceImpl implements VehicleService {
             return vehicleToVehicleEntityMapper.map(assignedVehicleEntity);
         });
         return vehicleEntityToVehicleMapper.map(vehicleEntity);
+    }
+
+    @Override
+    public VehicleEntity findByLicensePlate(final String licensePlate) {
+        return vehicleRepository
+                .findByLicensePlate(licensePlate)
+                .orElseThrow(VehicleNotFoundException::new);
     }
 
 }
