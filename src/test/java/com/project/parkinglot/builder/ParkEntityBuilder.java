@@ -2,9 +2,11 @@ package com.project.parkinglot.builder;
 
 import com.project.parkinglot.model.entity.ParkEntity;
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
+import com.project.parkinglot.model.entity.PriceListEntity;
 import com.project.parkinglot.model.entity.VehicleEntity;
 import com.project.parkinglot.model.enums.ParkStatus;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -48,6 +50,11 @@ public class ParkEntityBuilder extends BaseBuilder<ParkEntity> {
 
     public ParkEntityBuilder withCheckOut() {
         data.setCheckOut(LocalDateTime.now());
+        return this;
+    }
+
+    public ParkEntityBuilder withTotalCost(final BigDecimal totalCost) {
+        data.setTotalCost(totalCost);
         return this;
     }
 
