@@ -248,7 +248,6 @@ class ParkControllerTest extends BaseControllerTest {
         // Given
         final String mockUserId = UUID.randomUUID().toString();
         final String mockParkingAreaId = "ParkingArea123";
-        final String mockParkingAreaName = "ParkingArea";
 
         final Vehicle vehicle = new VehicleBuilder()
                 .withValidFields()
@@ -263,10 +262,6 @@ class ParkControllerTest extends BaseControllerTest {
                 .parkingAreaId(mockParkingAreaId)
                 .vehicleRequest(vehicleRequest)
                 .build();
-
-        // When
-        Mockito.when(parkService.checkOut(anyString(), any(ParkCheckOutRequest.class)))
-                .thenReturn(null);
 
         // Then
         mockMvc.perform(
@@ -288,7 +283,6 @@ class ParkControllerTest extends BaseControllerTest {
         // Given
         final String mockUserId = UUID.randomUUID().toString();
         final String mockParkingAreaId = "ParkingArea123";
-        final String mockParkingAreaName = "ParkingArea";
 
         final Vehicle vehicle = new VehicleBuilder()
                 .withValidFields()
