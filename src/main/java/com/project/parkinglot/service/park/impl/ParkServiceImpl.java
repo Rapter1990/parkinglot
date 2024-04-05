@@ -91,7 +91,11 @@ public class ParkServiceImpl implements ParkService {
         ParkEntity parkEntity = parkRepository.findTopByVehicleEntityAndParkStatusOrderByCheckInDesc(
                 existingVehicle,
                 ParkStatus.FULL
-        ).orElseThrow(RuntimeException::new);
+        ).orElseThrow(
+                () -> new ParkingAreaNotFoundException(
+                        "With given Parking Area Id: " + parkCheckOutRequest.getParkingAreaId()
+                )
+        );
 
         parkEntity.setCheckOut(LocalDateTime.now());
         parkEntity.setParkStatus(ParkStatus.EMPTY);
