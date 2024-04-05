@@ -9,11 +9,12 @@ import com.project.parkinglot.model.Park;
 import com.project.parkinglot.model.Vehicle;
 import com.project.parkinglot.model.dto.request.park.ParkCheckInRequest;
 import com.project.parkinglot.model.dto.request.vehicle.VehicleRequest;
-import com.project.parkinglot.model.dto.response.ParkCheckInResponse;
+import com.project.parkinglot.model.dto.response.park.ParkCheckInResponse;
 import com.project.parkinglot.model.entity.ParkEntity;
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
 import com.project.parkinglot.model.enums.ParkStatus;
 import com.project.parkinglot.model.mapper.park.ParkCheckInRequestToParkEntityMapper;
+import com.project.parkinglot.model.mapper.park.ParkEntityToParkCheckOutResponseMapper;
 import com.project.parkinglot.model.mapper.park.ParkEntityToParkMapper;
 import com.project.parkinglot.model.mapper.park.ParkToParkCheckInResponseMapper;
 import com.project.parkinglot.model.mapper.park.ParkToParkEntityMapper;
@@ -60,6 +61,7 @@ class ParkServiceImplTest extends BaseServiceTest {
 
     private final ParkingAreaToParkingAreaEntityMapper parkingAreaToParkingAreaEntityMapper = ParkingAreaToParkingAreaEntityMapper.initialize();
 
+    private final ParkEntityToParkCheckOutResponseMapper parkEntityToParkCheckOutResponseMapper = ParkEntityToParkCheckOutResponseMapper.initialize();
 
     @Test
     void givenUserIdAndParkCheckInRequest_whenCheckIn_ReturnParkCheckInResponse() {
