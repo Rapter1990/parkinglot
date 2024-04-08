@@ -19,7 +19,11 @@ public class ParkEntityBuilder extends BaseBuilder<ParkEntity> {
     public ParkEntityBuilder withValidFields() {
         return this
                 .withId(UUID.randomUUID().toString())
+                .withParkingAreaEntity(new ParkingAreaEntityBuilder().withValidFields().build())
                 .withVehicleEntity(new VehicleEntityBuilder().withValidFields().build())
+                .withCheckIn()
+                .withCheckOut()
+                .withTotalCost(BigDecimal.valueOf(10))
                 .withParkStatus(ParkStatus.FULL);
     }
 
