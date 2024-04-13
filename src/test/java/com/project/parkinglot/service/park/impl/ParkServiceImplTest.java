@@ -157,7 +157,7 @@ class ParkServiceImplTest extends BaseServiceTest {
     }
 
     @Test
-    void countCurrentParks() {
+    void givenParkingAreaEntity_whenCountByParkingAreaEntityAndParkStatus_thenReturnCurrentParks() {
 
         // Given
         ParkingAreaEntity mockParkingArea = new ParkingAreaEntityBuilder().withValidFields().build();
