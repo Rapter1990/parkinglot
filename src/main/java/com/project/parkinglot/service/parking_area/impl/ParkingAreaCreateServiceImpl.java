@@ -43,8 +43,7 @@ class ParkingAreaCreateServiceImpl implements ParkingAreaCreateService {
 
         parkingAreaRepository.save(parkingAreaToBeCreate);
 
-        if (Objects.nonNull(parkingAreaCreateRequest.getPriceListRequest()))
-        {
+        if (Objects.nonNull(parkingAreaCreateRequest.getPriceListRequest())) {
             final PriceList createdPriceListForParkingArea = priceListCreateService
                     .createPriceList(parkingAreaCreateRequest.getPriceListRequest());
 
