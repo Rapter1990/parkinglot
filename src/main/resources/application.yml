@@ -24,6 +24,7 @@ spring:
       ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    open-in-view: true
 
 # SWAGGER
 springdoc:
@@ -34,8 +35,8 @@ springdoc:
 # JWT
 jwt:
   secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
-  expireMs: 600000 # 10 Minutes
-  refrEshexpireMs: 120000
+  expireMs: 6000000 # 1 Hour
+  refrEshexpireMs: 6000000 # 1 Hour
 
 management:
   endpoints:

@@ -35,14 +35,14 @@ public class VehicleServiceImpl implements VehicleService {
     private final VehicleToVehicleEntityMapper vehicleToVehicleEntityMapper =
             VehicleToVehicleEntityMapper.initialize();
 
+    private final ParkEntityToParkDetailResponse parkEntityToParkDetailResponse =
+            ParkEntityToParkDetailResponse.initialize();
+
     private final VehicleRequestToVehicleMapper vehicleRequestToVehicleMapper=
             VehicleRequestToVehicleMapper.initialize();
 
     private final VehicleEntityToVehicleMapper vehicleEntityToVehicleMapper =
             VehicleEntityToVehicleMapper.initialize();
-
-    private final ParkEntityToParkDetailResponse parkEntityToParkDetailResponse =
-            ParkEntityToParkDetailResponse.initialize();
 
     @Override
     @Transactional
@@ -93,6 +93,13 @@ public class VehicleServiceImpl implements VehicleService {
             return vehicleToVehicleEntityMapper.map(assignedVehicleEntity);
         });
         return vehicleEntityToVehicleMapper.map(vehicleEntity);
+    }
+
+    @Override
+    public VehicleEntity findByLicensePlate(final String licensePlate) {
+        return vehicleRepository
+                .findByLicensePlate(licensePlate)
+                .orElseThrow(VehicleNotFoundException::new);
     }
 
     @Override

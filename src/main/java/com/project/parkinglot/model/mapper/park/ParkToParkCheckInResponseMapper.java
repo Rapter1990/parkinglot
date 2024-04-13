@@ -1,7 +1,7 @@
 package com.project.parkinglot.model.mapper.park;
 
 import com.project.parkinglot.model.Park;
-import com.project.parkinglot.model.dto.response.ParkCheckInResponse;
+import com.project.parkinglot.model.dto.response.park.ParkCheckInResponse;
 import com.project.parkinglot.model.mapper.BaseMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
 public interface ParkToParkCheckInResponseMapper extends BaseMapper<Park, ParkCheckInResponse> {
 
     @Override
-    @Mapping(source = "id", target = "parkingAreaId")
+    @Mapping(source = "parkingArea.id", target = "parkingAreaId")
     @Mapping(source = "vehicle", target = "vehicleCheckInResponse")
     @Mapping(source = "parkStatus", target = "parkStatus")
     @Mapping(source = "checkIn", target = "checkIn")

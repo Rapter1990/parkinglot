@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
-
 @Service
 @RequiredArgsConstructor
 class ParkingAreaUpdateServiceImpl implements ParkingAreaUpdateService {
@@ -27,15 +26,15 @@ class ParkingAreaUpdateServiceImpl implements ParkingAreaUpdateService {
             final ParkingAreaUpdateRequest parkingAreaUpdateRequest
     ) {
 
-        final ParkingAreaEntity parkingAreaEntityToBeUpdate  = parkingAreaRepository
+        final ParkingAreaEntity parkingAreaEntityToBeUpdate = parkingAreaRepository
                 .findById(parkingAreaId)
-                .orElseThrow(()-> new ParkingAreaNotFoundException("ParkingArea not found given id" + parkingAreaId));
+                .orElseThrow(() -> new ParkingAreaNotFoundException("ParkingArea not found given id" + parkingAreaId));
 
-        parkingAreaEntityToBeUpdate .setCapacity(parkingAreaUpdateRequest.getCapacity());
+        parkingAreaEntityToBeUpdate.setCapacity(parkingAreaUpdateRequest.getCapacity());
 
-        parkingAreaRepository.save(parkingAreaEntityToBeUpdate );
+        parkingAreaRepository.save(parkingAreaEntityToBeUpdate);
 
-        return parkingAreaEntityToParkingArea.map(parkingAreaEntityToBeUpdate );
+        return parkingAreaEntityToParkingArea.map(parkingAreaEntityToBeUpdate);
     }
 
 }

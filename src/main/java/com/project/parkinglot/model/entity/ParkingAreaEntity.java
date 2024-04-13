@@ -50,7 +50,7 @@ public class ParkingAreaEntity extends BaseEntity {
 
     @ManyToOne(
             fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
+            cascade = CascadeType.REMOVE
     )
     @JoinColumn(
             name = "PRICE_LIST_ID",

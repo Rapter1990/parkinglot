@@ -1,8 +1,14 @@
-package com.project.parkinglot.model.dto.response;
+package com.project.parkinglot.model.dto.response.park;
 
 import com.project.parkinglot.common.model.BaseDomainModel;
+import com.project.parkinglot.model.dto.response.vehicle.VehicleCheckInResponse;
 import com.project.parkinglot.model.enums.ParkStatus;
-import lombok.*;
+
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;

@@ -15,7 +15,7 @@ public interface ParkRepository extends JpaRepository<ParkEntity, String> {
             final ParkStatus parkStatus
     );
 
-    Optional<ParkEntity> findByVehicleEntityAndParkStatus(
+    Optional<ParkEntity> findTopByVehicleEntityAndParkStatusOrderByCheckInDesc(
             final VehicleEntity vehicle,
             final ParkStatus parkStatus
     );

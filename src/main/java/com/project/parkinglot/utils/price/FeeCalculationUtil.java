@@ -21,7 +21,7 @@ public class FeeCalculationUtil {
     );
 
 
-    private static BigDecimal findPriceForTimeInterval(
+    public BigDecimal findPriceForTimeInterval(
             final PriceListEntity parkingAreaPriceListEntity,
             final ParkEntity parkEntity
     ) {
