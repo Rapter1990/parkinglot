@@ -5,9 +5,11 @@ import com.project.parkinglot.builder.ParkEntityBuilder;
 import com.project.parkinglot.builder.ParkingAreaEntityBuilder;
 import com.project.parkinglot.builder.VehicleBuilder;
 import com.project.parkinglot.exception.parkingarea.ParkingAreaCapacityException;
+import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException;
 import com.project.parkinglot.model.Park;
 import com.project.parkinglot.model.Vehicle;
 import com.project.parkinglot.model.dto.request.park.ParkCheckInRequest;
+import com.project.parkinglot.model.dto.request.park.ParkCheckOutRequest;
 import com.project.parkinglot.model.dto.request.vehicle.VehicleRequest;
 import com.project.parkinglot.model.dto.response.park.ParkCheckInResponse;
 import com.project.parkinglot.model.entity.ParkEntity;
@@ -117,7 +119,7 @@ class ParkServiceImplTest extends BaseServiceTest {
     }
 
     @Test
-    void checkInThrowParkingAreaCapacityException() {
+    void givenUserIdAndParkCheckInRequest_whenCheckIn_thenThrowParkingAreaCapacityException() {
 
         // Given
         String userId = "user123";
@@ -155,6 +157,39 @@ class ParkServiceImplTest extends BaseServiceTest {
         verify(parkRepository, never()).save(parkEntity);
 
     }
+
+    @Test
+    void givenInvalidParkingAreaId_whenCheckOut_thenThrowParkingAreaNotFoundException() {
+
+        // Given
+        String userId = "user123";
+        String mockParkingAreaId = "parkingArea123";
+
+        Vehicle vehicle = new VehicleBuilder().withValidFields().build();
+
+        VehicleRequest vehicleRequest = VehicleRequest.builder()
+                .licensePlate(vehicle.getLicensePlate())
+                .vehicleType(vehicle.getVehicleType())
+                .build();
+
+        ParkCheckOutRequest parkCheckOutRequest = ParkCheckOutRequest.builder()
+                .parkingAreaId(mockParkingAreaId)
+                .vehicleRequest(vehicleRequest)
+                .build();
+
+        // When
+        when(parkingAreaRepository.findById(parkCheckOutRequest.getParkingAreaId())).thenReturn(Optional.empty());
+
+        // Then
+        assertThrows(ParkingAreaNotFoundException.class, () -> parkService.checkOut(userId, parkCheckOutRequest));
+
+        // Verify
+        verify(vehicleService, never()).findByLicensePlate(vehicleRequest.getLicensePlate());
+        verify(parkRepository, never()).findTopByVehicleEntityAndParkStatusOrderByCheckInDesc(any(), any());
+        verify(parkRepository, never()).save(any(ParkEntity.class));
+
+    }
+
 
     @Test
     void givenParkingAreaEntity_whenCountByParkingAreaEntityAndParkStatus_thenReturnCurrentParks() {
