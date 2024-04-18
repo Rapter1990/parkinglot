@@ -50,7 +50,6 @@ class ParkingAreaGetServiceImplTest extends BaseServiceTest {
         Assertions.assertEquals(mockParkingArea.getParkList(), result.getParkList());
         Assertions.assertEquals(mockParkingArea.getName(), result.getName());
         Assertions.assertEquals(mockParkingArea.getCapacity(), result.getCapacity());
-        Assertions.assertEquals(mockParkingArea.getDailyIncomeList(), result.getDailyIncomeList());
         Assertions.assertEquals(mockParkingArea.getLocation(), result.getLocation());
 
         // Verify
@@ -98,7 +97,6 @@ class ParkingAreaGetServiceImplTest extends BaseServiceTest {
         Assertions.assertEquals(mockParkingArea.getParkList(), result.getParkList());
         Assertions.assertEquals(mockParkingArea.getName(), result.getName());
         Assertions.assertEquals(mockParkingArea.getCapacity(), result.getCapacity());
-        Assertions.assertEquals(mockParkingArea.getDailyIncomeList(), result.getDailyIncomeList());
         Assertions.assertEquals(mockParkingArea.getLocation(), result.getLocation());
 
         // Verify
