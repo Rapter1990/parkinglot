@@ -3,6 +3,7 @@ package com.project.parkinglot.controller;
 import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaUpdateRequest;
+import com.project.parkinglot.model.dto.response.parkingarea.ParkingAreaIncomeResponse;
 import com.project.parkinglot.payload.response.CustomResponse;
 import com.project.parkinglot.service.parking_area.ParkingAreaCreateService;
 import com.project.parkinglot.service.parking_area.ParkingAreaDeleteService;
@@ -25,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @RestController
@@ -72,11 +72,11 @@ public class ParkingAreaController {
 
     @GetMapping("/income")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public CustomResponse<BigDecimal> getDailyIncome(
+    public CustomResponse<ParkingAreaIncomeResponse> getDailyIncome(
             @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date,
             @RequestParam(value = "parkingAreaId") final String parkingAreaId
     ) {
-        final BigDecimal dailyIncome = parkingAreaGetService.getDailyIncome(date, parkingAreaId);
+        final ParkingAreaIncomeResponse dailyIncome = parkingAreaGetService.getDailyIncome(date, parkingAreaId);
 
         return CustomResponse.ok(dailyIncome);
     }

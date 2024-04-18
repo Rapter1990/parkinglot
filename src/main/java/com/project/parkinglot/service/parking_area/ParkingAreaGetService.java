@@ -1,8 +1,8 @@
 package com.project.parkinglot.service.parking_area;
 
 import com.project.parkinglot.model.ParkingArea;
+import com.project.parkinglot.model.dto.response.parkingarea.ParkingAreaIncomeResponse;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public interface ParkingAreaGetService {
@@ -11,5 +11,5 @@ public interface ParkingAreaGetService {
 
     ParkingArea getParkingAreaByName(final String name);
 
-    BigDecimal getDailyIncome(final LocalDate date, final String parkingAreaId);
+    ParkingAreaIncomeResponse getDailyIncome(final LocalDate date, final String parkingAreaId);
 }
