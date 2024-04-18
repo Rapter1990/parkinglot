@@ -12,10 +12,21 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.UUID;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/v1/parking-area")
@@ -59,6 +70,17 @@ public class ParkingAreaController {
 
     }
 
+    @GetMapping("/income")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public CustomResponse<BigDecimal> getDailyIncome(
+            @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date,
+            @RequestParam(value = "parkingAreaId") final String parkingAreaId
+    ) {
+        final BigDecimal dailyIncome = parkingAreaGetService.getDailyIncome(date, parkingAreaId);
+
+        return CustomResponse.ok(dailyIncome);
+    }
+
     @DeleteMapping("/{parkingAreaId}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public CustomResponse<String> deleteParkingAreaById(@PathVariable("parkingAreaId") @UUID final String parkingAreaId) {
@@ -74,9 +96,9 @@ public class ParkingAreaController {
     public CustomResponse<String> updateParkingArea(
             @PathVariable("parkingAreaId") @UUID final String parkingAreaId,
             @RequestBody @Valid final ParkingAreaUpdateRequest parkingAreaUpdateRequest
-    ){
+    ) {
         final ParkingArea parkingArea = parkingAreaUpdateService
-                .parkingAreaUpdateByCapacity(parkingAreaId,parkingAreaUpdateRequest);
+                .parkingAreaUpdateByCapacity(parkingAreaId, parkingAreaUpdateRequest);
 
         return CustomResponse.ok("Parking area with id " + parkingArea.getId() + " is updated");
     }
