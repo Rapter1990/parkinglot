@@ -1,7 +1,6 @@
 package com.project.parkinglot.builder;
 
 import com.github.javafaker.Faker;
-import com.project.parkinglot.model.DailyIncome;
 import com.project.parkinglot.model.Park;
 import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.PriceList;
@@ -26,8 +25,7 @@ public class ParkingAreaBuilder extends BaseBuilder<ParkingArea> {
                 .withCapacity(faker.number().numberBetween(1, 100))
                 .withCity(faker.address().city())
                 .withPriceList(new PriceListBuilder().withValidFields().build())
-                .withParkList(List.of(new ParkBuilder().withValidFields().build()))
-                .withDailyIncomeList(List.of(new DailyIncomeBuilder().withValidFields().build()));
+                .withParkList(List.of(new ParkBuilder().withValidFields().build()));
     }
 
     public ParkingAreaBuilder withId(final String id) {
@@ -62,11 +60,6 @@ public class ParkingAreaBuilder extends BaseBuilder<ParkingArea> {
 
     public ParkingAreaBuilder withParkList(final List<Park> parkList) {
         data.setParkList(parkList);
-        return this;
-    }
-
-    public ParkingAreaBuilder withDailyIncomeList(final List<DailyIncome> dailyIncomeList) {
-        data.setDailyIncomeList(dailyIncomeList);
         return this;
     }
 
