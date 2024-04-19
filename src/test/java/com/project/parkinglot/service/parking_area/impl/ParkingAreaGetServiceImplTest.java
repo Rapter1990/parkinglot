@@ -163,8 +163,7 @@ class ParkingAreaGetServiceImplTest extends BaseServiceTest {
 
     }
 
-    @Test
-    void givenValidGetDailyIncomeParameter_WhenGivenDailyIncome_ThenReturnParkingAreaIncomeResponse()
+
 
 
     private LocalDate generateRandomDate(){

@@ -1,7 +1,6 @@
 package com.project.parkinglot.builder;
 
 import com.github.javafaker.Faker;
-import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaUpdateRequest;
 import com.project.parkinglot.model.dto.response.parkingarea.ParkingAreaIncomeResponse;
 
 import java.math.BigDecimal;
