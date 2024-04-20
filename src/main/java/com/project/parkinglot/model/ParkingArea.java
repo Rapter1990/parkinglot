@@ -1,11 +1,7 @@
 package com.project.parkinglot.model;
 
 import com.project.parkinglot.common.model.BaseDomainModel;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
