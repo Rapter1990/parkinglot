@@ -10,6 +10,7 @@ import com.project.parkinglot.model.dto.response.parkingarea.ParkingAreaIncomeRe
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
 import com.project.parkinglot.model.mapper.parking_area.ParkingAreaEntityToParkingAreaMapper;
 import com.project.parkinglot.repository.ParkingAreaRepository;
+import com.project.parkinglot.utils.TestUtilityClass;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -143,14 +144,11 @@ class ParkingAreaGetServiceImplTest extends BaseServiceTest {
                 .withName(mockParkingAreaEntity.getName())
                 .build();
 
-        LocalDate mockDate = generateRandomDate();
-
-
+        LocalDate mockDate = TestUtilityClass.generateRandomDate();
 
 
         // When
         Mockito.when(parkingAreaRepository.findById(mockParkingAreaId)).thenReturn(Optional.of(mockParkingAreaEntity));
-
         Mockito.when(parkingAreaRepository.calculateDailyIncome(mockDate,mockParkingAreaId)).thenReturn(Optional.of(BigDecimal.valueOf(Mockito.anyLong())));
 
         // Then
@@ -162,13 +160,13 @@ class ParkingAreaGetServiceImplTest extends BaseServiceTest {
         Mockito.verify(parkingAreaRepository,Mockito.times(1)).calculateDailyIncome(mockDate,mockParkingAreaId);
 
     }
+
     @Test
     void givenValidGetDailyIncomeParameter_WhenGivenDailyIncome_ThenThrowsParkingAreaNotFoundException(){
 
         // Given
         String mockParkingAreaId = UUID.randomUUID().toString();
-
-        LocalDate mockDate = generateRandomDate();
+        LocalDate mockDate = TestUtilityClass.generateRandomDate();
 
         // When
         Mockito.when(parkingAreaRepository.findById(mockParkingAreaId)).thenReturn(Optional.empty());
@@ -179,9 +177,9 @@ class ParkingAreaGetServiceImplTest extends BaseServiceTest {
 
         // Verify
         Mockito.verify(parkingAreaRepository,Mockito.times(1)).findById(Mockito.anyString());
-
         Mockito.verify(parkingAreaRepository,Mockito.never())
                 .calculateDailyIncome(Mockito.any(LocalDate.class),Mockito.anyString());
+
     }
 
     @Test
@@ -195,8 +193,7 @@ class ParkingAreaGetServiceImplTest extends BaseServiceTest {
                 .withId(mockParkingAreaId)
                 .build();
 
-
-        LocalDate mockDate = generateRandomDate();
+        LocalDate mockDate = TestUtilityClass.generateRandomDate();
 
         // When
         Mockito.when(parkingAreaRepository.findById(mockParkingAreaId)).thenReturn(Optional.of(mockParkingAreaEntity));
@@ -211,16 +208,8 @@ class ParkingAreaGetServiceImplTest extends BaseServiceTest {
 
         Mockito.verify(parkingAreaRepository,Mockito.times(1))
                 .calculateDailyIncome(Mockito.any(LocalDate.class),Mockito.anyString());
-    }
 
 
-
-
-    private LocalDate generateRandomDate(){
-
-        Random rnd = new Random();
-
-        return LocalDate.of(rnd.nextInt(4)+2020, rnd.nextInt(11)+1, rnd.nextInt(30)+1);
     }
 
 }
