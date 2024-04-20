@@ -34,4 +34,5 @@ public interface ParkingAreaRepository extends JpaRepository<ParkingAreaEntity, 
             final @Param("date") LocalDate date,
             final @Param("parkingAreaId") String parkingAreaId
     );
+
 }

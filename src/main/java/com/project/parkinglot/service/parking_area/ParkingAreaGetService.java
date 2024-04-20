@@ -12,4 +12,5 @@ public interface ParkingAreaGetService {
     ParkingArea getParkingAreaByName(final String name);
 
     ParkingAreaIncomeResponse getDailyIncome(final LocalDate date, final String parkingAreaId);
+
 }
