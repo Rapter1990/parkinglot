@@ -32,7 +32,6 @@ public class FeeCalculationUtil {
                 .filter(priceEntity -> isWithinTimeInterval(priceEntity, spentTime))
                 .map(PriceEntity::getCost)
                 .findFirst()
-                // TODO : Add validation exception for this process
                 .orElseThrow(() -> new PriceListNotFoundException("Not Found"));
 
 
