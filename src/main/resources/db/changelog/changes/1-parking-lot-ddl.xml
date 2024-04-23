@@ -107,39 +107,6 @@
         <!-- =========================================== -->
 
 
-        <!-- ======================= -->
-        <!-- DDL of DAILY_INCOME -->
-        <!-- ======================= -->
-        <createTable tableName="DAILY_INCOME">
-            <column name="ID" type="VARCHAR(36)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="DATE" type="DATE">
-                <constraints nullable="false"/>
-            </column>
-            <column name="INCOME" type="DECIMAL(24,4)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="PARKING_AREA_ID" type="VARCHAR(36)">
-                <constraints foreignKeyName="FK__PARKING_AREA__DAILY_INCOME"
-                             referencedTableName="PARKING_AREA"
-                             referencedColumnNames="ID"
-                />
-            </column>
-            <column name="CREATED_USER" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="UPDATED_USER" type="VARCHAR(255)">
-                <constraints nullable="true"/>
-            </column>
-            <column name="CREATED_AT" type="TIMESTAMP"/>
-            <column name="UPDATED_AT" type="TIMESTAMP"/>
-        </createTable>
-        <!-- ======================= -->
-        <!-- DDL of DAILY_INCOME -->
-        <!-- ======================= -->
-
-
         <!-- ===================== -->
         <!-- DDL of PARK -->
         <!-- ===================== -->

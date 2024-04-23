@@ -21,6 +21,5 @@ public class ParkingArea extends BaseDomainModel {
     private String city;
     private PriceList priceList;
     private List<Park> parkList;
-    private List<DailyIncome> dailyIncomeList;
 
 }

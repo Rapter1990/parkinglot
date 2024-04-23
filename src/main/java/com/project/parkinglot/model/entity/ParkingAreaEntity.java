@@ -64,10 +64,4 @@ public class ParkingAreaEntity extends BaseEntity {
     )
     private List<ParkEntity> parkEntities;
 
-    @OneToMany(
-            fetch = FetchType.LAZY,
-            mappedBy = "parkingAreaEntity"
-    )
-    private List<DailyIncomeEntity> dailyIncomeEntities;
-
 }

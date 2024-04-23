@@ -3,11 +3,7 @@ package com.project.parkinglot.model.dto.request.park;
 import com.project.parkinglot.model.dto.request.vehicle.VehicleRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter

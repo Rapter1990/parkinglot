@@ -2,7 +2,6 @@ package com.project.parkinglot.builder;
 
 import com.project.parkinglot.model.entity.ParkEntity;
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
-import com.project.parkinglot.model.entity.PriceListEntity;
 import com.project.parkinglot.model.entity.VehicleEntity;
 import com.project.parkinglot.model.enums.ParkStatus;
 

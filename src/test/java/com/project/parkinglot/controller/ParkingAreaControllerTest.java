@@ -8,6 +8,7 @@ import com.project.parkinglot.exception.parkingarea.ParkingAreaNotFoundException
 import com.project.parkinglot.model.ParkingArea;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaCreateRequest;
 import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaUpdateRequest;
+import com.project.parkinglot.model.dto.response.parkingarea.ParkingAreaIncomeResponse;
 import com.project.parkinglot.service.parking_area.ParkingAreaCreateService;
 import com.project.parkinglot.service.parking_area.ParkingAreaDeleteService;
 import com.project.parkinglot.service.parking_area.ParkingAreaGetService;
@@ -21,8 +22,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.UUID;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 
@@ -60,7 +64,7 @@ class ParkingAreaControllerTest extends BaseControllerTest {
                   .build();
 
         // When
-        Mockito.when(parkingAreaCreateService.createParkingArea(Mockito.any(ParkingAreaCreateRequest.class)))
+        Mockito.when(parkingAreaCreateService.createParkingArea(any(ParkingAreaCreateRequest.class)))
                   .thenReturn(mockParkingArea);
 
         // Then
@@ -79,7 +83,7 @@ class ParkingAreaControllerTest extends BaseControllerTest {
 
         // Verify
         Mockito.verify(parkingAreaCreateService, times(1))
-                .createParkingArea(Mockito.any(ParkingAreaCreateRequest.class));
+                .createParkingArea(any(ParkingAreaCreateRequest.class));
 
     }
 
@@ -104,7 +108,7 @@ class ParkingAreaControllerTest extends BaseControllerTest {
 
         // Verify
         Mockito.verify(parkingAreaCreateService, never())
-                .createParkingArea(Mockito.any(ParkingAreaCreateRequest.class));
+                .createParkingArea(any(ParkingAreaCreateRequest.class));
 
     }
 
@@ -122,7 +126,7 @@ class ParkingAreaControllerTest extends BaseControllerTest {
                   .build();
 
         // When
-        Mockito.when(parkingAreaCreateService.createParkingArea(Mockito.any(ParkingAreaCreateRequest.class)))
+        Mockito.when(parkingAreaCreateService.createParkingArea(any(ParkingAreaCreateRequest.class)))
                   .thenReturn(mockParkingArea);
 
         // Then
@@ -138,7 +142,7 @@ class ParkingAreaControllerTest extends BaseControllerTest {
 
         // Verify
         Mockito.verify(parkingAreaCreateService, never())
-                  .createParkingArea(Mockito.any(ParkingAreaCreateRequest.class));
+                  .createParkingArea(any(ParkingAreaCreateRequest.class));
 
     }
 
@@ -156,7 +160,7 @@ class ParkingAreaControllerTest extends BaseControllerTest {
                   .build();
 
         // When
-        Mockito.when(parkingAreaCreateService.createParkingArea(Mockito.any(ParkingAreaCreateRequest.class)))
+        Mockito.when(parkingAreaCreateService.createParkingArea(any(ParkingAreaCreateRequest.class)))
                   .thenReturn(mockParkingArea);
 
         // Then
@@ -172,7 +176,7 @@ class ParkingAreaControllerTest extends BaseControllerTest {
 
         // Verify
         Mockito.verify(parkingAreaCreateService, never())
-                  .createParkingArea(Mockito.any(ParkingAreaCreateRequest.class));
+                  .createParkingArea(any(ParkingAreaCreateRequest.class));
 
     }
 
@@ -190,7 +194,7 @@ class ParkingAreaControllerTest extends BaseControllerTest {
                   .build();
 
         // When
-        Mockito.when(parkingAreaCreateService.createParkingArea(Mockito.any(ParkingAreaCreateRequest.class)))
+        Mockito.when(parkingAreaCreateService.createParkingArea(any(ParkingAreaCreateRequest.class)))
                   .thenReturn(mockParkingArea);
 
         // Then
@@ -206,7 +210,7 @@ class ParkingAreaControllerTest extends BaseControllerTest {
 
         // Verify
         Mockito.verify(parkingAreaCreateService, never())
-                  .createParkingArea(Mockito.any(ParkingAreaCreateRequest.class));
+                  .createParkingArea(any(ParkingAreaCreateRequest.class));
 
     }
 
@@ -403,7 +407,7 @@ class ParkingAreaControllerTest extends BaseControllerTest {
         Mockito.when(
                   parkingAreaUpdateService.parkingAreaUpdateByCapacity(
                           Mockito.anyString(),
-                          Mockito.any(ParkingAreaUpdateRequest.class)
+                          any(ParkingAreaUpdateRequest.class)
                   )
         ).thenReturn(mockParkingAreaDomainModel);
 
@@ -424,7 +428,7 @@ class ParkingAreaControllerTest extends BaseControllerTest {
 
         // Verify
         Mockito.verify(parkingAreaUpdateService, Mockito.times(1))
-                  .parkingAreaUpdateByCapacity(Mockito.anyString(), Mockito.any(ParkingAreaUpdateRequest.class));
+                  .parkingAreaUpdateByCapacity(Mockito.anyString(), any(ParkingAreaUpdateRequest.class));
 
     }
 
@@ -552,6 +556,68 @@ class ParkingAreaControllerTest extends BaseControllerTest {
 
         // Verify
         Mockito.verify(parkingAreaGetService, never()).getParkingAreaByName(mockParkingAreaName);
+
+    }
+
+
+    @Test
+    void givenValidRequestWithAdminRole_whenGetDailyIncome_thenReturnsIncome() throws Exception {
+
+        // Given
+        final String date = "21-04-2023";
+        final String parkingAreaId = "area123";
+        final ParkingAreaIncomeResponse incomeResponse = ParkingAreaIncomeResponse.builder()
+                .income(new BigDecimal("1200"))
+                .name("Parking name")
+                .build();
+
+        // When
+        Mockito.when(parkingAreaGetService.getDailyIncome(any(LocalDate.class), any(String.class)))
+                .thenReturn(incomeResponse);
+
+        // Then
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/parking-area/income")
+                        .param("date", date)
+                        .param("parkingAreaId", parkingAreaId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header(HttpHeaders.AUTHORIZATION, mockAdminToken))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.name").value("Parking name"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response.income").value("1200"));
+
+
+        // Verify
+        Mockito.verify(parkingAreaGetService, times(1)).getDailyIncome(any(LocalDate.class), any(String.class));
+
+    }
+
+    @Test
+    void givenValidRequestWithUserRole_whenUserRoleUnAuthorized_thenThrowsForbidden() throws Exception {
+
+        // Given
+        final String date = "21-04-2023";
+        final String parkingAreaId = "area123";
+        final ParkingAreaIncomeResponse incomeResponse = ParkingAreaIncomeResponse.builder()
+                .income(new BigDecimal("1200"))
+                .name("Parking name")
+                .build();
+
+        // When
+        Mockito.when(parkingAreaGetService.getDailyIncome(any(LocalDate.class), any(String.class)))
+                .thenReturn(incomeResponse);
+
+        // Then
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/parking-area/income")
+                        .param("date", date)
+                        .param("parkingAreaId", parkingAreaId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header(HttpHeaders.AUTHORIZATION, mockUserToken))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isForbidden());
+
+        // Verify
+        Mockito.verify(parkingAreaGetService, never()).getDailyIncome(any(LocalDate.class), any(String.class));
 
     }
 
