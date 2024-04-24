@@ -24,7 +24,168 @@
       <th>Request Body</th>
       <th>Header</th>
       <th>Valid Path Variable</th>
+      <th>Request Param</th>
       <th>No Path Variable</th>
+  </tr>
+  <tr>
+      <td>POST</td>
+      <td>/register</td>
+      <td>Register a new user (Admin and Driver)</td>
+      <td>SignupRequest request</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+      <td>POST</td>
+      <td>/login</td>
+      <td>Login user (Admin and Driver)</td>
+      <td>LoginRequest request</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+      <td>POST</td>
+      <td>/refreshtoken</td>
+      <td>Refresh token (Admin and Driver)</td>
+      <td>TokenRefreshRequest request</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td>/logout</td>
+    <td>Logout user (Admin and Driver)</td>
+    <td></td>
+    <td>Authorization header with Bearer token</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td>/parks/userId/{userId}/check-in</td>
+    <td>Check in to a park (Driver)</td>
+    <td>ParkCheckInRequest request</td>
+    <td>Authorization header with Bearer token</td>
+    <td>{userId} - Valid UUID</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td>/parks/userId/{userId}/check-out</td>
+    <td>Check out from a park (Driver)</td>
+    <td>ParkCheckOutRequest request</td>
+    <td>Authorization header with Bearer token</td>
+    <td>{userId} - Valid UUID</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td>/parking-area</td>
+    <td>Create a new parking area (Admin)</td>
+    <td>ParkingAreaCreateRequest request</td>
+    <td>Authorization header with Bearer token</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/parking-area/id/{parkingAreaId}</td>
+    <td>Get a parking area by ID (Admin)</td>
+    <td></td>
+    <td>Authorization header with Bearer token</td>
+    <td>{parkingAreaId} - Valid UUID</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/parking-area/name/{name}</td>
+    <td>Get a parking area by name (Admin)</td>
+    <td></td>
+    <td>Authorization header with Bearer token</td>
+    <td>{name} - Non-empty string</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/parking-area/income</td>
+    <td>Get daily income for a parking area (Admin)</td>
+    <td>date - Date in dd-MM-yyyy format<br>parkingAreaId - String</td>
+    <td>Authorization header with Bearer token</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>DELETE</td>
+    <td>/parking-area/{parkingAreaId}</td>
+    <td>Delete a parking area by ID (Admin)</td>
+    <td></td>
+    <td>Authorization header with Bearer token</td>
+    <td>{parkingAreaId} - Valid UUID</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>PUT</td>
+    <td>/parking-area/{parkingAreaId}</td>
+    <td>Update a parking area by ID (Admin)</td>
+    <td>ParkingAreaUpdateRequest request</td>
+    <td>Authorization header with Bearer token</td>
+    <td>{parkingAreaId} - Valid UUID</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/users/user/{user-id}</td>
+    <td>Get user information by ID (Driver)</td>
+    <td></td>
+    <td>Authorization header with Bearer token</td>
+    <td>{user-id} - Valid UUID</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/users/admin/{admin-id}</td>
+    <td>Get admin information by ID (Admin)</td>
+    <td></td>
+    <td>Authorization header with Bearer token</td>
+    <td>{admin-id} - Valid UUID</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td>/vehicles/assign/{user-id}</td>
+    <td>Assign a vehicle to a user (Driver)</td>
+    <td>VehicleRequest request</td>
+    <td>Authorization header with Bearer token</td>
+    <td>{user-id} - Valid UUID</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/vehicles/get-parking-detail/{licensePlate}</td>
+    <td>Get parking details of a vehicle (Driver)</td>
+    <td></td>
+    <td>Authorization header with Bearer token</td>
+    <td>{licensePlate} - String</td>
+    <td></td>
+    <td></td>
   </tr>
 </table>
 
