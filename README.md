@@ -210,7 +210,8 @@
 - Prometheus and Grafana
 - Postman
 - Actuator
-- Swagger 3
+- Open Api (Swagger 3)
+- Liquibase
 
 
 ### Swagger
