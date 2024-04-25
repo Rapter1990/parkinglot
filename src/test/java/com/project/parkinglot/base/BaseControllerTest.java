@@ -9,15 +9,12 @@ import com.project.parkinglot.security.CustomUserDetailsService;
 import com.project.parkinglot.security.jwt.JwtUtils;
 import com.project.parkinglot.security.model.entity.UserEntity;
 import org.junit.jupiter.api.BeforeEach;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -59,9 +56,9 @@ public abstract class BaseControllerTest extends AbstractTestContainerConfigurat
         this.mockUserToken = generateMockToken(mockUserDetails);
         this.mockAdminToken = generateMockToken(mockAdminDetails);
 
-        when(customUserDetailsService.loadUserByUsername(mockUserEntity.getEmail())).thenReturn(mockUserDetails);
-        when(customUserDetailsService.loadUserByUsername(mockAdmin.getEmail())).thenReturn(mockAdminDetails);
-        doNothing().when(logService).saveLogToDatabase(any(LogEntity.class));
+        Mockito.when(customUserDetailsService.loadUserByUsername(mockUserEntity.getEmail())).thenReturn(mockUserDetails);
+        Mockito.when(customUserDetailsService.loadUserByUsername(mockAdmin.getEmail())).thenReturn(mockAdminDetails);
+        Mockito.doNothing().when(logService).saveLogToDatabase(Mockito.any(LogEntity.class));
 
     }
 
