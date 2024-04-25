@@ -214,7 +214,7 @@
 - Liquibase
 
 
-### Swagger
+### Open Api (Swagger 3)
 
 ```
 http://localhost:1222/swagger-ui/index.html
