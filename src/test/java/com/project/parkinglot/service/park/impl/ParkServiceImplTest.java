@@ -16,12 +16,8 @@ import com.project.parkinglot.model.entity.ParkEntity;
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
 import com.project.parkinglot.model.entity.VehicleEntity;
 import com.project.parkinglot.model.enums.ParkStatus;
-import com.project.parkinglot.model.mapper.park.ParkCheckInRequestToParkEntityMapper;
-import com.project.parkinglot.model.mapper.park.ParkEntityToParkCheckOutResponseMapper;
 import com.project.parkinglot.model.mapper.park.ParkEntityToParkMapper;
 import com.project.parkinglot.model.mapper.park.ParkToParkCheckInResponseMapper;
-import com.project.parkinglot.model.mapper.park.ParkToParkEntityMapper;
-import com.project.parkinglot.model.mapper.parking_area.ParkingAreaToParkingAreaEntityMapper;
 import com.project.parkinglot.model.mapper.vehicle.VehicleToVehicleEntityMapper;
 import com.project.parkinglot.repository.ParkRepository;
 import com.project.parkinglot.repository.ParkingAreaRepository;
@@ -49,19 +45,11 @@ class ParkServiceImplTest extends BaseServiceTest {
     @Mock
     private VehicleService vehicleService;
 
-    private final ParkCheckInRequestToParkEntityMapper parkCheckInRequestToParkEntityMapper = ParkCheckInRequestToParkEntityMapper.initialize();
-
     private final ParkEntityToParkMapper parkEntityToParkMapper = ParkEntityToParkMapper.initialize();
-
-    private final ParkToParkEntityMapper parkToParkEntityMapper = ParkToParkEntityMapper.initialize();
 
     private final ParkToParkCheckInResponseMapper parkToParkCheckInResponseMapper = ParkToParkCheckInResponseMapper.initialize();
 
     private final VehicleToVehicleEntityMapper vehicleToVehicleEntityMapper = VehicleToVehicleEntityMapper.initialize();
-
-    private final ParkingAreaToParkingAreaEntityMapper parkingAreaToParkingAreaEntityMapper = ParkingAreaToParkingAreaEntityMapper.initialize();
-
-    private final ParkEntityToParkCheckOutResponseMapper parkEntityToParkCheckOutResponseMapper = ParkEntityToParkCheckOutResponseMapper.initialize();
 
     @Test
     void givenUserIdAndParkCheckInRequest_whenCheckIn_ReturnParkCheckInResponse() {
