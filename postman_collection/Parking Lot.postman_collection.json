@@ -1,0 +1,828 @@
+{
+	"info": {
+		"_postman_id": "4a4d71ef-74c4-4090-ad20-f2cdff3a02cb",
+		"name": "Parking Lot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33002673"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Register by Admin",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"admin_fullname\",\r\n  \"password\": \"admin_password\",\r\n  \"username\": \"admin_1\",\r\n  \"email\": \"admin@parkinglot.com\",\r\n  \"role\": \"ROLE_ADMIN\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:1222/api/v1/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login by Admin",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"admin@parkinglot.com\",\r\n  \"password\": \"admin_password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:1222/api/v1/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Refresh Token by Admin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refreshToken\" : \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:1222/api/v1/auth/refreshtoken",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"refreshtoken"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Logout by Admin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInVzZXJGdWxsTmFtZSI6ImFkbWluX2Z1bGxuYW1lIiwiaWQiOjEsImVtYWlsIjoiYWRtaW5AYm9va2RlbGl2ZXJ5LmNvbSIsInVzZXJuYW1lIjoiYWRtaW5fMSIsInN1YiI6ImFkbWluXzEiLCJpYXQiOjE2OTQ0NjMyMzMsImV4cCI6MTY5NDQ2MzI5M30.KI_mAzfACnsxSYnga4IVACD9Zir6V94hhiJPXiEpD8c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:1222/api/v1/auth/logout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Parking Area",
+					"item": [
+						{
+							"name": "Create Parking Area by Admin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_ACCESS_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\r\n    \"name\": \"Bakirkoy Otoparki\",\r\n    \"location\": \"Bakirkoy\",\r\n    \"capacity\": 10,\r\n    \"city\": \"Istanbul\",\r\n    \"priceListRequest\": {\r\n        \"name\": \"Kadikoy Park Ucreti\",\r\n        \"prices\": [\r\n            {\r\n                \"lowerBound\": 0,\r\n                \"upperBound\": 2,\r\n                \"cost\": 20\r\n            }\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:1222/api/v1/parking-area",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"parking-area"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Parking Area by Id and Admin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInVzZXJGdWxsTmFtZSI6ImFkbWluX2Z1bGxuYW1lIiwiaWQiOiIyY2RiMWUxNS0zYjRhLTQyOTktODViMS1jNTlmODUyMjI0ZjAiLCJlbWFpbCI6ImFkbWluQHBhcmtpbmdsb3QuY29tIiwidXNlcm5hbWUiOiJhZG1pbl8xIiwic3ViIjoiYWRtaW5fMSIsImlhdCI6MTcwODYyNDcxMywiZXhwIjoxNzA4NjI1MzEzfQ.fQaCVLFIL0H0-zYmpoYnS5y2P0srZgz41K_AdbtiIO8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:1222/api/v1/parking-area/f3a08d33-920a-4c10-80ba-fc7958de59da",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"parking-area",
+										"f3a08d33-920a-4c10-80ba-fc7958de59da"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Parking Area by Id and Admin Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInVzZXJGdWxsTmFtZSI6ImFkbWluX2Z1bGxuYW1lIiwiaWQiOiIyY2RiMWUxNS0zYjRhLTQyOTktODViMS1jNTlmODUyMjI0ZjAiLCJlbWFpbCI6ImFkbWluQHBhcmtpbmdsb3QuY29tIiwidXNlcm5hbWUiOiJhZG1pbl8xIiwic3ViIjoiYWRtaW5fMSIsImlhdCI6MTcwODYyNDcxMywiZXhwIjoxNzA4NjI1MzEzfQ.fQaCVLFIL0H0-zYmpoYnS5y2P0srZgz41K_AdbtiIO8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:1222/api/v1/parking-area/name/Bakirkoy Otoparki",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"parking-area",
+										"name",
+										"Bakirkoy Otoparki"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Parking Area by Id and Admin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInVzZXJGdWxsTmFtZSI6ImFkbWluX2Z1bGxuYW1lIiwiaWQiOiIyY2RiMWUxNS0zYjRhLTQyOTktODViMS1jNTlmODUyMjI0ZjAiLCJlbWFpbCI6ImFkbWluQHBhcmtpbmdsb3QuY29tIiwidXNlcm5hbWUiOiJhZG1pbl8xIiwic3ViIjoiYWRtaW5fMSIsImlhdCI6MTcwODYyNDcxMywiZXhwIjoxNzA4NjI1MzEzfQ.fQaCVLFIL0H0-zYmpoYnS5y2P0srZgz41K_AdbtiIO8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"capacity\":20\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:1222/api/v1/parking-area/f3a08d33-920a-4c10-80ba-fc7958de59da",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"parking-area",
+										"f3a08d33-920a-4c10-80ba-fc7958de59da"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Parking Area by Id and Admin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInVzZXJGdWxsTmFtZSI6ImFkbWluX2Z1bGxuYW1lIiwiaWQiOiIyY2RiMWUxNS0zYjRhLTQyOTktODViMS1jNTlmODUyMjI0ZjAiLCJlbWFpbCI6ImFkbWluQHBhcmtpbmdsb3QuY29tIiwidXNlcm5hbWUiOiJhZG1pbl8xIiwic3ViIjoiYWRtaW5fMSIsImlhdCI6MTcwODYyNDcxMywiZXhwIjoxNzA4NjI1MzEzfQ.fQaCVLFIL0H0-zYmpoYnS5y2P0srZgz41K_AdbtiIO8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:1222/api/v1/parking-area/f3a08d33-920a-4c10-80ba-fc7958de59da",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"parking-area",
+										"f3a08d33-920a-4c10-80ba-fc7958de59da"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Daily Income",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_ACCESS_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:1222/api/v1/parking-area/income?parkingAreaId=5d28e28d-b06a-4483-a604-0b858f77bcb8&date=2024-04-17",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"parking-area",
+										"income"
+									],
+									"query": [
+										{
+											"key": "parkingAreaId",
+											"value": "5d28e28d-b06a-4483-a604-0b858f77bcb8"
+										},
+										{
+											"key": "date",
+											"value": "2024-04-17"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Admin Info",
+					"item": [
+						{
+							"name": "Get Admin By Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_ACCESS_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:1222/api/v1/users/admin/cc4292d5-2011-463c-882b-06cce8715be7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"admin",
+										"cc4292d5-2011-463c-882b-06cce8715be7"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Register by Driver",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"driver_fullname\",\r\n  \"password\": \"driver_password\",\r\n  \"username\": \"driver_1\",\r\n  \"email\": \"driver_1@parkinglot.com\",\r\n  \"role\": \"ROLE_DRIVER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:1222/api/v1/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login By Driver",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"driver_1@parkinglot.com\",\r\n  \"password\": \"driver_password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:1222/api/v1/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Refresh Token by Driver",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sInVzZXJGdWxsTmFtZSI6ImN1c3RvbWVyX2Z1bGxuYW1lIiwiaWQiOjEsImVtYWlsIjoiY3VzdG9tZXJAYm9va2RlbGl2ZXJ5LmNvbSIsInVzZXJuYW1lIjoiY3VzdG9tZXJfMSIsInN1YiI6ImN1c3RvbWVyXzEiLCJpYXQiOjE2OTQzNjY0MzksImV4cCI6MTY5NDM2NjQ5OX0.NvhDY4m0Ay9o-in-j33Zz-KSVYiqvToQ_EjRlLxwY9s",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refreshToken\" : \"ef8fe0af-69f8-4b58-83bd-38f7d790860a\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:1222/api/v1/auth/refreshtoken",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"refreshtoken"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Logout by Driver",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sInVzZXJGdWxsTmFtZSI6ImN1c3RvbWVyX2Z1bGxuYW1lIiwiaWQiOjEsImVtYWlsIjoiY3VzdG9tZXJAYm9va2RlbGl2ZXJ5LmNvbSIsInVzZXJuYW1lIjoiY3VzdG9tZXJfMSIsInN1YiI6ImN1c3RvbWVyXzEiLCJpYXQiOjE2OTQzNjY0MzksImV4cCI6MTY5NDM2NjQ5OX0.NvhDY4m0Ay9o-in-j33Zz-KSVYiqvToQ_EjRlLxwY9s",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:1222/api/v1/auth/logout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Vehicle",
+					"item": [
+						{
+							"name": "Assign Vehicle to User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{DRIVER_ACCESS_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"licensePlate\": \"34ABC12359\",\r\n  \"vehicleType\": \"MINIVAN\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:1222/api/v1/vehicles/assign/f382c6d9-f790-4c59-b5f8-7aec3e0825e1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"vehicles",
+										"assign",
+										"f382c6d9-f790-4c59-b5f8-7aec3e0825e1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Parking Details By Vehicle",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:1222/api/v1/vehicles/get-parking-detail/34ABC12359",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"vehicles",
+										"get-parking-detail",
+										"34ABC12359"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Driver Info",
+					"item": [
+						{
+							"name": "Get User By Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{DRIVER_ACCESS_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:1222/api/v1/users/user/f382c6d9-f790-4c59-b5f8-7aec3e0825e1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"user",
+										"f382c6d9-f790-4c59-b5f8-7aec3e0825e1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Park",
+					"item": [
+						{
+							"name": "Check in",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{DRIVER_ACCESS_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"parkingAreaId\": \"ba3e152f-1647-4bcd-b451-5e973b357a42\",\r\n    \"vehicle\": {\r\n        \"licensePlate\": \"34ABC12359\",\r\n        \"vehicleType\": \"SUV\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:1222/api/v1/parks/userId/50646a06-5aba-4b59-9fe9-a76012a81969/check-in",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"parks",
+										"userId",
+										"50646a06-5aba-4b59-9fe9-a76012a81969",
+										"check-in"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Check Out",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{DRIVER_ACCESS_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"parkingAreaId\": \"5d28e28d-b06a-4483-a604-0b858f77bcb8\",\r\n    \"vehicleRequest\": {\r\n        \"licensePlate\": \"34ABC12358\",\r\n        \"vehicleType\": \"SEDAN\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:1222/api/v1/parks/userId/6a54de6a-2d0d-449b-901a-b2ee91fa40cf/check-out",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1222",
+									"path": [
+										"api",
+										"v1",
+										"parks",
+										"userId",
+										"6a54de6a-2d0d-449b-901a-b2ee91fa40cf",
+										"check-out"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "ADMIN_ACCESS_TOKEN",
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInVzZXJGdWxsTmFtZSI6ImFkbWluX2Z1bGxuYW1lIiwiaWQiOiIwZGNhOGYwZC02NmU5LTQ5NTgtOWE2ZC01YzQwODIzYmY2MDIiLCJlbWFpbCI6ImFkbWluQHBhcmtpbmdsb3QuY29tIiwidXNlcm5hbWUiOiJhZG1pbl8xIiwic3ViIjoiYWRtaW5fMSIsImlhdCI6MTcxMzQzMTEzMywiZXhwIjoxNzEzNDM3MTMzfQ.ggOSwYgfCArVSaQOYCLchpLpuYwkdEWm9r8A6GmZN_U",
+			"type": "string"
+		},
+		{
+			"key": "DRIVER_ACCESS_TOKEN",
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0RSSVZFUiJdLCJ1c2VyRnVsbE5hbWUiOiJkcml2ZXJfZnVsbG5hbWUiLCJpZCI6IjZhNTRkZTZhLTJkMGQtNDQ5Yi05MDFhLWIyZWU5MWZhNDBjZiIsImVtYWlsIjoiZHJpdmVyXzFAcGFya2luZ2xvdC5jb20iLCJ1c2VybmFtZSI6ImRyaXZlcl8xIiwic3ViIjoiZHJpdmVyXzEiLCJpYXQiOjE3MTMzODIzMjYsImV4cCI6MTcxMzM4ODMyNn0.2YbgK0ZmCKAZshAYdHlkS7m8fI2QqxV2xI8Y4TIC-VI",
+			"type": "string"
+		}
+	]
+}

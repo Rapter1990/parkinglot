@@ -213,6 +213,11 @@
 - Open Api (Swagger 3)
 - Liquibase
 
+### Postman
+
+```
+Import postman collection under postman_collection folder
+```
 
 ### Open Api (Swagger 3)
 
