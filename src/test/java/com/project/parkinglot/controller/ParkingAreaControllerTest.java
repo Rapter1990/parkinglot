@@ -229,7 +229,7 @@ class ParkingAreaControllerTest extends BaseControllerTest {
 
         // Then
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/api/v1/parking-area/id/{parkingAreaId}", mockParkingAreaId)
+                        .get("/api/v1/parking-area/{parkingAreaId}", mockParkingAreaId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .header(HttpHeaders.AUTHORIZATION, mockAdminToken))
                 .andDo(MockMvcResultHandlers.print())
@@ -257,7 +257,7 @@ class ParkingAreaControllerTest extends BaseControllerTest {
 
         // Then
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/api/v1/parking-area/id/{parkingAreaId}", invalidParkingAreaId)
+                        .get("/api/v1/parking-area/{parkingAreaId}", invalidParkingAreaId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .header(HttpHeaders.AUTHORIZATION, mockAdminToken))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
@@ -288,7 +288,7 @@ class ParkingAreaControllerTest extends BaseControllerTest {
         // Then
         mockMvc.perform(
                         MockMvcRequestBuilders
-                                .get("/api/v1/parking-area/id/{parkingAreaId}", mockParkingAreaId)
+                                .get("/api/v1/parking-area/{parkingAreaId}", mockParkingAreaId)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .header(HttpHeaders.AUTHORIZATION, mockUserToken)
                 )
