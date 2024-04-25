@@ -173,10 +173,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="PRICE_LIST_ID" type="VARCHAR(36)">
-                <constraints foreignKeyName="FK__PRICE__PRICE_LIST"
-                             referencedTableName="PRICE_LIST"
-                             referencedColumnNames="ID"
-                />
+                <constraints nullable="false"/>
             </column>
             <column name="CREATED_USER" type="VARCHAR(255)">
                 <constraints nullable="false"/>
@@ -190,6 +187,16 @@
         <!-- =============== -->
         <!-- DDL of PRICE    -->
         <!-- =============== -->
-
     </changeSet>
+
+    <changeSet id="2-add-foreign-key-to-price" author="mseymusyuzen">
+        <addForeignKeyConstraint baseTableName="PRICE"
+                                 baseColumnNames="PRICE_LIST_ID"
+                                 constraintName="FK__PRICE__PRICE_LIST"
+                                 referencedTableName="PRICE_LIST"
+                                 referencedColumnNames="ID"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+    </changeSet>
+
 </databaseChangeLog>
