@@ -267,7 +267,7 @@ $ mvn spring-boot:run
 <details>
 <summary>Click here to show the screenshots of project</summary>
     <p> Figure 1 </p>
-    <img src ="screenshots/1.PNG">
+    <img src ="screenshots/screenshot_1.PNG">
 </details>
 
 ### Contributors
