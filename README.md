@@ -7,10 +7,21 @@
 ### 📖 Information
 
 <ul style="list-style-type:disc">
-  <li><b>Parking Lot</b> is a kind of Spring Boot with covering important and useful features</li> 
-  <li>Here is the explanation of the example
-       <ul>There are 2 roles named <b>Admin</b> and <b>Driver</b></ul>
-       <ul>Explanation A</ul>
+  <li><b>Parking Lot</b> is a <b>Spring Boot application</b> covering important and useful features related to managing parking areas, park check-ins and check-outs for drivers, user management, and vehicle management.</li> 
+  <li>
+    <b>Roles:</b>
+    <ul>
+      <li><b>Admin:</b> Users with administrative privileges.</li>
+      <li><b>Driver:</b> Users with driver privileges.</li>
+    </ul>
+    <b>Explanation:</b>
+    <ul>
+      <li><b>AuthController:</b> API for authentication operations such as register, login, refresh token, and logout.</li>
+      <li><b>ParkController:</b> APIs related to park check-ins and check-outs for <b>drivers</b>.</li>
+      <li><b>ParkingAreaController:</b> APIs for managing parking areas, including creating, updating, and deleting parking areas, as well as retrieving parking area information and daily income handled with <b>admins</b></li>
+      <li><b>UserController:</b> APIs for managing user information, including retrieving user information by ID for both <b>admins</b> and <b>drivers</b>.</li>
+      <li><b>VehicleController:</b> APIs for managing vehicles, including assigning a vehicle to a user and retrieving parking details of a vehicle handled with <b>drivers</b>.</li>
+    </ul>
   </li>
 </ul>
 
