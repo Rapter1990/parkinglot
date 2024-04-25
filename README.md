@@ -124,7 +124,7 @@
     <td>date - Date in dd-MM-yyyy format<br>parkingAreaId - String</td>
     <td>Authorization header with Bearer token</td>
     <td></td>
-    <td></td>
+    <td>parkingAreaId - Valid UUID , date - Valid Date</td>
     <td></td>
   </tr>
   <tr>
