@@ -25,11 +25,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 class ParkControllerTest extends BaseControllerTest {
 
     @MockBean
@@ -65,7 +60,7 @@ class ParkControllerTest extends BaseControllerTest {
                 .build();
 
         // When
-        when(parkService.checkIn(anyString(), any(ParkCheckInRequest.class))).thenReturn(parkCheckInResponse);
+        Mockito.when(parkService.checkIn(Mockito.anyString(), Mockito.any(ParkCheckInRequest.class))).thenReturn(parkCheckInResponse);
 
 
         // Then
@@ -90,7 +85,7 @@ class ParkControllerTest extends BaseControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.httpStatus").value("OK"));
 
         // Verify
-        verify(parkService).checkIn(anyString(), any(ParkCheckInRequest.class));
+        Mockito.verify(parkService).checkIn(Mockito.anyString(), Mockito.any(ParkCheckInRequest.class));
 
     }
 
@@ -113,19 +108,6 @@ class ParkControllerTest extends BaseControllerTest {
                 .vehicle(vehicleRequest)
                 .build();
 
-        final ParkCheckInResponse parkCheckInResponse = ParkCheckInResponse.builder()
-                .parkStatus(ParkStatus.FULL)
-                .parkingAreaId(mockParkingAreaId)
-                .vehicleCheckInResponse(VehicleCheckInResponse.builder()
-                        .vehicleType(vehicleRequest.getVehicleType())
-                        .licensePlate(vehicleRequest.getLicensePlate())
-                        .build())
-                .build();
-
-        // When
-        when(parkService.checkIn(mockUserId, parkCheckInRequest)).thenReturn(parkCheckInResponse);
-
-
         // Then
         mockMvc.perform(
                         MockMvcRequestBuilders
@@ -137,7 +119,7 @@ class ParkControllerTest extends BaseControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized());
 
         // Verify
-        verify(parkService, Mockito.never()).checkIn(mockUserId, parkCheckInRequest);
+        Mockito.verify(parkService, Mockito.never()).checkIn(mockUserId, parkCheckInRequest);
 
     }
 
@@ -172,12 +154,13 @@ class ParkControllerTest extends BaseControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isForbidden());
 
         // Verify
-        verify(parkService, Mockito.never()).checkIn(mockUserId, parkCheckInRequest);
+        Mockito.verify(parkService, Mockito.never()).checkIn(mockUserId, parkCheckInRequest);
 
     }
 
     @Test
     void givenUserIdAndParkCheckOutRequest_WhenCheckOut_ThenReturnParkCheckOutResponse() throws Exception {
+
         // Given
         final String mockUserId = UUID.randomUUID().toString();
         final String mockParkingAreaId = "ParkingArea123";
@@ -210,7 +193,7 @@ class ParkControllerTest extends BaseControllerTest {
                 .build();
 
         // When
-        Mockito.when(parkService.checkOut(anyString(), any(ParkCheckOutRequest.class)))
+        Mockito.when(parkService.checkOut(Mockito.anyString(), Mockito.any(ParkCheckOutRequest.class)))
                 .thenReturn(parkCheckOutResponse);
 
         // Then
@@ -240,11 +223,12 @@ class ParkControllerTest extends BaseControllerTest {
 
         // Verify
         Mockito.verify(parkService, Mockito.times(1))
-                .checkOut(anyString(), any(ParkCheckOutRequest.class));
+                .checkOut(Mockito.anyString(), Mockito.any(ParkCheckOutRequest.class));
     }
 
     @Test
     void givenUserIdAndParkCheckOutResponse_whenUserTokenNotAvailable_thenReturnUnauthorized() throws Exception {
+
         // Given
         final String mockUserId = UUID.randomUUID().toString();
         final String mockParkingAreaId = "ParkingArea123";
@@ -275,7 +259,7 @@ class ParkControllerTest extends BaseControllerTest {
 
         // Verify
         Mockito.verify(parkService, Mockito.never())
-                .checkOut(anyString(), any(ParkCheckOutRequest.class));
+                .checkOut(Mockito.anyString(), Mockito.any(ParkCheckOutRequest.class));
     }
 
     @Test
@@ -311,7 +295,7 @@ class ParkControllerTest extends BaseControllerTest {
 
         // Verify
         Mockito.verify(parkService, Mockito.never())
-                .checkOut(anyString(), any(ParkCheckOutRequest.class));
+                .checkOut(Mockito.anyString(), Mockito.any(ParkCheckOutRequest.class));
 
     }
 }
