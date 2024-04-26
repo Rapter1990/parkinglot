@@ -320,6 +320,8 @@ $ mvn spring-boot:run
     <img src ="screenshots/screenshot_18.PNG">
     <p> Figure 19 </p>
     <img src ="screenshots/screenshot_19.PNG">
+    <p> Figure 19 </p>
+    <img src ="screenshots/prometheus_1.PNG">
 </details>
 
 ### Contributors
