@@ -284,6 +284,42 @@ $ mvn spring-boot:run
 <summary>Click here to show the screenshots of project</summary>
     <p> Figure 1 </p>
     <img src ="screenshots/screenshot_1.PNG">
+    <p> Figure 2 </p>
+    <img src ="screenshots/screenshot_2.PNG">
+    <p> Figure 3 </p>
+    <img src ="screenshots/screenshot_3.PNG">
+    <p> Figure 4 </p>
+    <img src ="screenshots/screenshot_4.PNG">
+    <p> Figure 5 </p>
+    <img src ="screenshots/screenshot_5.PNG">
+    <p> Figure 6 </p>
+    <img src ="screenshots/screenshot_6.PNG">
+    <p> Figure 7 </p>
+    <img src ="screenshots/screenshot_7.PNG">
+    <p> Figure 8 </p>
+    <img src ="screenshots/screenshot_8.PNG">
+    <p> Figure 9 </p>
+    <img src ="screenshots/screenshot_9.PNG">
+    <p> Figure 10 </p>
+    <img src ="screenshots/screenshot_10.PNG">
+    <p> Figure 11 </p>
+    <img src ="screenshots/screenshot_11.PNG">
+    <p> Figure 12 </p>
+    <img src ="screenshots/screenshot_12.PNG">
+    <p> Figure 13 </p>
+    <img src ="screenshots/screenshot_13.PNG">
+    <p> Figure 14 </p>
+    <img src ="screenshots/screenshot_14.PNG">
+    <p> Figure 15 </p>
+    <img src ="screenshots/screenshot_15.PNG">
+    <p> Figure 16 </p>
+    <img src ="screenshots/screenshot_16.PNG">
+    <p> Figure 17 </p>
+    <img src ="screenshots/screenshot_17.PNG">
+    <p> Figure 18 </p>
+    <img src ="screenshots/screenshot_18.PNG">
+    <p> Figure 19 </p>
+    <img src ="screenshots/screenshot_19.PNG">
 </details>
 
 ### Contributors
