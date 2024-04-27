@@ -320,8 +320,28 @@ $ mvn spring-boot:run
     <img src ="screenshots/screenshot_18.PNG">
     <p> Figure 19 </p>
     <img src ="screenshots/screenshot_19.PNG">
-    <p> Figure 19 </p>
+    <p> Figure 20 </p>
     <img src ="screenshots/prometheus_1.PNG">
+    <p> Figure 21 </p>
+    <img src ="screenshots/grafana_1.PNG">
+    <p> Figure 22 </p>
+    <img src ="screenshots/grafana_2.PNG">
+    <p> Figure 23 </p>
+    <img src ="screenshots/grafana_3.PNG">
+    <p> Figure 24 </p>
+    <img src ="screenshots/grafana_3.PNG">
+    <p> Figure 25 </p>
+    <img src ="screenshots/grafana_4.PNG">
+    <p> Figure 26 </p>
+    <img src ="screenshots/grafana_5.PNG">
+    <p> Figure 27 </p>
+    <img src ="screenshots/grafana_6.PNG">
+    <p> Figure 28 </p>
+    <img src ="screenshots/grafana_7.PNG">
+    <p> Figure 29 </p>
+    <img src ="screenshots/grafana_8.PNG">
+    <p> Figure 30 </p>
+    <img src ="screenshots/grafana_9.PNG">
 </details>
 
 ### Contributors
