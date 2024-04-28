@@ -201,10 +201,10 @@
 </table>
 
 
-
+---
 ### Technologies
 
----
+
 - Java 17
 - Spring Boot 3.0
 - Spring Security
@@ -224,18 +224,21 @@
 - Open Api (Swagger 3)
 - Liquibase
 
+---
 ### Postman
 
 ```
 Import postman collection under postman_collection folder
 ```
 
+---
 ### Open Api (Swagger 3)
 
 ```
 http://localhost:1222/swagger-ui/index.html
 ```
 
+---
 ### Prerequisites
 
 #### Define Variable in .env file
@@ -278,13 +281,14 @@ $ mvn clean install
 $ mvn spring-boot:run
 ```
 
+---
 ### Docker Image Location
 
 ```
 https://hub.docker.com/repository/docker/noyandocker/parkinglot/general
 ```
 
-
+---
 ### Prometheus 
 To open `Prometheus` running on Docker as Image , please go to the link shown below. 
 Its screenshot is displayed in the Screenshots part.
@@ -292,6 +296,7 @@ Its screenshot is displayed in the Screenshots part.
 http://localhost:9090
 ```
 
+---
 ### Grafana 
 To open `Grafana` running on Docker as Image , please go to the link shown below. 
 Its screenshots is displayed in the Screenshots part.
@@ -299,6 +304,7 @@ Its screenshots is displayed in the Screenshots part.
 http://localhost:3000
 ```
 
+---
 ### Screenshots
 
 <details>
