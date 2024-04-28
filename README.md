@@ -343,18 +343,16 @@ http://localhost:3000
     <p> Figure 23 </p>
     <img src ="screenshots/grafana_3.PNG">
     <p> Figure 24 </p>
-    <img src ="screenshots/grafana_3.PNG">
-    <p> Figure 25 </p>
     <img src ="screenshots/grafana_4.PNG">
-    <p> Figure 26 </p>
+    <p> Figure 25 </p>
     <img src ="screenshots/grafana_5.PNG">
-    <p> Figure 27 </p>
+    <p> Figure 26 </p>
     <img src ="screenshots/grafana_6.PNG">
-    <p> Figure 28 </p>
+    <p> Figure 27 </p>
     <img src ="screenshots/grafana_7.PNG">
-    <p> Figure 29 </p>
+    <p> Figure 28 </p>
     <img src ="screenshots/grafana_8.PNG">
-    <p> Figure 30 </p>
+    <p> Figure 29 </p>
     <img src ="screenshots/grafana_9.PNG">
 </details>
 
