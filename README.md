@@ -278,15 +278,15 @@ $ mvn clean install
 $ mvn spring-boot:run
 ```
 
-#### Prometheus running on Docker as Image
-To open `Prometheus` , please go to the link shown below. 
+### Prometheus 
+To open `Prometheus` running on Docker as Image , please go to the link shown below. 
 Its screenshot is displayed in the Screenshots part.
 ```
 http://localhost:9090
 ```
 
-#### Grafana running on Docker as Image
-To open `Grafana` , please go to the link shown below. 
+### Grafana 
+To open `Grafana` running on Docker as Image , please go to the link shown below. 
 Its screenshots is displayed in the Screenshots part.
 ```
 http://localhost:3000
