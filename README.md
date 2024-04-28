@@ -278,6 +278,13 @@ $ mvn clean install
 $ mvn spring-boot:run
 ```
 
+### Docker Image Location
+
+```
+https://hub.docker.com/repository/docker/noyandocker/parkinglot/general
+```
+
+
 ### Prometheus 
 To open `Prometheus` running on Docker as Image , please go to the link shown below. 
 Its screenshot is displayed in the Screenshots part.
