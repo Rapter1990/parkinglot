@@ -1,7 +1,7 @@
 # Case Study - Parking Lot
 
 <p align="center">
-    <img src="screenshots/parking_lot_main_image.png" alt="Main Information" width="700" height="500">
+    <img src="screenshots/parking_lot_main_image.png" alt="Main Information" width="800" height="500">
 </p>
 
 ### 📖 Information
