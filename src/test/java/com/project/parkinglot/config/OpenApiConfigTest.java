@@ -6,9 +6,8 @@ import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OpenApiConfigTest {
 
@@ -19,9 +18,9 @@ class OpenApiConfigTest {
         OpenAPIDefinition openAPIDefinition = OpenApiConfig.class.getAnnotation(OpenAPIDefinition.class);
 
         // Then
-        assertEquals("1.0.0", openAPIDefinition.info().version());
-        assertEquals("Parking Lot App API", openAPIDefinition.info().title());
-        assertEquals("Case Study - Parking Lot (Spring Boot, Spring Security , Mysql, JUnit, Integration Test, Docker, Test Container, AOP, Prometheus, Grafana) ", openAPIDefinition.info().description());
+        Assertions.assertEquals("1.0.0", openAPIDefinition.info().version());
+        Assertions.assertEquals("Parking Lot App API", openAPIDefinition.info().title());
+        Assertions.assertEquals("Case Study - Parking Lot (Spring Boot, Spring Security , Mysql, JUnit, Integration Test, Docker, Test Container, AOP, Prometheus, Grafana) ", openAPIDefinition.info().description());
 
     }
 
@@ -32,12 +31,12 @@ class OpenApiConfigTest {
         SecurityScheme securityScheme = OpenApiConfig.class.getAnnotation(SecurityScheme.class);
 
         // Then
-        assertEquals("bearerAuth", securityScheme.name());
-        assertEquals("JWT Token", securityScheme.description());
-        assertEquals("bearer", securityScheme.scheme());
-        assertEquals(SecuritySchemeType.HTTP, securityScheme.type());
-        assertEquals("JWT", securityScheme.bearerFormat());
-        assertEquals(SecuritySchemeIn.HEADER, securityScheme.in());
+        Assertions.assertEquals("bearerAuth", securityScheme.name());
+        Assertions.assertEquals("JWT Token", securityScheme.description());
+        Assertions.assertEquals("bearer", securityScheme.scheme());
+        Assertions.assertEquals(SecuritySchemeType.HTTP, securityScheme.type());
+        Assertions.assertEquals("JWT", securityScheme.bearerFormat());
+        Assertions.assertEquals(SecuritySchemeIn.HEADER, securityScheme.in());
 
     }
 
@@ -49,8 +48,8 @@ class OpenApiConfigTest {
         Contact contact = info.contact();
 
         // Then
-        assertEquals("Sercan Noyan Germiyanoğlu | Mehmet Şeymus Yüzen | Harun Yusuf Ekşioğlu | Muhammet Oğuzhan Aydoğan", contact.name());
-        assertEquals("https://github.com/Rapter1990/parkinglot/", contact.url());
+        Assertions.assertEquals("Sercan Noyan Germiyanoğlu | Mehmet Şeymus Yüzen | Harun Yusuf Ekşioğlu | Muhammet Oğuzhan Aydoğan", contact.name());
+        Assertions.assertEquals("https://github.com/Rapter1990/parkinglot/", contact.url());
 
     }
 

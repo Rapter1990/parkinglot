@@ -14,8 +14,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.springframework.core.MethodParameter;
-import org.springframework.http.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpInputMessage;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
@@ -28,8 +33,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.mockito.Mockito.mock;
 
 @Slf4j
 class GlobalExceptionHandlerTest extends BaseControllerTest {
@@ -71,7 +74,7 @@ class GlobalExceptionHandlerTest extends BaseControllerTest {
     void givenMalformedJsonRequest_whenThrowHttpMessageNotReadableException_thenReturnErrorResponse() {
 
         // Given
-        HttpInputMessage httpInputMessage = mock(HttpInputMessage.class);
+        HttpInputMessage httpInputMessage = Mockito.mock(HttpInputMessage.class);
         HttpMessageNotReadableException mockException = new HttpMessageNotReadableException("Malformed JSON request", httpInputMessage);
 
         // When
@@ -370,7 +373,7 @@ class GlobalExceptionHandlerTest extends BaseControllerTest {
         // Then
         ResponseEntity<ErrorResponse> responseEntity = globalExceptionHandler.handleParkingAreaNotFoundException(mockException);
 
-        Assertions.assertEquals(HttpStatus.BAD_REQUEST,responseEntity.getStatusCode());
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
         Assertions.assertEquals(expectedErrorResponse.getTimestamp().toLocalDate(),
                 responseEntity.getBody().getTimestamp().toLocalDate());
 

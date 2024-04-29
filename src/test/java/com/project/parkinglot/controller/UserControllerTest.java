@@ -16,9 +16,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.UUID;
 
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-
 class UserControllerTest extends BaseControllerTest {
 
     @MockBean
@@ -84,7 +81,7 @@ class UserControllerTest extends BaseControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isForbidden());
 
         // Verify
-        Mockito.verify(userGetService, never()).getUserById(mockUserId);
+        Mockito.verify(userGetService, Mockito.never()).getUserById(mockUserId);
 
     }
 
@@ -110,7 +107,7 @@ class UserControllerTest extends BaseControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized());
 
         // Verify
-        Mockito.verify(userGetService, never()).getUserById(mockUserId);
+        Mockito.verify(userGetService, Mockito.never()).getUserById(mockUserId);
 
     }
 
@@ -146,7 +143,7 @@ class UserControllerTest extends BaseControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.httpStatus").value("OK"));
 
         // Verify
-        Mockito.verify(userGetService, times(1)).getAdminById(mockAdminId);
+        Mockito.verify(userGetService, Mockito.times(1)).getAdminById(mockAdminId);
     }
 
     @Test
@@ -173,7 +170,7 @@ class UserControllerTest extends BaseControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isForbidden());
 
         // Verify
-        Mockito.verify(userGetService, never()).getAdminById(mockAdminId);
+        Mockito.verify(userGetService, Mockito.never()).getAdminById(mockAdminId);
     }
 
     @Test
@@ -199,7 +196,7 @@ class UserControllerTest extends BaseControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized());
 
         // Verify
-        Mockito.verify(userGetService, never()).getAdminById(mockAdminId);
+        Mockito.verify(userGetService, Mockito.never()).getAdminById(mockAdminId);
     }
 
 }

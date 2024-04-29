@@ -13,18 +13,17 @@ import com.project.parkinglot.security.model.entity.UserEntity;
 import com.project.parkinglot.security.model.enums.Role;
 import com.project.parkinglot.security.repository.UserRepository;
 import com.project.parkinglot.service.auth.RefreshTokenService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 class AuthServiceImplTest extends BaseServiceTest {
 
@@ -67,16 +66,16 @@ class AuthServiceImplTest extends BaseServiceTest {
                 .build();
 
         // When
-        when(userRepository.existsByEmail(request.getEmail())).thenReturn(false);
-        when(userRepository.save(any(UserEntity.class))).thenReturn(userEntity);
+        Mockito.when(userRepository.existsByEmail(request.getEmail())).thenReturn(false);
+        Mockito.when(userRepository.save(Mockito.any(UserEntity.class))).thenReturn(userEntity);
 
         // Then
         String result = authService.register(request);
 
-        assertEquals("Success", result);
+        Assertions.assertEquals("Success", result);
 
         // Verify
-        verify(userRepository).save(any(UserEntity.class));
+        Mockito.verify(userRepository).save(Mockito.any(UserEntity.class));
     }
 
     @Test
@@ -92,13 +91,13 @@ class AuthServiceImplTest extends BaseServiceTest {
                 .build();
 
         // When
-        when(userRepository.existsByEmail(request.getEmail())).thenReturn(true);
+        Mockito.when(userRepository.existsByEmail(request.getEmail())).thenReturn(true);
 
         // Then
-        assertThrows(Exception.class, () -> authService.register(request));
+        Assertions.assertThrows(Exception.class, () -> authService.register(request));
 
         // Verify
-        verify(userRepository, never()).save(any(UserEntity.class));
+        Mockito.verify(userRepository, Mockito.never()).save(Mockito.any(UserEntity.class));
 
     }
 
@@ -123,26 +122,26 @@ class AuthServiceImplTest extends BaseServiceTest {
                 request.getEmail(), request.getPassword());
 
         // When
-        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
+        Mockito.when(authenticationManager.authenticate(Mockito.any(UsernamePasswordAuthenticationToken.class)))
                 .thenReturn(mockAuthentication);
-        when(jwtUtils.generateJwtToken(mockAuthentication)).thenReturn("mockedToken");
-        when(userRepository.findByEmail(request.getEmail())).thenReturn(Optional.of(mockUserEntity));
-        when(refreshTokenService.createRefreshToken(any(UserEntity.class)))
+        Mockito.when(jwtUtils.generateJwtToken(mockAuthentication)).thenReturn("mockedToken");
+        Mockito.when(userRepository.findByEmail(request.getEmail())).thenReturn(Optional.of(mockUserEntity));
+        Mockito.when(refreshTokenService.createRefreshToken(Mockito.any(UserEntity.class)))
                 .thenReturn("actualRefreshToken");
 
         // Then
         JWTResponse jwtResponse = authService.login(request);
 
-        assertNotNull(jwtResponse);
-        assertEquals(request.getEmail(), jwtResponse.getEmail());
-        assertEquals("mockedToken", jwtResponse.getToken());
-        assertEquals("actualRefreshToken", jwtResponse.getRefreshToken());
+        Assertions.assertNotNull(jwtResponse);
+        Assertions.assertEquals(request.getEmail(), jwtResponse.getEmail());
+        Assertions.assertEquals("mockedToken", jwtResponse.getToken());
+        Assertions.assertEquals("actualRefreshToken", jwtResponse.getRefreshToken());
 
         // Verify
-        verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
-        verify(jwtUtils).generateJwtToken(mockAuthentication);
-        verify(userRepository).findByEmail(request.getEmail());
-        verify(refreshTokenService).createRefreshToken(any(UserEntity.class));
+        Mockito.verify(authenticationManager).authenticate(Mockito.any(UsernamePasswordAuthenticationToken.class));
+        Mockito.verify(jwtUtils).generateJwtToken(mockAuthentication);
+        Mockito.verify(userRepository).findByEmail(request.getEmail());
+        Mockito.verify(refreshTokenService).createRefreshToken(Mockito.any(UserEntity.class));
 
     }
 
@@ -156,14 +155,14 @@ class AuthServiceImplTest extends BaseServiceTest {
                 .build();
 
         // When
-        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
+        Mockito.when(authenticationManager.authenticate(Mockito.any(UsernamePasswordAuthenticationToken.class)))
                 .thenReturn(null);
 
         // Then
-        assertThrows(RuntimeException.class, () -> authService.login(request));
+        Assertions.assertThrows(RuntimeException.class, () -> authService.login(request));
 
         // Verify
-        verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
+        Mockito.verify(authenticationManager).authenticate(Mockito.any(UsernamePasswordAuthenticationToken.class));
 
     }
 
@@ -181,22 +180,22 @@ class AuthServiceImplTest extends BaseServiceTest {
                 .build();
 
         // When
-        when(refreshTokenService.findByToken(request.getRefreshToken()))
+        Mockito.when(refreshTokenService.findByToken(request.getRefreshToken()))
                 .thenReturn(Optional.of(refreshToken));
-        when(refreshTokenService.isRefreshExpired(refreshToken)).thenReturn(false);
-        when(jwtUtils.generateJwtToken(any(CustomUserDetails.class))).thenReturn("newMockedToken");
+        Mockito.when(refreshTokenService.isRefreshExpired(refreshToken)).thenReturn(false);
+        Mockito.when(jwtUtils.generateJwtToken(Mockito.any(CustomUserDetails.class))).thenReturn("newMockedToken");
 
         // Then
         TokenRefreshResponse tokenRefreshResponse = authService.refreshToken(request);
 
-        assertNotNull(tokenRefreshResponse);
-        assertEquals("newMockedToken", tokenRefreshResponse.getAccessToken());
-        assertEquals("validRefreshToken", tokenRefreshResponse.getRefreshToken());
+        Assertions.assertNotNull(tokenRefreshResponse);
+        Assertions.assertEquals("newMockedToken", tokenRefreshResponse.getAccessToken());
+        Assertions.assertEquals("validRefreshToken", tokenRefreshResponse.getRefreshToken());
 
         // Verify
-        verify(refreshTokenService).findByToken(request.getRefreshToken());
-        verify(refreshTokenService).isRefreshExpired(refreshToken);
-        verify(jwtUtils).generateJwtToken(any(CustomUserDetails.class));
+        Mockito.verify(refreshTokenService).findByToken(request.getRefreshToken());
+        Mockito.verify(refreshTokenService).isRefreshExpired(refreshToken);
+        Mockito.verify(jwtUtils).generateJwtToken(Mockito.any(CustomUserDetails.class));
 
     }
 
@@ -209,14 +208,14 @@ class AuthServiceImplTest extends BaseServiceTest {
                 .build();
 
         // When
-        when(refreshTokenService.findByToken(request.getRefreshToken()))
+        Mockito.when(refreshTokenService.findByToken(request.getRefreshToken()))
                 .thenReturn(Optional.empty());
 
         // Then
-        assertThrows(Exception.class, () -> authService.refreshToken(request));
+        Assertions.assertThrows(Exception.class, () -> authService.refreshToken(request));
 
         // Verify
-        verify(refreshTokenService).findByToken(request.getRefreshToken());
+        Mockito.verify(refreshTokenService).findByToken(request.getRefreshToken());
 
     }
 
@@ -234,18 +233,18 @@ class AuthServiceImplTest extends BaseServiceTest {
                 .build();
 
         // When
-        when(refreshTokenService.findByToken(request.getRefreshToken()))
+        Mockito.when(refreshTokenService.findByToken(request.getRefreshToken()))
                 .thenReturn(Optional.of(refreshToken));
-        when(refreshTokenService.isRefreshExpired(refreshToken)).thenReturn(true);
+        Mockito.when(refreshTokenService.isRefreshExpired(refreshToken)).thenReturn(true);
 
         // Then
         TokenRefreshResponse tokenRefreshResponse = authService.refreshToken(request);
 
-        assertNull(tokenRefreshResponse);
+        Assertions.assertNull(tokenRefreshResponse);
 
         // Verify
-        verify(refreshTokenService).findByToken(request.getRefreshToken());
-        verify(refreshTokenService).isRefreshExpired(refreshToken);
+        Mockito.verify(refreshTokenService).findByToken(request.getRefreshToken());
+        Mockito.verify(refreshTokenService).isRefreshExpired(refreshToken);
 
     }
 
@@ -257,17 +256,17 @@ class AuthServiceImplTest extends BaseServiceTest {
         String userId = "1L";
 
         // When
-        when(jwtUtils.extractTokenFromHeader(token)).thenReturn(token);
-        when(jwtUtils.validateJwtToken(token)).thenReturn(true);
-        when(jwtUtils.getIdFromToken(token)).thenReturn(userId);
+        Mockito.when(jwtUtils.extractTokenFromHeader(token)).thenReturn(token);
+        Mockito.when(jwtUtils.validateJwtToken(token)).thenReturn(true);
+        Mockito.when(jwtUtils.getIdFromToken(token)).thenReturn(userId);
 
         // Then
         String result = authService.logout(token);
 
-        assertEquals("Success", result);
+        Assertions.assertEquals("Success", result);
 
         // Verify
-        verify(refreshTokenService).deleteByUserId(userId);
+        Mockito.verify(refreshTokenService).deleteByUserId(userId);
 
     }
 
@@ -277,16 +276,16 @@ class AuthServiceImplTest extends BaseServiceTest {
         // Given
         String token = "invalidAuthToken";
 
-        when(jwtUtils.extractTokenFromHeader(token)).thenReturn(null); // Invalid token
+        Mockito.when(jwtUtils.extractTokenFromHeader(token)).thenReturn(null); // Invalid token
 
         // When
         String result = authService.logout(token);
 
         // Then
-        assertEquals("Failed", result);
+        Assertions.assertEquals("Failed", result);
 
         // Verify
-        verify(refreshTokenService, never()).deleteByUserId(anyString());
+        Mockito.verify(refreshTokenService, Mockito.never()).deleteByUserId(Mockito.anyString());
 
     }
 
@@ -296,17 +295,17 @@ class AuthServiceImplTest extends BaseServiceTest {
         // Given
         String token = "invalidAuthToken";
 
-        when(jwtUtils.extractTokenFromHeader(token)).thenReturn(token);
-        when(jwtUtils.validateJwtToken(token)).thenReturn(false);
+        Mockito.when(jwtUtils.extractTokenFromHeader(token)).thenReturn(token);
+        Mockito.when(jwtUtils.validateJwtToken(token)).thenReturn(false);
 
         // When
         String result = authService.logout(token);
 
         // Then
-        assertEquals("Failed", result);
+        Assertions.assertEquals("Failed", result);
 
         // Verify
-        verify(refreshTokenService, never()).deleteByUserId(anyString());
+        Mockito.verify(refreshTokenService, Mockito.never()).deleteByUserId(Mockito.anyString());
 
     }
 
@@ -331,16 +330,16 @@ class AuthServiceImplTest extends BaseServiceTest {
                 .build();
 
         // When
-        when(userRepository.existsByEmail(request.getEmail())).thenReturn(false);
-        when(userRepository.save(any(UserEntity.class))).thenReturn(userEntity);
+        Mockito.when(userRepository.existsByEmail(request.getEmail())).thenReturn(false);
+        Mockito.when(userRepository.save(Mockito.any(UserEntity.class))).thenReturn(userEntity);
 
         // Then
         String result = authService.register(request);
 
-        assertEquals("Success", result);
+        Assertions.assertEquals("Success", result);
 
         // Verify
-        verify(userRepository).save(any(UserEntity.class));
+        Mockito.verify(userRepository).save(Mockito.any(UserEntity.class));
 
     }
 
@@ -357,13 +356,13 @@ class AuthServiceImplTest extends BaseServiceTest {
                 .build();
 
         // When
-        when(userRepository.existsByEmail(request.getEmail())).thenReturn(true);
+        Mockito.when(userRepository.existsByEmail(request.getEmail())).thenReturn(true);
 
         // Then
-        assertThrows(Exception.class, () -> authService.register(request));
+        Assertions.assertThrows(Exception.class, () -> authService.register(request));
 
         // Verify
-        verify(userRepository, never()).save(any(UserEntity.class));
+        Mockito.verify(userRepository, Mockito.never()).save(Mockito.any(UserEntity.class));
 
     }
 
@@ -388,26 +387,26 @@ class AuthServiceImplTest extends BaseServiceTest {
                 request.getEmail(), request.getPassword());
 
         // When
-        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
+        Mockito.when(authenticationManager.authenticate(Mockito.any(UsernamePasswordAuthenticationToken.class)))
                 .thenReturn(mockAuthentication);
-        when(jwtUtils.generateJwtToken(mockAuthentication)).thenReturn("mockedToken");
-        when(userRepository.findByEmail(request.getEmail())).thenReturn(Optional.of(mockUserEntity));
-        when(refreshTokenService.createRefreshToken(any(UserEntity.class)))
+        Mockito.when(jwtUtils.generateJwtToken(mockAuthentication)).thenReturn("mockedToken");
+        Mockito.when(userRepository.findByEmail(request.getEmail())).thenReturn(Optional.of(mockUserEntity));
+        Mockito.when(refreshTokenService.createRefreshToken(Mockito.any(UserEntity.class)))
                 .thenReturn("actualRefreshToken");
 
         // Then
         JWTResponse jwtResponse = authService.login(request);
 
-        assertNotNull(jwtResponse);
-        assertEquals(request.getEmail(), jwtResponse.getEmail());
-        assertEquals("mockedToken", jwtResponse.getToken());
-        assertEquals("actualRefreshToken", jwtResponse.getRefreshToken());
+        Assertions.assertNotNull(jwtResponse);
+        Assertions.assertEquals(request.getEmail(), jwtResponse.getEmail());
+        Assertions.assertEquals("mockedToken", jwtResponse.getToken());
+        Assertions.assertEquals("actualRefreshToken", jwtResponse.getRefreshToken());
 
         // Verify
-        verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
-        verify(jwtUtils).generateJwtToken(mockAuthentication);
-        verify(userRepository).findByEmail(request.getEmail());
-        verify(refreshTokenService).createRefreshToken(any(UserEntity.class));
+        Mockito.verify(authenticationManager).authenticate(Mockito.any(UsernamePasswordAuthenticationToken.class));
+        Mockito.verify(jwtUtils).generateJwtToken(mockAuthentication);
+        Mockito.verify(userRepository).findByEmail(request.getEmail());
+        Mockito.verify(refreshTokenService).createRefreshToken(Mockito.any(UserEntity.class));
 
     }
 
@@ -421,14 +420,14 @@ class AuthServiceImplTest extends BaseServiceTest {
                 .build();
 
         // When
-        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
+        Mockito.when(authenticationManager.authenticate(Mockito.any(UsernamePasswordAuthenticationToken.class)))
                 .thenReturn(null);
 
         // Then
-        assertThrows(RuntimeException.class, () -> authService.login(request));
+        Assertions.assertThrows(RuntimeException.class, () -> authService.login(request));
 
         // Verify
-        verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
+        Mockito.verify(authenticationManager).authenticate(Mockito.any(UsernamePasswordAuthenticationToken.class));
 
     }
 
@@ -446,22 +445,22 @@ class AuthServiceImplTest extends BaseServiceTest {
                 .build();
 
         // When
-        when(refreshTokenService.findByToken(request.getRefreshToken()))
+        Mockito.when(refreshTokenService.findByToken(request.getRefreshToken()))
                 .thenReturn(Optional.of(refreshToken));
-        when(refreshTokenService.isRefreshExpired(refreshToken)).thenReturn(false);
-        when(jwtUtils.generateJwtToken(any(CustomUserDetails.class))).thenReturn("newMockedToken");
+        Mockito.when(refreshTokenService.isRefreshExpired(refreshToken)).thenReturn(false);
+        Mockito.when(jwtUtils.generateJwtToken(Mockito.any(CustomUserDetails.class))).thenReturn("newMockedToken");
 
         // Then
         TokenRefreshResponse tokenRefreshResponse = authService.refreshToken(request);
 
-        assertNotNull(tokenRefreshResponse);
-        assertEquals("newMockedToken", tokenRefreshResponse.getAccessToken());
-        assertEquals("validRefreshToken", tokenRefreshResponse.getRefreshToken());
+        Assertions.assertNotNull(tokenRefreshResponse);
+        Assertions.assertEquals("newMockedToken", tokenRefreshResponse.getAccessToken());
+        Assertions.assertEquals("validRefreshToken", tokenRefreshResponse.getRefreshToken());
 
         // Verify
-        verify(refreshTokenService).findByToken(request.getRefreshToken());
-        verify(refreshTokenService).isRefreshExpired(refreshToken);
-        verify(jwtUtils).generateJwtToken(any(CustomUserDetails.class));
+        Mockito.verify(refreshTokenService).findByToken(request.getRefreshToken());
+        Mockito.verify(refreshTokenService).isRefreshExpired(refreshToken);
+        Mockito.verify(jwtUtils).generateJwtToken(Mockito.any(CustomUserDetails.class));
 
     }
 
@@ -474,14 +473,14 @@ class AuthServiceImplTest extends BaseServiceTest {
                 .build();
 
         // When
-        when(refreshTokenService.findByToken(request.getRefreshToken()))
+        Mockito.when(refreshTokenService.findByToken(request.getRefreshToken()))
                 .thenReturn(Optional.empty());
 
         // Then
-        assertThrows(Exception.class, () -> authService.refreshToken(request));
+        Assertions.assertThrows(Exception.class, () -> authService.refreshToken(request));
 
         // Verify
-        verify(refreshTokenService).findByToken(request.getRefreshToken());
+        Mockito.verify(refreshTokenService).findByToken(request.getRefreshToken());
 
     }
 
@@ -499,18 +498,18 @@ class AuthServiceImplTest extends BaseServiceTest {
                 .build();
 
         // When
-        when(refreshTokenService.findByToken(request.getRefreshToken()))
+        Mockito.when(refreshTokenService.findByToken(request.getRefreshToken()))
                 .thenReturn(Optional.of(refreshToken));
-        when(refreshTokenService.isRefreshExpired(refreshToken)).thenReturn(true);
+        Mockito.when(refreshTokenService.isRefreshExpired(refreshToken)).thenReturn(true);
 
         // Then
         TokenRefreshResponse tokenRefreshResponse = authService.refreshToken(request);
 
-        assertNull(tokenRefreshResponse);
+        Assertions.assertNull(tokenRefreshResponse);
 
         // Verify
-        verify(refreshTokenService).findByToken(request.getRefreshToken());
-        verify(refreshTokenService).isRefreshExpired(refreshToken);
+        Mockito.verify(refreshTokenService).findByToken(request.getRefreshToken());
+        Mockito.verify(refreshTokenService).isRefreshExpired(refreshToken);
 
     }
 
@@ -522,17 +521,17 @@ class AuthServiceImplTest extends BaseServiceTest {
         String userId = "1L";
 
         // When
-        when(jwtUtils.extractTokenFromHeader(token)).thenReturn(token);
-        when(jwtUtils.validateJwtToken(token)).thenReturn(true);
-        when(jwtUtils.getIdFromToken(token)).thenReturn(userId);
+        Mockito.when(jwtUtils.extractTokenFromHeader(token)).thenReturn(token);
+        Mockito.when(jwtUtils.validateJwtToken(token)).thenReturn(true);
+        Mockito.when(jwtUtils.getIdFromToken(token)).thenReturn(userId);
 
         // Then
         String result = authService.logout(token);
 
-        assertEquals("Success", result);
+        Assertions.assertEquals("Success", result);
 
         // Verify
-        verify(refreshTokenService).deleteByUserId(userId);
+        Mockito.verify(refreshTokenService).deleteByUserId(userId);
 
     }
 
@@ -543,15 +542,15 @@ class AuthServiceImplTest extends BaseServiceTest {
         String token = "invalidAuthToken";
 
         // When
-        when(jwtUtils.extractTokenFromHeader(token)).thenReturn(null); // Invalid token
+        Mockito.when(jwtUtils.extractTokenFromHeader(token)).thenReturn(null); // Invalid token
 
         // Then
         String result = authService.logout(token);
 
-        assertEquals("Failed", result);
+        Assertions.assertEquals("Failed", result);
 
         // Verify
-        verify(refreshTokenService, never()).deleteByUserId(anyString());
+        Mockito.verify(refreshTokenService, Mockito.never()).deleteByUserId(Mockito.anyString());
 
     }
 
@@ -562,16 +561,16 @@ class AuthServiceImplTest extends BaseServiceTest {
         String token = "invalidAuthToken";
 
         // When
-        when(jwtUtils.extractTokenFromHeader(token)).thenReturn(token);
-        when(jwtUtils.validateJwtToken(token)).thenReturn(false);
+        Mockito.when(jwtUtils.extractTokenFromHeader(token)).thenReturn(token);
+        Mockito.when(jwtUtils.validateJwtToken(token)).thenReturn(false);
 
         // Then
         String result = authService.logout(token);
 
-        assertEquals("Failed", result);
+        Assertions.assertEquals("Failed", result);
 
         // Verify
-        verify(refreshTokenService, never()).deleteByUserId(anyString());
+        Mockito.verify(refreshTokenService, Mockito.never()).deleteByUserId(Mockito.anyString());
 
     }
 

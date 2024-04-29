@@ -11,15 +11,12 @@ import com.project.parkinglot.security.model.entity.UserEntity;
 import com.project.parkinglot.security.model.enums.Role;
 import com.project.parkinglot.service.auth.impl.AuthServiceImpl;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 class AuthControllerTest extends BaseControllerTest {
 
@@ -40,16 +37,16 @@ class AuthControllerTest extends BaseControllerTest {
                 .build();
 
         // When
-        when(authService.register(request)).thenReturn("Success");
+        Mockito.when(authService.register(request)).thenReturn("Success");
 
         // Then
-        mockMvc.perform(post("/api/v1/auth/register")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isCreated());
+                .andExpect(MockMvcResultMatchers.status().isCreated());
 
         // Verify
-        verify(authService).register(request);
+        Mockito.verify(authService).register(request);
 
     }
 
@@ -66,16 +63,16 @@ class AuthControllerTest extends BaseControllerTest {
                 .build();
 
         // When
-        when(authService.register(request)).thenReturn("Success");
+        Mockito.when(authService.register(request)).thenReturn("Success");
 
         // Then
-        mockMvc.perform(post("/api/v1/auth/register")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isCreated());
+                .andExpect(MockMvcResultMatchers.status().isCreated());
 
         // Verify
-        verify(authService).register(request);
+        Mockito.verify(authService).register(request);
 
     }
 
@@ -95,17 +92,17 @@ class AuthControllerTest extends BaseControllerTest {
                 .build();
 
         // When
-        when(authService.login(request)).thenReturn(mockResponse);
+        Mockito.when(authService.login(request)).thenReturn(mockResponse);
 
         // Then
-        mockMvc.perform(post("/api/v1/auth/login")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
 
         // Verify
-        verify(authService).login(request);
+        Mockito.verify(authService).login(request);
 
     }
 
@@ -138,20 +135,20 @@ class AuthControllerTest extends BaseControllerTest {
                 .build();
 
         // When
-        when(authService.refreshToken(request)).thenReturn(mockResponse);
-        when(customUserDetailsService.loadUserByUsername("driver_1@parkinglot.com")).thenReturn(userDetails);
+        Mockito.when(authService.refreshToken(request)).thenReturn(mockResponse);
+        Mockito.when(customUserDetailsService.loadUserByUsername("driver_1@parkinglot.com")).thenReturn(userDetails);
 
         // Then
-        mockMvc.perform(post("/api/v1/auth/refreshtoken")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/auth/refreshtoken")
                         .header(HttpHeaders.AUTHORIZATION, mockBearerToken)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
 
         // Verify
-        verify(authService).refreshToken(request);
-        verify(customUserDetailsService).loadUserByUsername("driver_1@parkinglot.com");
+        Mockito.verify(authService).refreshToken(request);
+        Mockito.verify(customUserDetailsService).loadUserByUsername("driver_1@parkinglot.com");
 
 
     }
@@ -176,17 +173,17 @@ class AuthControllerTest extends BaseControllerTest {
         String mockBearerToken = "Bearer " + accessToken;
 
         // When
-        when(customUserDetailsService.loadUserByUsername("driver_1@parkinglot.com")).thenReturn(userDetails);
-        when(authService.logout(mockBearerToken)).thenReturn("Success");
+        Mockito.when(customUserDetailsService.loadUserByUsername("driver_1@parkinglot.com")).thenReturn(userDetails);
+        Mockito.when(authService.logout(mockBearerToken)).thenReturn("Success");
 
         // Then
-        mockMvc.perform(post("/api/v1/auth/logout")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/auth/logout")
                         .header(HttpHeaders.AUTHORIZATION, mockBearerToken))
-                .andExpect(status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isOk());
 
         // Verify
-        verify(customUserDetailsService).loadUserByUsername("driver_1@parkinglot.com");
-        verify(authService).logout(mockBearerToken);
+        Mockito.verify(customUserDetailsService).loadUserByUsername("driver_1@parkinglot.com");
+        Mockito.verify(authService).logout(mockBearerToken);
 
     }
 
@@ -206,17 +203,17 @@ class AuthControllerTest extends BaseControllerTest {
                 .build();
 
         // When
-        when(authService.login(request)).thenReturn(mockResponse);
+        Mockito.when(authService.login(request)).thenReturn(mockResponse);
 
         // Then
-        mockMvc.perform(post("/api/v1/auth/login")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
 
         // Verify
-        verify(authService).login(request);
+        Mockito.verify(authService).login(request);
 
     }
 
@@ -249,20 +246,20 @@ class AuthControllerTest extends BaseControllerTest {
                 .build();
 
         // When
-        when(authService.refreshToken(request)).thenReturn(mockResponse);
-        when(customUserDetailsService.loadUserByUsername("admin@parkinglot.com")).thenReturn(userDetails);
+        Mockito.when(authService.refreshToken(request)).thenReturn(mockResponse);
+        Mockito.when(customUserDetailsService.loadUserByUsername("admin@parkinglot.com")).thenReturn(userDetails);
 
         // Then
-        mockMvc.perform(post("/api/v1/auth/refreshtoken")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/auth/refreshtoken")
                         .header(HttpHeaders.AUTHORIZATION, mockBearerToken)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
 
         // Verify
-        verify(authService).refreshToken(request);
-        verify(customUserDetailsService).loadUserByUsername("admin@parkinglot.com");
+        Mockito.verify(authService).refreshToken(request);
+        Mockito.verify(customUserDetailsService).loadUserByUsername("admin@parkinglot.com");
 
     }
 
@@ -286,17 +283,17 @@ class AuthControllerTest extends BaseControllerTest {
         String mockBearerToken = "Bearer " + accessToken;
 
         // When
-        when(customUserDetailsService.loadUserByUsername("admin@parkinglot.com")).thenReturn(userDetails);
-        when(authService.logout(mockBearerToken)).thenReturn("Success");
+        Mockito.when(customUserDetailsService.loadUserByUsername("admin@parkinglot.com")).thenReturn(userDetails);
+        Mockito.when(authService.logout(mockBearerToken)).thenReturn("Success");
 
         // Then
-        mockMvc.perform(post("/api/v1/auth/logout")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/auth/logout")
                         .header(HttpHeaders.AUTHORIZATION, mockBearerToken))
-                .andExpect(status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isOk());
 
         // Verify
-        verify(customUserDetailsService).loadUserByUsername("admin@parkinglot.com");
-        verify(authService).logout(mockBearerToken);
+        Mockito.verify(customUserDetailsService).loadUserByUsername("admin@parkinglot.com");
+        Mockito.verify(authService).logout(mockBearerToken);
 
     }
 

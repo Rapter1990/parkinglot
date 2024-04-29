@@ -16,22 +16,19 @@ import com.project.parkinglot.model.entity.ParkEntity;
 import com.project.parkinglot.model.entity.ParkingAreaEntity;
 import com.project.parkinglot.model.entity.VehicleEntity;
 import com.project.parkinglot.model.enums.ParkStatus;
-import com.project.parkinglot.model.mapper.park.*;
-import com.project.parkinglot.model.mapper.parking_area.ParkingAreaToParkingAreaEntityMapper;
+import com.project.parkinglot.model.mapper.park.ParkEntityToParkMapper;
+import com.project.parkinglot.model.mapper.park.ParkToParkCheckInResponseMapper;
 import com.project.parkinglot.model.mapper.vehicle.VehicleToVehicleEntityMapper;
 import com.project.parkinglot.repository.ParkRepository;
 import com.project.parkinglot.repository.ParkingAreaRepository;
 import com.project.parkinglot.service.vehicle.VehicleService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 class ParkServiceImplTest extends BaseServiceTest {
 
@@ -48,19 +45,11 @@ class ParkServiceImplTest extends BaseServiceTest {
     @Mock
     private VehicleService vehicleService;
 
-    private final ParkCheckInRequestToParkEntityMapper parkCheckInRequestToParkEntityMapper = ParkCheckInRequestToParkEntityMapper.initialize();
-
     private final ParkEntityToParkMapper parkEntityToParkMapper = ParkEntityToParkMapper.initialize();
-
-    private final ParkToParkEntityMapper parkToParkEntityMapper = ParkToParkEntityMapper.initialize();
 
     private final ParkToParkCheckInResponseMapper parkToParkCheckInResponseMapper = ParkToParkCheckInResponseMapper.initialize();
 
     private final VehicleToVehicleEntityMapper vehicleToVehicleEntityMapper = VehicleToVehicleEntityMapper.initialize();
-
-    private final ParkingAreaToParkingAreaEntityMapper parkingAreaToParkingAreaEntityMapper = ParkingAreaToParkingAreaEntityMapper.initialize();
-
-    private final ParkEntityToParkCheckOutResponseMapper parkEntityToParkCheckOutResponseMapper = ParkEntityToParkCheckOutResponseMapper.initialize();
 
     @Test
     void givenUserIdAndParkCheckInRequest_whenCheckIn_ReturnParkCheckInResponse() {
@@ -96,22 +85,22 @@ class ParkServiceImplTest extends BaseServiceTest {
         ParkCheckInResponse expected = parkToParkCheckInResponseMapper.map(mockPark);
 
         // When
-        when(parkingAreaRepository.findById(parkCheckInRequest.getParkingAreaId())).thenReturn(Optional.ofNullable(existingParkingArea));
-        when(vehicleService.assignOrGet(mockUserId, vehicleRequest)).thenReturn(vehicle);
-        when(parkRepository.save(any(ParkEntity.class))).thenReturn(parkEntity);
+        Mockito.when(parkingAreaRepository.findById(parkCheckInRequest.getParkingAreaId())).thenReturn(Optional.ofNullable(existingParkingArea));
+        Mockito.when(vehicleService.assignOrGet(mockUserId, vehicleRequest)).thenReturn(vehicle);
+        Mockito.when(parkRepository.save(Mockito.any(ParkEntity.class))).thenReturn(parkEntity);
 
         // Then
         ParkCheckInResponse result = parkService.checkIn(mockUserId, parkCheckInRequest);
 
         // Then
-        assertEquals(expected.getParkingAreaId(), result.getParkingAreaId());
-        assertEquals(expected.getVehicleCheckInResponse().getLicensePlate(), result.getVehicleCheckInResponse().getLicensePlate());
-        assertEquals(expected.getVehicleCheckInResponse().getVehicleType(), result.getVehicleCheckInResponse().getVehicleType());
-        assertEquals(expected.getParkStatus(), result.getParkStatus());
-        assertEquals(expected.getCheckIn().toLocalTime(), result.getCheckIn().toLocalTime());
+        Assertions.assertEquals(expected.getParkingAreaId(), result.getParkingAreaId());
+        Assertions.assertEquals(expected.getVehicleCheckInResponse().getLicensePlate(), result.getVehicleCheckInResponse().getLicensePlate());
+        Assertions.assertEquals(expected.getVehicleCheckInResponse().getVehicleType(), result.getVehicleCheckInResponse().getVehicleType());
+        Assertions.assertEquals(expected.getParkStatus(), result.getParkStatus());
+        Assertions.assertEquals(expected.getCheckIn().toLocalTime(), result.getCheckIn().toLocalTime());
 
         // Verify
-        verify(parkRepository).save(any(ParkEntity.class));
+        Mockito.verify(parkRepository).save(Mockito.any(ParkEntity.class));
 
     }
 
@@ -143,15 +132,15 @@ class ParkServiceImplTest extends BaseServiceTest {
                 .build();
 
         // When
-        when(parkingAreaRepository.findById(parkCheckInRequest.getParkingAreaId())).thenReturn(Optional.ofNullable(existingParkingArea));
-        when(vehicleService.assignOrGet(userId, vehicleRequest)).thenReturn(vehicle);
-        when(parkService.countCurrentParks(existingParkingArea)).thenReturn(existingParkingArea.getCapacity() + 1);
+        Mockito.when(parkingAreaRepository.findById(parkCheckInRequest.getParkingAreaId())).thenReturn(Optional.ofNullable(existingParkingArea));
+        Mockito.when(vehicleService.assignOrGet(userId, vehicleRequest)).thenReturn(vehicle);
+        Mockito.when(parkService.countCurrentParks(existingParkingArea)).thenReturn(existingParkingArea.getCapacity() + 1);
 
         // Then
-        assertThrows(ParkingAreaCapacityException.class, () -> parkService.checkIn(userId, parkCheckInRequest));
+        Assertions.assertThrows(ParkingAreaCapacityException.class, () -> parkService.checkIn(userId, parkCheckInRequest));
 
         // Verify
-        verify(parkRepository, never()).save(parkEntity);
+        Mockito.verify(parkRepository, Mockito.never()).save(parkEntity);
 
     }
 
@@ -175,15 +164,15 @@ class ParkServiceImplTest extends BaseServiceTest {
                 .build();
 
         // When
-        when(parkingAreaRepository.findById(parkCheckOutRequest.getParkingAreaId())).thenReturn(Optional.empty());
+        Mockito.when(parkingAreaRepository.findById(parkCheckOutRequest.getParkingAreaId())).thenReturn(Optional.empty());
 
         // Then
-        assertThrows(ParkingAreaNotFoundException.class, () -> parkService.checkOut(userId, parkCheckOutRequest));
+        Assertions.assertThrows(ParkingAreaNotFoundException.class, () -> parkService.checkOut(userId, parkCheckOutRequest));
 
         // Verify
-        verify(vehicleService, never()).findByLicensePlate(vehicleRequest.getLicensePlate());
-        verify(parkRepository, never()).findTopByVehicleEntityAndParkStatusOrderByCheckInDesc(any(), any());
-        verify(parkRepository, never()).save(any(ParkEntity.class));
+        Mockito.verify(vehicleService, Mockito.never()).findByLicensePlate(vehicleRequest.getLicensePlate());
+        Mockito.verify(parkRepository, Mockito.never()).findTopByVehicleEntityAndParkStatusOrderByCheckInDesc(Mockito.any(), Mockito.any());
+        Mockito.verify(parkRepository, Mockito.never()).save(Mockito.any(ParkEntity.class));
 
     }
 
@@ -208,15 +197,15 @@ class ParkServiceImplTest extends BaseServiceTest {
         ParkingAreaEntity existingParkingAreaEntity = new ParkingAreaEntityBuilder().withValidFields().withId(mockParkingAreaId).build();
 
         // When
-        when(parkingAreaRepository.findById(mockParkingAreaId)).thenReturn(Optional.of(existingParkingAreaEntity));
-        when(vehicleService.findByLicensePlate(vehicle.getLicensePlate())).thenReturn(existingVehicleEntity);
-        when(parkRepository.findTopByVehicleEntityAndParkStatusOrderByCheckInDesc(existingVehicleEntity, ParkStatus.FULL)).thenReturn(Optional.empty());
+        Mockito.when(parkingAreaRepository.findById(mockParkingAreaId)).thenReturn(Optional.of(existingParkingAreaEntity));
+        Mockito.when(vehicleService.findByLicensePlate(vehicle.getLicensePlate())).thenReturn(existingVehicleEntity);
+        Mockito.when(parkRepository.findTopByVehicleEntityAndParkStatusOrderByCheckInDesc(existingVehicleEntity, ParkStatus.FULL)).thenReturn(Optional.empty());
 
         // Then
-        assertThrows(ParkingAreaNotFoundException.class, () -> parkService.checkOut(userId, parkCheckOutRequest));
+        Assertions.assertThrows(ParkingAreaNotFoundException.class, () -> parkService.checkOut(userId, parkCheckOutRequest));
 
         // Verify
-        verify(parkRepository, never()).save(any(ParkEntity.class));
+        Mockito.verify(parkRepository, Mockito.never()).save(Mockito.any(ParkEntity.class));
 
     }
 
@@ -228,15 +217,15 @@ class ParkServiceImplTest extends BaseServiceTest {
         int expected = 5;
 
         // When
-        when(parkRepository.countByParkingAreaEntityAndParkStatus(mockParkingArea, ParkStatus.EMPTY)).thenReturn(expected);
+        Mockito.when(parkRepository.countByParkingAreaEntityAndParkStatus(mockParkingArea, ParkStatus.EMPTY)).thenReturn(expected);
 
         // Then
         int result = parkService.countCurrentParks(mockParkingArea);
 
-        assertEquals(expected, result);
+        Assertions.assertEquals(expected, result);
 
         // Verify
-        verify(parkRepository).countByParkingAreaEntityAndParkStatus(mockParkingArea, ParkStatus.EMPTY);
+        Mockito.verify(parkRepository).countByParkingAreaEntityAndParkStatus(mockParkingArea, ParkStatus.EMPTY);
 
     }
 

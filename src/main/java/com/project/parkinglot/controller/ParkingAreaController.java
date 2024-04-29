@@ -57,7 +57,7 @@ public class ParkingAreaController {
 
     }
 
-    @GetMapping("/id/{parkingAreaId}")
+    @GetMapping("/{parkingAreaId}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @Operation(summary = "Get a parking area by ID",
             description = "Retrieves details of a parking area by its ID.",
