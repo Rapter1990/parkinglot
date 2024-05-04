@@ -2,6 +2,9 @@ package com.project.parkinglot.exception.parkingarea;
 
 import java.io.Serial;
 
+/**
+ * Exception class named {@link InvalidDateException}  thrown when a date is invalid for processing.
+ */
 public class InvalidDateException extends RuntimeException {
 
     @Serial

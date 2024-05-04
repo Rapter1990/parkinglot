@@ -5,6 +5,10 @@ import org.springframework.http.HttpStatus;
 
 import java.io.Serial;
 
+/**
+ * An abstract exception class representing the scenario where an entity is not found.
+ * This exception should be extended by specific exception classes for different entities.
+ */
 public abstract class NotFoundException extends RuntimeException {
 
     @Serial

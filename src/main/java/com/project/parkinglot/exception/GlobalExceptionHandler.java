@@ -27,10 +27,22 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Global exception handler class named {@link GlobalExceptionHandler} for handling various exceptions across the application.
+ */
 @ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
+    /**
+     * Handles HTTP media type not supported exception.
+     *
+     * @param ex      The HttpMediaTypeNotSupportedException thrown
+     * @param headers The headers of the HTTP request
+     * @param status  The status of the HTTP request
+     * @param request The HTTP request
+     * @return ResponseEntity with an error response
+     */
     @Override
     protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException ex,
                                                                      HttpHeaders headers,
@@ -57,6 +69,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(status).body(errorResponse);
     }
 
+    /**
+     * Handles HTTP message not readable exception.
+     *
+     * @param ex      The HttpMessageNotReadableException thrown
+     * @param headers The headers of the HTTP request
+     * @param status  The status of the HTTP request
+     * @param request The HTTP request
+     * @return ResponseEntity with an error response
+     */
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
                                                                   HttpHeaders headers,
@@ -78,6 +99,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(status).body(errorResponse);
     }
 
+    /**
+     * Handles method argument not valid exception.
+     *
+     * @param ex      The MethodArgumentNotValidException thrown
+     * @param headers The headers of the HTTP request
+     * @param status  The status of the HTTP request
+     * @param request The HTTP request
+     * @return ResponseEntity with an error response
+     */
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers,
@@ -102,6 +132,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
+    /**
+     * Handles missing servlet request parameter exception.
+     *
+     * @param ex      The MissingServletRequestParameterException thrown
+     * @param headers The headers of the HTTP request
+     * @param status  The status of the HTTP request
+     * @param request The HTTP request
+     * @return ResponseEntity with an error response
+     */
     @Override
     protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex,
                                                                           HttpHeaders headers,
@@ -124,6 +163,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
+    /**
+     * Handles parking area not found exception.
+     *
+     * @param ex The ParkingAreaNotFoundException thrown
+     * @return ResponseEntity with an error response
+     */
     @ExceptionHandler(value = {ParkingAreaNotFoundException.class})
     protected ResponseEntity<ErrorResponse> handleParkingAreaNotFoundException(final ParkingAreaNotFoundException ex) {
 
@@ -143,6 +188,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
+    /**
+     * Handles park not found exception.
+     *
+     * @param ex The ParkNotFoundException thrown
+     * @return ResponseEntity with an error response
+     */
     @ExceptionHandler(value = {ParkNotFoundException.class})
     protected ResponseEntity<ErrorResponse> handleParkNotFoundException(final ParkNotFoundException ex) {
 
@@ -162,6 +213,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
+    /**
+     * Handles price list not found exception.
+     *
+     * @param ex The PriceListNotFoundException thrown
+     * @return ResponseEntity with an error response
+     */
     @ExceptionHandler(value = {PriceListNotFoundException.class})
     protected ResponseEntity<ErrorResponse> handlePriceListNotFoundException(final PriceListNotFoundException ex) {
 
@@ -181,6 +238,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
+    /**
+     * Handles email already exists exception.
+     *
+     * @param ex The EmailAlreadyExistsException thrown
+     * @return ResponseEntity with an error response
+     */
     @ExceptionHandler(value = {EmailAlreadyExistsException.class})
     protected ResponseEntity<ErrorResponse> handleEmailAlreadyExistsException(final EmailAlreadyExistsException ex) {
 
@@ -200,6 +263,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
+    /**
+     * Handles refresh token not found exception.
+     *
+     * @param ex The RefreshTokenNotFoundException thrown
+     * @return ResponseEntity with an error response
+     */
     @ExceptionHandler(value = {RefreshTokenNotFoundException.class})
     protected ResponseEntity<ErrorResponse> handleRefreshTokenNotFoundException(final RefreshTokenNotFoundException ex) {
 
@@ -220,6 +289,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
+    /**
+     * Handles user not found exception.
+     *
+     * @param ex The UserNotFoundException thrown
+     * @return ResponseEntity with an error response
+     */
     @ExceptionHandler(value = {UserNotFoundException.class})
     protected ResponseEntity<ErrorResponse> handleUserNotFoundException(final UserNotFoundException ex) {
 
@@ -239,6 +314,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
+    /**
+     * Handles parking area already exists exception.
+     *
+     * @param ex The ParkingAreaAlreadyExistException thrown
+     * @return ResponseEntity with an error response
+     */
     @ExceptionHandler(ParkingAreaAlreadyExistException.class)
     protected ResponseEntity<ErrorResponse> handleParkingAreAlreadyExistException(final ParkingAreaAlreadyExistException ex) {
 
@@ -258,6 +339,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
+    /**
+     * Handles parking area capacity not null exception.
+     *
+     * @param ex The ParkingAreaCapacityCanNotBeNullException thrown
+     * @return ResponseEntity with an error response
+     */
     @ExceptionHandler(ParkingAreaCapacityCanNotBeNullException.class)
     protected ResponseEntity<ErrorResponse> handleParkingAreaNotFoundException(final ParkingAreaCapacityCanNotBeNullException ex) {
 
@@ -277,6 +364,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
+    /**
+     * Handles vehicle already exist exception.
+     *
+     * @param ex The VehicleAlreadyExist thrown
+     * @return ResponseEntity with an error response
+     */
     @ExceptionHandler(VehicleAlreadyExist.class)
     protected  ResponseEntity<ErrorResponse> handleUserAlreadyHasThisVehicleException(final VehicleAlreadyExist ex){
 

@@ -2,6 +2,9 @@ package com.project.parkinglot.exception.vehicle;
 
 import java.io.Serial;
 
+/**
+ * Exception class named {@link VehicleAlreadyExist} thrown when a user tries to add a vehicle that already exists.
+ */
 public class VehicleAlreadyExist extends RuntimeException{
 
     @Serial

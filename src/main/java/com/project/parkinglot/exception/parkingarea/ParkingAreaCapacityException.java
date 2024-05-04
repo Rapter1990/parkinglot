@@ -2,6 +2,9 @@ package com.project.parkinglot.exception.parkingarea;
 
 import java.io.Serial;
 
+/**
+ * Exception class named {@link ParkingAreaCapacityException} thrown when the capacity of a parking area is not available.
+ */
 public class ParkingAreaCapacityException extends RuntimeException {
 
     @Serial
