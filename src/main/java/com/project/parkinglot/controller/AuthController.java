@@ -17,6 +17,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller class named {@link AuthController} for authentication operations.
+ */
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
@@ -25,6 +28,12 @@ public class AuthController {
 
     private final AuthService authService;
 
+    /**
+     * Registers a new user.
+     *
+     * @param request The SignupRequest object containing user details.
+     * @return A CustomResponse containing a success message.
+     */
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Register a new user", description = "Registers a new user and returns a success message.",
@@ -37,6 +46,12 @@ public class AuthController {
         return CustomResponse.created(authService.register(request));
     }
 
+    /**
+     * Logs in a user and returns JWT tokens.
+     *
+     * @param request The LoginRequest object containing user credentials.
+     * @return A CustomResponse containing JWT tokens.
+     */
     @PostMapping("/login")
     @Operation(summary = "Login user", description = "Logs in a user and returns JWT tokens.",
             responses = {
@@ -48,6 +63,12 @@ public class AuthController {
         return CustomResponse.ok(authService.login(request));
     }
 
+    /**
+     * Refreshes the JWT authentication token using a refresh token.
+     *
+     * @param request The TokenRefreshRequest object containing the refresh token.
+     * @return A CustomResponse containing the refreshed token.
+     */
     @PostMapping("/refreshtoken")
     @Operation(summary = "Refresh token", description = "Refreshes the JWT authentication token using a refresh token.",
             responses = {
@@ -59,6 +80,12 @@ public class AuthController {
         return CustomResponse.ok(authService.refreshToken(request));
     }
 
+    /**
+     * Logs out a user by invalidating the authentication token.
+     *
+     * @param token The JWT token to invalidate.
+     * @return A CustomResponse containing a success message.
+     */
     @PostMapping("/logout")
     @Operation(summary = "Logout user", description = "Logs out a user by invalidating the authentication token.",
             responses = {

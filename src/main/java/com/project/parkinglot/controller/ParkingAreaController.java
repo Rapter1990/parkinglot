@@ -26,6 +26,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
+/**
+ * Controller class named {@link ParkingAreaController} for managing parking areas.
+ */
 @RestController
 @RequestMapping("/api/v1/parking-area")
 @RequiredArgsConstructor
@@ -38,6 +41,12 @@ public class ParkingAreaController {
     private final ParkingAreaDeleteService parkingAreaDeleteService;
     private final ParkingAreaGetService parkingAreaGetService;
 
+    /**
+     * Creates a new parking area with the specified details.
+     *
+     * @param parkingAreaCreateRequest The details of the parking area to be created.
+     * @return A CustomResponse indicating the success of the operation.
+     */
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @Operation(summary = "Create a new parking area",
@@ -57,6 +66,12 @@ public class ParkingAreaController {
 
     }
 
+    /**
+     * Retrieves details of a parking area by its ID.
+     *
+     * @param parkingAreaId The ID of the parking area.
+     * @return A CustomResponse containing the details of the parking area.
+     */
     @GetMapping("/{parkingAreaId}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @Operation(summary = "Get a parking area by ID",
@@ -74,6 +89,12 @@ public class ParkingAreaController {
 
     }
 
+    /**
+     * Retrieves details of a parking area by its name.
+     *
+     * @param name The name of the parking area.
+     * @return A CustomResponse containing the details of the parking area.
+     */
     @GetMapping("/name/{name}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @Operation(summary = "Get a parking area by name",
@@ -91,6 +112,13 @@ public class ParkingAreaController {
 
     }
 
+    /**
+     * Retrieves the daily income for a parking area on a specified date.
+     *
+     * @param date          The date for which the income is to be retrieved.
+     * @param parkingAreaId The ID of the parking area.
+     * @return A CustomResponse containing the daily income for the parking area.
+     */
     @GetMapping("/income")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @Operation(summary = "Get daily income for a parking area",
@@ -109,6 +137,12 @@ public class ParkingAreaController {
         return CustomResponse.ok(dailyIncome);
     }
 
+    /**
+     * Deletes a parking area by its ID.
+     *
+     * @param parkingAreaId The ID of the parking area to be deleted.
+     * @return A CustomResponse indicating the success of the operation.
+     */
     @DeleteMapping("/{parkingAreaId}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @Operation(summary = "Delete a parking area by ID",
@@ -126,6 +160,13 @@ public class ParkingAreaController {
 
     }
 
+    /**
+     * Updates a parking area by its ID based on the provided data.
+     *
+     * @param parkingAreaId             The ID of the parking area to be updated.
+     * @param parkingAreaUpdateRequest The updated details of the parking area.
+     * @return A CustomResponse indicating the success of the operation.
+     */
     @PutMapping("/{parkingAreaId}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @Operation(summary = "Update a parking area by ID",

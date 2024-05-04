@@ -19,6 +19,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller class named {@link VehicleController} for managing vehicles.
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/vehicles")
@@ -28,6 +31,13 @@ public class VehicleController {
 
     private final VehicleService vehicleService;
 
+    /**
+     * Assigns a vehicle based on the provided request to a specified user.
+     *
+     * @param userId         The ID of the user to whom the vehicle is to be assigned.
+     * @param vehicleRequest The details of the vehicle to be assigned.
+     * @return A CustomResponse indicating the success of the operation.
+     */
     @PostMapping("/assign/{user-id}")
     @PreAuthorize("hasAuthority('ROLE_DRIVER')")
     @Operation(summary = "Assign a vehicle to a user",
@@ -48,6 +58,12 @@ public class VehicleController {
         return CustomResponse.ok(vehicle.getLicensePlate());
     }
 
+    /**
+     * Retrieves parking details for a vehicle using its license plate number.
+     *
+     * @param licensePlate The license plate number of the vehicle.
+     * @return A CustomResponse containing the parking details of the vehicle.
+     */
     @GetMapping("/get-parking-detail/{licensePlate}")
     @PreAuthorize("hasAuthority('ROLE_DRIVER')")
     @Operation(summary = "Get parking details of a vehicle",

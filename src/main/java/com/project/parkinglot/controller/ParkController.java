@@ -19,6 +19,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller class named {@link ParkController} for park management operations.
+ */
 @RestController
 @RequestMapping("/api/v1/parks")
 @RequiredArgsConstructor
@@ -28,6 +31,13 @@ public class ParkController {
 
     private final ParkService parkService;
 
+    /**
+     * Allows a driver to check in to a park, recording the time and location.
+     *
+     * @param userId               The ID of the user checking in.
+     * @param parkCheckInRequest   The ParkCheckInRequest containing check-in details.
+     * @return A CustomResponse containing the check-in response.
+     */
     @PostMapping("/userId/{userId}/check-in")
     @PreAuthorize("hasAuthority('ROLE_DRIVER')")
     @Operation(summary = "Check in to a park",
@@ -44,6 +54,13 @@ public class ParkController {
         return CustomResponse.ok(parkCheckInResponse);
     }
 
+    /**
+     * Allows a driver to check out from a park, recording the departure time.
+     *
+     * @param userId               The ID of the user checking out.
+     * @param parkCheckOutRequest  The ParkCheckOutRequest containing check-out details.
+     * @return A CustomResponse containing the check-out response.
+     */
     @PostMapping("/userId/{userId}/check-out")
     @PreAuthorize("hasAuthority('ROLE_DRIVER')")
     @Operation(summary = "Check out from a park",
