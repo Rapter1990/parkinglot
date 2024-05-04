@@ -26,6 +26,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * Aspect class {@link LoggerAspectJ} for logging requests and responses of Spring REST Controllers.
+ */
 @Aspect
 @Slf4j
 @Component
@@ -34,11 +37,20 @@ public class LoggerAspectJ {
 
     private final LogService logService;
 
+    /**
+     * Defines a pointcut for Spring REST Controllers.
+     */
     @Pointcut("within(@org.springframework.web.bind.annotation.RestController *)")
     public void restControllerPointcut() {
 
     }
 
+    /**
+     * Advice method to log exceptions thrown from RestControllers.
+     *
+     * @param joinPoint The join point where the exception occurred.
+     * @param ex        The exception that was thrown.
+     */
     @AfterThrowing(pointcut = "restControllerPointcut()", throwing = "ex")
     public void logAfterThrowing(JoinPoint joinPoint, Exception ex) {
 
@@ -77,6 +89,13 @@ public class LoggerAspectJ {
 
     }
 
+    /**
+     * Advice method to log successful responses from RestControllers.
+     *
+     * @param joinPoint The join point where the response was generated.
+     * @param result    The result returned by the controller method.
+     * @throws IOException If there is an error while converting the response to a JSON string.
+     */
     @AfterReturning(value = "restControllerPointcut()", returning = "result")
     public void logAfterReturning(JoinPoint joinPoint, Object result) throws IOException {
 
@@ -123,6 +142,12 @@ public class LoggerAspectJ {
         }
     }
 
+    /**
+     * Helper method to determine HttpStatus from an exception.
+     *
+     * @param ex The exception for which to determine the HttpStatus.
+     * @return The HttpStatus corresponding to the exception, or null if not recognized.
+     */
     private HttpStatus getHttpStatusFromException(Exception ex) {
 
         if (ex instanceof NotFoundException) {
