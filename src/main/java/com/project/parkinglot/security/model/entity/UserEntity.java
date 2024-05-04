@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Represents a user entity named {@link UserEntity}.
+ */
 @Entity
 @Data
 @Builder
@@ -48,6 +51,11 @@ public class UserEntity {
     )
     private List<VehicleEntity> vehicles;
 
+    /**
+     * Generates JWT claims for the user.
+     *
+     * @return Map of JWT claims.
+     */
     public Map<String, Object> getClaims() {
         final Map<String, Object> claims = new HashMap<>();
         claims.put(TokenClaims.ID.getValue(), this.id);

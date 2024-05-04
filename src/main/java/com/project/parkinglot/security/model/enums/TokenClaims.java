@@ -3,6 +3,9 @@ package com.project.parkinglot.security.model.enums;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Enumerator class named {@link TokenClaims} representing claims in JWT tokens.
+ */
 @Getter
 @RequiredArgsConstructor
 public enum TokenClaims {

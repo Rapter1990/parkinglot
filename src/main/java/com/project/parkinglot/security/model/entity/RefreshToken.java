@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a refresh token entity named {@link RefreshToken}.
+ */
 @Entity
 @Data
 @Builder
