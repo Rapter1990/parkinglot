@@ -7,6 +7,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
+/**
+ * Represents a vehicle domain model object named {@link Vehicle}.
+ */
 @Getter
 @Setter
 @SuperBuilder

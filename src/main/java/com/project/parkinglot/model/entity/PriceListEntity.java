@@ -7,6 +7,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
+/**
+ * Represents an entity named {@link PriceListEntity} for price list.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)

@@ -6,6 +6,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
+/**
+ * Represents a parking area domain model object named {@link ParkingArea}.
+ */
 @Getter
 @Setter
 @SuperBuilder

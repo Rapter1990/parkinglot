@@ -10,6 +10,9 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ * A request class named {@link PriceListCreateRequest} representing the creation of a price list.
+ */
 @Getter
 @Setter
 @NoArgsConstructor

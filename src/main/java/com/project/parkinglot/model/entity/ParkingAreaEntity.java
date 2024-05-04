@@ -21,6 +21,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
+/**
+ * Represents an entity named {@link ParkingAreaEntity} for parking area.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)

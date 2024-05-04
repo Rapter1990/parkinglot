@@ -8,7 +8,7 @@ import lombok.experimental.SuperBuilder;
 import java.util.List;
 
 /**
- * Domain Model of {@link PriceListEntity}
+ * Represents a pricelist domain model object named {@link PriceList}.
  */
 @Getter
 @Setter
