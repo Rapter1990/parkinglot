@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Represents a logout request named {@link LogoutRequest}.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

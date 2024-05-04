@@ -9,6 +9,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Represents a signup request named {@link SignupRequest}.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

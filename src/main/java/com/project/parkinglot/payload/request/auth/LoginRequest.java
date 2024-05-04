@@ -8,6 +8,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Represents a login request named {@link LoginRequest}.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

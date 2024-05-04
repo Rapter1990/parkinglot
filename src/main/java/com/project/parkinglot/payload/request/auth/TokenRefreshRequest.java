@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Represents a token refresh request named {@link TokenRefreshRequest}.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

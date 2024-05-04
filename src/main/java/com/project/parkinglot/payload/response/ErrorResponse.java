@@ -10,6 +10,9 @@ import org.springframework.http.HttpStatus;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Represents an error response named {@link ErrorResponse}.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
