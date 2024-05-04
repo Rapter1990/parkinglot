@@ -7,6 +7,9 @@ import com.project.parkinglot.service.parking_area.ParkingAreaDeleteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service implementation class named {@link ParkingAreaDeleteServiceImpl} for deleting parking areas.
+ */
 @Service
 @RequiredArgsConstructor
 class ParkingAreaDeleteServiceImpl implements ParkingAreaDeleteService {
@@ -14,6 +17,11 @@ class ParkingAreaDeleteServiceImpl implements ParkingAreaDeleteService {
 
     private final ParkingAreaRepository parkingAreaRepository;
 
+    /**
+     * Deletes a parking area by its ID.
+     *
+     * @param parkingAreaId the ID of the parking area to delete
+     */
     @Override
     public void deleteParkingAreaById(
             final String parkingAreaId

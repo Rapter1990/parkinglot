@@ -23,6 +23,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service class named {@link AuthServiceImpl} that provides authentication-related functionalities.
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
@@ -37,7 +40,12 @@ public class AuthServiceImpl implements AuthService {
 
     private final JwtUtils jwtUtils;
 
-
+    /**
+     * Registers a new user.
+     *
+     * @param request the signup request
+     * @return the generated user ID
+     */
     @Override
     public String register(SignupRequest request) {
 
@@ -58,7 +66,12 @@ public class AuthServiceImpl implements AuthService {
         return "Success";
     }
 
-
+    /**
+     * Authenticates a user.
+     *
+     * @param request the login request
+     * @return the JWT response
+     */
     @Override
     public JWTResponse login(LoginRequest request) {
 
@@ -78,7 +91,12 @@ public class AuthServiceImpl implements AuthService {
                 .build();
     }
 
-
+    /**
+     * Refreshes the JWT token.
+     *
+     * @param request the token refresh request
+     * @return the token refresh response
+     */
     @Override
     public TokenRefreshResponse refreshToken(TokenRefreshRequest request) {
 
@@ -99,6 +117,12 @@ public class AuthServiceImpl implements AuthService {
         return null;
     }
 
+    /**
+     * Logs out the user.
+     *
+     * @param token the user's token
+     * @return the result of the logout operation
+     */
     @Override
     public String logout(String token) {
 

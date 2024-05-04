@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * Service implementation class named {@link ParkingAreaGetServiceImpl} for getting parking areas.
+ */
 @Service
 @RequiredArgsConstructor
 class ParkingAreaGetServiceImpl implements ParkingAreaGetService {
@@ -25,7 +28,12 @@ class ParkingAreaGetServiceImpl implements ParkingAreaGetService {
             ParkingAreaEntityToParkingAreaMapper.initialize();
 
 
-
+    /**
+     * Retrieves a parking area by its ID.
+     *
+     * @param parkingAreaId the ID of the parking area to retrieve
+     * @return the retrieved parking area
+     */
     @Override
     public ParkingArea getParkingAreaById(final String parkingAreaId) {
 
@@ -36,6 +44,12 @@ class ParkingAreaGetServiceImpl implements ParkingAreaGetService {
 
     }
 
+    /**
+     * Retrieves a parking area by its name.
+     *
+     * @param name the name of the parking area to retrieve
+     * @return the retrieved parking area
+     */
     @Override
     public ParkingArea getParkingAreaByName(final String name) {
 
@@ -46,6 +60,13 @@ class ParkingAreaGetServiceImpl implements ParkingAreaGetService {
 
     }
 
+    /**
+     * Retrieves daily income for a parking area on a given date.
+     *
+     * @param date         the date for which to retrieve income
+     * @param parkingAreaId the ID of the parking area
+     * @return the daily income of the parking area
+     */
     @Override
     public ParkingAreaIncomeResponse getDailyIncome(final LocalDate date, final String parkingAreaId) {
 
@@ -64,6 +85,12 @@ class ParkingAreaGetServiceImpl implements ParkingAreaGetService {
                  .build();
     }
 
+    /**
+     * Checks if the given date is after the current date.
+     *
+     * @param date the date to check
+     * @throws InvalidDateException if the given date is after the current date
+     */
     private void isGivenDateAfterCurrentDate(final LocalDate date) {
         if (Boolean.TRUE.equals(date.isAfter(LocalDate.now()))) {
             throw new InvalidDateException();

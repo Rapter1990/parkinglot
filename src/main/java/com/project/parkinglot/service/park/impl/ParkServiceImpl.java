@@ -28,6 +28,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * Service implementation class named {@link ParkServiceImpl} for managing park operations.
+ */
 @Service
 @RequiredArgsConstructor
 public class ParkServiceImpl implements ParkService {
@@ -52,6 +55,13 @@ public class ParkServiceImpl implements ParkService {
 
     private final ParkEntityToParkCheckOutResponseMapper parkEntityToParkCheckOutResponseMapper = ParkEntityToParkCheckOutResponseMapper.initialize();
 
+    /**
+     * Checks in a vehicle to the parking area.
+     *
+     * @param userId            the ID of the user
+     * @param parkCheckInRequest the check-in request
+     * @return the check-in response
+     */
     @Override
     @Transactional
     public ParkCheckInResponse checkIn(final String userId, final ParkCheckInRequest parkCheckInRequest) {
@@ -65,6 +75,13 @@ public class ParkServiceImpl implements ParkService {
         return parkToParkCheckInResponseMapper.map(park);
     }
 
+    /**
+     * Checks out a vehicle from the parking area.
+     *
+     * @param userId              the ID of the user
+     * @param parkCheckOutRequest the check-out request
+     * @return the check-out response
+     */
     @Override
     @Transactional
     public ParkCheckOutResponse checkOut(
@@ -107,11 +124,25 @@ public class ParkServiceImpl implements ParkService {
         return parkEntityToParkCheckOutResponseMapper.map(parkEntity);
     }
 
+    /**
+     * Counts the number of current parks in the parking area.
+     *
+     * @param parkingAreaEntity the parking area entity
+     * @return the number of current parks
+     */
     @Override
     public Integer countCurrentParks(ParkingAreaEntity parkingAreaEntity) {
         return parkRepository.countByParkingAreaEntityAndParkStatus(parkingAreaEntity, ParkStatus.EMPTY);
     }
 
+    /**
+     * Parks a vehicle in the available parking area.
+     *
+     * @param checkInRequest           the check-in request
+     * @param vehicle                  the vehicle to be parked
+     * @param existingParkingEntityArea the existing parking area entity
+     * @return the parked vehicle
+     */
     private Park parkAvailableArea(ParkCheckInRequest checkInRequest, Vehicle vehicle, ParkingAreaEntity existingParkingEntityArea) {
         ParkEntity parkEntity = parkCheckInRequestToParkEntityMapper.map(checkInRequest);
         parkEntity.setVehicleEntity(vehicleToVehicleEntityMapper.map(vehicle));
@@ -122,6 +153,12 @@ public class ParkServiceImpl implements ParkService {
         return parkEntityToParkMapper.map(savedParkEntity);
     }
 
+    /**
+     * Validates the available capacity in the parking area.
+     *
+     * @param parkingAreaEntity the parking area entity to check
+     * @throws ParkingAreaCapacityException if the parking area capacity is full
+     */
     private void validateAvailableCapacity(ParkingAreaEntity parkingAreaEntity) {
         Integer currentParks = countCurrentParks(parkingAreaEntity);
         if (parkingAreaEntity.getCapacity() <= currentParks) {
