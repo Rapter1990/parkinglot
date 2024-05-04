@@ -15,6 +15,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.time.LocalDateTime;
 
+/**
+ * Base class named {@link BaseEntity} for all entities in the application. It provides common fields
+ * such as createdUser, createdAt, updatedUser, and updatedAt along with
+ * prePersist and preUpdate hooks to manage these fields automatically.
+ */
 @Getter
 @Setter
 @SuperBuilder
