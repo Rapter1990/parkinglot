@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+/**
+ * Service implementation class named {@link ParkingAreaCreateServiceImpl} for creating parking areas.
+ */
 @Service
 @RequiredArgsConstructor
 class ParkingAreaCreateServiceImpl implements ParkingAreaCreateService {
@@ -29,6 +32,12 @@ class ParkingAreaCreateServiceImpl implements ParkingAreaCreateService {
     private final ParkingAreaEntityToParkingAreaMapper parkingAreaEntityToParkingAreaMapper =
             ParkingAreaEntityToParkingAreaMapper.initialize();
 
+    /**
+     * Creates a new parking area.
+     *
+     * @param parkingAreaCreateRequest the request containing details for creating the parking area
+     * @return the created parking area
+     */
     @Override
     public ParkingArea createParkingArea(
             final ParkingAreaCreateRequest parkingAreaCreateRequest
@@ -54,6 +63,13 @@ class ParkingAreaCreateServiceImpl implements ParkingAreaCreateService {
                 .map(parkingAreaToBeCreate);
     }
 
+    /**
+     * Checks if a parking area with the given name and location already exists.
+     *
+     * @param name the name of the parking area to check
+     * @param location the location of the parking area to check
+     * @throws ParkingAreaAlreadyExistException if a parking area with the same name and location already exists
+     */
     private void checkParkingAreaNameAndLocationUniqueness(
             final String name,
             final String location
@@ -63,5 +79,6 @@ class ParkingAreaCreateServiceImpl implements ParkingAreaCreateService {
             throw new ParkingAreaAlreadyExistException();
         }
     }
+
 }
 

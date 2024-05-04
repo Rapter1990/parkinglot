@@ -7,6 +7,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
+/**
+ * Represents a user domain model object named {@link User}.
+ */
 @Getter
 @Setter
 @SuperBuilder

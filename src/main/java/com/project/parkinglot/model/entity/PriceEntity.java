@@ -10,6 +10,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 
+/**
+ * Represents an entity named {@link PriceEntity} for price.
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder

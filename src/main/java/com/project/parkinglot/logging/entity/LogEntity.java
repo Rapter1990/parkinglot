@@ -6,6 +6,9 @@ import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
+/**
+ * Entity class named {@link LogEntity} representing logs of the parking lot.
+ */
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)

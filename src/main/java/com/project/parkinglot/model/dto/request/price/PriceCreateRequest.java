@@ -10,6 +10,9 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
+/**
+ * A request class named {@link PriceCreateRequest} representing the creation of a price.
+ */
 @Getter
 @Setter
 @NoArgsConstructor

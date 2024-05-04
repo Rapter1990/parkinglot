@@ -17,6 +17,9 @@ import java.time.ZoneOffset;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Service class named {@link RefreshTokenServiceImpl} that provides refresh token-related functionalities.
+ */
 @Service
 @RequiredArgsConstructor
 public class RefreshTokenServiceImpl implements RefreshTokenService {
@@ -28,7 +31,12 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
 
     private final UserService userService;
 
-
+    /**
+     * Creates a refresh token for the specified user.
+     *
+     * @param userEntity the user entity
+     * @return the generated refresh token
+     */
     @Override
     public String createRefreshToken(UserEntity userEntity) {
 
@@ -46,23 +54,45 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
         return token.getToken();
     }
 
+    /**
+     * Checks if the refresh token is expired.
+     *
+     * @param token the refresh token
+     * @return {@code true} if the token is expired, {@code false} otherwise
+     */
     @Override
     public boolean isRefreshExpired(RefreshToken token) {
         return token.getExpiryDate().isBefore(LocalDate.now());
     }
 
+    /**
+     * Retrieves the refresh token associated with the specified user.
+     *
+     * @param userId the user ID
+     * @return the refresh token
+     */
     @Override
     public RefreshToken getByUser(String userId) {
         return refreshTokenRepository.findByUserEntityId(userId);
     }
 
-
+    /**
+     * Retrieves the refresh token by its token value.
+     *
+     * @param token the token value
+     * @return an {@link Optional} containing the refresh token, or empty if not found
+     */
     @Override
     public Optional<RefreshToken> findByToken(String token) {
         return refreshTokenRepository.findByToken(token);
     }
 
-
+    /**
+     * Deletes the refresh token associated with the specified user.
+     *
+     * @param userId the user ID
+     * @return the number of refresh tokens deleted
+     */
     @Override
     @Transactional
     public int deleteByUserId(String userId) {

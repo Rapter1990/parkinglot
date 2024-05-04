@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller class named {@link UserController} for managing user information.
+ */
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
@@ -27,6 +30,12 @@ public class UserController {
 
     private final UserGetService userGetService;
 
+    /**
+     * Retrieves detailed information for a specific user by their ID.
+     *
+     * @param userId The ID of the user.
+     * @return A CustomResponse containing the user information.
+     */
     @GetMapping("/user/{user-id}")
     @PreAuthorize("hasAuthority('ROLE_DRIVER')")
     @Operation(summary = "Get user information by ID",
@@ -44,6 +53,12 @@ public class UserController {
         return CustomResponse.ok(user);
     }
 
+    /**
+     * Retrieves detailed information for a specific admin by their ID.
+     *
+     * @param adminId The ID of the admin.
+     * @return A CustomResponse containing the admin information.
+     */
     @GetMapping("/admin/{admin-id}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @Operation(summary = "Get admin information by ID",

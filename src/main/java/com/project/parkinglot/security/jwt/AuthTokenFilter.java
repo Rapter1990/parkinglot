@@ -17,6 +17,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+/**
+ * Authentication Token Filter named {@link AuthTokenFilter} for validating JWT tokens.
+ */
 @RequiredArgsConstructor
 @Log4j2
 public class AuthTokenFilter extends OncePerRequestFilter {
@@ -25,6 +28,15 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
     private final CustomUserDetailsService customUserDetailsService;
 
+    /**
+     * Filters incoming requests.
+     *
+     * @param request     The incoming request.
+     * @param response    The response to be generated.
+     * @param filterChain The chain of filters to proceed the request.
+     * @throws ServletException If a servlet error occurs.
+     * @throws IOException      If an input or output error occurs.
+     */
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
@@ -55,6 +67,12 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+    /**
+     * Parses JWT token from the request header.
+     *
+     * @param request The incoming HTTP request.
+     * @return JWT token if exists, otherwise null.
+     */
     private String parseJwt(HttpServletRequest request) {
 
         String headerAuth = request.getHeader("Authorization");

@@ -4,6 +4,9 @@ import com.project.parkinglot.exception.AlreadyException;
 
 import java.io.Serial;
 
+/**
+ * Exception class named {@link ParkingAreaAlreadyExistException} thrown when a parking area already exists.
+ */
 public class ParkingAreaAlreadyExistException extends AlreadyException {
 
     @Serial

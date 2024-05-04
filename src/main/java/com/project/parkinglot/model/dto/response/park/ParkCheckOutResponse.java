@@ -9,6 +9,9 @@ import lombok.experimental.SuperBuilder;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * A response class named {@link ParkCheckOutResponse} representing the check-out response.
+ */
 @Getter
 @Setter
 @SuperBuilder

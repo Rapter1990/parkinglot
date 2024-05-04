@@ -4,6 +4,9 @@ import com.project.parkinglot.exception.NotFoundException;
 
 import java.io.Serial;
 
+/**
+ * Exception class named {@link VehicleNotFoundException} thrown when a vehicle is not found.
+ */
 public class VehicleNotFoundException extends NotFoundException {
 
     @Serial

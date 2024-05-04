@@ -4,6 +4,9 @@ import com.project.parkinglot.exception.AlreadyException;
 
 import java.io.Serial;
 
+/**
+ * Exception class named {@link EmailAlreadyExistsException} thrown when an email already exists in the system.
+ */
 public class EmailAlreadyExistsException extends AlreadyException {
 
     @Serial

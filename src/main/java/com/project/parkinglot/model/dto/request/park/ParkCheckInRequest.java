@@ -5,6 +5,9 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+/**
+ * A request class named {@link ParkCheckInRequest} representing the check-in request for a vehicle at a parking area.
+ */
 @Getter
 @Setter
 @NoArgsConstructor

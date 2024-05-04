@@ -9,6 +9,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
+/**
+ * Represents an entity named {@link VehicleEntity} for vehicle.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)

@@ -11,6 +11,9 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Map;
 
+/**
+ * Utility class named {@link FeeCalculationUtil}  for calculating fees based on vehicle type.
+ */
 @UtilityClass
 public class FeeCalculationUtil {
 
@@ -20,7 +23,14 @@ public class FeeCalculationUtil {
             VehicleType.MINIVAN, new MinivanFeeCalculatorStrategy()
     );
 
-
+    /**
+     * Finds the price for the time interval.
+     *
+     * @param parkingAreaPriceListEntity the price list entity for the parking area
+     * @param parkEntity                 the park entity
+     * @return the price for the time interval
+     * @throws PriceListNotFoundException if the price list is not found
+     */
     public BigDecimal findPriceForTimeInterval(
             final PriceListEntity parkingAreaPriceListEntity,
             final ParkEntity parkEntity
@@ -39,6 +49,13 @@ public class FeeCalculationUtil {
 
     }
 
+    /**
+     * Checks if the spent time is within the time interval defined by the price entity.
+     *
+     * @param priceEntity the price entity
+     * @param spentTime   the spent time
+     * @return {@code true} if the spent time is within the time interval, otherwise {@code false}
+     */
     private static boolean isWithinTimeInterval(
             final PriceEntity priceEntity,
             final long spentTime
@@ -48,6 +65,12 @@ public class FeeCalculationUtil {
         return spentTime >= startHour && spentTime <= endHour;
     }
 
+    /**
+     * Calculates the spent time based on the check-in and check-out time of the park entity.
+     *
+     * @param parkEntity the park entity
+     * @return the spent time in hours
+     */
     private static long getSpentTime(
             final ParkEntity parkEntity
     ){

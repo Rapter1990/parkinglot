@@ -8,6 +8,9 @@ import lombok.experimental.SuperBuilder;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * Represents a park domain model object named {@link Park}.
+ */
 @Getter
 @Setter
 @SuperBuilder

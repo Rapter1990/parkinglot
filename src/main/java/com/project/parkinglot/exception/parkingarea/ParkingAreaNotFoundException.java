@@ -4,6 +4,9 @@ import com.project.parkinglot.exception.NotFoundException;
 
 import java.io.Serial;
 
+/**
+ * Exception class named {@link ParkingAreaNotFoundException} thrown when a parking area is not found.
+ */
 public class ParkingAreaNotFoundException extends NotFoundException {
 
     @Serial

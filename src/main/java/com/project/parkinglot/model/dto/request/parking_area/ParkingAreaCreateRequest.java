@@ -10,6 +10,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * A request class named {@link ParkingAreaCreateRequest} representing the update of a parking area.
+ */
 @Getter
 @Setter
 @NoArgsConstructor

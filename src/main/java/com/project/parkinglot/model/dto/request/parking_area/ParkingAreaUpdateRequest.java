@@ -9,6 +9,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * A request class named {@link ParkingAreaUpdateRequest} representing the creation of a parking area.
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

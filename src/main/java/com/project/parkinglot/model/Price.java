@@ -8,7 +8,7 @@ import lombok.experimental.SuperBuilder;
 import java.math.BigDecimal;
 
 /**
- * Domain Model of {@link PriceEntity}
+ * Represents a price domain model object named {@link Price}.
  */
 @Getter
 @Setter

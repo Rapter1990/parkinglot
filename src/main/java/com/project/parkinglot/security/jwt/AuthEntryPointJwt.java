@@ -15,12 +15,23 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Custom authentication entry point named {@link AuthEntryPointJwt} for handling unauthorized requests.
+ */
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthEntryPointJwt.class);
 
-
+    /**
+     * Commences the authentication process for unauthorized requests.
+     *
+     * @param request        The request object.
+     * @param response       The response object.
+     * @param authException  The authentication exception.
+     * @throws IOException      If an I/O error occurs.
+     * @throws ServletException If a servlet exception occurs.
+     */
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {

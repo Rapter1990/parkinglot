@@ -9,6 +9,9 @@ import lombok.experimental.SuperBuilder;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * Represents an entity named {@link ParkEntity} for park.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)

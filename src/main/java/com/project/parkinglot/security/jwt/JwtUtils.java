@@ -14,6 +14,9 @@ import java.security.Key;
 import java.util.Date;
 import java.util.Map;
 
+/**
+ * Utility class named {@link JwtUtils} for JWT operations.
+ */
 @Component
 @Log4j2
 public class JwtUtils {
@@ -24,12 +27,25 @@ public class JwtUtils {
     @Value("${jwt.expireMs}")
     private int jwtExpirationMs;
 
+    /**
+     * Generates JWT token.
+     *
+     * @param auth The authentication object.
+     * @return Generated JWT token.
+     */
     public String generateJwtToken(Authentication auth) {
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
         Map<String, Object> claims = userDetails.getClaims();
         return createToken(claims, userDetails.getUsername());
     }
 
+    /**
+     * Creates JWT token.
+     *
+     * @param claims  The claims to be included in the token.
+     * @param subject The subject of the token.
+     * @return Generated JWT token.
+     */
     public String createToken(Map<String, Object> claims, String subject) {
         Date now = new Date();
         Date expirationDate = new Date(now.getTime() + jwtExpirationMs);
@@ -43,17 +59,34 @@ public class JwtUtils {
                 .compact();
     }
 
+    /**
+     * Generates JWT token for a custom user.
+     *
+     * @param customUserDetails The custom user details.
+     * @return Generated JWT token.
+     */
     public String generateJwtToken(CustomUserDetails customUserDetails) {
         Map<String, Object> claims = customUserDetails.getClaims();
         claims.put(TokenClaims.ID.getValue(), customUserDetails.getId());
         return createToken(claims, customUserDetails.getUsername());
     }
 
+    /**
+     * Retrieves the signing key from the JWT secret.
+     *
+     * @return The signing key.
+     */
     private Key getSignInKey() {
         byte[] keyBytes = Decoders.BASE64.decode(jwtSecret);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
+    /**
+     * Extracts claims from JWT token.
+     *
+     * @param token The JWT token.
+     * @return Claims extracted from the token.
+     */
     public Claims extractClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSignInKey())
@@ -62,15 +95,33 @@ public class JwtUtils {
                 .getBody();
     }
 
+    /**
+     * Extracts user ID from JWT token.
+     *
+     * @param token The JWT token.
+     * @return Extracted user ID.
+     */
     public String getIdFromToken(String token) {
         String idValue = extractClaims(token).get(TokenClaims.ID.getValue()).toString();
         return idValue;
     }
 
+    /**
+     * Extracts user email from JWT token.
+     *
+     * @param token The JWT token.
+     * @return Extracted user email.
+     */
     public String getEmailFromToken(String token) {
         return extractClaims(token).get(TokenClaims.EMAIL.getValue()).toString();
     }
 
+    /**
+     * Validates JWT token.
+     *
+     * @param authToken The JWT token.
+     * @return True if the token is valid, otherwise false.
+     */
     public boolean validateJwtToken(String authToken) {
 
         log.info("JwtUtils | validateJwtToken | authToken: {}", authToken);
@@ -91,6 +142,12 @@ public class JwtUtils {
         return false;
     }
 
+    /**
+     * Extracts JWT token from the authorization header.
+     *
+     * @param authorizationHeader The authorization header.
+     * @return Extracted JWT token.
+     */
     public String extractTokenFromHeader(String authorizationHeader) {
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {

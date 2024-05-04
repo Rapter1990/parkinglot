@@ -8,6 +8,7 @@ import com.project.parkinglot.model.mapper.priceList.PriceListDTOMapper;
 import com.project.parkinglot.model.mapper.priceList.PriceListMapper;
 import com.project.parkinglot.repository.PriceListRepository;
 import com.project.parkinglot.service.price.PriceCreateService;
+import com.project.parkinglot.service.price.impl.PriceCreateServiceImpl;
 import com.project.parkinglot.service.priceList.PriceListCreateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Service implementation class named {@link PriceListCreateServiceImpl} for creating price list.
+ */
 @Service
 @RequiredArgsConstructor
 public class PriceListCreateServiceImpl implements PriceListCreateService {
@@ -22,6 +26,12 @@ public class PriceListCreateServiceImpl implements PriceListCreateService {
     private final PriceListRepository priceListRepository;
     private final PriceCreateService priceCreateService;
 
+    /**
+     * Creates a new price list.
+     *
+     * @param priceListCreateRequest the request containing the price list details
+     * @return the created price list
+     */
     @Override
     public PriceList createPriceList(
             final PriceListCreateRequest priceListCreateRequest
@@ -34,10 +44,8 @@ public class PriceListCreateServiceImpl implements PriceListCreateService {
         final PriceList priceListDomainModel = PriceListMapper
                 .toDomainModel(priceListEntityToBeSave);
 
-        if (Objects.isNull(priceListCreateRequest.getPrices()))
-        {
+        if (Objects.isNull(priceListCreateRequest.getPrices())) {
             return priceListDomainModel;
-
         }
 
         final List<Price> createdPrices = priceListCreateRequest
@@ -57,4 +65,5 @@ public class PriceListCreateServiceImpl implements PriceListCreateService {
 
         return priceListDomainModel;
     }
+
 }

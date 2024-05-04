@@ -4,8 +4,17 @@ import com.project.parkinglot.model.PriceList;
 import com.project.parkinglot.model.entity.PriceListEntity;
 import com.project.parkinglot.model.mapper.price.PriceMapper;
 
+/**
+ * Mapper class named {@link PriceListMapper} to map between {@link PriceList} and {@link PriceListEntity}.
+ */
 public class PriceListMapper {
 
+    /**
+     * Maps a {@link PriceListEntity} object to a {@link PriceList} domain model.
+     *
+     * @param priceListEntity The {@link PriceListEntity} object to map.
+     * @return The mapped {@link PriceList} domain model object.
+     */
     public static PriceList toDomainModel(
             final PriceListEntity priceListEntity
     ) {
@@ -25,6 +34,12 @@ public class PriceListMapper {
                 .build();
     }
 
+    /**
+     * Maps a {@link PriceList} domain model object to a {@link PriceListEntity} object.
+     *
+     * @param priceList The {@link PriceList} domain model object to map.
+     * @return The mapped {@link PriceListEntity} object.
+     */
     public static PriceListEntity toEntity(
             final PriceList priceList
     ) {
@@ -37,4 +52,5 @@ public class PriceListMapper {
                 .updatedUser(priceList.getUpdatedUser())
                 .build();
     }
+
 }
