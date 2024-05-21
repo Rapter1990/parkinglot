@@ -202,8 +202,8 @@
 
 
 ---
-### Technologies
 
+### Technologies
 
 - Java 17
 - Spring Boot 3.0
@@ -225,6 +225,7 @@
 - Liquibase
 
 ---
+
 ### Postman
 
 ```
@@ -232,6 +233,7 @@ Import postman collection under postman_collection folder
 ```
 
 ---
+
 ### Open Api (Swagger 3)
 
 ```
@@ -239,6 +241,7 @@ http://localhost:1222/swagger-ui/index.html
 ```
 
 ---
+
 ### Prerequisites
 
 #### Define Variable in .env file
@@ -250,12 +253,15 @@ PARKING_LOT_LIQUIBASE_ENABLE_DROP_FIRST=true
 ```
 
 ---
+
 - Maven or Docker
+
 ---
 
-
 ### Docker Run
-The application can be built and run by the `Docker` engine. The `Dockerfile` has multistage build, so you do not need to build and run separately.
+
+The application can be built and run by the `Docker` engine. The `Dockerfile` has multistage build, so you do not need
+to build and run separately.
 
 Please follow directions shown below in order to build and run the application with Docker Compose file;
 
@@ -272,7 +278,9 @@ $ docker-compose up --build
 ```
 
 ---
+
 ### Maven Run
+
 To build and run the application with `Maven`, please follow the directions shown below;
 
 ```sh
@@ -282,6 +290,7 @@ $ mvn spring-boot:run
 ```
 
 ---
+
 ### Docker Image Location
 
 ```
@@ -289,22 +298,29 @@ https://hub.docker.com/repository/docker/noyandocker/parkinglot/general
 ```
 
 ---
-### Prometheus 
-To open `Prometheus` running on Docker as Image , please go to the link shown below. 
+
+### Prometheus
+
+To open `Prometheus` running on Docker as Image , please go to the link shown below.
 Its screenshot is displayed in the Screenshots part.
+
 ```
 http://localhost:9090
 ```
 
 ---
-### Grafana 
-To open `Grafana` running on Docker as Image , please go to the link shown below. 
+
+### Grafana
+
+To open `Grafana` running on Docker as Image , please go to the link shown below.
 Its screenshots is displayed in the Screenshots part.
+
 ```
 http://localhost:3000
 ```
 
 ---
+
 ### Screenshots
 
 <details>
