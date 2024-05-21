@@ -1,7 +1,6 @@
 package com.project.parkinglot.model.dto.response;
 
 import com.project.parkinglot.common.model.BaseDomainModel;
-import com.project.parkinglot.model.dto.response.vehicle.VehicleCheckOutResponse;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 

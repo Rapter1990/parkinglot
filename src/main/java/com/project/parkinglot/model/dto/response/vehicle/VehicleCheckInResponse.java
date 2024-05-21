@@ -1,6 +1,5 @@
 package com.project.parkinglot.model.dto.response.vehicle;
 
-import com.project.parkinglot.model.dto.response.parkingarea.ParkingAreaIncomeResponse;
 import com.project.parkinglot.model.enums.VehicleType;
 import lombok.*;
 

@@ -5,7 +5,6 @@ import com.project.parkinglot.model.User;
 import com.project.parkinglot.model.mapper.user.UserEntityToUserMapper;
 import com.project.parkinglot.security.model.entity.UserEntity;
 import com.project.parkinglot.service.auth.UserService;
-import com.project.parkinglot.service.priceList.impl.PriceListCreateServiceImpl;
 import com.project.parkinglot.service.user.UserGetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

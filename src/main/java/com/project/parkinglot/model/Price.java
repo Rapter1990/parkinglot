@@ -1,7 +1,6 @@
 package com.project.parkinglot.model;
 
 import com.project.parkinglot.common.model.BaseDomainModel;
-import com.project.parkinglot.model.entity.PriceEntity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 

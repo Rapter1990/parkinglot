@@ -15,7 +15,6 @@ import com.project.parkinglot.model.mapper.vehicle.VehicleToVehicleEntityMapper;
 import com.project.parkinglot.repository.VehicleRepository;
 import com.project.parkinglot.security.model.entity.UserEntity;
 import com.project.parkinglot.service.auth.UserService;
-import com.project.parkinglot.service.user.impl.UserGetServiceImpl;
 import com.project.parkinglot.service.vehicle.VehicleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

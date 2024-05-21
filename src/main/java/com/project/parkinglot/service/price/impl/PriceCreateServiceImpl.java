@@ -8,7 +8,6 @@ import com.project.parkinglot.model.mapper.price.PriceDTOMapper;
 import com.project.parkinglot.model.mapper.price.PriceMapper;
 import com.project.parkinglot.model.mapper.priceList.PriceListMapper;
 import com.project.parkinglot.repository.PriceRepository;
-import com.project.parkinglot.service.parking_area.ParkingAreaCreateService;
 import com.project.parkinglot.service.price.PriceCreateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

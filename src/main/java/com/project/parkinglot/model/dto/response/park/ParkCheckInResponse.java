@@ -1,7 +1,6 @@
 package com.project.parkinglot.model.dto.response.park;
 
 import com.project.parkinglot.common.model.BaseDomainModel;
-import com.project.parkinglot.model.dto.request.park.ParkCheckInRequest;
 import com.project.parkinglot.model.dto.response.vehicle.VehicleCheckInResponse;
 import com.project.parkinglot.model.enums.ParkStatus;
 import lombok.*;
