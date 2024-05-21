@@ -8,7 +8,7 @@ import java.util.Random;
 @UtilityClass
 public class TestUtilityClass {
 
-    public LocalDate generateRandomDate(){
+    public LocalDate generateRandomDate() {
 
         Random rnd = new Random();
         int year = rnd.nextInt(4) + 2020; // Years 2020 to 2023

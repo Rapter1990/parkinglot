@@ -13,12 +13,14 @@ public class ParkingAreaCapacityCanNotBeNullException extends RuntimeException {
     private static final String DEFAULT_MESSAGE =
             "The Parking Area Capacity can not be null!";
 
-    public ParkingAreaCapacityCanNotBeNullException(){ super(DEFAULT_MESSAGE);}
+    public ParkingAreaCapacityCanNotBeNullException() {
+        super(DEFAULT_MESSAGE);
+    }
 
     public ParkingAreaCapacityCanNotBeNullException(
             final String message
-    ){
-        super(DEFAULT_MESSAGE + " " + message );
+    ) {
+        super(DEFAULT_MESSAGE + " " + message);
     }
 
 }

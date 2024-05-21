@@ -34,8 +34,8 @@ public class ParkController {
     /**
      * Allows a driver to check in to a park, recording the time and location.
      *
-     * @param userId               The ID of the user checking in.
-     * @param parkCheckInRequest   The ParkCheckInRequest containing check-in details.
+     * @param userId             The ID of the user checking in.
+     * @param parkCheckInRequest The ParkCheckInRequest containing check-in details.
      * @return A CustomResponse containing the check-in response.
      */
     @PostMapping("/userId/{userId}/check-in")
@@ -57,8 +57,8 @@ public class ParkController {
     /**
      * Allows a driver to check out from a park, recording the departure time.
      *
-     * @param userId               The ID of the user checking out.
-     * @param parkCheckOutRequest  The ParkCheckOutRequest containing check-out details.
+     * @param userId              The ID of the user checking out.
+     * @param parkCheckOutRequest The ParkCheckOutRequest containing check-out details.
      * @return A CustomResponse containing the check-out response.
      */
     @PostMapping("/userId/{userId}/check-out")

@@ -19,7 +19,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 
-
 class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
 
     @InjectMocks
@@ -32,9 +31,8 @@ class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
             ParkingAreaEntityToParkingAreaMapper.initialize();
 
 
-
     @Test
-    void givenValidParkingAreaUpdateRequest_whenUpdateParkingArea_thenReturnParkingArea(){
+    void givenValidParkingAreaUpdateRequest_whenUpdateParkingArea_thenReturnParkingArea() {
 
         //Given
         final String mockParkingAreaId = UUID.randomUUID().toString();
@@ -56,7 +54,7 @@ class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
 
         // Then
         final ParkingArea parkingAreaResponse =
-                parkingAreaUpdateService.parkingAreaUpdateByCapacity(mockParkingAreaId,mockParkingAreaUpdateRequest);
+                parkingAreaUpdateService.parkingAreaUpdateByCapacity(mockParkingAreaId, mockParkingAreaUpdateRequest);
 
         Assertions.assertNotNull(parkingAreaResponse);
 
@@ -86,13 +84,13 @@ class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
         );
 
         // Verify
-        Mockito.verify(parkingAreaRepository,Mockito.times(1)).findById(mockParkingAreaId);
-        Mockito.verify(parkingAreaRepository,Mockito.times(1)).save(mockParkingAreaEntity);
+        Mockito.verify(parkingAreaRepository, Mockito.times(1)).findById(mockParkingAreaId);
+        Mockito.verify(parkingAreaRepository, Mockito.times(1)).save(mockParkingAreaEntity);
 
     }
 
     @Test
-    void givenEmptyParkingAreaUpdate_whenUpdateParkingArea_thenThrowParkingAreaNotFoundException(){
+    void givenEmptyParkingAreaUpdate_whenUpdateParkingArea_thenThrowParkingAreaNotFoundException() {
 
         // Given
         final ParkingAreaUpdateRequest mockParkingAreaUpdateRequest = new ParkingAreaUpdateRequestBuilder()
@@ -106,11 +104,11 @@ class ParkingAreaUpdateServiceImplTest extends BaseServiceTest {
 
         // Then
         Assertions.assertThrows(ParkingAreaNotFoundException.class,
-                () -> parkingAreaUpdateService.parkingAreaUpdateByCapacity(mockParkingAreaUpdateRequestId,mockParkingAreaUpdateRequest));
+                () -> parkingAreaUpdateService.parkingAreaUpdateByCapacity(mockParkingAreaUpdateRequestId, mockParkingAreaUpdateRequest));
 
         // Verify
-        Mockito.verify(parkingAreaRepository,Mockito.times(1)).findById(mockParkingAreaUpdateRequestId);
-        Mockito.verify(parkingAreaRepository,Mockito.times(0)).save(Mockito.any(ParkingAreaEntity.class));
+        Mockito.verify(parkingAreaRepository, Mockito.times(1)).findById(mockParkingAreaUpdateRequestId);
+        Mockito.verify(parkingAreaRepository, Mockito.times(0)).save(Mockito.any(ParkingAreaEntity.class));
 
     }
 

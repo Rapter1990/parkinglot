@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
  * Mapper interface named {@link VehicleToVehicleEntityMapper} to map from {@link Vehicle} to {@link VehicleEntity}.
  */
 @Mapper
-public interface VehicleToVehicleEntityMapper extends BaseMapper<Vehicle,VehicleEntity> {
+public interface VehicleToVehicleEntityMapper extends BaseMapper<Vehicle, VehicleEntity> {
 
     /**
      * Maps a {@link Vehicle} object to a {@link VehicleEntity} object.
@@ -28,7 +28,7 @@ public interface VehicleToVehicleEntityMapper extends BaseMapper<Vehicle,Vehicle
      *
      * @return The initialized mapper object.
      */
-    static VehicleToVehicleEntityMapper initialize(){
+    static VehicleToVehicleEntityMapper initialize() {
         return Mappers.getMapper(VehicleToVehicleEntityMapper.class);
     }
 

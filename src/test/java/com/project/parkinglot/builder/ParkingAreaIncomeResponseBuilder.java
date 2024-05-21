@@ -5,11 +5,13 @@ import com.project.parkinglot.model.dto.response.parkingarea.ParkingAreaIncomeRe
 
 import java.math.BigDecimal;
 
-public class ParkingAreaIncomeResponseBuilder extends BaseBuilder<ParkingAreaIncomeResponse>{
+public class ParkingAreaIncomeResponseBuilder extends BaseBuilder<ParkingAreaIncomeResponse> {
 
-    public ParkingAreaIncomeResponseBuilder() {super(ParkingAreaIncomeResponse.class);}
+    public ParkingAreaIncomeResponseBuilder() {
+        super(ParkingAreaIncomeResponse.class);
+    }
 
-    public ParkingAreaIncomeResponseBuilder withValidFields(){
+    public ParkingAreaIncomeResponseBuilder withValidFields() {
         final Faker faker = new Faker();
         return this
                 .withName(faker.name().name())
@@ -19,18 +21,20 @@ public class ParkingAreaIncomeResponseBuilder extends BaseBuilder<ParkingAreaInc
 
     public ParkingAreaIncomeResponseBuilder withName(
             final String name
-    ){
+    ) {
         data.setName(name);
         return this;
     }
 
     public ParkingAreaIncomeResponseBuilder withIncome(
             final BigDecimal income
-    ){
+    ) {
         data.setIncome(income);
         return this;
     }
 
     @Override
-    public ParkingAreaIncomeResponse build(){return super.build();}
+    public ParkingAreaIncomeResponse build() {
+        return super.build();
+    }
 }

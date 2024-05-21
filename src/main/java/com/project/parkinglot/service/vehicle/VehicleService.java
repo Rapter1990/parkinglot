@@ -17,7 +17,7 @@ public interface VehicleService {
      * @param vehicleRequest the vehicle details
      * @return the assigned vehicle
      */
-    Vehicle assignVehicleToUser (
+    Vehicle assignVehicleToUser(
             String id,
             VehicleRequest vehicleRequest
     );

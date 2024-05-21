@@ -163,7 +163,7 @@ public class ParkingAreaController {
     /**
      * Updates a parking area by its ID based on the provided data.
      *
-     * @param parkingAreaId             The ID of the parking area to be updated.
+     * @param parkingAreaId            The ID of the parking area to be updated.
      * @param parkingAreaUpdateRequest The updated details of the parking area.
      * @return A CustomResponse indicating the success of the operation.
      */

@@ -58,7 +58,7 @@ public class ParkServiceImpl implements ParkService {
     /**
      * Checks in a vehicle to the parking area.
      *
-     * @param userId            the ID of the user
+     * @param userId             the ID of the user
      * @param parkCheckInRequest the check-in request
      * @return the check-in response
      */
@@ -138,8 +138,8 @@ public class ParkServiceImpl implements ParkService {
     /**
      * Parks a vehicle in the available parking area.
      *
-     * @param checkInRequest           the check-in request
-     * @param vehicle                  the vehicle to be parked
+     * @param checkInRequest            the check-in request
+     * @param vehicle                   the vehicle to be parked
      * @param existingParkingEntityArea the existing parking area entity
      * @return the parked vehicle
      */

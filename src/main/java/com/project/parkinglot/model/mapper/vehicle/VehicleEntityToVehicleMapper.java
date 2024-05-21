@@ -20,7 +20,7 @@ public interface VehicleEntityToVehicleMapper extends BaseMapper<VehicleEntity, 
      * @return The mapped {@link Vehicle} domain model object.
      */
     @Override
-    @Mapping(source = "parkEntities",target = "parkList")
+    @Mapping(source = "parkEntities", target = "parkList")
     Vehicle map(VehicleEntity source);
 
     /**
@@ -28,7 +28,7 @@ public interface VehicleEntityToVehicleMapper extends BaseMapper<VehicleEntity, 
      *
      * @return The initialized mapper object.
      */
-    static VehicleEntityToVehicleMapper initialize(){
+    static VehicleEntityToVehicleMapper initialize() {
         return Mappers.getMapper(VehicleEntityToVehicleMapper.class);
     }
 

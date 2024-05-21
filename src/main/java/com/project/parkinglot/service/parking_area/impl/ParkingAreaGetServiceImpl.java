@@ -63,26 +63,26 @@ class ParkingAreaGetServiceImpl implements ParkingAreaGetService {
     /**
      * Retrieves daily income for a parking area on a given date.
      *
-     * @param date         the date for which to retrieve income
+     * @param date          the date for which to retrieve income
      * @param parkingAreaId the ID of the parking area
      * @return the daily income of the parking area
      */
     @Override
     public ParkingAreaIncomeResponse getDailyIncome(final LocalDate date, final String parkingAreaId) {
 
-       ParkingAreaEntity parkingAreaEntity = parkingAreaRepository
+        ParkingAreaEntity parkingAreaEntity = parkingAreaRepository
                 .findById(parkingAreaId)
                 .orElseThrow(ParkingAreaNotFoundException::new);
 
         isGivenDateAfterCurrentDate(date);
 
-         BigDecimal calculatedIncome=parkingAreaRepository.calculateDailyIncome(date, parkingAreaId)
+        BigDecimal calculatedIncome = parkingAreaRepository.calculateDailyIncome(date, parkingAreaId)
                 .orElseThrow(DailyIncomeException::new);
 
-         return ParkingAreaIncomeResponse.builder()
-                 .income(calculatedIncome)
-                 .name(parkingAreaEntity.getName())
-                 .build();
+        return ParkingAreaIncomeResponse.builder()
+                .income(calculatedIncome)
+                .name(parkingAreaEntity.getName())
+                .build();
     }
 
     /**

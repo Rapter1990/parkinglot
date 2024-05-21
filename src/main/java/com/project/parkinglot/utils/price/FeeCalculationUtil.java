@@ -73,7 +73,7 @@ public class FeeCalculationUtil {
      */
     private static long getSpentTime(
             final ParkEntity parkEntity
-    ){
+    ) {
         return Duration.between(parkEntity.getCheckIn(), parkEntity.getCheckOut()).toHours();
     }
 

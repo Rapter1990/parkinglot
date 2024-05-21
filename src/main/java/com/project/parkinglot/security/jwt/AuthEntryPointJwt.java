@@ -26,9 +26,9 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
     /**
      * Commences the authentication process for unauthorized requests.
      *
-     * @param request        The request object.
-     * @param response       The response object.
-     * @param authException  The authentication exception.
+     * @param request       The request object.
+     * @param response      The response object.
+     * @param authException The authentication exception.
      * @throws IOException      If an I/O error occurs.
      * @throws ServletException If a servlet exception occurs.
      */

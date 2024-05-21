@@ -19,8 +19,8 @@ import lombok.Setter;
 public class ParkingAreaUpdateRequest {
 
     @NotNull
-    @Min(value = 0,message = "value of capacity should be bigger than zero")
-    @Max(value = 24,message = "UpperBound must be at most 24")
+    @Min(value = 0, message = "value of capacity should be bigger than zero")
+    @Max(value = 24, message = "UpperBound must be at most 24")
     private Integer capacity;
 
 }

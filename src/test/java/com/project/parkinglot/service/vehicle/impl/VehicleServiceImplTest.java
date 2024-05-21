@@ -45,18 +45,18 @@ class VehicleServiceImplTest extends BaseServiceTest {
     final VehicleEntityToVehicleMapper vehicleEntityToVehicleMapper =
             VehicleEntityToVehicleMapper.initialize();
 
-     private final VehicleToVehicleEntityMapper vehicleToVehicleEntityMapper =
-             VehicleToVehicleEntityMapper.initialize();
+    private final VehicleToVehicleEntityMapper vehicleToVehicleEntityMapper =
+            VehicleToVehicleEntityMapper.initialize();
 
-     private final VehicleRequestToVehicleMapper vehicleRequestToVehicleMapper=
-             VehicleRequestToVehicleMapper.initialize();
+    private final VehicleRequestToVehicleMapper vehicleRequestToVehicleMapper =
+            VehicleRequestToVehicleMapper.initialize();
 
-     private final ParkEntityToParkDetailResponse parkEntityToParkDetailResponse =
-             ParkEntityToParkDetailResponse.initialize();
+    private final ParkEntityToParkDetailResponse parkEntityToParkDetailResponse =
+            ParkEntityToParkDetailResponse.initialize();
 
 
     @Test
-    void givenValidVehicleRequest_whenAssignVehicleToUser_thenReturnVehicle(){
+    void givenValidVehicleRequest_whenAssignVehicleToUser_thenReturnVehicle() {
 
         // Given
         final String mockUserId = UUID.randomUUID().toString();
@@ -84,26 +84,26 @@ class VehicleServiceImplTest extends BaseServiceTest {
                 .thenReturn(Boolean.FALSE);
 
         // Then
-        final Vehicle vehicleToBeAssigned = vehicleService.assignVehicleToUser(mockUserId,mockVehicleRequest);
+        final Vehicle vehicleToBeAssigned = vehicleService.assignVehicleToUser(mockUserId, mockVehicleRequest);
 
-        Assertions.assertEquals(mockVehicleRequest.getLicensePlate(),vehicleToBeAssigned.getLicensePlate());
-        Assertions.assertEquals(mockVehicleRequest.getVehicleType(),vehicleToBeAssigned.getVehicleType());
-        Assertions.assertEquals(mockVehicleRequest.getLicensePlate(),mockVehicleEntity.getLicensePlate());
-        Assertions.assertEquals(mockVehicleRequest.getVehicleType(),mockVehicleEntity.getVehicleType());
-        Assertions.assertEquals(mockVehicleEntity.getId() , mockVehicleToCreated.getId());
-        Assertions.assertEquals(mockVehicleEntity.getLicensePlate() , mockVehicleToCreated.getLicensePlate());
-        Assertions.assertEquals(mockVehicleEntity.getVehicleType() , mockVehicleToCreated.getVehicleType());
-        Assertions.assertEquals(mockVehicleEntity.getParkEntities() , mockVehicleToCreated.getParkList());
-        Assertions.assertEquals(mockVehicleEntity.getUserEntity() , mockVehicleToCreated.getUser());
+        Assertions.assertEquals(mockVehicleRequest.getLicensePlate(), vehicleToBeAssigned.getLicensePlate());
+        Assertions.assertEquals(mockVehicleRequest.getVehicleType(), vehicleToBeAssigned.getVehicleType());
+        Assertions.assertEquals(mockVehicleRequest.getLicensePlate(), mockVehicleEntity.getLicensePlate());
+        Assertions.assertEquals(mockVehicleRequest.getVehicleType(), mockVehicleEntity.getVehicleType());
+        Assertions.assertEquals(mockVehicleEntity.getId(), mockVehicleToCreated.getId());
+        Assertions.assertEquals(mockVehicleEntity.getLicensePlate(), mockVehicleToCreated.getLicensePlate());
+        Assertions.assertEquals(mockVehicleEntity.getVehicleType(), mockVehicleToCreated.getVehicleType());
+        Assertions.assertEquals(mockVehicleEntity.getParkEntities(), mockVehicleToCreated.getParkList());
+        Assertions.assertEquals(mockVehicleEntity.getUserEntity(), mockVehicleToCreated.getUser());
 
         // Verify
-        Mockito.verify(userService,Mockito.times(1)).findById(Mockito.anyString());
-        Mockito.verify(vehicleRepository,Mockito.times(1)).save(Mockito.any(VehicleEntity.class));
+        Mockito.verify(userService, Mockito.times(1)).findById(Mockito.anyString());
+        Mockito.verify(vehicleRepository, Mockito.times(1)).save(Mockito.any(VehicleEntity.class));
 
     }
 
     @Test
-    void givenNonExitUser_whenAssignVehicleToUser_thenThrowsUserNotFoundException(){
+    void givenNonExitUser_whenAssignVehicleToUser_thenThrowsUserNotFoundException() {
 
         // Given
         final String mockGivenId = UUID.randomUUID().toString();
@@ -119,16 +119,16 @@ class VehicleServiceImplTest extends BaseServiceTest {
         // Then
         Assertions.assertThrowsExactly(
                 UserNotFoundException.class,
-                () -> vehicleService.assignVehicleToUser(mockGivenId,mockVehicleRequest)
+                () -> vehicleService.assignVehicleToUser(mockGivenId, mockVehicleRequest)
         );
 
         // Verify
-        Mockito.verify(userService,Mockito.times(1)).findById(Mockito.anyString());
+        Mockito.verify(userService, Mockito.times(1)).findById(Mockito.anyString());
 
     }
 
     @Test
-    void givenValidVehicleRequest_whenAssignVehicleToUser_ThenThrowVehicleAlreadyExistException(){
+    void givenValidVehicleRequest_whenAssignVehicleToUser_ThenThrowVehicleAlreadyExistException() {
 
         // Given
         final String mockUserId = UUID.randomUUID().toString();
@@ -144,7 +144,7 @@ class VehicleServiceImplTest extends BaseServiceTest {
 
         // When
         Mockito.when(userService.findById(mockUserId))
-                 .thenReturn(Optional.of(mockUserEntity));
+                .thenReturn(Optional.of(mockUserEntity));
 
         Mockito.when(vehicleRepository.existsByLicensePlate(mockVehicleRequest.getLicensePlate()))
                 .thenReturn(Boolean.TRUE);
@@ -152,38 +152,38 @@ class VehicleServiceImplTest extends BaseServiceTest {
         // Then
         Assertions.assertThrowsExactly(
                 VehicleAlreadyExist.class,
-                ()->vehicleService.assignVehicleToUser(mockUserId,mockVehicleRequest)
+                () -> vehicleService.assignVehicleToUser(mockUserId, mockVehicleRequest)
         );
 
         // Verify
-        Mockito.verify(userService,Mockito.times(1)).findById(Mockito.anyString());
-        Mockito.verify(vehicleRepository,Mockito.never()).save(Mockito.any(VehicleEntity.class));
+        Mockito.verify(userService, Mockito.times(1)).findById(Mockito.anyString());
+        Mockito.verify(vehicleRepository, Mockito.never()).save(Mockito.any(VehicleEntity.class));
 
     }
 
-     @Test
-     void givenValidLicensePlate_whenGetParkingDetails_thenReturnParkingDetails() {
+    @Test
+    void givenValidLicensePlate_whenGetParkingDetails_thenReturnParkingDetails() {
 
         // Given
         final String mockLicensePlate = UUID.randomUUID().toString();
 
         final ParkEntity mockParkEntity1 = new ParkEntityBuilder()
-                 .withValidFields().build();
+                .withValidFields().build();
         final ParkEntity mockParkEntity2 = new ParkEntityBuilder()
-                 .withValidFields().build();
+                .withValidFields().build();
 
         final List<ParkEntity> mockParkEntities = Arrays.asList(mockParkEntity1, mockParkEntity2);
 
         final VehicleEntity mockVehicleEntity = new VehicleEntityBuilder()
-                 .withValidFields()
-                 .withLicensePlate(mockLicensePlate)
-                 .build();
+                .withValidFields()
+                .withLicensePlate(mockLicensePlate)
+                .build();
 
         mockVehicleEntity.setParkEntities(mockParkEntities);
 
         List<ParkDetailResponse> expectedParkDetails = Arrays.asList(
-                 parkEntityToParkDetailResponse.map(mockParkEntity1),
-                 parkEntityToParkDetailResponse.map(mockParkEntity2)
+                parkEntityToParkDetailResponse.map(mockParkEntity1),
+                parkEntityToParkDetailResponse.map(mockParkEntity2)
         );
 
         // When
@@ -196,7 +196,7 @@ class VehicleServiceImplTest extends BaseServiceTest {
 
         Assertions.assertNotNull(parkingDetails);
         Assertions.assertEquals(mockLicensePlate, parkingDetails.getLicensePlate());
-        for(int i = 0; i < expectedParkDetails.size(); i++){
+        for (int i = 0; i < expectedParkDetails.size(); i++) {
             Assertions.assertEquals(expectedParkDetails.get(i).getCheckInDate(), parkingDetails.getParkDetails().get(i).getCheckInDate());
             Assertions.assertEquals(expectedParkDetails.get(i).getCheckOutDate(), parkingDetails.getParkDetails().get(i).getCheckOutDate());
             Assertions.assertEquals(expectedParkDetails.get(i).getParkingAreaName(), parkingDetails.getParkDetails().get(i).getParkingAreaName());
@@ -207,6 +207,6 @@ class VehicleServiceImplTest extends BaseServiceTest {
         // Verify
         Mockito.verify(vehicleRepository, Mockito.times(1)).findByLicensePlate(mockLicensePlate);
 
-     }
+    }
 
 }

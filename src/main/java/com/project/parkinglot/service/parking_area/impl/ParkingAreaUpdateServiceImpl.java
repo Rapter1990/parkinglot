@@ -25,7 +25,7 @@ class ParkingAreaUpdateServiceImpl implements ParkingAreaUpdateService {
     /**
      * Updates the capacity of a parking area.
      *
-     * @param parkingAreaId           the ID of the parking area to update
+     * @param parkingAreaId            the ID of the parking area to update
      * @param parkingAreaUpdateRequest the request containing the new capacity
      * @return the updated parking area
      */

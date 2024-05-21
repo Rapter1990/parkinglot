@@ -8,16 +8,16 @@ import com.project.parkinglot.model.dto.request.parking_area.ParkingAreaUpdateRe
  */
 public interface ParkingAreaUpdateService {
 
-     /**
-      * Updates the capacity of a parking area.
-      *
-      * @param parkingAreaId           the ID of the parking area to update
-      * @param parkingAreaUpdateRequest the request containing the new capacity
-      * @return the updated parking area
-      */
-     ParkingArea parkingAreaUpdateByCapacity(
-             final String parkingAreaId,
-             final ParkingAreaUpdateRequest parkingAreaUpdateRequest
-     );
+    /**
+     * Updates the capacity of a parking area.
+     *
+     * @param parkingAreaId            the ID of the parking area to update
+     * @param parkingAreaUpdateRequest the request containing the new capacity
+     * @return the updated parking area
+     */
+    ParkingArea parkingAreaUpdateByCapacity(
+            final String parkingAreaId,
+            final ParkingAreaUpdateRequest parkingAreaUpdateRequest
+    );
 
 }

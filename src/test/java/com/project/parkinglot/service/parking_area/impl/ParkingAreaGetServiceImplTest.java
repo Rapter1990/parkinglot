@@ -69,7 +69,7 @@ class ParkingAreaGetServiceImplTest extends BaseServiceTest {
     }
 
     @Test
-    void givenNonExistParkingArea_whenGetParkingAreaById_thenThrowsParkingAreaNotFoundException(){
+    void givenNonExistParkingArea_whenGetParkingAreaById_thenThrowsParkingAreaNotFoundException() {
 
         // When
         Mockito.when(parkingAreaRepository.findById(Mockito.anyString()))
@@ -116,7 +116,7 @@ class ParkingAreaGetServiceImplTest extends BaseServiceTest {
     }
 
     @Test
-    void givenNonExistParkingArea_whenGetParkingAreaByName_thenThrowsParkingAreaNotFoundException(){
+    void givenNonExistParkingArea_whenGetParkingAreaByName_thenThrowsParkingAreaNotFoundException() {
 
         // When
         Mockito.when(parkingAreaRepository.findByName(Mockito.anyString()))
@@ -132,8 +132,9 @@ class ParkingAreaGetServiceImplTest extends BaseServiceTest {
         Mockito.verify(parkingAreaRepository, times(1)).findByName(Mockito.anyString());
 
     }
+
     @Test
-    void givenValidGetDailyIncomeParameter_WhenGivenDailyIncome_ThenReturnParkingAreaIncomeResponse(){
+    void givenValidGetDailyIncomeParameter_WhenGivenDailyIncome_ThenReturnParkingAreaIncomeResponse() {
 
         // Given
         String mockParkingAreaId = UUID.randomUUID().toString();
@@ -153,20 +154,20 @@ class ParkingAreaGetServiceImplTest extends BaseServiceTest {
 
         // When
         Mockito.when(parkingAreaRepository.findById(mockParkingAreaId)).thenReturn(Optional.of(mockParkingAreaEntity));
-        Mockito.when(parkingAreaRepository.calculateDailyIncome(mockDate,mockParkingAreaId)).thenReturn(Optional.of(BigDecimal.valueOf(Mockito.anyLong())));
+        Mockito.when(parkingAreaRepository.calculateDailyIncome(mockDate, mockParkingAreaId)).thenReturn(Optional.of(BigDecimal.valueOf(Mockito.anyLong())));
 
         // Then
-        ParkingAreaIncomeResponse checkParkingAreaIncomeResponse = parkingAreaService.getDailyIncome(mockDate,mockParkingAreaId);
-        Assertions.assertEquals(checkParkingAreaIncomeResponse.getName(),mockParkingAreaIncomeResponse.getName());
+        ParkingAreaIncomeResponse checkParkingAreaIncomeResponse = parkingAreaService.getDailyIncome(mockDate, mockParkingAreaId);
+        Assertions.assertEquals(checkParkingAreaIncomeResponse.getName(), mockParkingAreaIncomeResponse.getName());
 
         //Verify
         Mockito.verify(parkingAreaRepository, times(1)).findById(mockParkingAreaId);
-        Mockito.verify(parkingAreaRepository, times(1)).calculateDailyIncome(mockDate,mockParkingAreaId);
+        Mockito.verify(parkingAreaRepository, times(1)).calculateDailyIncome(mockDate, mockParkingAreaId);
 
     }
 
     @Test
-    void givenValidGetDailyIncomeParameter_WhenGivenDailyIncome_ThenThrowsParkingAreaNotFoundException(){
+    void givenValidGetDailyIncomeParameter_WhenGivenDailyIncome_ThenThrowsParkingAreaNotFoundException() {
 
         // Given
         String mockParkingAreaId = UUID.randomUUID().toString();
@@ -177,17 +178,17 @@ class ParkingAreaGetServiceImplTest extends BaseServiceTest {
 
         // Then
         Assertions.assertThrowsExactly(ParkingAreaNotFoundException.class,
-                ()->parkingAreaService.getDailyIncome(mockDate,mockParkingAreaId));
+                () -> parkingAreaService.getDailyIncome(mockDate, mockParkingAreaId));
 
         // Verify
         Mockito.verify(parkingAreaRepository, times(1)).findById(Mockito.anyString());
         Mockito.verify(parkingAreaRepository, never())
-                .calculateDailyIncome(any(LocalDate.class),Mockito.anyString());
+                .calculateDailyIncome(any(LocalDate.class), Mockito.anyString());
 
     }
 
     @Test
-    void givenValidGetDailyIncomeParameter_WhenGivenDailyIncome_ThenThrowsDailyIncomeException(){
+    void givenValidGetDailyIncomeParameter_WhenGivenDailyIncome_ThenThrowsDailyIncomeException() {
 
         // Given
         String mockParkingAreaId = UUID.randomUUID().toString();
@@ -201,17 +202,17 @@ class ParkingAreaGetServiceImplTest extends BaseServiceTest {
 
         // When
         Mockito.when(parkingAreaRepository.findById(mockParkingAreaId)).thenReturn(Optional.of(mockParkingAreaEntity));
-        Mockito.when(parkingAreaRepository.calculateDailyIncome(mockDate,mockParkingAreaId)).thenReturn(Optional.empty());
+        Mockito.when(parkingAreaRepository.calculateDailyIncome(mockDate, mockParkingAreaId)).thenReturn(Optional.empty());
 
         // Then
         Assertions.assertThrowsExactly(DailyIncomeException.class,
-                ()->parkingAreaService.getDailyIncome(mockDate,mockParkingAreaId));
+                () -> parkingAreaService.getDailyIncome(mockDate, mockParkingAreaId));
 
         // Verify
         Mockito.verify(parkingAreaRepository, times(1)).findById(Mockito.anyString());
 
         Mockito.verify(parkingAreaRepository, times(1))
-                .calculateDailyIncome(any(LocalDate.class),Mockito.anyString());
+                .calculateDailyIncome(any(LocalDate.class), Mockito.anyString());
 
 
     }

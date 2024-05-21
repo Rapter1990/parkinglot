@@ -32,7 +32,7 @@ public class ParkingAreaEntityBuilder extends BaseBuilder<ParkingAreaEntity> {
 
     public ParkingAreaEntityBuilder witId(
             final String id
-    ){
+    ) {
         data.setId(id);
         return this;
     }

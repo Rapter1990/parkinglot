@@ -9,13 +9,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ParkinglotApplication {
 
-	/**
-	 * Main method to start the Spring Boot application.
-	 *
-	 * @param args the command line arguments
-	 */
-	public static void main(String[] args) {
-		SpringApplication.run(ParkinglotApplication.class, args);
-	}
+    /**
+     * Main method to start the Spring Boot application.
+     *
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        SpringApplication.run(ParkinglotApplication.class, args);
+    }
 
 }

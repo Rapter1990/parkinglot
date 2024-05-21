@@ -49,10 +49,10 @@ public class VehicleController {
                     @ApiResponse(responseCode = "403", description = "Unauthorized to access this endpoint")
             },
             security = @SecurityRequirement(name = "bearerAuth"))
-    public CustomResponse<String>  assignVehicleToUser(
+    public CustomResponse<String> assignVehicleToUser(
             @PathVariable("user-id") @UUID final String userId,
             @RequestBody @Valid final VehicleRequest vehicleRequest
-    ){
+    ) {
         final Vehicle vehicle = vehicleService.assignVehicleToUser(userId, vehicleRequest);
 
         return CustomResponse.ok(vehicle.getLicensePlate());

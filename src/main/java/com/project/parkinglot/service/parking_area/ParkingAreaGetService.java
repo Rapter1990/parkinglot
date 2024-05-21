@@ -29,7 +29,7 @@ public interface ParkingAreaGetService {
     /**
      * Retrieves daily income for a parking area on a given date.
      *
-     * @param date         the date for which to retrieve income
+     * @param date          the date for which to retrieve income
      * @param parkingAreaId the ID of the parking area
      * @return the daily income of the parking area
      */

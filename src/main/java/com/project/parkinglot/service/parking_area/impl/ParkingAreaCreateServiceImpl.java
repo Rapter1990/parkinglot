@@ -66,7 +66,7 @@ class ParkingAreaCreateServiceImpl implements ParkingAreaCreateService {
     /**
      * Checks if a parking area with the given name and location already exists.
      *
-     * @param name the name of the parking area to check
+     * @param name     the name of the parking area to check
      * @param location the location of the parking area to check
      * @throws ParkingAreaAlreadyExistException if a parking area with the same name and location already exists
      */

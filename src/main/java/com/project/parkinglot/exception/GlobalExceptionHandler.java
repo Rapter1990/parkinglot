@@ -371,11 +371,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      * @return ResponseEntity with an error response
      */
     @ExceptionHandler(VehicleAlreadyExist.class)
-    protected  ResponseEntity<ErrorResponse> handleUserAlreadyHasThisVehicleException(final VehicleAlreadyExist ex){
+    protected ResponseEntity<ErrorResponse> handleUserAlreadyHasThisVehicleException(final VehicleAlreadyExist ex) {
 
         log.error(ex.getMessage(), ex);
 
-        final List<String> details =new ArrayList<>();
+        final List<String> details = new ArrayList<>();
         details.add(ex.getMessage());
 
         final ErrorResponse errorResponse = ErrorResponse.builder()

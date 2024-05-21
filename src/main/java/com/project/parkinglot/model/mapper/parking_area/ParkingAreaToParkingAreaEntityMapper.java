@@ -26,7 +26,7 @@ public interface ParkingAreaToParkingAreaEntityMapper extends BaseMapper<Parking
      *
      * @return The initialized mapper object.
      */
-    static ParkingAreaToParkingAreaEntityMapper initialize(){
+    static ParkingAreaToParkingAreaEntityMapper initialize() {
         return Mappers.getMapper(ParkingAreaToParkingAreaEntityMapper.class);
     }
 

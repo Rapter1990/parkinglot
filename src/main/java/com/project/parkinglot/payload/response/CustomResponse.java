@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 
 /**
  * Represents a custom response.
+ *
  * @param <T> the type of the response
  */
 @Getter

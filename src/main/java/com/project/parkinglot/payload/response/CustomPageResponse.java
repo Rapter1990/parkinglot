@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Represents a custom page response.
+ *
  * @param <T> the type of content in the response.
  */
 @Getter

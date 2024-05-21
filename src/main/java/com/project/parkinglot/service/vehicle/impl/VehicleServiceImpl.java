@@ -42,7 +42,7 @@ public class VehicleServiceImpl implements VehicleService {
     private final ParkEntityToParkDetailResponse parkEntityToParkDetailResponse =
             ParkEntityToParkDetailResponse.initialize();
 
-    private final VehicleRequestToVehicleMapper vehicleRequestToVehicleMapper=
+    private final VehicleRequestToVehicleMapper vehicleRequestToVehicleMapper =
             VehicleRequestToVehicleMapper.initialize();
 
     private final VehicleEntityToVehicleMapper vehicleEntityToVehicleMapper =
@@ -60,7 +60,7 @@ public class VehicleServiceImpl implements VehicleService {
     public Vehicle assignVehicleToUser(final String id, final VehicleRequest vehicleRequest) {
 
         final UserEntity userEntity = userService.findById(id)
-                .orElseThrow( ()-> new UserNotFoundException("Cant find user given id"));
+                .orElseThrow(() -> new UserNotFoundException("Cant find user given id"));
 
         final Vehicle vehicle = vehicleRequestToVehicleMapper.map(vehicleRequest);
 
@@ -76,9 +76,9 @@ public class VehicleServiceImpl implements VehicleService {
      * @param vehicle the vehicle to check
      * @throws VehicleAlreadyExist if a vehicle with the same license plate already exists
      */
-    private void existByLicensePlate (final Vehicle vehicle){
+    private void existByLicensePlate(final Vehicle vehicle) {
 
-        if (Boolean.TRUE.equals(vehicleRepository.existsByLicensePlate(vehicle.getLicensePlate()))){
+        if (Boolean.TRUE.equals(vehicleRepository.existsByLicensePlate(vehicle.getLicensePlate()))) {
             throw new VehicleAlreadyExist();
         }
 
@@ -92,7 +92,7 @@ public class VehicleServiceImpl implements VehicleService {
      * @return the persisted vehicle entity with the assigned user
      * @throws VehicleAlreadyExist if a vehicle with the same license plate already exists
      */
-    private VehicleEntity assignUserToVehicle(final UserEntity userEntity, final Vehicle vehicle){
+    private VehicleEntity assignUserToVehicle(final UserEntity userEntity, final Vehicle vehicle) {
 
         existByLicensePlate(vehicle);
 

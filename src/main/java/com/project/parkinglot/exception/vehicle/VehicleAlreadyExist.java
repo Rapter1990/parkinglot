@@ -5,7 +5,7 @@ import java.io.Serial;
 /**
  * Exception class named {@link VehicleAlreadyExist} thrown when a user tries to add a vehicle that already exists.
  */
-public class VehicleAlreadyExist extends RuntimeException{
+public class VehicleAlreadyExist extends RuntimeException {
 
     @Serial
     private static final long serialVersionUID = 5431951469912355123L;
