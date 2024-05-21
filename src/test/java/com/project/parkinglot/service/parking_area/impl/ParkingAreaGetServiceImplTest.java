@@ -232,9 +232,7 @@ class ParkingAreaGetServiceImplTest extends BaseServiceTest {
         Mockito.when(parkingAreaRepository.findById(mockParkingAreaId)).thenReturn(Optional.of(mockParkingAreaEntity));
 
         // Then
-        Assertions.assertThrows(InvalidDateException.class, () -> {
-            parkingAreaService.getDailyIncome(futureDate, mockParkingAreaId);
-        });
+        Assertions.assertThrows(InvalidDateException.class, () -> parkingAreaService.getDailyIncome(futureDate, mockParkingAreaId));
 
         // Verify
         Mockito.verify(parkingAreaRepository, times(1)).findById(mockParkingAreaId);
